@@ -1,0 +1,28 @@
+.cerveza{
+  width: fit-content;
+  border: 1px;
+  border-style:solid;
+}
+
+.cerveza-foto{}
+
+.cerveza-info{  
+  justify-content: center;
+}
+
+.cerveza-nombre{
+  justify-content: center;
+}
+
+.cerveza-valores{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cerveza-viejo{
+  color: gray;
+}
+
+.cerveza-actual{}

@@ -1,5 +1,8 @@
 import { createRoot } from "react-dom/client";
 
+import Cerveza from "../interfaces/cerveza";
+
+
 export function home() {
     return (
       <div className="home">
@@ -7,6 +10,7 @@ export function home() {
           <div>
             i am going insane!!!!
           </div>
+          <Cerveza/>
         </div>
 
       </div>
