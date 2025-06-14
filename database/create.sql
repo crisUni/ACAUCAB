@@ -1,7 +1,7 @@
 CREATE TABLE LUGAR (
     id INT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('PAIS', 'ESTADO', 'CIUDAD', 'PARROQUIA')),
+    tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('PAIS', 'ESTADO', 'MUNICIPIO', 'PARROQUIA')),
     fk_lugar INT
 );
 
