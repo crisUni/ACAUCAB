@@ -45,7 +45,7 @@ VALUES (x, 'PARROQUIA', fid);
 END;
 $$ LANGUAGE plpgsql;
 
-DELETE FROM Lugar;
+DELETE * FROM Lugar;
 
 -- INSERT --
 CALL insert_estados(ARRAY ['Amazonas', 'Anzoategui', 'Apure', 'Aragua', 'Barinas', 'Bolivar', 'Carabobo', 'Cojedes', 'Delta Amacuro', 'Distrito Capital', 'Falcon', 'Guarico', 'La Guaira', 'Lara', 'Merida', 'Miranda', 'Monagas', 'Nueva Esparta', 'Portuguesa', 'Sucre', 'Tachira', 'Trujillo', 'Yaracuy', 'Zulia']);
@@ -724,12 +724,35 @@ VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best M
 --   █    █  ▐▛▀▘ ▐▌ ▐▌    ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ ▐▌ ▐▌ 
 --   █  ▗▄█▄▖▐▌   ▝▚▄▞▘    ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █ ▝▚▄▞▘       
 
+INSERT INTO TIPO_EVENTO (nombre, descripcion) 
+VALUES ('Foro','Foro dado por un ponente invitado'),
+('Cata','Degustacion de cervezas'), 
+('Presentacion','Presentacion de algun tema'),
+('Curso','Curso de algun tema'),
+('Caridad','Evento para apoyar alguna caridad'),
+('Privado','Evento con invitaciones'),
+('Corporativo','Evento hecho para corporaciones'),
+('Cultural','Evento en el que se celebra la cultura'),
+('Exhibicion','Exhibicion de productos'),
+('Exposicion','Exposicion de algun tema/producto');
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  
 -- ▐▌   ▐▌  ▐▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌ 
 -- ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ ▐▌ ▐▌ 
 -- ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █ ▝▚▄▞▘     
 
+INSERT INTO EVENTO (nombre, descripcion, numero_entradas, fecha_inicio, fecha_fin, direccion, fk_evento, fk_tipo_evento, fk_lugar) 
+VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '12-7-2024','13-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '19-7-2024','20-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '26-7-2024','27-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('Historia de la Cerveza en Venezuela','Charla dada por un experto', 1000, '1-1-2024','1-1-2024', 'UCAB, Aula Magna', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Foro'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+;
 
 -- ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  
 -- ▐▌  ▐▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌       
@@ -808,6 +831,7 @@ VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best M
 --    ▐▌▐▌ ▐▌▐▛▀▀▘ ▗▞▘ 
 -- ▗▄▄▞▘▝▚▄▞▘▐▙▄▄▖▐▙▄▄▄▖  
 
+
 --    ▗▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▄▖    ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖ 
 --    ▐▌▐▌ ▐▌▐▌      ▗▞▘    ▐▌   ▐▌  ▐▌▐▌   ▐▛▚▖▐▌  █  
 --    ▐▌▐▌ ▐▌▐▛▀▀▘ ▗▞▘      ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ 
@@ -832,17 +856,7 @@ VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best M
 --  ▝▚▞▘ ▐▌ ▐▌▝▚▄▄▖▐▌ ▐▌▝▚▄▄▖▗▄█▄▖▝▚▄▞▘▐▌  ▐▌ 
 
 -- Insert Tipo Evento --
-INSERT INTO TIPO_EVENTO (nombre, descripcion) 
-VALUES ('Foro','Foro dado por un ponente invitado'),
-('Cata','Degustacion de cervezas'), 
-('Presentacion','Presentacion de algun tema'),
-('Curso','Curso de algun tema'),
-('Caridad','Evento para apoyar alguna caridad'),
-('Privado','Evento con invitaciones'),
-('Corporativo','Evento hecho para corporaciones'),
-('Cultural','Evento en el que se celebra la cultura'),
-('Exhibicion','Exhibicion de productos'),
-('Exposicion','Exposicion de algun tema/producto');
+
 
 
 
