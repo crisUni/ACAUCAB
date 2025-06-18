@@ -463,8 +463,7 @@ CALL insert_parroquias(ARRAY['Rafael Urdaneta','La Victoria','Raul Cuenca'],'Val
 -- ▐▛▀▚▖▐▛▀▀▘▐▌   ▐▛▀▀▘  █ ▐▛▀▜▌
 -- ▐▌ ▐▌▐▙▄▄▖▝▚▄▄▖▐▙▄▄▖  █ ▐▌ ▐▌
 
-INSERT INTO RECETA (nombre, elaboracion, instrucciones) 
-VALUES ('American Amber Ale','??','Maceración de toda la malta durante 1 hora a 66 grados. Realizar el sparging a 76 grados. Ebullición de una hora, siguiendo los tiempos de adición del lúpulo indicados. Fermentar a 18-20 grados. Maduración en botella o en barril durante 4 semanas.');
+
 
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
@@ -746,6 +745,7 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 ('UBirra','Degustacion de 30 birras', 100, '12-7-2024','13-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
 ('UBirra','Degustacion de 30 birras', 100, '19-7-2024','20-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
 ('UBirra','Degustacion de 30 birras', 100, '26-7-2024','27-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+
 ('Historia de la Cerveza en Venezuela','Charla dada por un experto', 1000, '1-1-2024','1-1-2024', 'UCAB, Aula Magna', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Foro'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
 ('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
 ('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
@@ -854,14 +854,4 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 -- ▐▌  ▐▌▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
 -- ▐▌  ▐▌▐▛▀▜▌▐▌   ▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▌ ▝▜▌
 --  ▝▚▞▘ ▐▌ ▐▌▝▚▄▄▖▐▌ ▐▌▝▚▄▄▖▗▄█▄▖▝▚▄▞▘▐▌  ▐▌ 
-
--- Insert Tipo Evento --
-
-
-
-
-
-
-
-
 

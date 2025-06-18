@@ -60,7 +60,7 @@ Hacer minimo 10 insert en cada uno (exepto en los que solo son 1)
 - [ ] Comentario
 - [ ] Cerv_Pres
 - [ ] Desc_Cerv_Pres
-- [ ] Tipo Evento
+- [x] Tipo Evento
 - [ ] Evento
 - [ ] Venta
 - [ ] Esta_Vent
