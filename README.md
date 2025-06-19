@@ -15,7 +15,7 @@
 ## INSERT
 Hacer minimo 10 insert en cada uno (exepto en los que solo son 1)
 
--[ ] CAMBIAR CONTRASEN~A EN USUARIO A CONTRASENA!!!
+- [ ] CAMBIAR CONTRASEN~A EN USUARIO A CONTRASENA!!!
 
 - [x] Lugar
 - [ ] Receta
