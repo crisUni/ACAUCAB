@@ -1,18 +1,25 @@
-/**
- * This file is the entry point for the React app, it sets up the root
- * element and renders the App component to the DOM.
- *
- * It is included in `src/index.html`.
- */
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import { App } from "./App";
+import CrudUser from "./pages/crud_user";
+import CrudCliente from "./pages/CrudCliente";
+import CrudUsuario from "./pages/CrudUsuario";
+import TempHome from "./pages/TempHome";
+import CrudRol from "./pages/CrudRol";
 
 const elem = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <App />
+    <Router>
+        <Routes>
+          <Route path="/" element={<TempHome />} />
+          <Route path="/clientes" element={<CrudCliente />} />
+          <Route path="/usuario" element={<CrudUsuario />} />
+          <Route path="/roles" element={<CrudRol />} />
+        </Routes>
+    </Router>
   </StrictMode>
 );
 

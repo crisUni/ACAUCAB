@@ -1,0 +1,14 @@
+.navbar{
+  display: flex;
+  gap: 100px;
+  background-color: blueviolet;
+  height: 100px;
+}
+.nav-left{
+  display: flex;
+  width: fit-content;
+}
+
+.nav-right{
+  display: flex;
+}

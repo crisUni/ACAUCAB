@@ -14,6 +14,8 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - /var/lib/postgresql/data
+    ports:
+      - 5432:5432
   frontend:
     image: oven/bun
     restart: always
@@ -25,6 +27,8 @@ services:
     command: bun run dev
     ports:
       - 3000:3000
+    environment:
+      POSTGRES_URL: postgres://postgres:admin@postgres-sql:5432/postgres
   backend:
     image: oven/bun
     restart: always
