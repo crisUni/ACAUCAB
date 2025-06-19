@@ -45,7 +45,7 @@ VALUES (x, 'PARROQUIA', fid);
 END;
 $$ LANGUAGE plpgsql;
 
-DELETE * FROM Lugar;
+DELETE FROM Lugar;
 
 -- INSERT --
 CALL insert_estados(ARRAY ['Amazonas', 'Anzoategui', 'Apure', 'Aragua', 'Barinas', 'Bolivar', 'Carabobo', 'Cojedes', 'Delta Amacuro', 'Distrito Capital', 'Falcon', 'Guarico', 'La Guaira', 'Lara', 'Merida', 'Miranda', 'Monagas', 'Nueva Esparta', 'Portuguesa', 'Sucre', 'Tachira', 'Trujillo', 'Yaracuy', 'Zulia']);
@@ -463,13 +463,48 @@ CALL insert_parroquias(ARRAY['Rafael Urdaneta','La Victoria','Raul Cuenca'],'Val
 -- ▐▛▀▚▖▐▛▀▀▘▐▌   ▐▛▀▀▘  █ ▐▛▀▜▌
 -- ▐▌ ▐▌▐▙▄▄▖▝▚▄▄▖▐▙▄▄▖  █ ▐▌ ▐▌
 
+INSERT INTO RECETA (nombre, descripcion) VALUES
+('Receta IPA Americana', 'Receta para una India Pale Ale lupulada y aromática.'),
+('Receta Stout de Avena', 'Receta para una cerveza oscura y cremosa con avena.'),
+('Receta Lager Pilsner', 'Receta para una cerveza lager limpia y refrescante.'),
+('Receta Wheat Beer Belga', 'Receta para una cerveza de trigo afrutada y especiada.'),
+('Receta Porter Robust', 'Receta para una porter oscura con notas de café y chocolate.'),
+('Receta Sour Frambuesa', 'Receta para una cerveza ácida con adición de frambuesas.'),
+('Receta Cerveza Ahumada', 'Receta para una cerveza con sabores ahumados distintivos.'),
+('Receta Blonde Ale Ligera', 'Receta para una cerveza rubia, ligera y fácil de beber.'),
+('Receta Doble IPA', 'Receta para una IPA con doble carga de lúpulo y mayor ABV.'),
+('Receta Imperial Stout Chocolate', 'Receta para una stout intensa con cacao y alto contenido alcohólico.');
 
+
+
+INSERT INTO INSTRUCCION (descripcion) VALUES
+('Moler la malta hasta obtener una molienda gruesa.'),
+('Realizar la maceración a 65°C durante 60 minutos.'),
+('Lavar el grano con agua caliente a 78°C.'),
+('Hervir el mosto durante 60 minutos, añadiendo lúpulos en diferentes etapas.'),
+('Enfriar el mosto rápidamente a temperatura de fermentación.'),
+('Airear el mosto antes de inocular la levadura.'),
+('Fermentar a 18°C durante 7 días.'),
+('Realizar un dry-hopping durante 3 días si se desea.'),
+('Embotellar o embasurar la cerveza con azúcar para carbonatación.'),
+('Dejar madurar la cerveza en botella o barril por al menos 2 semanas.');
 
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
 -- ▐▛▀▘ ▐▛▀▚▖▐▛▀▀▘ ▝▀▚▖▐▛▀▀▘▐▌ ▝▜▌  █ ▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▌ ▝▜▌
 -- ▐▌   ▐▌ ▐▌▐▙▄▄▖▗▄▄▞▘▐▙▄▄▖▐▌  ▐▌  █ ▐▌ ▐▌▝▚▄▄▖▗▄█▄▖▝▚▄▞▘▐▌  ▐▌
 
+INSERT INTO PRESENTACION (nombre, cantidad) VALUES
+('Botella 330ml', 330),
+('Lata 330ml', 330),
+('Botella 500ml', 500),
+('Botella 750ml', 750),
+('Barril 20L', 20000),
+('Barril 50L', 50000),
+('Pack 6 Latas 330ml', 1980),
+('Caja 12 Botellas 330ml', 3960),
+('Vaso Degustación', 200),
+('Copa Pinta', 568);
 
 -- ▗▄▄▄  ▗▄▄▄▖ ▗▄▄▖ ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖
 -- ▐▌  █ ▐▌   ▐▌   ▐▌   ▐▌ ▐▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌  
@@ -484,6 +519,17 @@ VALUES (10), (25), (30), (40), (50), (60), (75), (80), (90), (100);
 --   █    █  ▐▛▀▀▘▐▌ ▝▜▌▐▌  █ ▐▛▀▜▌    ▐▌  ▐▌  █  ▐▛▀▚▖ █  ▐▌ ▐▌▐▛▀▜▌▐▌ 
 --   █  ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌▐▙▄▄▀ ▐▌ ▐▌     ▝▚▞▘ ▗▄█▄▖▐▌ ▐▌ █  ▝▚▄▞▘▐▌ ▐▌▐▙▄▄▖
 
+INSERT INTO TIENDA_VIRTUAL (descripcion) VALUES
+('Tienda online oficial para cervezas artesanales.'),
+('Plataforma de venta de productos locales y orgánicos.'),
+('Ecommerce especializado en licores importados.'),
+('Tienda de regalos personalizados y cestas de cerveza.'),
+('Mercado en línea para pequeños productores de cerveza.'),
+('Sitio web para suscripciones mensuales de cerveza.'),
+('Tienda virtual con ofertas exclusivas y eventos online.'),
+('Plataforma de venta al por mayor para cervecerías.'),
+('Tienda online para productos de bar y accesorios cerveceros.'),
+('Portal de venta de experiencias de cata y tours cerveceros.');
 
 --  ▗▄▄▖ ▗▄▖ ▗▄▄▖  ▗▄▖  ▗▄▄▖▗▄▄▄▖▗▄▄▄▖▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖ ▗▄▖  
 -- ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌     █  ▐▌   ▐▌ ▐▌  █  ▐▌     █    █  ▐▌   ▐▌ ▐▌ 
@@ -502,6 +548,18 @@ VALUES ('Grado de alcohol'),('Color'), ('IBU'), ('Sabor'), ('Aroma'), ('Historia
 -- ▐▌ ▐▌▐▌   ▐▛▚▖▐▌▐▌   ▐▌     █  ▐▌     █  ▐▌ ▐▌            
 -- ▐▛▀▚▖▐▛▀▀▘▐▌ ▝▜▌▐▛▀▀▘▐▛▀▀▘  █  ▐▌     █  ▐▌ ▐▌            
 -- ▐▙▄▞▘▐▙▄▄▖▐▌  ▐▌▐▙▄▄▖▐▌   ▗▄█▄▖▝▚▄▄▖▗▄█▄▖▝▚▄▞▘  
+
+INSERT INTO BENEFICIO (nombre, descripcion) VALUES
+('Seguro Médico Integral', 'Cobertura médica completa para el empleado y su familia.'),
+('Bono de Alimentación', 'Tarjeta o vales para la compra de alimentos.'),
+('Transporte Subsidiado', 'Ayuda económica para el transporte diario al trabajo.'),
+('Gimnasio Corporativo', 'Acceso gratuito a un gimnasio dentro o cerca de la empresa.'),
+('Clases de Idiomas', 'Cursos de idiomas pagados por la empresa.'),
+('Guardería', 'Servicio de guardería para hijos de empleados.'),
+('Plan de Pensiones', 'Contribución de la empresa a un plan de retiro.'),
+('Flexibilidad Horaria', 'Posibilidad de ajustar los horarios de entrada y salida.'),
+('Descuentos en Productos', 'Descuentos especiales en los productos de la empresa.'),
+('Días Libres Adicionales', 'Días de vacaciones extra por buen desempeño.');
 
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖   ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖ ▗▄▖        
 -- ▐▌ ▐▌▐▌ ▐▌  █  ▐▌  ▐▌  █  ▐▌   ▐▌   ▐▌     █  ▐▌ ▐▌       
@@ -526,20 +584,68 @@ VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best M
 -- ▐▛▀▚▖▐▛▀▜▌▐▌ ▝▜▌▐▌   ▐▌ ▐▌                                   
 -- ▐▙▄▞▘▐▌ ▐▌▐▌  ▐▌▝▚▄▄▖▝▚▄▞▘
 
+INSERT INTO BANCO (nombre) VALUES
+('Banco de Venezuela'),
+('Banesco'),
+('Mercantil'),
+('BBVA Provincial'),
+('Banco Nacional de Crédito'),
+('Banco Occidental de Descuento'),
+('Bancaribe'),
+('Banco Exterior'),
+('Banco Activo'),
+('Banco Plaza');
+
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▖  ▗▄▖     ▗▄▄▄▖▗▄▖ ▗▄▄▖    ▗▖▗▄▄▄▖▗▄▄▄▖▗▄▖     
 --   █    █  ▐▌ ▐▌▐▌ ▐▌      █ ▐▌ ▐▌▐▌ ▐▌   ▐▌▐▌     █ ▐▌ ▐▌    
 --   █    █  ▐▛▀▘ ▐▌ ▐▌      █ ▐▛▀▜▌▐▛▀▚▖   ▐▌▐▛▀▀▘  █ ▐▛▀▜▌    
 --   █  ▗▄█▄▖▐▌   ▝▚▄▞▘      █ ▐▌ ▐▌▐▌ ▐▌▗▄▄▞▘▐▙▄▄▖  █ ▐▌ ▐▌ 
 
+INSERT INTO TIPO_TARJETA (nombre, procesador) VALUES
+('Crédito Visa', 'Visa'),
+('Débito Visa', 'Visa'),
+('Crédito Mastercard', 'Mastercard'),
+('Débito Mastercard', 'Mastercard'),
+('Crédito American Express', 'American Express'),
+('Débito Maestro', 'Maestro'),
+('Crédito Diners Club', 'Diners Club'),
+('Tarjeta Prepago Visa', 'Visa'),
+('Tarjeta Prepago Mastercard', 'Mastercard'),
+('Tarjeta de Regalo', 'Interno');
+
 -- ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▖▗▄▄▄▖▗▖ ▗▖ ▗▄▄▖                            
 -- ▐▌   ▐▌     █ ▐▌ ▐▌ █  ▐▌ ▐▌▐▌                               
 -- ▐▛▀▀▘ ▝▀▚▖  █ ▐▛▀▜▌ █  ▐▌ ▐▌ ▝▀▚▖                            
 -- ▐▙▄▄▖▗▄▄▞▘  █ ▐▌ ▐▌ █  ▝▚▄▞▘▗▄▄▞▘ 
+
+INSERT INTO ESTATUS (nombre) VALUES
+('Pendiente'),
+('En Proceso'),
+('Completado'),
+('Cancelado'),
+('En Espera'),
+('Rechazado'),
+('Enviado'),
+('Entregado'),
+('Devuelto'),
+('Archivado');
                     
 -- ▗▄▄▄▖▗▄▖  ▗▄▄▖ ▗▄▖      ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▖ ▗▄▄▄▖ ▗▄▖        
 --   █ ▐▌ ▐▌▐▌   ▐▌ ▐▌    ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌ ▐▌  █  ▐▌ ▐▌       
 --   █ ▐▛▀▜▌ ▝▀▚▖▐▛▀▜▌    ▐▌   ▐▛▀▜▌▐▌  ▐▌▐▛▀▚▖  █  ▐▌ ▐▌       
 --   █ ▐▌ ▐▌▗▄▄▞▘▐▌ ▐▌    ▝▚▄▄▖▐▌ ▐▌▐▌  ▐▌▐▙▄▞▘▗▄█▄▖▝▚▄▞▘  
+
+INSERT INTO TASA_CAMBIO (fecha, tasa_bs_dolar, tasa_bs_punto) VALUES
+('2025-01-01', 36.50, 37.00),
+('2025-01-02', 36.55, 37.05),
+('2025-01-03', 36.60, 37.10),
+('2025-01-04', 36.65, 37.15),
+('2025-01-05', 36.70, 37.20),
+('2025-01-06', 36.75, 37.25),
+('2025-01-07', 36.80, 37.30),
+('2025-01-08', 36.85, 37.35),
+('2025-01-09', 36.90, 37.40),
+('2025-01-10', 36.95, 37.45);
 
 -- ▗▖   ▗▖ ▗▖ ▗▄▄▖ ▗▄▖ ▗▄▄▖     ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄   ▗▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌      █    █  ▐▌   ▐▛▚▖▐▌▐▌  █ ▐▌ ▐▌
@@ -680,6 +786,18 @@ VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best M
 -- ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌ ▐▌                                                           
 -- ▐▌   ▐▛▀▜▌▐▛▀▚▖▐▌▝▜▌▐▌ ▐▌                                                           
 -- ▝▚▄▄▖▐▌ ▐▌▐▌ ▐▌▝▚▄▞▘▝▚▄▞▘ 
+
+INSERT INTO CARGO (nombre) VALUES
+('Gerente'),
+('Supervisor'),
+('Asistente'),
+('Operador'),
+('Especialista'),
+('Coordinador'),
+('Analista'),
+('Director'),
+('Técnico'),
+('Practicante');
 
 
 -- ▗▄▄▖ ▗▄▄▄▖▗▄▄▖  ▗▄▄▖ ▗▄▖ ▗▖  ▗▖ ▗▄▖ ▗▖        ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▖  ▗▄▄▖▗▄▄▄▖▗▄▖ 

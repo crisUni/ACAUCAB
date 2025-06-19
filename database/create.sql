@@ -13,7 +13,16 @@ CREATE TABLE IF NOT EXISTS INSTRUCCION (
 CREATE TABLE IF NOT EXISTS RECETA (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
-    FOREIGN KEY (fk_instruccion) REFERENCES INSTRUCCION(eid)
+    descripcion TEXT NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS RECE_INST (
+    fk_instruccion INT NOT NULL,
+    fk_receta INT NOT NULL,
+    orden INT,
+    PRIMARY KEY (fk_instruccion, fk_receta),
+    FOREIGN KEY (fk_instruccion) REFERENCES INSTRUCCION(eid),
+    FOREIGN KEY (fk_receta) REFERENCES RECETA(eid)
 );
 
 CREATE TABLE IF NOT EXISTS PRESENTACION (
