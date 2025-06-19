@@ -7,6 +7,7 @@ import CrudUser from "./pages/crud_user";
 import CrudCliente from "./pages/CrudCliente";
 import CrudUsuario from "./pages/CrudUsuario";
 import TempHome from "./pages/TempHome";
+import CrudRol from "./pages/CrudRol";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -16,6 +17,7 @@ const app = (
           <Route path="/" element={<TempHome />} />
           <Route path="/clientes" element={<CrudCliente />} />
           <Route path="/usuario" element={<CrudUsuario />} />
+          <Route path="/roles" element={<CrudRol />} />
         </Routes>
     </Router>
   </StrictMode>

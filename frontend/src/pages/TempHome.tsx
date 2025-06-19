@@ -7,6 +7,9 @@ export default function TempHome() {
             <li key="usuarios">
                 <a href="/usuario">Usuarios</a>
             </li>
+            <li key="roles">
+                <a href="/roles">Roles</a>
+            </li>
         </ul>
     )
 }

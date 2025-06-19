@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import GenerateForm from "@/components/FormGenerator";
 
 const JuridicoForm = () => {
   const [fkLugar1, setFkLugar1] = useState([]);
@@ -290,6 +291,18 @@ const NaturalForm = () => {
   );
 };
 
+const NewCrudNatural = () => GenerateForm([
+  { label: "RIF", keyName: "rif", inputType: "text", required: true },
+  { label: "Direccion", keyName: "direccion", inputType: "text", required: true },
+  { label: "Numero Registro", keyName: "numero_registro", inputType: "number", required: true },
+  { label: "Cedula de Identidad", keyName: "ci", inputType: "number", required: true },
+  { label: "Nombre", keyName: "nombre", inputType: "text", required: true },
+  { label: "Apellido", keyName: "apellido", inputType: "text", required: true },
+  { label: "Fecha de Nacimiento", keyName: "fecha_nacimiento", inputType: "date", required: true },
+  { label: "Direccion 1", keyName: "fk_lugar_1", fetchFrom:'http://127.0.0.1:3000/api/form/parroquias', required: true },
+  { label: "Direccion 2", keyName: "fk_lugar_2", fetchFrom:'http://127.0.0.1:3000/api/form/parroquias', required: true }
+], 'http://127.0.0.1:3000/api/cliente_natural')
+
 export default function CrudCliente() {
     const [naturalData, setNaturalData] = useState<Array<any>>([])
     const [juridicoData, setJuridicoData] = useState<Array<any>>([])
@@ -311,9 +324,18 @@ export default function CrudCliente() {
             <a href="/">Back</a>
             <h1>"Crear Clientes"</h1>
             <h2>Crear Natural</h2>
-            <NaturalForm />
+            <NewCrudNatural/>
             <h2>Crear Juridico</h2>
-            <JuridicoForm />
+            {
+              GenerateForm([
+                {
+                  keyName: "fk_cliente,fk_pnatural",
+                  label: "Cliente Natural",
+                  required: true,
+                  fetchFrom: 'http://127.0.0.1:3000/api/form/pnatural'
+                }
+              ], "")
+            }
             <h2> Clientes Naturales </h2>
             <ul>
               { naturalData.map(x => <li key={x.eid}> { JSON.stringify(x) } </li>) }
