@@ -1,0 +1,12 @@
+export default function TempHome() {
+    return (
+        <ul>
+            <li key="clientes">
+                <a href="/clientes">Clientes</a>
+            </li>
+            <li key="usuarios">
+                <a href="/usuario">Usuarios</a>
+            </li>
+        </ul>
+    )
+}
