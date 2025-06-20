@@ -914,17 +914,16 @@ INSERT INTO TIPO_CERVEZA (nombre, fk_tipo_cerveza, fk_receta) VALUES
 -- ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘ ▐▙▄▄▖▐▙▄▄▄▖▐▌ ▐▌ 
 
 INSERT INTO CERVEZA (nombre, descripcion, historia, fk_tipo_cerveza, fk_proveedor, fk_lugar) VALUES
-('Golden Ale Sol', 'Una cerveza dorada y refrescante, con notas sutiles de malta y un final limpio.', 'Inspirada en las cálidas tardes de verano, esta Golden Ale fue creada para ser fácil de beber y refrescante, ideal para cualquier ocasión.', 1, 1, 1),
-('Stout Nocturna', 'Cerveza oscura e intensa con sabores a café tostado, chocolate amargo y un toque cremoso.', 'Elaborada en honor a las noches estrelladas de Caracas, esta Stout busca capturar la profundidad y el misterio con cada sorbo.', 2, 2, 1),
-('IPA Tropical', 'India Pale Ale con un perfil aromático intenso a frutas tropicales como mango y maracuyá, y un amargor pronunciado.', 'Un tributo a la riqueza frutal del trópico venezolano, esta IPA es una explosión de sabor que desafía el paladar.', 3, 3, 1),
-('Witbier de Trigo', 'Cerveza belga de trigo, ligera y turbia, con toques de cilantro y cáscara de naranja, muy refrescante.', 'Con raíces en las tradiciones cerveceras belgas, esta Witbier se adaptó al clima local, ofreciendo una opción ligera y especiada.', 4, 4, 1),
-('Lager Clásica', 'Una Lager pálida y crujiente, de fermentación baja, con un sabor equilibrado y refrescante.', 'La "Lager Clásica" busca replicar la pureza y sencillez de las cervezas tradicionales europeas, perfecta para el día a día.', 5, 5, 1),
-('Porter Robusta', 'Cerveza oscura con notas de caramelo, toffee y un ligero ahumado, de cuerpo medio a completo.', 'Con orígenes en los pubs londinenses, esta Porter fue reinventada para el paladar local, ofreciendo calidez y complejidad.', 6, 6, 1),
-('Saison Campestre', 'Cerveza rústica de granja, con alta carbonatación, notas frutales y un final seco y especiado.', 'Esta Saison evoca los sabores del campo y la frescura de la naturaleza, siendo una cerveza versátil y sorprendente.', 7, 7, 1),
-('Scotch Ale Fuerte', 'Cerveza ámbar-rojiza, maltosa, con un dulzor inicial pronunciado y un cuerpo robusto.', 'Inspirada en las robustas cervezas escocesas, esta ale es una bebida para los amantes de los sabores intensos y el carácter maltoso.', 8, 8, 1),
-('Sour Frambuesa', 'Cerveza ácida y frutal, con un intenso sabor a frambuesas frescas y un final vibrante.', 'Una innovación audaz, esta Sour busca el equilibrio entre la acidez y la dulzura natural de la fruta, ideal para paladares aventureros.', 9, 9, 1),
-('Imperial Stout Añeja', 'Stout de alto contenido alcohólico, compleja, con capas de sabor a licor, frutos secos y vainilla.', 'Creada para la contemplación, esta Imperial Stout es una joya que mejora con el tiempo, ofreciendo una experiencia sensorial única.', 10, 10, 1);
-
+('Golden Ale Sol', 'Cerveza dorada y refrescante con notas sutiles de malta y final limpio.', 'Inspirada en el sol de verano, creada para ser ligera y fácil de beber en cualquier ocasión.', 1, 1, 200), 
+('Stout Nocturna', 'Cerveza oscura e intensa con sabores a café tostado y chocolate amargo.', 'Elaborada para las noches caraqueñas, buscando capturar la profundidad y el misterio.', 4, 2, 201), 
+('IPA Tropical', 'India Pale Ale con perfil aromático intenso a frutas tropicales (mango, maracuyá) y amargor pronunciado.', 'Tributo a la riqueza frutal del trópico venezolano, una explosión de sabor.', 3, 3, 202), 
+('Witbier de Trigo', 'Cerveza belga de trigo, ligera y turbia, con toques de cilantro y cáscara de naranja.', 'Con raíces belgas, adaptada al clima local para una opción ligera y especiada.', 6, 4, 203), 
+('Lager Clásica', 'Lager pálida y crujiente de fermentación baja, sabor equilibrado y refrescante.', 'Busca replicar la pureza y sencillez de las cervezas tradicionales europeas.', 2, 5, 204),
+('Porter Robusta', 'Cerveza oscura con notas de caramelo, toffee y ligero ahumado, de cuerpo medio a completo.', 'Reinventada para el paladar local, ofreciendo calidez y complejidad.', 5, 6, 205), 
+('Saison Campestre', 'Cerveza rústica de granja, alta carbonatación, notas frutales y final seco.', 'Evoca los sabores del campo y la frescura de la naturaleza.', 9, 7, 206), 
+('Scotch Ale Fuerte', 'Cerveza ámbar-rojiza, maltosa, con un dulzor inicial pronunciado y cuerpo robusto.', 'Inspirada en las cervezas escocesas, para amantes de sabores intensos.', 1, 8, 207), 
+('Sour Frambuesa', 'Cerveza ácida y frutal, con intenso sabor a frambuesas frescas y final vibrante.', 'Innovación audaz, equilibrio entre acidez y dulzura, para paladares aventureros.', 8, 9, 208), 
+('Imperial Stout Añeja', 'Stout de alto contenido alcohólico, compleja, con capas de sabor a licor y frutos secos.', 'Una joya que mejora con el tiempo, para una experiencia sensorial única.', 4, 10, 209);
 
 --  ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌ ▐▌  █  ▐▌ ▐▌  
