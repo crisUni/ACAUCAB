@@ -18,50 +18,52 @@ Hacer minimo 10 insert en cada uno (exepto en los que solo son 1)
 - [ ] CAMBIAR CONTRASEN~A EN USUARIO A CONTRASENA!!!
 
 - [x] Lugar
-- [ ] Receta
-- [ ] Presentacion
+- [x] Receta
+- [x] Instruccion
+- [x] Rece_Inst
+- [x] Presentacion
 - [x] Descuento
 - [ ] Tienda Virtual
 - [x] Caracteristicas
-- [ ] Horario
-- [ ] Beneficio
+- [x] Horario
+- [x] Beneficio
 - [ ] Privilegio
 - [x] Ingrediente
 - [ ] Rol
-- [ ] Banco
-- [ ] Tipo Tarjeta
-- [ ] Estatus
-- [ ] Tasa Cambio
-- [ ] Lugar Tienda
-- [ ] Metodo Pago
+- [x] Banco
+- [x] Tipo Tarjeta
+- [x] Estatus
+- [x] Tasa Cambio
+- [x] Lugar Tienda
+- [x] Metodo Pago
 - [ ] Ingr_Rece
 - [ ] Rol_Priv
 - [ ] Proveedor
 - [ ] Cliente
-- [ ] Tienda_Fisica
-- [ ] Empleado
-- [ ] Tarjeta
-- [ ] Cheque
+- [x] Tienda_Fisica
+- [x] Empleado
+- [x] Tarjeta
+- [x] Cheque
 - [ ] Efectivo
 - [ ] Punto
-- [ ] Afiliacion
+- [x] Afiliacion
 - [ ] Compra
 - [ ] PNatural (Persona Natural)
 - [ ] PJurudico (Persona Juridico)
 - [ ] Departamento
-- [ ] Empl_Hora
+- [x] Empl_Hora
 - [ ] Usuario
 - [ ] Telefono
 - [ ] Correo
 - [ ] Esta_Comp
 - [ ] Detalle_Compra
-- [ ] Cargo
+- [x] Cargo
 - [ ] Personal_Contacto
 - [ ] Tipo_Cerveza
-- [ ] Cerveza
+- [x] Cerveza
 - [ ] Comentario
-- [ ] Cerv_Pres
-- [ ] Desc_Cerv_Pres
+- [x] Cerv_Pres
+- [x] Desc_Cerv_Pres
 - [x] Tipo Evento
 - [ ] Evento
 - [ ] Venta
