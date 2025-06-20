@@ -301,7 +301,7 @@ const NewCrudNatural = () => GenerateForm([
   { label: "Fecha de Nacimiento", keyName: "fecha_nacimiento", inputType: "date", required: true },
   { label: "Direccion 1", keyName: "fk_lugar_1", fetchFrom:'http://127.0.0.1:3000/api/form/parroquias', required: true },
   { label: "Direccion 2", keyName: "fk_lugar_2", fetchFrom:'http://127.0.0.1:3000/api/form/parroquias', required: true }
-], 'http://127.0.0.1:3000/api/cliente_natural')
+], {url: 'http://127.0.0.1:3000/api/cliente_natural'})
 
 export default function CrudCliente() {
     const [naturalData, setNaturalData] = useState<Array<any>>([])

@@ -3,11 +3,11 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { App } from "./App";
-import CrudUser from "./pages/crud_user";
 import CrudCliente from "./pages/CrudCliente";
 import CrudUsuario from "./pages/CrudUsuario";
 import TempHome from "./pages/TempHome";
 import CrudRol from "./pages/CrudRol";
+import MenuPrivilegios from "./pages/MenuPrivilegios";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -18,6 +18,7 @@ const app = (
           <Route path="/clientes" element={<CrudCliente />} />
           <Route path="/usuario" element={<CrudUsuario />} />
           <Route path="/roles" element={<CrudRol />} />
+          <Route path="/privilegios/*" element={<MenuPrivilegios />} />
         </Routes>
     </Router>
   </StrictMode>

@@ -79,6 +79,25 @@ const server = serve({
       },
     },
 
+    "/api/privilegios/:rol": {
+      async GET(req) {
+        const rol = req.params.rol;
+        const missing = new URL(req.url).searchParams.get("missing");
+        let res;
+        if (missing === "true")
+          res = await sql`
+            SELECT * from privilegio where eid NOT IN (SELECT fk_privilegio
+              FROM Privilegio p, ROL_PRIV rp
+              WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
+        else
+          res = await sql`
+            SELECT * FROM privilegio WHERE eid IN (SELECT fk_privilegio
+            FROM Privilegio p, ROL_PRIV rp
+            WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
+
     "/api/cliente_natural": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() { return Response.json(await ClienteService.getNaturalesSQL(), CORS_HEADERS); },

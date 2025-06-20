@@ -10,6 +10,9 @@ export default function TempHome() {
             <li key="roles">
                 <a href="/roles">Roles</a>
             </li>
+            <li key="privilegios">
+                <a href="/privilegios">Privilegios</a>
+            </li>
         </ul>
     )
 }

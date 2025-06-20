@@ -7,7 +7,7 @@ const possibleUsers = () => GenerateForm([
   { label: "Cliente | Empleado | Proveedor al que pertenece la cuenta",
     keyName: "fk_cliente,fk_empleado,fk_proveedor", fetchFrom: "http://127.0.0.1:3000/api/form/user_creation", required: true },
   { label: "Rol de la Cuenta", keyName: "fk_rol", fetchFrom: "http://127.0.0.1:3000/api/form/roles", required: true },
-  ], "http://127.0.0.1:3000/api/usuario")
+  ], {url:"http://127.0.0.1:3000/api/usuario"})
 
 export default function CrudUsuario() {
     return (

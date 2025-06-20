@@ -14,7 +14,12 @@ type FormEntrySelectFromDatabase = {
     fetchFrom: string,
 }
 
-function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase)[], url: string) {
+type FormOptions = {
+    url?: string,
+    callback?: (data: any) => void;
+}
+
+function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase)[], options: FormOptions) {
     const [fromDatabase, setFromDatabase] = useState<{ [key: string | symbol]: any }>({});
     const [formData, setFormData] = useState<{ [key: string | symbol]: any }>(() => {
         const res: { [key: string | symbol]: any } = {};
@@ -84,6 +89,15 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         </div>)
     }
 
+    function postToUrl(data: any) {
+        fetch(options.url as string, {
+            method: "POST",
+            body: data
+        })
+            .then(async res => console.log(await res.json()))
+            .catch(err => console.error)
+    }
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
@@ -97,20 +111,16 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
             delete newFormData[key]
         }
 
-        for (const key in newFormData) {
-            console.log(newFormData[key])
+        for (const key in newFormData)
             if (((newFormData[key] ?? undefined) === undefined) || newFormData[key] === "null")
                 delete newFormData[key]
-        }
 
         const data = JSON.stringify({ insert_data: newFormData });
 
-        fetch(url, {
-            method: "POST",
-            body: data
-        })
-            .then(async res => console.log(await res.json()))
-            .catch(err => console.error)
+        if ('url' in options && options.callback !== undefined)
+            postToUrl(data)
+        if ('callback' in options && options.callback !== undefined)
+            options.callback(JSON.parse(data))
     };
 
     return (
