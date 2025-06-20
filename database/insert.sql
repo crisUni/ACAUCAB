@@ -705,6 +705,13 @@ INSERT INTO LUGAR_TIENDA (nombre, tipo, fk_lugar_tienda) VALUES
 -- ▐▌  ▐▌▐▛▀▀▘  █ ▐▌ ▐▌▐▌  █ ▐▌ ▐▌    ▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▌ ▐▌      
 -- ▐▌  ▐▌▐▙▄▄▖  █ ▝▚▄▞▘▐▙▄▄▀ ▝▚▄▞▘    ▐▌   ▐▌ ▐▌▝▚▄▞▘▝▚▄▞▘ 
 
+INSERT INTO METODO_PAGO (nombre) VALUES
+('Tarjeta de Crédito'),
+('Tarjeta de Débito'),
+('Efectivo'),
+('Puntos');
+('Cheque')
+
 -- ▗▄▄▄▖▗▖  ▗▖ ▗▄▄▖▗▄▄▖     ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖                
 --   █  ▐▛▚▖▐▌▐▌   ▐▌ ▐▌    ▐▌ ▐▌▐▌   ▐▌   ▐▌                   
 --   █  ▐▌ ▝▜▌▐▌▝▜▌▐▛▀▚▖    ▐▛▀▚▖▐▛▀▀▘▐▌   ▐▛▀▀▘                
@@ -739,12 +746,34 @@ INSERT INTO PROVEEDOR (rif, direccion, denominacion_comercial, razon_social, pag
 -- ▐▌   ▐▌     █  ▐▛▀▀▘▐▌ ▝▜▌  █  ▐▛▀▀▘ 
 -- ▝▚▄▄▖▐▙▄▄▖▗▄█▄▖▐▙▄▄▖▐▌  ▐▌  █  ▐▙▄▄▖  
 
+INSERT INTO CLIENTE (rif, direccion, numero_registro, fk_lugar_1, fk_lugar_2) VALUES
+('V-10203040-5', 'Av. Principal, Res. Los Apamates, Apto 5B, Caracas', 1001, 1, 15),
+('E-20304050-6', 'Calle La Paz, Casa 8, Maracaibo', 1002, 24, 220),
+('J-30405060-7', 'Urb. Las Mercedes, Torre C, Piso 10, Valencia', 1003, 7, 45),
+('G-40506070-8', 'Carrera 20, Edif. Blanco, Local 3, Barquisimeto', 1004, 14, 100),
+('V-50607080-9', 'Zona Industrial, Galpón 10, Puerto Ordaz', 1005, 10, 80),
+('E-60708090-0', 'Calle Real, Quinta Los Girasoles, Mérida', 1006, 15, 160),
+('J-70809010-1', 'Av. Atlántico, CC. El Faro, Local 20, Porlamar', 1800, 18, 175),
+('G-80901020-2', 'Sector El Carmen, Calle 5, Maturín', 1008, 17, 170),
+('V-90102030-3', 'Plaza Bolívar, Edif. Azul, Oficina 7, San Felipe', 1009, 23, 210),
+('E-01020304-4', 'Av. Las Delicias, Local 15, Ciudad Ojeda', 1010, 24, 230);
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄   ▗▄▖     ▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖ ▗▄▄▖ ▗▄▖
 --   █    █  ▐▌   ▐▛▚▖▐▌▐▌  █ ▐▌ ▐▌    ▐▌     █  ▐▌     █  ▐▌   ▐▌ ▐▌
 --   █    █  ▐▛▀▀▘▐▌ ▝▜▌▐▌  █ ▐▛▀▜▌    ▐▛▀▀▘  █   ▝▀▚▖  █  ▐▌   ▐▛▀▜▌
 --   █  ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌▐▙▄▄▀ ▐▌ ▐▌    ▐▌   ▗▄█▄▖▗▄▄▞▘▗▄█▄▖▝▚▄▄▖▐▌ ▐▌
 
+INSERT INTO TIENDA_FISICA (capacidad, direccion, fk_lugar) VALUES
+(50, 'Av. Francisco de Miranda, Edif. Comer, Local 1, Caracas', 15),
+(30, 'Calle 72, Sector Bella Vista, Maracaibo', 220),
+(40, 'Centro Comercial Sambil, Nivel Feria, Valencia', 45),
+(25, 'Carrera 19, entre calles 20 y 21, Barquisimeto', 100),
+(35, 'Zona Alta, CC. Orinoco, Local 5, Puerto Ordaz', 80),
+(20, 'Calle 24, Centro, Mérida', 160),
+(15, 'Bulevar 5 de Julio, Local 10, Cumaná', 205),
+(28, 'Av. Bolívar, Centro, San Cristóbal', 200),
+(22, 'Calle Urdaneta, Edif. El Sol, Piso PB, Coro', 90),
+(32, 'Av. Intercomunal, CC. Metrópolis, Local 1, Cabudare', 100);
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▄▄▖ ▗▖   ▗▄▄▄▖ ▗▄▖ ▗▄▄▄   ▗▄▖
 -- ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌   ▐▌ ▐▌▐▌  █ ▐▌ ▐▌
@@ -769,11 +798,35 @@ INSERT INTO EMPLEADO (cedula, primer_nombre, segundo_nombre, primer_apellido, se
 --   █ ▐▛▀▜▌▐▛▀▚▖   ▐▌▐▛▀▀▘  █ ▐▛▀▜▌ 
 --   █ ▐▌ ▐▌▐▌ ▐▌▗▄▄▞▘▐▙▄▄▖  █ ▐▌ ▐▌
 
+INSERT INTO TARJETA (fk_metodo_pago, fk_banco, fk_tipo_tarjeta, numero_tarjeta, fecha_vence, nombre_titular, cvv) VALUES
+(1, 1, 1, 1234567890, '2027-12-31', 'Juan Perez', 123),
+(2, 2, 2, 9876543210, '2026-11-30', 'Maria Rodriguez', 456),
+(1, 3, 1, 1122334455, '2028-06-30', 'Pedro Garcia', 789),
+(2, 4, 2, 6677889900, '2025-05-31', 'Ana Martinez', 012),
+(1, 5, 1, 0099887766, '2029-04-30', 'Luis Diaz', 345),
+(2, 6, 2, 5544332211, '2027-03-31', 'Sofia Hernandez', 678),
+(1, 7, 1, 2211443355, '2026-02-28', 'Jorge Morales', 901),
+(2, 8, 2, 7788554422, '2028-01-31', 'Laura Flores', 234),
+(1, 9, 1, 3322110099, '2025-10-31', 'Diego Ramirez', 567),
+(2, 10, 2, 9900112233, '2029-09-30', 'Gabriela Torres', 890);
+
 
 --  ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▖ ▗▖ ▗▖▗▄▄▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌ ▐▌ ▐▌▐▌
 -- ▐▌   ▐▛▀▜▌▐▛▀▀▘▐▌ ▐▌ ▐▌ ▐▌▐▛▀▀▘
 -- ▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖▐▙▄▟▙▖▝▚▄▞▘▐▙▄▄▖ 
+
+INSERT INTO CHEQUE (fk_metodo_pago, numero, fk_banco, memo) VALUES
+(5, 1001, 1, 'Pago de servicios'),
+(5, 1002, 2, 'Compra de insumos'),
+(5, 1003, 3, 'Alquiler local'),
+(5, 1004, 4, 'Salarios'),
+(5, 1005, 5, 'Factura proveedor X'),
+(5, 1006, 6, 'Reembolso gasto'),
+(5, 1007, 7, 'Pago publicidad'),
+(5, 1008, 8, 'Mantenimiento'),
+(5, 1009, 9, 'Bonificación'),
+(5, 1010, 10, 'Compra de equipos');
 
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖ ▗▄▖
@@ -792,6 +845,18 @@ INSERT INTO EMPLEADO (cedula, primer_nombre, segundo_nombre, primer_apellido, se
 -- ▐▌ ▐▌▐▌     █  ▐▌     █  ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌ 
 -- ▐▛▀▜▌▐▛▀▀▘  █  ▐▌     █  ▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▌ ▝▜▌
 -- ▐▌ ▐▌▐▌   ▗▄█▄▖▐▙▄▄▖▗▄█▄▖▐▌ ▐▌▝▚▄▄▖▗▄█▄▖▝▚▄▞▘▐▌  ▐▌ 
+
+INSERT INTO AFILIACION (fecha, monto_mensual, fk_proveedor) VALUES
+('2024-01-01', 50.00, 1),  
+('2024-01-15', 75.00, 2), 
+('2024-02-01', 60.00, 3), 
+('2024-02-10', 45.00, 4),  
+('2024-03-01', 80.00, 5), 
+('2024-03-20', 55.00, 6),  
+('2024-04-05', 70.00, 7),  
+('2024-04-15', 65.00, 8),  
+('2024-05-01', 90.00, 9),  
+('2024-05-10', 50.00, 10);
 
 
 --  ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▖ ▗▄▄▖  ▗▄▖
@@ -937,11 +1002,35 @@ INSERT INTO CERVEZA (nombre, descripcion, historia, fk_tipo_cerveza, fk_proveedo
 -- ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘     ▐▌   ▐▌ ▐▌▐▙▄▄▖▗▄▄▞▘  
 
 
+INSERT INTO CERV_PRES (fk_cerveza, fk_presentacion, precio) VALUES
+(1, 1, 3.50),
+(1, 3, 3.75), 
+(2, 2, 4.80), 
+(2, 4, 5.20), 
+(3, 1, 4.00),
+(3, 7, 120.00), 
+(4, 5, 8.50),
+(5, 3, 2.99),
+(6, 2, 4.50),
+(7, 8, 18.00);
+
 -- ▗▄▄▄  ▗▄▄▄▖ ▗▄▄▖ ▗▄▄▖     ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖    ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖  
 -- ▐▌  █ ▐▌   ▐▌   ▐▌       ▐▌   ▐▌   ▐▌ ▐▌▐▌  ▐▌    ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌ 
 -- ▐▌  █ ▐▛▀▀▘ ▝▀▚▖▐▌       ▐▌   ▐▛▀▀▘▐▛▀▚▖▐▌  ▐▌    ▐▛▀▘ ▐▛▀▚▖▐▛▀▀▘ ▝▀▚▖ 
 -- ▐▙▄▄▀ ▐▙▄▄▖▗▄▄▞▘▝▚▄▄▖    ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘     ▐▌   ▐▌ ▐▌▐▙▄▄▖▗▄▄▞▘  
 
+
+INSERT INTO DESC_CERV_PRES (fk_cerveza, fk_presentacion, fk_descuento, fecha_inicio, fecha_fin) VALUES
+(1, 1, 1, '2025-07-01', '2025-07-15'),  
+(2, 2, 2, '2025-07-05', '2025-07-20'),  
+(3, 3, 3, '2025-07-10', '2025-07-25'),  
+(4, 4, 4, '2025-07-15', '2025-07-30'),  
+(5, 5, 5, '2025-08-01', '2025-08-15'),  
+(6, 6, 1, '2025-08-05', '2025-08-20'),  
+(7, 7, 2, '2025-08-10', '2025-08-25'),  
+(8, 8, 3, '2025-08-15', '2025-08-30'),  
+(9, 9, 4, '2025-09-01', '2025-09-15'),  
+(10, 10, 5, '2025-09-05', '2025-09-20');
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▖  ▗▄▖     ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖ 
 --   █    █  ▐▌ ▐▌▐▌ ▐▌    ▐▌   ▐▌  ▐▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌  
