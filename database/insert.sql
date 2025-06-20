@@ -489,6 +489,18 @@ INSERT INTO INSTRUCCION (descripcion) VALUES
 ('Embotellar o embasurar la cerveza con azúcar para carbonatación.'),
 ('Dejar madurar la cerveza en botella o barril por al menos 2 semanas.');
 
+INSERT INTO RECE_INST (fk_instruccion, fk_receta, orden) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 1),
+(4, 2, 2),
+(5, 3, 1),
+(6, 3, 2),
+(7, 4, 1),
+(8, 4, 2),
+(9, 5, 1),
+(10, 5, 2);
+
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
 -- ▐▛▀▘ ▐▛▀▚▖▐▛▀▀▘ ▝▀▚▖▐▛▀▀▘▐▌ ▝▜▌  █ ▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▌ ▝▜▌
@@ -544,6 +556,18 @@ VALUES ('Grado de alcohol'),('Color'), ('IBU'), ('Sabor'), ('Aroma'), ('Historia
 -- ▐▛▀▜▌▐▌ ▐▌▐▛▀▚▖▐▛▀▜▌▐▛▀▚▖  █  ▐▌ ▐▌                       
 -- ▐▌ ▐▌▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▗▄█▄▖▝▚▄▞▘     
 
+INSERT INTO HORARIO (hora_entrada, hora_salida, dia_semana) VALUES
+('09:00:00', '17:00:00', 'Lunes'),
+('09:00:00', '17:00:00', 'Martes'),
+('09:00:00', '17:00:00', 'Miercoles'),
+('09:00:00', '17:00:00', 'Jueves'),
+('09:00:00', '17:00:00', 'Viernes'),
+('10:00:00', '14:00:00', 'Sabado'),
+('11:00:00', '15:00:00', 'Domingo'),
+('08:00:00', '16:00:00', 'Lunes'),
+('10:00:00', '18:00:00', 'Martes'),
+('12:00:00', '20:00:00', 'Miercoles');
+
 -- ▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖ ▗▄▖             
 -- ▐▌ ▐▌▐▌   ▐▛▚▖▐▌▐▌   ▐▌     █  ▐▌     █  ▐▌ ▐▌            
 -- ▐▛▀▚▖▐▛▀▀▘▐▌ ▝▜▌▐▛▀▀▘▐▛▀▀▘  █  ▐▌     █  ▐▌ ▐▌            
@@ -572,7 +596,19 @@ INSERT INTO BENEFICIO (nombre, descripcion) VALUES
 -- ▗▄█▄▖▐▌  ▐▌▝▚▄▞▘▐▌ ▐▌▐▙▄▄▖▐▙▄▄▀ ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌  █  ▐▙▄▄▖
 
 INSERT INTO INGREDIENTE (nombre) 
-VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best Malz Caramel Light '), ('Lúpulo Columbus'), ('Lúpulo Cascade'), ('Lúpulo Columbus'), ('Lúpulo Cascade'), ('Levadura: Danstar Bry-97'), ('Agua'), ('Azucar Blanca');
+VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best Malz Caramel Light '), ('Lúpulo Columbus'), ('Lúpulo Cascade'), ('Malta de cebada'), ('Frutas tropicales'), ('Levadura: Danstar Bry-97'), ('Agua'), ('Azucar Blanca');
+
+INSERT INTO INGR_RECE (fk_ingrediente, fk_receta, fecha_inicio) VALUES
+(1, 1, '2025-01-01'),
+(2, 1, '2025-01-02'),
+(3, 2, '2025-01-03'),
+(4, 2, '2025-01-04'),
+(5, 3, '2025-01-05'),
+(6, 3, '2025-01-06'),
+(7, 4, '2025-01-07'),
+(8, 4, '2025-01-08'),
+(9, 5, '2025-01-09'),
+(10, 5, '2025-01-10');
 
 -- ▗▄▄▖  ▗▄▖ ▗▖                                                 
 -- ▐▌ ▐▌▐▌ ▐▌▐▌                                                 
@@ -652,6 +688,18 @@ INSERT INTO TASA_CAMBIO (fecha, tasa_bs_dolar, tasa_bs_punto) VALUES
 -- ▐▌   ▐▌ ▐▌▐▌▝▜▌▐▛▀▜▌▐▛▀▚▖      █    █  ▐▛▀▀▘▐▌ ▝▜▌▐▌  █ ▐▛▀▜▌
 -- ▐▙▄▄▖▝▚▄▞▘▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌      █  ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌▐▙▄▄▀ ▐▌ ▐▌
 
+INSERT INTO LUGAR_TIENDA (nombre, tipo, fk_lugar_tienda) VALUES
+('Tienda', 'TIENDA', NULL),
+('Pasillo A', 'PASILLO', 1),
+('Pasillo B', 'PASILLO', 1),
+('Pasillo C', 'PASILLO', 1);
+('Anaquel A1', 'ANAQUEL', 2),
+('Anaquel A2', 'ANAQUEL', 2), 
+('Anaquel B1', 'ANAQUEL', 3), 
+('Anaquel B2', 'ANAQUEL', 3), 
+('Anaquel C1', 'ANAQUEL', 4), 
+('Anaquel C2', 'ANAQUEL', 4);
+
 -- ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖▗▄▖ ▗▄▄▄   ▗▄▖     ▗▄▄▖  ▗▄▖  ▗▄▄▖ ▗▄▖       
 -- ▐▛▚▞▜▌▐▌     █ ▐▌ ▐▌▐▌  █ ▐▌ ▐▌    ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌ ▐▌      
 -- ▐▌  ▐▌▐▛▀▀▘  █ ▐▌ ▐▌▐▌  █ ▐▌ ▐▌    ▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▌ ▐▌      
@@ -674,6 +722,17 @@ INSERT INTO TASA_CAMBIO (fecha, tasa_bs_dolar, tasa_bs_punto) VALUES
 -- ▐▛▀▘ ▐▛▀▚▖▐▌ ▐▌▐▌  ▐▌▐▛▀▀▘▐▛▀▀▘▐▌  █ ▐▌ ▐▌▐▛▀▚▖ 
 -- ▐▌   ▐▌ ▐▌▝▚▄▞▘ ▝▚▞▘ ▐▙▄▄▖▐▙▄▄▖▐▙▄▄▀ ▝▚▄▞▘▐▌ ▐▌ 
 
+INSERT INTO PROVEEDOR (rif, direccion, denominacion_comercial, razon_social, pagina_web, fk_lugar_1, fk_lugar_2) VALUES
+('J-12345678-0', 'Calle Real, Sector El Centro, Altagracia', 'Cervecería La Capital', 'Cervezas La Capital C.A.', 'www.lacapital.com', 1, 2), 
+('G-98765432-1', 'Av. Intercomunal, Urb. Las Palmas, Chacao', 'Distribuidora Miranda Premium', 'Distribuciones Miranda Premium S.A.', 'www.mirandapremium.com', 3, 4), 
+('J-23456789-2', 'Zona Industrial Carabobo, Galpón 15', 'Malta Carabobo Supply', 'Suministros Malta Carabobo C.A.', 'www.maltacarabobo.com', 5, 6), 
+('G-87654321-3', 'Calle Bolívar, Urb. Central, Pueblo Nuevo', 'Lúpulos Anzoátegui Export', 'Lúpulos Anzoátegui Export S.A.', NULL, 7, 8), 
+('J-34567890-4', 'Av. Apure, Urb. Los Llanos, San Juan de Payara', 'Empaque Apureño', 'Empaques Apureños C.A.', 'www.empaquesapure.com', 9, 10), 
+('G-76543210-5', 'Sector La Laguna, La Azulita, Mérida', 'Fábrica de Envases Andinos', 'Envases Andinos S.R.L.', NULL, 11, 12), 
+('J-45678901-6', 'Centro Empresarial Paraguaná, Guzmán Guillermo', 'Fermentadores Falcón', 'Fermentadores Falcón C.A.', 'www.fermentadoresfalcon.com', 13, 14),
+('G-65432109-7', 'Calle Comercio, Urb. Las Flores, Valle de la Pascua', 'Cebada Guárico Global', 'Cebada Guárico Global S.A.', 'www.cebadaguarico.com', 15, 16),
+('J-56789012-8', 'Urbanización Delta, Calle 3, San Jose', 'Ingredientes Delta', 'Ingredientes Delta C.A.', NULL, 17, 18), 
+('G-54321098-9', 'Zona Industrial Turmero, El Limón, Choroni', 'Levaduras Aragua Innova', 'Levaduras Aragua Innova S.A.', 'www.levadurasaragua.com', 19, 20);
 
 --  ▗▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖  
 -- ▐▌   ▐▌     █  ▐▌   ▐▛▚▖▐▌  █  ▐▌     
@@ -691,6 +750,18 @@ INSERT INTO TASA_CAMBIO (fecha, tasa_bs_dolar, tasa_bs_punto) VALUES
 -- ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌   ▐▌   ▐▌ ▐▌▐▌  █ ▐▌ ▐▌
 -- ▐▛▀▀▘▐▌  ▐▌▐▛▀▘ ▐▌   ▐▛▀▀▘▐▛▀▜▌▐▌  █ ▐▌ ▐▌
 -- ▐▙▄▄▖▐▌  ▐▌▐▌   ▐▙▄▄▖▐▙▄▄▖▐▌ ▐▌▐▙▄▄▀ ▝▚▄▞▘
+
+INSERT INTO EMPLEADO (cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, genero, fecha_union, fk_lugar) VALUES
+('V-12345678', 'Ana', NULL, 'Pérez', 'García', '1990-03-15', 'Femenino', '2023-01-10', 1),
+('E-87654321', 'Luis', 'Alberto', 'Rodríguez', 'Martínez', '1985-07-22', 'Masculino', '2022-05-20', 1),
+('V-23456789', 'María', 'Fernanda', 'González', 'López', '1992-11-01', 'Femenino', '2024-03-01', 1),
+('V-34567890', 'José', NULL, 'Hernández', 'Díaz', '1988-04-30', 'Masculino', '2021-08-15', 1),
+('E-98765432', 'Carla', 'Alexandra', 'Sánchez', 'Ruiz', '1995-09-10', 'Femenino', '2023-11-01', 1),
+('V-45678901', 'Pedro', 'Antonio', 'Ramírez', 'Flores', '1980-01-25', 'Masculino', '2020-02-01', 1),
+('V-56789012', 'Sofía', NULL, 'Torres', 'Vargas', '1998-06-18', 'Femenino', '2024-06-10', 1),
+('E-10987654', 'Ricardo', 'Jesús', 'Morales', 'Castro', '1983-12-05', 'Masculino', '2021-04-20', 1),
+('V-67890123', 'Elena', 'Beatriz', 'Gómez', 'Silva', '1993-02-28', 'Femenino', '2022-09-01', 1),
+('V-78901234', 'Andrés', 'Manuel', 'Ortega', 'Rojas', '1987-10-12', 'Masculino', '2023-07-05', 1);
 
 
 -- ▗▄▄▄▖▗▄▖ ▗▄▄▖    ▗▖▗▄▄▄▖▗▄▄▄▖▗▄▖ 
@@ -753,6 +824,19 @@ INSERT INTO TASA_CAMBIO (fecha, tasa_bs_dolar, tasa_bs_punto) VALUES
 -- ▐▙▄▄▖▐▌  ▐▌▐▌   ▐▙▄▄▖    ▐▌ ▐▌▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌ 
 
 
+INSERT INTO EMPL_HORA (fk_empleado, fk_horario, asistencia) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 0),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1),
+(7, 7, 0),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1);
+
+
 -- ▗▖ ▗▖ ▗▄▄▖▗▖ ▗▖ ▗▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▖     
 -- ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌  █  ▐▌ ▐▌   
 -- ▐▌ ▐▌ ▝▀▚▖▐▌ ▐▌▐▛▀▜▌▐▛▀▚▖  █  ▐▌ ▐▌    
@@ -809,13 +893,37 @@ INSERT INTO CARGO (nombre) VALUES
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▖  ▗▄▖      ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▄▖ ▗▄▖  
 --   █    █  ▐▌ ▐▌▐▌ ▐▌    ▐▌   ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▌      ▗▞▘▐▌ ▐▌   
 --   █    █  ▐▛▀▘ ▐▌ ▐▌    ▐▌   ▐▛▀▀▘▐▛▀▚▖▐▌  ▐▌▐▛▀▀▘ ▗▞▘  ▐▛▀▜▌ 
---   █  ▗▄█▄▖▐▌   ▝▚▄▞▘    ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘ ▐▙▄▄▖▐▙▄▄▄▖▐▌ ▐▌    
+--   █  ▗▄█▄▖▐▌   ▝▚▄▞▘    ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘ ▐▙▄▄▖▐▙▄▄▄▖▐▌ ▐▌  
+
+INSERT INTO TIPO_CERVEZA (nombre, fk_tipo_cerveza, fk_receta) VALUES
+('Ale', NULL, 1),
+('Lager', NULL, 2),
+('IPA', 1, 3), 
+('Stout', 1, 4),
+('Porter', 1, 5),
+('Cerveza de trigo', 1, 6),
+('Pilsner', 2, 7),
+('Sour', NULL, 8),
+('Saison', 1, 9),
+('Barleywine', 1, 10);
 
 
 --  ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▄▖ ▗▄▖  
 -- ▐▌   ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▌      ▗▞▘▐▌ ▐▌   
 -- ▐▌   ▐▛▀▀▘▐▛▀▚▖▐▌  ▐▌▐▛▀▀▘ ▗▞▘  ▐▛▀▜▌   
 -- ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘ ▐▙▄▄▖▐▙▄▄▄▖▐▌ ▐▌ 
+
+INSERT INTO CERVEZA (nombre, descripcion, historia, fk_tipo_cerveza, fk_proveedor, fk_lugar) VALUES
+('Golden Ale Sol', 'Una cerveza dorada y refrescante, con notas sutiles de malta y un final limpio.', 'Inspirada en las cálidas tardes de verano, esta Golden Ale fue creada para ser fácil de beber y refrescante, ideal para cualquier ocasión.', 1, 1, 1),
+('Stout Nocturna', 'Cerveza oscura e intensa con sabores a café tostado, chocolate amargo y un toque cremoso.', 'Elaborada en honor a las noches estrelladas de Caracas, esta Stout busca capturar la profundidad y el misterio con cada sorbo.', 2, 2, 1),
+('IPA Tropical', 'India Pale Ale con un perfil aromático intenso a frutas tropicales como mango y maracuyá, y un amargor pronunciado.', 'Un tributo a la riqueza frutal del trópico venezolano, esta IPA es una explosión de sabor que desafía el paladar.', 3, 3, 1),
+('Witbier de Trigo', 'Cerveza belga de trigo, ligera y turbia, con toques de cilantro y cáscara de naranja, muy refrescante.', 'Con raíces en las tradiciones cerveceras belgas, esta Witbier se adaptó al clima local, ofreciendo una opción ligera y especiada.', 4, 4, 1),
+('Lager Clásica', 'Una Lager pálida y crujiente, de fermentación baja, con un sabor equilibrado y refrescante.', 'La "Lager Clásica" busca replicar la pureza y sencillez de las cervezas tradicionales europeas, perfecta para el día a día.', 5, 5, 1),
+('Porter Robusta', 'Cerveza oscura con notas de caramelo, toffee y un ligero ahumado, de cuerpo medio a completo.', 'Con orígenes en los pubs londinenses, esta Porter fue reinventada para el paladar local, ofreciendo calidez y complejidad.', 6, 6, 1),
+('Saison Campestre', 'Cerveza rústica de granja, con alta carbonatación, notas frutales y un final seco y especiado.', 'Esta Saison evoca los sabores del campo y la frescura de la naturaleza, siendo una cerveza versátil y sorprendente.', 7, 7, 1),
+('Scotch Ale Fuerte', 'Cerveza ámbar-rojiza, maltosa, con un dulzor inicial pronunciado y un cuerpo robusto.', 'Inspirada en las robustas cervezas escocesas, esta ale es una bebida para los amantes de los sabores intensos y el carácter maltoso.', 8, 8, 1),
+('Sour Frambuesa', 'Cerveza ácida y frutal, con un intenso sabor a frambuesas frescas y un final vibrante.', 'Una innovación audaz, esta Sour busca el equilibrio entre la acidez y la dulzura natural de la fruta, ideal para paladares aventureros.', 9, 9, 1),
+('Imperial Stout Añeja', 'Stout de alto contenido alcohólico, compleja, con capas de sabor a licor, frutos secos y vainilla.', 'Creada para la contemplación, esta Imperial Stout es una joya que mejora con el tiempo, ofreciendo una experiencia sensorial única.', 10, 10, 1);
 
 
 --  ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▖ 
