@@ -40,11 +40,11 @@ function RolPrivileges({ rol }: { rol: string }) {
 
     const possiblePrivilegios = () => GenerateForm([
         { label: "Eliminar privilegio", keyName: "fk_priv", fetchFrom: `/api/privilegios/${String(rol)}?missing=false`, required: true },
-    ], { url: `http://127.0.0.1:3000/api/privilegios/${String(rol)}`, method: "DELETE" })
+    ], { url: `http://127.0.0.1:3000/api/privilegios/${String(rol)}`, method: "DELETE", callback: (data) => window.location.href = `/privilegios/${rol}` })
 
     const missingPrivilegios = () => GenerateForm([
         { label: "Agregar privilegio", keyName: "fk_priv", fetchFrom: `/api/privilegios/${String(rol)}?missing=true`, required: true },
-    ], { url: `http://127.0.0.1:3000/api/privilegios/${String(rol)}` })
+    ], { url: `http://127.0.0.1:3000/api/privilegios/${String(rol)}`, callback: (data) => window.location.href = `/privilegios/${rol}` })
 
     return (
         <div>

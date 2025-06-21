@@ -54,7 +54,7 @@ const server = serve({
       },
     },
 
-    "/api/form/pnatural": {
+    "/api/form/pjuridico": {
       async GET() {
         const res = await ClienteService.getClienteJuridicoForm();
         return Response.json(res, CORS_HEADERS);

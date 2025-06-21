@@ -91,7 +91,7 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
     }
 
     function postToUrl(data: any) {
-        fetch(options.url as string, {
+        return fetch(options.url as string, {
             method: options.method === undefined ? "POST" : options.method,
             body: data
         })
@@ -99,7 +99,7 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
             .catch(err => console.error)
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         let newFormData = formData;
@@ -118,10 +118,8 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
 
         const data = JSON.stringify({ insert_data: newFormData });
 
-        if ('url' in options && options.url !== undefined) {
-            console.log("Posting to URL")
-            postToUrl(data)
-        }
+        if ('url' in options && options.url !== undefined)
+            await postToUrl(data)
         if ('callback' in options && options.callback !== undefined)
             options.callback(JSON.parse(data))
     };
