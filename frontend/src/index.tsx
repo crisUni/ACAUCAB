@@ -4,6 +4,7 @@ import index from "./index.html";
 import home from "./pages/home.html"
 import users from "./pages/crud_user.html"
 import ClienteService from "./backend/ClienteService";
+import RolManagementService from "./backend/RolManagementService";
 
 const CORS_HEADERS = {
   headers: {
@@ -48,14 +49,18 @@ const server = serve({
 
     "/api/form/pnatural": {
       async GET() {
-        const res = await sql`
-          SELECT c.eid||','||n.eid AS "eid", c.rif||': '||n.nombre||' '||n.cedula AS "displayName"
-          FROM cliente as c
-          JOIN pnatural as n on c.eid = n.fk_cliente
-        `
+        const res = await ClienteService.getClienteNaturalForm();
         return Response.json(res, CORS_HEADERS);
       },
     },
+
+    "/api/form/pnatural": {
+      async GET() {
+        const res = await ClienteService.getClienteJuridicoForm();
+        return Response.json(res, CORS_HEADERS);
+      },
+    },
+
 
     "/api/form/parroquias": {
       async GET() {
@@ -80,41 +85,44 @@ const server = serve({
     },
 
     "/api/privilegios/:rol": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET(req) {
         const rol = req.params.rol;
         const missing = new URL(req.url).searchParams.get("missing");
         let res;
         if (missing === "true")
           res = await sql`
-            SELECT * from privilegio where eid NOT IN (SELECT fk_privilegio
-              FROM Privilegio p, ROL_PRIV rp
-              WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
+            SELECT eid as "eid", nombre||': '||descripcion as "displayName"
+            FROM privilegio where eid NOT IN (SELECT fk_privilegio
+            FROM Privilegio p, ROL_PRIV rp
+            WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
         else
           res = await sql`
-            SELECT * FROM privilegio WHERE eid IN (SELECT fk_privilegio
+            SELECT eid as "eid", nombre||': '||descripcion as "displayName"
+            FROM privilegio WHERE eid IN (SELECT fk_privilegio
             FROM Privilegio p, ROL_PRIV rp
             WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
         return Response.json(res, CORS_HEADERS);
-      }
+      },
+      async POST(req, _) {
+        const body = await req.json()
+        const rol_id = req.params.rol;
+        const res = await RolManagementService.postRolPrivSQL({ fk_privilegio: body.insert_data.fk_priv, fk_rol: Number(rol_id) })
+        return Response.json(res, CORS_HEADERS);
+      },
+      async DELETE(req, _) {
+        const body = await req.json()
+        const rol_id = req.params.rol;
+        const res = await RolManagementService.deleteRolPrivSQL({ fk_privilegio: body.insert_data.fk_priv, fk_rol: Number(rol_id) })
+        return Response.json(res, CORS_HEADERS);
+      },
     },
 
     "/api/cliente_natural": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() { return Response.json(await ClienteService.getNaturalesSQL(), CORS_HEADERS); },
       async POST(req: Bun.BunRequest) {
-        const body = await req.json()
-        const res = ClienteService.postNaturalSQL({
-          rif: body.insert_data.rif,
-          direccion: body.insert_data.direccion,
-          numero_registro: body.insert_data.numero_registro,
-          fk_lugar_1: body.insert_data.fk_lugar_1,
-          fk_lugar_2: body.insert_data.fk_lugar_2
-        }, {
-          cedula: body.insert_data.cedula,
-          nombre: body.insert_data.nombre,
-          apellido: body.insert_data.apellido,
-          fecha_nacimiento: body.insert_data.fecha_nacimiento
-        })
+        const res = await ClienteService.insertClienteNatural(await req.json());
         return Response.json(res, CORS_HEADERS);
       }
     },
@@ -123,19 +131,7 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() { return Response.json(await ClienteService.getJuridicoSQL(), CORS_HEADERS); },
       async POST(req: Bun.BunRequest) {
-        const body = await req.json()
-        const res = ClienteService.postJuridicoSQL({
-          rif: body.insert_data.rif,
-          direccion: body.insert_data.direccion,
-          numero_registro: body.insert_data.numero_registro,
-          fk_lugar_1: body.insert_data.fk_lugar_1,
-          fk_lugar_2: body.insert_data.fk_lugar_2
-        }, {
-          denominacion_comercial: body.insert_data.denominacion_comercial,
-          razon_social: body.insert_data.razon_social,
-          pagina_web: body.insert_data.pagina_web,
-          capital_disponible: body.insert_data.capital_disponible
-        })
+        const res = await ClienteService.insertClienteJuridico(await req.json());
         return Response.json(res, CORS_HEADERS);
       }
     },

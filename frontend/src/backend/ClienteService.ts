@@ -57,6 +57,54 @@ const ClienteService = {
         const eid = await this.postClienteSQL(cliente);
         juridico.fk_cliente = eid[0].eid;
         return await sql`INSERT INTO pjuridico ${sql(juridico)} RETURNING *`
+    },
+
+    insertClienteNatural: async function(data: Cliente & Natural) {
+        const res = await ClienteService.postNaturalSQL({
+          rif: data.rif,
+          direccion: data.direccion,
+          numero_registro: data.numero_registro,
+          fk_lugar_1: data.fk_lugar_1,
+          fk_lugar_2: data.fk_lugar_2
+        }, {
+          cedula: data.cedula,
+          nombre: data.nombre,
+          apellido: data.apellido,
+          fecha_nacimiento: data.fecha_nacimiento
+        })
+        return res;
+    },
+
+    insertClienteJuridico: async function(data: Cliente & Juridico) {
+        const res = await ClienteService.postJuridicoSQL({
+          rif: data.rif,
+          direccion: data.direccion,
+          numero_registro: data.numero_registro,
+          fk_lugar_1: data.fk_lugar_1,
+          fk_lugar_2: data.fk_lugar_2
+        }, {
+          denominacion_comercial: data.denominacion_comercial,
+          razon_social: data.razon_social,
+          pagina_web: data.pagina_web,
+          capital_disponible: data.capital_disponible
+        })
+        return res;
+    },
+
+    getClienteNaturalForm: async function() {
+        const res = await sql`
+          SELECT c.eid||','||n.eid AS "eid", c.rif||': '||n.nombre||' '||n.cedula AS "displayName"
+          FROM cliente as c
+          JOIN pnatural as n on c.eid = n.fk_cliente`
+        return res;
+    },
+
+    getClienteJuridicoForm: async function() {
+        const res = await sql`
+          SELECT c.eid||','||n.eid AS "eid", c.rif||': '||j.denominacion_comercial AS "displayName"
+          FROM cliente as c
+          JOIN pjuridico as j on c.eid = jn.fk_cliente`
+        return res;
     }
 }
 

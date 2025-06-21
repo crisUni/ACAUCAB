@@ -17,6 +17,7 @@ type FormEntrySelectFromDatabase = {
 type FormOptions = {
     url?: string,
     callback?: (data: any) => void;
+    method?: "POST" | "DELETE"
 }
 
 function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase)[], options: FormOptions) {
@@ -91,7 +92,7 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
 
     function postToUrl(data: any) {
         fetch(options.url as string, {
-            method: "POST",
+            method: options.method === undefined ? "POST" : options.method,
             body: data
         })
             .then(async res => console.log(await res.json()))
@@ -117,8 +118,10 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
 
         const data = JSON.stringify({ insert_data: newFormData });
 
-        if ('url' in options && options.callback !== undefined)
+        if ('url' in options && options.url !== undefined) {
+            console.log("Posting to URL")
             postToUrl(data)
+        }
         if ('callback' in options && options.callback !== undefined)
             options.callback(JSON.parse(data))
     };
