@@ -23,45 +23,45 @@ Hacer minimo 10 insert en cada uno (exepto en los que solo son 1)
 - [x] Rece_Inst
 - [x] Presentacion
 - [x] Descuento
-- [ ] Tienda Virtual
+- [x] Tienda Virtual
 - [x] Caracteristicas
 - [x] Horario
 - [x] Beneficio
-- [ ] Privilegio
+- [x] Privilegio
 - [x] Ingrediente
-- [ ] Rol
+- [x] Rol
 - [x] Banco
 - [x] Tipo Tarjeta
 - [x] Estatus
 - [x] Tasa Cambio
 - [x] Lugar Tienda
 - [x] Metodo Pago
-- [ ] Ingr_Rece
-- [ ] Rol_Priv
-- [ ] Proveedor
-- [ ] Cliente
+- [x] Ingr_Rece
+- [x] Rol_Priv
+- [x] Proveedor
+- [x] Cliente
 - [x] Tienda_Fisica
 - [x] Empleado
 - [x] Tarjeta
 - [x] Cheque
-- [ ] Efectivo
-- [ ] Punto
+- [x] Efectivo
+- [x] Punto
 - [x] Afiliacion
 - [ ] Compra
-- [ ] PNatural (Persona Natural)
-- [ ] PJurudico (Persona Juridico)
-- [ ] Departamento
+- [x] PNatural (Persona Natural)
+- [x] PJurudico (Persona Juridico)
+- [x] Departamento
 - [x] Empl_Hora
-- [ ] Usuario
-- [ ] Telefono
-- [ ] Correo
+- [x] Usuario
+- [x] Telefono
+- [x] Correo
 - [ ] Esta_Comp
 - [ ] Detalle_Compra
 - [x] Cargo
-- [ ] Personal_Contacto
-- [ ] Tipo_Cerveza
+- [x] Personal_Contacto
+- [x] Tipo_Cerveza
 - [x] Cerveza
-- [ ] Comentario
+- [x] Comentario
 - [x] Cerv_Pres
 - [x] Desc_Cerv_Pres
 - [x] Tipo Evento
@@ -69,17 +69,17 @@ Hacer minimo 10 insert en cada uno (exepto en los que solo son 1)
 - [ ] Venta
 - [ ] Esta_Vent
 - [ ] Esta_Even
-- [ ] Cerv_Cara
+- [x] Cerv_Cara
 - [ ] Inve_Tien
 - [ ] Even_Prov
 - [ ] Even_Clie
-- [ ] Carg_Empl
-- [ ] Empl_Bene
+- [x] Carg_Empl
+- [x] Empl_Bene
 - [ ] Inve_Even
-- [ ] Punt_Clie
+- [x] Punt_Clie
 - [ ] Pago
 - [ ] Juez
 - [ ] Juez_Event
-- [ ] Detalle Factura
-- [ ] Pago Afiliacion
-- [ ] Vacacion
+- [x] Detalle Factura
+- [x] Pago Afiliacion
+- [x] Vacacion
