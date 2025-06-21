@@ -695,7 +695,12 @@ INSERT INTO PRIVILEGIO (nombre, descripcion) VALUES
 -- ▗▄█▄▖▐▌  ▐▌▝▚▄▞▘▐▌ ▐▌▐▙▄▄▖▐▙▄▄▀ ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌  █  ▐▙▄▄▖
 
 INSERT INTO INGREDIENTE (nombre) 
-VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best Malz Caramel Light '), ('Lúpulo Columbus'), ('Lúpulo Cascade'), ('Malta de cebada'), ('Frutas tropicales'), ('Levadura: Danstar Bry-97'), ('Agua'), ('Azucar Blanca');
+VALUES ('Malta Best Malz Pale Ale'),
+('Malta Best Malz Aromatic'), 
+('Malta Best Malz Caramel Light '), 
+('Lúpulo Columbus'), ('Lúpulo Cascade'), 
+('Malta de cebada'), ('Frutas tropicales'), 
+('Levadura: Danstar Bry-97'), ('Agua'), ('Azucar Blanca');
 
 
 
@@ -858,7 +863,7 @@ INSERT INTO PROVEEDOR (rif, direccion, denominacion_comercial, razon_social, pag
 ('J-45678901-6', 'Centro Empresarial Paraguaná, Guzmán Guillermo', 'Fermentadores Falcón', 'Fermentadores Falcón C.A.', 'www.fermentadoresfalcon.com', 13, 14),
 ('G-65432109-7', 'Calle Comercio, Urb. Las Flores, Valle de la Pascua', 'Cebada Guárico Global', 'Cebada Guárico Global S.A.', 'www.cebadaguarico.com', 15, 16),
 ('J-56789012-8', 'Urbanización Delta, Calle 3, San Jose', 'Ingredientes Delta', 'Ingredientes Delta C.A.', NULL, 17, 18), 
-('G-54321098-9', 'Zona Industrial Turmero, El Limón, Choroni', 'Levaduras Aragua Innova', 'Levaduras Aragua Innova S.A.', 'www.levadurasaragua.com', 19, 20);
+('G-54321098-9', 'Zona Industrial Turmero, El Limón, Choroni', 'Levaduras Aragua Innova', 'Levaduras Aragua Innova S.A.', 'www.levadurasaragua.com', 19, 20),
 ('J-10000000-0', 'Calle Las Palmas, Edificio Norte, Suite 101, Caracas', 'Materias Primas C.A.', 'Materias Primas C.A.', 'http://www.materiasprimas.com', 1, 15),
 ('G-20000000-1', 'Avenida Los Próceres, Galpón 5, Maracaibo', 'Suministros Industriales Zulia', 'Suministros Industriales Zulia S.A.', NULL, 24, 220),
 ('J-30000000-2', 'Zona Industrial II, Calle A, Nave 8, Valencia', 'Equipos Cerveceros del Centro', 'Equipos Cerveceros del Centro R.L.', 'http://www.equiposcerveceros.com', 7, 45),
@@ -885,7 +890,7 @@ INSERT INTO CLIENTE (rif, direccion, numero_registro, fk_lugar_1, fk_lugar_2) VA
 ('J-70809010-1', 'Av. Atlántico, CC. El Faro, Local 20, Porlamar', 1800, 18, 175),
 ('G-80901020-2', 'Sector El Carmen, Calle 5, Maturín', 1008, 17, 170),
 ('V-90102030-3', 'Plaza Bolívar, Edif. Azul, Oficina 7, San Felipe', 1009, 23, 210),
-('E-01020304-4', 'Av. Las Delicias, Local 15, Ciudad Ojeda', 1010, 24, 230);
+('E-01020304-4', 'Av. Las Delicias, Local 15, Ciudad Ojeda', 1010, 24, 230),
 ('J-11223344-5', 'Av. Rómulo Gallegos, Edif. Este, Piso 3, Caracas', 1011, 1, 15),
 ('G-22334455-6', 'Calle Miranda, Local 7, Puerto La Cruz', 1012, 2, 20),
 ('J-33445566-7', 'Zona Industrial Sur, Galpón 5, Valencia', 1013, 7, 45),
@@ -895,7 +900,7 @@ INSERT INTO CLIENTE (rif, direccion, numero_registro, fk_lugar_1, fk_lugar_2) VA
 ('J-77889900-1', 'Av. Principal, Urb. La Granja, Maracay', 1017, 4, 25),
 ('G-88990011-2', 'Vía La Costa, Urb. Las Aves, La Guaira', 1018, 13, 140),
 ('J-99001122-3', 'Calle Comercio, Centro, Maturín', 1019, 17, 170),
-('G-00112233-4', 'Av. 22, Sector Belloso, Maracaibo', 1020, 24, 220);
+('G-00112233-4', 'Av. 22, Sector Belloso, Maracaibo', 1020, 24, 220),
 ('V-00112233-4', 'Calle 5, Urb. Los Robles, Apto 1A, Caracas', 1021, 1, 16),
 ('E-00223344-5', 'Av. 2, Sector Milagro Norte, Maracaibo', 1022, 24, 221),
 ('J-00334455-6', 'Urb. Guaparo, Res. El Lago, Piso 8, Valencia', 1023, 7, 46),
@@ -1072,7 +1077,7 @@ INSERT INTO PNATURAL (fk_cliente, cedula, nombre, apellido, fecha_nacimiento) VA
 (7, 'V-78901234', 'Elena', 'González', '1998-06-18'),
 (8, 'V-89012345', 'Pedro', 'Ruiz', '1983-12-05'),
 (9, 'V-90123456', 'Laura', 'Martínez', '1993-02-28'),
-(10, 'V-01234567', 'Andrés', 'López', '1987-10-12');
+(10, 'V-01234567', 'Andrés', 'López', '1987-10-12'),
 (21, 'V-10112233', 'Roberto', 'Vargas', '1979-08-01'),
 (22, 'V-10223344', 'Camila', 'Silva', '1991-04-19'),
 (23, 'V-10334455', 'Fernando', 'Peña', '1984-11-05'),
@@ -1100,7 +1105,7 @@ INSERT INTO PJURIDICO (fk_cliente, denominacion_comercial, razon_social, pagina_
 (17, 'Fábrica de Malta Aragua', 'Fábrica de Malta Aragua S.A.', 'http://www.maltaragua.com', 900000.00),
 (18, 'Importadora La Guaira Bebidas', 'Importadora La Guaira Bebidas C.A.', NULL, 400000.00),
 (19, 'Corporación Cervecera Monagas', 'Corporación Cervecera Monagas S.R.L.', 'http://www.cervezasmonagas.net', 1100000.00),
-(20, 'Almacenes Zulia Cervezas', 'Almacenes Zulia Cervezas S.A.', NULL, 1500000.00);
+(20, 'Almacenes Zulia Cervezas', 'Almacenes Zulia Cervezas S.A.', NULL, 1500000.00),
 (31, 'Importadora del Centro C.A.', 'Importaciones del Centro S.A.', NULL, 650000.00),
 (32, 'Servicios Logísticos Barquisimeto', 'Servicios Logísticos Barquisimeto R.L.', 'http://www.logisticabqto.com', 400000.00),
 (33, 'Cervezas Artesanales Cabudare', 'Cervezas Artesanales Cabudare C.A.', 'http://www.cabudarebrew.com', 950000.00),
