@@ -334,7 +334,7 @@ export default function CrudCliente() {
                   required: true,
                   fetchFrom: 'http://127.0.0.1:3000/api/form/pnatural'
                 }
-              ], "")
+              ], { url: 'http://127.0.0.1:3000/api/cliente_juridico'})
             }
             <h2> Clientes Naturales </h2>
             <ul>

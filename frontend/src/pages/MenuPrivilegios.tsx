@@ -38,18 +38,32 @@ function RolPrivileges({ rol }: { rol: string }) {
             .catch(console.error)
     }, [])
 
+    const possiblePrivilegios = () => GenerateForm([
+      { label: "Eliminar privilegio", keyName: "eid", fetchFrom: `/api/privilegios/${rol}?missing=false`, required: true },
+  ], { callback: (data) => window.location.href = `/privilegios/${data.insert_data.fk_rol}` })
+
+  const missingPrivilegios = () => GenerateForm([
+    { label: "Agregar privilegio", keyName: "nombre", fetchFrom: `/api/privilegios/${rol}?missing=true`, required: true },
+], { callback: (data) => window.location.href = `/privilegios/${data.insert_data.fk_rol}` })
+
+
     return (
         <div>
           <a href="/privilegios">Back</a>
+
           <h1>Privileges for Rol Nr {rol}</h1>
           <h2>Privileges [HAVE]</h2>
           <ul>
             {rolPrivileges.map(x => <li key={x.eid}> {JSON.stringify(x)}  </li>)}
           </ul>
+          <div>{possiblePrivilegios()}</div>
           <h2>Privileges [DONT HAVE]</h2>
           <ul>
             {missingPrivileges.map(x => <li key={x.eid}> {JSON.stringify(x)} </li>)}
           </ul>
+          <div>{missingPrivilegios()}</div>
+
+
         </div>
     )
 }
