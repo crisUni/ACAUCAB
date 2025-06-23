@@ -94,7 +94,8 @@ CREATE TABLE IF NOT EXISTS ESTATUS (
 
 CREATE TABLE IF NOT EXISTS TASA_CAMBIO (
     eid SERIAL PRIMARY KEY,
-    fecha DATE NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
     tasa_bs_dolar FLOAT NOT NULL,
     tasa_bs_punto FLOAT NOT NULL
 );
@@ -108,6 +109,7 @@ CREATE TABLE IF NOT EXISTS LUGAR_TIENDA (
 
 CREATE TABLE IF NOT EXISTS METODO_PAGO (
     eid SERIAL PRIMARY KEY
+    monto INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS INGR_RECE (
@@ -174,8 +176,7 @@ CREATE TABLE IF NOT EXISTS EMPLEADO (
 );
 
 CREATE TABLE IF NOT EXISTS TARJETA (
-    eid SERIAL PRIMARY KEY,
-    fk_metodo_pago INT NOT NULL,
+    fk_metodo_pago INT PRIMARY KEY,
     fk_banco INT NOT NULL,
     fk_tipo_tarjeta INT NOT NULL,
     numero_tarjeta INT NOT NULL,
@@ -188,8 +189,7 @@ CREATE TABLE IF NOT EXISTS TARJETA (
 );
 
 CREATE TABLE IF NOT EXISTS CHEQUE (
-    eid SERIAL PRIMARY KEY,
-    fk_metodo_pago INT NOT NULL,
+    fk_metodo_pago INT PRIMARY KEY,
     numero INT NOT NULL,
     fk_banco INT NOT NULL,
     memo TEXT,
@@ -198,16 +198,14 @@ CREATE TABLE IF NOT EXISTS CHEQUE (
 );
 
 CREATE TABLE IF NOT EXISTS EFECTIVO (
-    eid SERIAL PRIMARY KEY,
-    fk_metodo_pago INT NOT NULL,
+    fk_metodo_pago INT PRIMARY KEY,
     denominacion INT NOT NULL,
     tipo_moneda VARCHAR(50) NOT NULL,
     FOREIGN KEY (fk_metodo_pago) REFERENCES METODO_PAGO(eid)
 );
 
 CREATE TABLE IF NOT EXISTS PUNTO (
-    eid SERIAL PRIMARY KEY,
-    fk_metodo_pago INT NOT NULL,
+    fk_metodo_pago INT PRIMARY KEY,
     FOREIGN KEY (fk_metodo_pago) REFERENCES METODO_PAGO(eid)
 );
 
@@ -331,7 +329,7 @@ CREATE TABLE IF NOT EXISTS PERSONAL_CONTACTO (
     apellido VARCHAR(100) NOT NULL,
     fk_juridico INT,
     fk_proveedor INT,
-    fk_cargo INT,
+    fk_cargo INT NOT NULL,
     FOREIGN KEY (fk_juridico) REFERENCES PJURIDICO(eid),
     FOREIGN KEY (fk_proveedor) REFERENCES PROVEEDOR(eid),
     FOREIGN KEY (fk_cargo) REFERENCES CARGO(eid)
@@ -401,6 +399,7 @@ CREATE TABLE IF NOT EXISTS EVENTO (
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     direccion TEXT NOT NULL,
+    precio_entrada FLOAT NOT NULL,
     fk_evento INT,
     fk_tipo_evento INT NOT NULL,
     fk_lugar INT NOT NULL,
@@ -476,7 +475,7 @@ CREATE TABLE IF NOT EXISTS EVEN_PROV (
 CREATE TABLE IF NOT EXISTS EVEN_CLIE (
     fk_evento INT NOT NULL,
     fk_cliente INT NOT NULL,
-    precio FLOAT,
+    cantidad_entradas INT,
     PRIMARY KEY (fk_evento, fk_cliente),
     FOREIGN KEY (fk_evento) REFERENCES EVENTO(eid),
     FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid)
@@ -541,8 +540,6 @@ CREATE TABLE IF NOT EXISTS JUEZ (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
-    fk_evento INT,
-    FOREIGN KEY (fk_evento) REFERENCES EVENTO(eid)
 );
 
 CREATE TABLE IF NOT EXISTS JUEZ_EVENT (

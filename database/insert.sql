@@ -464,18 +464,60 @@ CALL insert_parroquias(ARRAY['Rafael Urdaneta','La Victoria','Raul Cuenca'],'Val
 -- ▐▌ ▐▌▐▙▄▄▖▝▚▄▄▖▐▙▄▄▖  █ ▐▌ ▐▌
 
 INSERT INTO RECETA (nombre, descripcion) VALUES
-('Receta IPA Americana', 'Receta para una India Pale Ale lupulada y aromática.'),
-('Receta Stout de Avena', 'Receta para una cerveza oscura y cremosa con avena.'),
-('Receta Lager Pilsner', 'Receta para una cerveza lager limpia y refrescante.'),
-('Receta Wheat Beer Belga', 'Receta para una cerveza de trigo afrutada y especiada.'),
-('Receta Porter Robust', 'Receta para una porter oscura con notas de café y chocolate.'),
-('Receta Sour Frambuesa', 'Receta para una cerveza ácida con adición de frambuesas.'),
-('Receta Cerveza Ahumada', 'Receta para una cerveza con sabores ahumados distintivos.'),
-('Receta Blonde Ale Ligera', 'Receta para una cerveza rubia, ligera y fácil de beber.'),
-('Receta Doble IPA', 'Receta para una IPA con doble carga de lúpulo y mayor ABV.'),
-('Receta Imperial Stout Chocolate', 'Receta para una stout intensa con cacao y alto contenido alcohólico.');
-
-
+('Receta Clásica de Pale Ale', 'Descripción de la elaboración de una Pale Ale balanceada y aromática.'),
+('Receta Estándar de Lager', 'Pasos para preparar una Lager limpia, refrescante y de baja fermentación.'),
+('Receta de IPA con Dry Hopping', 'Detalles para una Indian Pale Ale con alto lúpulo y aroma cítrico.'),
+('Receta de Stout Oatmeal', 'Elaboración de una Stout oscura con cuerpo cremoso y notas a café y chocolate.'),
+('Receta de Porter Robusta', 'Proceso para una Porter con carácter tostado y final seco.'),
+('Receta de Cerveza de Trigo Alemana', 'Instrucciones para una Hefeweizen con perfiles de banana y clavo.'),
+('Receta de Pilsner Auténtica', 'Guía para una Pilsner crujiente y amarga, al estilo tradicional checo.'),
+('Receta de Sour de Frutas Rojas', 'Descripción de una cerveza ácida con adición de frutos rojos para un sabor vibrante.'),
+('Receta de Saison Especiada', 'Elaboración de una Saison rústica con toques especiados y frutales.'),
+('Receta de Barleywine Añejada', 'Proceso para una Barleywine de alta graduación, ideal para madurar en botella.'),
+('Receta de Pale Ale Ligera', 'Una versión más ligera de la Pale Ale, ideal para el día a día.'),
+('Receta de Brown Ale Tradicional', 'Receta clásica de Brown Ale con maltas tostadas.'),
+('Receta de Red Ale Maltosa', 'Red Ale con énfasis en el dulzor de la malta.'),
+('Receta de Amber Ale Equilibrada', 'Amber Ale con un equilibrio perfecto entre malta y lúpulo.'),
+('Receta de Pumpkin Ale de Otoño', 'Cerveza de calabaza con especias de temporada.'),
+('Receta de Golden Ale Brillante', 'Golden Ale de color dorado y sabor suave.'),
+('Receta de Blond Ale Refrescante', 'Blond Ale ligera y muy fácil de beber.'),
+('Receta de ESB Amarga Balanceada', 'Extra Special Bitter con amargor distintivo y final persistente.'),
+('Receta de Hefeweizen Clásica', 'Hefeweizen con notas a banana y clavo, sin filtrar.'),
+('Receta de English Bitter Suave', 'Bitter inglesa de baja graduación y amargor moderado.'),
+('Receta de American Amber Ale Aromática', 'Amber Ale americana con lúpulos cítricos y florales.'),
+('Receta de American Pale Ale Refrescante', 'Pale Ale americana con perfil de lúpulo intenso.'),
+('Receta de American IPA Intensa', 'IPA americana con un punch de amargor y aroma a frutas tropicales.'),
+('Receta de Cerveza de Abadía Fuerte', 'Cerveza de abadía compleja y de alta graduación.'),
+('Receta de Cerveza Trapense Auténtica', 'Receta de cerveza trapense, elaborada en monasterios.'),
+('Receta de Ámbar Belga Afrutada', 'Cerveza ámbar belga con notas a caramelo y frutas.'),
+('Receta de Flamenca Acida', 'Cerveza flamenca con un perfil ácido y afrutado.'),
+('Receta de Belgian Barleywine Robusta', 'Barleywine belga, fuerte y con carácter afrutado.'),
+('Receta de Trappist Quadrupel Oscura', 'Quadrupel trapense oscura, compleja y de alta graduación.'),
+('Receta de Cerveza Navideña Belga', 'Cerveza belga especiada, ideal para las fiestas.'),
+('Receta de Belgian Stout Compleja', 'Stout belga con notas a café, chocolate y frutas oscuras.'),
+('Receta de Belgian IPA Doble', 'IPA belga con doble dry-hopping y levadura belga.'),
+('Receta de Blond Trappist Table Beer Ligera', 'Cerveza de mesa trapense, ligera y refrescante.'),
+('Receta de Blond Artesanal Fresca', 'Cerveza artesanal rubia, fresca y fácil de beber.'),
+('Receta de Amber Artesanal Balanceada', 'Cerveza artesanal ámbar con un buen equilibrio.'),
+('Receta de Brown Artesanal Maltosa', 'Cerveza artesanal marrón con un rico perfil de malta.'),
+('Receta de Flanders Red/Brown con Frutas', 'Cerveza ácida de Flandes con adición de frutas.'),
+('Receta de Pilsner Clásica', 'Pilsner tradicional con un final limpio y seco.'),
+('Receta de Spezial Lager', 'Lager Spezial, de cuerpo medio y sabor suave.'),
+('Receta de Dortmunster Fuerte', 'Lager Dortmunster, robusta y con buen cuerpo.'),
+('Receta de Schwarzbier Oscura', 'Schwarzbier o cerveza negra, ligera y con notas a café.'),
+('Receta de Vienna Lager Maltosa', 'Lager Vienna con un perfil de malta tostada.'),
+('Receta de Bock Maltosa', 'Cerveza Bock, fuerte y con un dulzor maltoso.'),
+('Receta de Weisse Beer', 'Receta de cerveza de trigo estilo Weisse.'),
+('Receta de Weizen-Weissbier', 'Receta de Weissbier de trigo.'),
+('Receta de Imperial Stout Potente', 'Imperial Stout con alta graduación y sabor intenso.'),
+('Receta de Chocolate Stout Deliciosa', 'Stout con adición de cacao para un sabor a chocolate.'),
+('Receta de Coffee Stout Vibrante', 'Stout con café, ideal para los amantes de ambas bebidas.'),
+('Receta de Milk Stout Cremosa', 'Stout con lactosa para un acabado cremoso y dulce.'),
+('Receta de Sweet Stout Suave', 'Stout dulce, ideal para postres o como postre.'),
+('Receta de Eisbock Congelada', 'Bock concentrada por congelación, muy fuerte.'),
+('Receta de Strong Saison', 'Saison fuerte y especiada.'),
+('Receta de Dark Saison', 'Saison oscura con notas tostadas.'),
+('Receta de Blonde Ale', 'Blonde Ale, ligera y dorada.');
 
 INSERT INTO INSTRUCCION (descripcion) VALUES
 ('Moler la malta hasta obtener una molienda gruesa.'),
@@ -491,15 +533,60 @@ INSERT INTO INSTRUCCION (descripcion) VALUES
 
 INSERT INTO RECE_INST (fk_instruccion, fk_receta, orden) VALUES
 (1, 1, 1),
-(2, 1, 2),
-(3, 2, 1),
-(4, 2, 2),
-(5, 3, 1),
-(6, 3, 2),
-(7, 4, 1),
-(8, 4, 2),
-(9, 5, 1),
-(10, 5, 2);
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1),
+(7, 7, 1),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1),
+(1, 11, 1),
+(2, 12, 1),
+(3, 13, 1),
+(4, 14, 1),
+(5, 15, 1),
+(6, 16, 1),
+(7, 17, 1),
+(8, 18, 1),
+(9, 19, 1),
+(10, 20, 1),
+(1, 21, 1),
+(2, 22, 1),
+(3, 23, 1),
+(4, 24, 1),
+(5, 25, 1),
+(6, 26, 1),
+(7, 27, 1),
+(8, 28, 1),
+(9, 29, 1),
+(10, 30, 1),
+(1, 31, 1),
+(2, 32, 1),
+(3, 33, 1),
+(4, 34, 1),
+(5, 35, 1),
+(6, 36, 1),
+(7, 37, 1),
+(8, 38, 1),
+(9, 39, 1),
+(10, 40, 1),
+(1, 41, 1),
+(2, 42, 1),
+(3, 43, 1),
+(4, 44, 1),
+(5, 45, 1),
+(6, 46, 1),
+(7, 47, 1),
+(8, 48, 1),
+(9, 49, 1),
+(10, 50, 1),
+(1, 51, 1),
+(2, 52, 1),
+(3, 53, 1),
+(4, 54, 1),
+(5, 55, 1);
 
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
@@ -588,7 +675,19 @@ INSERT INTO BENEFICIO (nombre, descripcion) VALUES
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖   ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖ ▗▄▖        
 -- ▐▌ ▐▌▐▌ ▐▌  █  ▐▌  ▐▌  █  ▐▌   ▐▌   ▐▌     █  ▐▌ ▐▌       
 -- ▐▛▀▘ ▐▛▀▚▖  █  ▐▌  ▐▌  █  ▐▌   ▐▛▀▀▘▐▌▝▜▌  █  ▐▌ ▐▌       
--- ▐▌   ▐▌ ▐▌▗▄█▄▖ ▝▚▞▘ ▗▄█▄▖▐▙▄▄▖▐▙▄▄▖▝▚▄▞▘▗▄█▄▖▝▚▄▞▘   
+-- ▐▌   ▐▌ ▐▌▗▄█▄▖ ▝▚▞▘ ▗▄█▄▖▐▙▄▄▖▐▙▄▄▖▝▚▄▞▘▗▄█▄▖▝▚▄▞▘  
+
+INSERT INTO PRIVILEGIO (nombre, descripcion) VALUES
+('Gestionar Usuarios', 'Permite crear, editar y eliminar cuentas de usuario.'),
+('Gestionar Productos', 'Permite añadir, modificar y eliminar productos del inventario.'),
+('Ver Reportes Financieros', 'Acceso a informes detallados de ventas, gastos e ingresos.'),
+('Procesar Pagos', 'Habilidad para autorizar y procesar transacciones de pago.'),
+('Administrar Contenido Web', 'Control sobre el contenido de la página web (textos, imágenes, ofertas).'),
+('Realizar Compras', 'Permite a los usuarios registrar pedidos y efectuar compras.'),
+('Ver Historial de Compras', 'Acceso al historial personal de pedidos y transacciones.'),
+('Actualizar Perfil', 'Permite a los usuarios modificar su información personal y preferencias.'),
+('Gestionar Eventos', 'Permite crear, programar y administrar eventos y catas.'),
+('Gestionar Proveedores', 'Permite añadir, editar y eliminar información de proveedores.');
 
 -- ▗▄▄▄▖▗▖  ▗▖ ▗▄▄▖▗▄▄▖ ▗▄▄▄▖▗▄▄▄  ▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖
 --   █  ▐▛▚▖▐▌▐▌   ▐▌ ▐▌▐▌   ▐▌  █   █  ▐▌   ▐▛▚▖▐▌  █  ▐▌   
@@ -596,24 +695,24 @@ INSERT INTO BENEFICIO (nombre, descripcion) VALUES
 -- ▗▄█▄▖▐▌  ▐▌▝▚▄▞▘▐▌ ▐▌▐▙▄▄▖▐▙▄▄▀ ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌  █  ▐▙▄▄▖
 
 INSERT INTO INGREDIENTE (nombre) 
-VALUES ('Malta Best Malz Pale Ale'),('Malta Best Malz Aromatic'), ('Malta Best Malz Caramel Light '), ('Lúpulo Columbus'), ('Lúpulo Cascade'), ('Malta de cebada'), ('Frutas tropicales'), ('Levadura: Danstar Bry-97'), ('Agua'), ('Azucar Blanca');
+VALUES ('Malta Best Malz Pale Ale'),
+('Malta Best Malz Aromatic'), 
+('Malta Best Malz Caramel Light '), 
+('Lúpulo Columbus'), ('Lúpulo Cascade'), 
+('Malta de cebada'), ('Frutas tropicales'), 
+('Levadura: Danstar Bry-97'), ('Agua'), ('Azucar Blanca');
 
-INSERT INTO INGR_RECE (fk_ingrediente, fk_receta, fecha_inicio) VALUES
-(1, 1, '2025-01-01'),
-(2, 1, '2025-01-02'),
-(3, 2, '2025-01-03'),
-(4, 2, '2025-01-04'),
-(5, 3, '2025-01-05'),
-(6, 3, '2025-01-06'),
-(7, 4, '2025-01-07'),
-(8, 4, '2025-01-08'),
-(9, 5, '2025-01-09'),
-(10, 5, '2025-01-10');
+
 
 -- ▗▄▄▖  ▗▄▖ ▗▖                                                 
 -- ▐▌ ▐▌▐▌ ▐▌▐▌                                                 
 -- ▐▛▀▚▖▐▌ ▐▌▐▌                                                 
 -- ▐▌ ▐▌▝▚▄▞▘▐▙▄▄▖ 
+
+INSERT INTO ROL (nombre, descripcion) VALUES
+('Administrador del Sistema', 'Acceso completo a la configuración del sistema, gestión de usuarios, productos y reportes.'),
+('Cliente Registrado', 'Usuario con cuenta que puede realizar pedidos, ver historial de compras y gestionar su perfil.'),
+
 
 -- ▗▄▄▖  ▗▄▖ ▗▖  ▗▖ ▗▄▄▖ ▗▄▖                                    
 -- ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌▐▌   ▐▌ ▐▌                                   
@@ -671,17 +770,19 @@ INSERT INTO ESTATUS (nombre) VALUES
 --   █ ▐▛▀▜▌ ▝▀▚▖▐▛▀▜▌    ▐▌   ▐▛▀▜▌▐▌  ▐▌▐▛▀▚▖  █  ▐▌ ▐▌       
 --   █ ▐▌ ▐▌▗▄▄▞▘▐▌ ▐▌    ▝▚▄▄▖▐▌ ▐▌▐▌  ▐▌▐▙▄▞▘▗▄█▄▖▝▚▄▞▘  
 
-INSERT INTO TASA_CAMBIO (fecha, tasa_bs_dolar, tasa_bs_punto) VALUES
-('2025-01-01', 36.50, 37.00),
-('2025-01-02', 36.55, 37.05),
-('2025-01-03', 36.60, 37.10),
-('2025-01-04', 36.65, 37.15),
-('2025-01-05', 36.70, 37.20),
-('2025-01-06', 36.75, 37.25),
-('2025-01-07', 36.80, 37.30),
-('2025-01-08', 36.85, 37.35),
-('2025-01-09', 36.90, 37.40),
-('2025-01-10', 36.95, 37.45);
+INSERT INTO TASA_CAMBIO (fecha_inicio, fecha_fin, tasa_bs_dolar, tasa_bs_punto) VALUES
+('2025-01-01', '2025-01-15', 55.00, 55.00), 
+('2025-01-16', '2025-01-31', 56.20, 56.20), 
+('2025-02-01', '2025-02-15', 57.50, 57.50), 
+('2025-02-16', '2025-02-28', 58.80, 58.80), 
+('2025-03-01', '2025-03-15', 60.10, 60.10), 
+('2025-03-16', '2025-03-31', 61.40, 61.40), 
+('2025-04-01', '2025-04-15', 62.70, 62.70), 
+('2025-04-16', '2025-04-30', 64.00, 64.00), 
+('2025-05-01', '2025-05-15', 65.30, 65.30), 
+('2025-05-16', '2025-05-31', 66.60, 66.60), 
+('2025-06-01', '2025-06-15', 67.90, 67.90),
+('2025-06-16', '2025-06-30', 69.20, 69.20);
 
 -- ▗▖   ▗▖ ▗▖ ▗▄▄▖ ▗▄▖ ▗▄▄▖     ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄   ▗▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌      █    █  ▐▌   ▐▛▚▖▐▌▐▌  █ ▐▌ ▐▌
@@ -705,23 +806,46 @@ INSERT INTO LUGAR_TIENDA (nombre, tipo, fk_lugar_tienda) VALUES
 -- ▐▌  ▐▌▐▛▀▀▘  █ ▐▌ ▐▌▐▌  █ ▐▌ ▐▌    ▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▌ ▐▌      
 -- ▐▌  ▐▌▐▙▄▄▖  █ ▝▚▄▞▘▐▙▄▄▀ ▝▚▄▞▘    ▐▌   ▐▌ ▐▌▝▚▄▞▘▝▚▄▞▘ 
 
-INSERT INTO METODO_PAGO (nombre) VALUES
-('Tarjeta de Crédito'),
-('Tarjeta de Débito'),
-('Efectivo'),
-('Puntos');
-('Cheque')
+INSERT INTO METODO_PAGO (monto) VALUES
+(500), (1200), (75), (2500), (30), (800), (150), (4000), (90), (600), 
+(100), (1500), (200), (3000), (50), (950), (180), (4500), (120), (700), 
+(350), (1000), (10), (2000), (70), (1100), (220), (5000), (140), (850), 
+(400), (1300), (40), (2800), (60), (1250), (280), (5500), (160), (900); 
 
 -- ▗▄▄▄▖▗▖  ▗▖ ▗▄▄▖▗▄▄▖     ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖                
 --   █  ▐▛▚▖▐▌▐▌   ▐▌ ▐▌    ▐▌ ▐▌▐▌   ▐▌   ▐▌                   
 --   █  ▐▌ ▝▜▌▐▌▝▜▌▐▛▀▚▖    ▐▛▀▚▖▐▛▀▀▘▐▌   ▐▛▀▀▘                
 -- ▗▄█▄▖▐▌  ▐▌▝▚▄▞▘▐▌ ▐▌    ▐▌ ▐▌▐▙▄▄▖▝▚▄▄▖▐▙▄▄▖ 
 
+INSERT INTO INGR_RECE (fk_ingrediente, fk_receta, fecha_inicio) VALUES
+(1, 1, '2025-01-01'),
+(2, 1, '2025-01-02'),
+(3, 2, '2025-01-03'),
+(4, 2, '2025-01-04'),
+(5, 3, '2025-01-05'),
+(6, 3, '2025-01-06'),
+(7, 4, '2025-01-07'),
+(8, 4, '2025-01-08'),
+(9, 5, '2025-01-09'),
+(10, 5, '2025-01-10');
+
 
 -- ▗▄▄▖  ▗▄▖ ▗▖       ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖ 
 -- ▐▌ ▐▌▐▌ ▐▌▐▌       ▐▌ ▐▌▐▌ ▐▌  █  ▐▌  ▐▌ 
 -- ▐▛▀▚▖▐▌ ▐▌▐▌       ▐▛▀▘ ▐▛▀▚▖  █  ▐▌  ▐▌ 
 -- ▐▌ ▐▌▝▚▄▞▘▐▙▄▄▖    ▐▌   ▐▌ ▐▌▗▄█▄▖ ▝▚▞▘  
+
+INSERT INTO ROL_PRIV (fk_rol, fk_privilegio) VALUES
+(1, 1), 
+(1, 2), 
+(1, 3), 
+(1, 4), 
+(1, 5), 
+(1, 9), 
+(1, 10),
+(2, 6), 
+(2, 7), 
+(2, 8); 
 
 
 -- ▗▄▄▖ ▗▄▄▖  ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖▗▄▄▄   ▗▄▖ ▗▄▄▖  
@@ -739,7 +863,17 @@ INSERT INTO PROVEEDOR (rif, direccion, denominacion_comercial, razon_social, pag
 ('J-45678901-6', 'Centro Empresarial Paraguaná, Guzmán Guillermo', 'Fermentadores Falcón', 'Fermentadores Falcón C.A.', 'www.fermentadoresfalcon.com', 13, 14),
 ('G-65432109-7', 'Calle Comercio, Urb. Las Flores, Valle de la Pascua', 'Cebada Guárico Global', 'Cebada Guárico Global S.A.', 'www.cebadaguarico.com', 15, 16),
 ('J-56789012-8', 'Urbanización Delta, Calle 3, San Jose', 'Ingredientes Delta', 'Ingredientes Delta C.A.', NULL, 17, 18), 
-('G-54321098-9', 'Zona Industrial Turmero, El Limón, Choroni', 'Levaduras Aragua Innova', 'Levaduras Aragua Innova S.A.', 'www.levadurasaragua.com', 19, 20);
+('G-54321098-9', 'Zona Industrial Turmero, El Limón, Choroni', 'Levaduras Aragua Innova', 'Levaduras Aragua Innova S.A.', 'www.levadurasaragua.com', 19, 20),
+('J-10000000-0', 'Calle Las Palmas, Edificio Norte, Suite 101, Caracas', 'Materias Primas C.A.', 'Materias Primas C.A.', 'http://www.materiasprimas.com', 1, 15),
+('G-20000000-1', 'Avenida Los Próceres, Galpón 5, Maracaibo', 'Suministros Industriales Zulia', 'Suministros Industriales Zulia S.A.', NULL, 24, 220),
+('J-30000000-2', 'Zona Industrial II, Calle A, Nave 8, Valencia', 'Equipos Cerveceros del Centro', 'Equipos Cerveceros del Centro R.L.', 'http://www.equiposcerveceros.com', 7, 45),
+('G-40000000-3', 'Carretera Nacional, Km 12, Barquisimeto', 'Empaques del Oeste', 'Empaques del Oeste C.A.', NULL, 14, 100),
+('J-50000000-4', 'Urbanización Ciudad Roca, Sector Este, Puerto Ordaz', 'Aditivos del Sur', 'Aditivos del Sur S.A.', 'http://www.aditivosdelsur.net', 10, 80),
+('G-60000000-5', 'Avenida Libertador, Sector Las Vegas, Mérida', 'Logística Andes', 'Logística Andes C.A.', NULL, 15, 160),
+('J-70000000-6', 'Calle La Marina, Dársena 3, Puerto La Cruz', 'Granos Marítimos', 'Granos Marítimos S.R.L.', 'http://www.granosmaritimos.com', 2, 20),
+('G-80000000-7', 'Via Principal, Pueblo Arriba, San Felipe', 'Botellas del Valle', 'Botellas del Valle C.A.', NULL, 23, 210),
+('J-90000000-8', 'Sector El Sol, Galpón 4, Coro', 'Insumos Industriales Falcón', 'Insumos Industriales Falcón S.A.', 'http://www.insumosfalcon.com', 9, 70),
+('G-99999999-9', 'Avenida Los Samanes, Local 2, Ciudad Bolívar', 'Esencias del Sur', 'Esencias del Sur C.A.', NULL, 10, 80);
 
 --  ▗▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖  
 -- ▐▌   ▐▌     █  ▐▌   ▐▛▚▖▐▌  █  ▐▌     
@@ -756,7 +890,37 @@ INSERT INTO CLIENTE (rif, direccion, numero_registro, fk_lugar_1, fk_lugar_2) VA
 ('J-70809010-1', 'Av. Atlántico, CC. El Faro, Local 20, Porlamar', 1800, 18, 175),
 ('G-80901020-2', 'Sector El Carmen, Calle 5, Maturín', 1008, 17, 170),
 ('V-90102030-3', 'Plaza Bolívar, Edif. Azul, Oficina 7, San Felipe', 1009, 23, 210),
-('E-01020304-4', 'Av. Las Delicias, Local 15, Ciudad Ojeda', 1010, 24, 230);
+('E-01020304-4', 'Av. Las Delicias, Local 15, Ciudad Ojeda', 1010, 24, 230),
+('J-11223344-5', 'Av. Rómulo Gallegos, Edif. Este, Piso 3, Caracas', 1011, 1, 15),
+('G-22334455-6', 'Calle Miranda, Local 7, Puerto La Cruz', 1012, 2, 20),
+('J-33445566-7', 'Zona Industrial Sur, Galpón 5, Valencia', 1013, 7, 45),
+('G-44556677-8', 'Carrera 23, Esquina Calle 30, Barquisimeto', 1014, 14, 100),
+('J-55667788-9', 'Av. Las Américas, CC. El Dorado, Local 12, Mérida', 1015, 15, 160),
+('G-66778899-0', 'Calle Bolívar, Sector Centro, San Cristóbal', 1016, 21, 200),
+('J-77889900-1', 'Av. Principal, Urb. La Granja, Maracay', 1017, 4, 25),
+('G-88990011-2', 'Vía La Costa, Urb. Las Aves, La Guaira', 1018, 13, 140),
+('J-99001122-3', 'Calle Comercio, Centro, Maturín', 1019, 17, 170),
+('G-00112233-4', 'Av. 22, Sector Belloso, Maracaibo', 1020, 24, 220),
+('V-00112233-4', 'Calle 5, Urb. Los Robles, Apto 1A, Caracas', 1021, 1, 16),
+('E-00223344-5', 'Av. 2, Sector Milagro Norte, Maracaibo', 1022, 24, 221),
+('J-00334455-6', 'Urb. Guaparo, Res. El Lago, Piso 8, Valencia', 1023, 7, 46),
+('G-00445566-7', 'Calle 30, Carrera 25, Local 10, Barquisimeto', 1024, 14, 101),
+('V-00556677-8', 'Sector Castillito, Casa 30, Puerto Ordaz', 1025, 10, 81),
+('E-00667788-9', 'Av. 3, Urb. Los Sauces, Mérida', 1026, 15, 161),
+('J-00778899-0', 'Calle Las Flores, CC. La Casona, Local 5, Porlamar', 1027, 18, 176),
+('G-00889900-1', 'Urb. La Viña, Calle Principal, Maturín', 1028, 17, 171),
+('V-00990011-2', 'Calle Real, Edif. Centro, Oficina 4, San Felipe', 1029, 23, 211),
+('E-01011223-3', 'Av. Venezuela, Urb. Los Olivos, Apto 2B, Caracas', 1030, 1, 17),
+('J-01122334-4', 'Carrera 18, Res. El Bosque, Maracay', 1031, 4, 26),
+('G-01233445-5', 'Calle Junín, Local 1, Barquisimeto', 1032, 14, 102),
+('J-01344556-6', 'Urb. Agua Viva, Casa 7, Cabudare', 1033, 14, 103),
+('G-01455667-7', 'Av. Urdaneta, Edif. El Faro, Piso 2, Coro', 1034, 9, 71),
+('J-01566778-8', 'Sector El Dique, Calle 1, Cumaná', 1035, 20, 206),
+('G-01677889-9', 'Av. Los Próceres, Urb. Don Bosco, San Cristóbal', 1036, 21, 201),
+('J-01788990-0', 'Calle Miranda, Edif. Central, Oficina 9, Valera', 1037, 22, 215),
+('G-01899001-1', 'Zona Industrial, Galpón 20, Puerto La Cruz', 1038, 2, 21),
+('J-01900112-2', 'Av. Intercomunal, CC. Las Naves, Punto Fijo', 1039, 11, 91),
+('G-02011223-3', 'Sector Las Garzas, Casa 10, Barinas', 1040, 5, 30);
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄   ▗▄▖     ▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖ ▗▄▄▖ ▗▄▖
 --   █    █  ▐▌   ▐▛▚▖▐▌▐▌  █ ▐▌ ▐▌    ▐▌     █  ▐▌     █  ▐▌   ▐▌ ▐▌
@@ -799,17 +963,16 @@ INSERT INTO EMPLEADO (cedula, primer_nombre, segundo_nombre, primer_apellido, se
 --   █ ▐▌ ▐▌▐▌ ▐▌▗▄▄▞▘▐▙▄▄▖  █ ▐▌ ▐▌
 
 INSERT INTO TARJETA (fk_metodo_pago, fk_banco, fk_tipo_tarjeta, numero_tarjeta, fecha_vence, nombre_titular, cvv) VALUES
-(1, 1, 1, 1234567890, '2027-12-31', 'Juan Perez', 123),
-(2, 2, 2, 9876543210, '2026-11-30', 'Maria Rodriguez', 456),
-(1, 3, 1, 1122334455, '2028-06-30', 'Pedro Garcia', 789),
-(2, 4, 2, 6677889900, '2025-05-31', 'Ana Martinez', 012),
-(1, 5, 1, 0099887766, '2029-04-30', 'Luis Diaz', 345),
-(2, 6, 2, 5544332211, '2027-03-31', 'Sofia Hernandez', 678),
-(1, 7, 1, 2211443355, '2026-02-28', 'Jorge Morales', 901),
-(2, 8, 2, 7788554422, '2028-01-31', 'Laura Flores', 234),
-(1, 9, 1, 3322110099, '2025-10-31', 'Diego Ramirez', 567),
-(2, 10, 2, 9900112233, '2029-09-30', 'Gabriela Torres', 890);
-
+(1, 1, 1, 1111222233334444, '2027-12-31', 'Ana Garcia', 123),
+(2, 2, 2, 5555666677778888, '2026-11-30', 'Luis Rodriguez', 456),
+(3, 3, 1, 9999888877776666, '2028-06-30', 'Sofia Martinez', 789),
+(4, 4, 2, 1234123412341234, '2025-05-31', 'Diego Ramirez', 101),
+(5, 5, 1, 4321432143214321, '2029-04-30', 'Laura Hernandez', 202),
+(6, 6, 2, 8765876587658765, '2027-03-31', 'Carlos Sanchez', 303),
+(7, 7, 1, 1010202030304040, '2026-02-28', 'Elena Gonzalez', 404),
+(8, 8, 2, 5050606070708080, '2028-01-31', 'Pedro Diaz', 505),
+(9, 9, 1, 9090808070706060, '2025-10-31', 'Maria Torres', 606),
+(10, 10, 2, 1122334455667788, '2029-09-30', 'Andres Ruiz', 707);
 
 --  ▗▄▄▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▖ ▗▖ ▗▖▗▄▄▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌ ▐▌ ▐▌▐▌
@@ -817,16 +980,16 @@ INSERT INTO TARJETA (fk_metodo_pago, fk_banco, fk_tipo_tarjeta, numero_tarjeta, 
 -- ▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖▐▙▄▟▙▖▝▚▄▞▘▐▙▄▄▖ 
 
 INSERT INTO CHEQUE (fk_metodo_pago, numero, fk_banco, memo) VALUES
-(5, 1001, 1, 'Pago de servicios'),
-(5, 1002, 2, 'Compra de insumos'),
-(5, 1003, 3, 'Alquiler local'),
-(5, 1004, 4, 'Salarios'),
-(5, 1005, 5, 'Factura proveedor X'),
-(5, 1006, 6, 'Reembolso gasto'),
-(5, 1007, 7, 'Pago publicidad'),
-(5, 1008, 8, 'Mantenimiento'),
-(5, 1009, 9, 'Bonificación'),
-(5, 1010, 10, 'Compra de equipos');
+(11, 1001, 1, 'Pago a proveedor de malta'),
+(12, 1002, 2, 'Alquiler de local comercial'),
+(13, 1003, 3, 'Servicios de publicidad'),
+(14, 1004, 4, 'Compra de equipos de producción'),
+(15, 1005, 5, 'Reembolso a cliente por devolución'),
+(16, 1006, 6, 'Pago de nómina semanal'),
+(17, 1007, 7, 'Mantenimiento de infraestructura'),
+(18, 1008, 8, 'Adquisición de lúpulo especial'),
+(19, 1009, 9, 'Bonificación a empleados'),
+(20, 1010, 10, 'Factura de servicios básicos');
 
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖ ▗▄▖
@@ -834,12 +997,34 @@ INSERT INTO CHEQUE (fk_metodo_pago, numero, fk_banco, memo) VALUES
 -- ▐▛▀▀▘▐▛▀▀▘▐▛▀▀▘▐▌     █    █  ▐▌  ▐▌▐▌ ▐▌
 -- ▐▙▄▄▖▐▌   ▐▙▄▄▖▝▚▄▄▖  █  ▗▄█▄▖ ▝▚▞▘ ▝▚▄▞▘
 
+INSERT INTO EFECTIVO (fk_metodo_pago, denominacion, tipo_moneda) VALUES
+(21, 100, 'Bolívares'),
+(22, 50, 'Dólares'),
+(23, 1, 'Bolívares'),
+(24, 20, 'Dólares'),
+(25, 5, 'Bolívares'),
+(26, 10, 'Dólares'),
+(27, 2, 'Bolívares'),
+(28, 100, 'Dólares'),
+(29, 500, 'Bolívares'),
+(30, 5, 'Dólares');
 
 -- ▗▄▄▖ ▗▖ ▗▖▗▖  ▗▖▗▄▄▄▖▗▄▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌  █ ▐▌ ▐▌ 
 -- ▐▛▀▘ ▐▌ ▐▌▐▌ ▝▜▌  █ ▐▌ ▐▌ 
--- ▐▌   ▝▚▄▞▘▐▌  ▐▌  █ ▝▚▄▞▘  
+-- ▐▌   ▝▚▄▞▘▐▌  ▐▌  █ ▝▚▄▞▘
 
+INSERT INTO PUNTO (fk_metodo_pago) VALUES
+(31),
+(32),
+(33),
+(34),
+(35),
+(36),
+(37),
+(38),
+(39),
+(40);
 
 --  ▗▄▖ ▗▄▄▄▖▗▄▄▄▖▗▖   ▗▄▄▄▖ ▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
 -- ▐▌ ▐▌▐▌     █  ▐▌     █  ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌ 
@@ -864,11 +1049,45 @@ INSERT INTO AFILIACION (fecha, monto_mensual, fk_proveedor) VALUES
 -- ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▛▀▘ ▐▛▀▚▖▐▛▀▜▌
 -- ▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌
 
+INSERT INTO COMPRA (fecha, monto_total, fk_proveedor) VALUES
+('2024-01-10', 1500.00, 1),
+('2024-01-15', 750.50, 2),
+('2024-01-20', 2300.75, 3),
+('2024-01-25', 500.00, 4),
+('2024-02-01', 1200.00, 5),
+('2024-02-05', 900.25, 6),
+('2024-02-10', 3100.00, 7),
+('2024-02-15', 620.50, 8),
+('2024-02-20', 1800.00, 9),
+('2024-02-25', 450.75, 10),
+
 
 -- ▗▄▄▖ ▗▖  ▗▖ ▗▄▖▗▄▄▄▖▗▖ ▗▖▗▄▄▖  ▗▄▖ ▗▖    
 -- ▐▌ ▐▌▐▛▚▖▐▌▐▌ ▐▌ █  ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌    
 -- ▐▛▀▘ ▐▌ ▝▜▌▐▛▀▜▌ █  ▐▌ ▐▌▐▛▀▚▖▐▛▀▜▌▐▌    
 -- ▐▌   ▐▌  ▐▌▐▌ ▐▌ █  ▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌▐▙▄▄▖
+
+INSERT INTO PNATURAL (fk_cliente, cedula, nombre, apellido, fecha_nacimiento) VALUES
+(1, 'V-12345678', 'Ana', 'Pérez', '1985-03-15'),
+(2, 'V-23456789', 'Luis', 'García', '1990-07-22'),
+(3, 'V-34567890', 'Sofía', 'Rodríguez', '1992-11-01'),
+(4, 'V-45678901', 'Diego', 'Hernández', '1988-04-30'),
+(5, 'V-56789012', 'María', 'Sánchez', '1995-09-10'),
+(6, 'V-67890123', 'Carlos', 'Díaz', '1980-01-25'),
+(7, 'V-78901234', 'Elena', 'González', '1998-06-18'),
+(8, 'V-89012345', 'Pedro', 'Ruiz', '1983-12-05'),
+(9, 'V-90123456', 'Laura', 'Martínez', '1993-02-28'),
+(10, 'V-01234567', 'Andrés', 'López', '1987-10-12'),
+(21, 'V-10112233', 'Roberto', 'Vargas', '1979-08-01'),
+(22, 'V-10223344', 'Camila', 'Silva', '1991-04-19'),
+(23, 'V-10334455', 'Fernando', 'Peña', '1984-11-05'),
+(24, 'V-10445566', 'Valeria', 'Reyes', '1996-02-14'),
+(25, 'V-10556677', 'Gabriel', 'Castro', '1982-07-28'),
+(26, 'V-10667788', 'Victoria', 'Medina', '1994-09-03'),
+(27, 'V-10778899', 'Ricardo', 'Navas', '1989-01-11'),
+(28, 'V-10889900', 'Paula', 'Moreno', '1997-05-20'),
+(29, 'V-10990011', 'Jorge', 'Herrera', '1981-12-07'),
+(30, 'V-11001122', 'Daniela', 'Soto', '1993-06-25');
 
 
 -- ▗▄▄▖ ▗▖▗▖ ▗▖▗▄▄▖ ▗▖ ▗▖▗▄▄▄  ▗▄▄▄▖ ▗▄▄▖ ▗▄▖    
@@ -876,12 +1095,44 @@ INSERT INTO AFILIACION (fecha, monto_mensual, fk_proveedor) VALUES
 -- ▐▛▀▘ ▐▌▐▌ ▐▌▐▛▀▚▖▐▌ ▐▌▐▌  █   █  ▐▌   ▐▌ ▐▌   
 -- ▐▌▗▄▄▞▘▝▚▄▞▘▐▌ ▐▌▝▚▄▞▘▐▙▄▄▀ ▗▄█▄▖▝▚▄▄▖▝▚▄▞▘   
 
+INSERT INTO PJURIDICO (fk_cliente, denominacion_comercial, razon_social, pagina_web, capital_disponible) VALUES
+(11, 'Cervecería Artesanal El Morro', 'Cervezas Artesanales El Morro C.A.', 'http://www.elmorrococuy.com', 500000.00),
+(12, 'Distribuidora Oriental de Bebidas', 'Distribuidora Oriental de Bebidas S.A.', NULL, 750000.00),
+(13, 'Embotelladora del Centro', 'Embotelladora del Centro C.A.', 'http://www.embocentro.com.ve', 1200000.00),
+(14, 'Grupo Cervecero Lara', 'Grupo Cervecero Lara S.R.L.', NULL, 300000.00),
+(15, 'Andina de Cervezas', 'Andina de Cervezas G.P.', 'http://www.andinacervezas.com', 800000.00),
+(16, 'Empresas Cerveceras del Táchira', 'Empresas Cerveceras del Táchira C.A.', NULL, 600000.00),
+(17, 'Fábrica de Malta Aragua', 'Fábrica de Malta Aragua S.A.', 'http://www.maltaragua.com', 900000.00),
+(18, 'Importadora La Guaira Bebidas', 'Importadora La Guaira Bebidas C.A.', NULL, 400000.00),
+(19, 'Corporación Cervecera Monagas', 'Corporación Cervecera Monagas S.R.L.', 'http://www.cervezasmonagas.net', 1100000.00),
+(20, 'Almacenes Zulia Cervezas', 'Almacenes Zulia Cervezas S.A.', NULL, 1500000.00),
+(31, 'Importadora del Centro C.A.', 'Importaciones del Centro S.A.', NULL, 650000.00),
+(32, 'Servicios Logísticos Barquisimeto', 'Servicios Logísticos Barquisimeto R.L.', 'http://www.logisticabqto.com', 400000.00),
+(33, 'Cervezas Artesanales Cabudare', 'Cervezas Artesanales Cabudare C.A.', 'http://www.cabudarebrew.com', 950000.00),
+(34, 'Envases y Embalajes Coro', 'Envases y Embalajes Coro S.A.', NULL, 280000.00),
+(35, 'Distribuidores Cumaná Global', 'Distribuidores Cumaná Global C.A.', 'http://www.distribuidorascumana.com', 720000.00),
+(36, 'Productos Gourmet Táchira', 'Productos Gourmet Táchira S.R.L.', NULL, 550000.00),
+(37, 'Tecnología Cervecera Valera', 'Tecnología Cervecera Valera S.A.', 'http://www.tecvalera.com', 1000000.00),
+(38, 'Insumos Industriales Anzoátegui', 'Insumos Industriales Anzoátegui C.A.', NULL, 480000.00),
+(39, 'Suministros Costa Oriental', 'Suministros Costa Oriental S.A.', 'http://www.suministroscosta.net', 880000.00),
+(40, 'Agroindustrias Barinas', 'Agroindustrias Barinas C.A.', NULL, 700000.00);
 
 -- ▗▄▄▄  ▗▄▄▄▖▗▄▄▖  ▗▄▖ ▗▄▄▖▗▄▄▄▖▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  
 -- ▐▌  █ ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌ █ ▐▌ ▐▌▐▛▚▞▜▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌ 
 -- ▐▌  █ ▐▛▀▀▘▐▛▀▘ ▐▛▀▜▌▐▛▀▚▖ █ ▐▛▀▜▌▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ ▐▌ ▐▌ 
 -- ▐▙▄▄▀ ▐▙▄▄▖▐▌   ▐▌ ▐▌▐▌ ▐▌ █ ▐▌ ▐▌▐▌  ▐▌▐▙▄▄▖▐▌  ▐▌  █ ▝▚▄▞▘   
 
+INSERT INTO DEPARTAMENTO (nombre, descripcion, fk_tienda_fisica) VALUES
+('Cervezas Nacionales', 'Departamento encargado de la venta de cervezas producidas en el país.', 1),
+('Cervezas Importadas', 'Departamento para la distribución y venta de cervezas de origen internacional.', 1),
+('Accesorios Cerveceros', 'Sección dedicada a la venta de vasos, destapadores y otros utensilios de cerveza.', 2),
+('Alimentos y Snacks', 'Ofrece una variedad de pasapalos y comidas para acompañar las bebidas.', 2),
+('Ventas Online', 'Gestiona los pedidos y envíos realizados a través de la tienda virtual.', 3),
+('Atención al Cliente', 'Área de soporte y resolución de dudas para los clientes.', 3),
+('Producción Artesanal', 'Espacio dedicado a la elaboración de lotes de cerveza artesanal.', 4),
+('Control de Calidad', 'Departamento que asegura la calidad de las cervezas y materias primas.', 4),
+('Administración', 'Oficina central para la gestión administrativa y financiera de la tienda.', 5),
+('Recursos Humanos', 'Sección encargada de la gestión de personal y contratación.', 5);
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▄▄▖ ▗▖       ▗▖ ▗▖ ▗▄▖ ▗▄▄▖  ▗▄▖       
 -- ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌       ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌      
@@ -907,10 +1158,34 @@ INSERT INTO EMPL_HORA (fk_empleado, fk_horario, asistencia) VALUES
 -- ▐▌ ▐▌ ▝▀▚▖▐▌ ▐▌▐▛▀▜▌▐▛▀▚▖  █  ▐▌ ▐▌    
 -- ▝▚▄▞▘▗▄▄▞▘▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌▗▄█▄▖▝▚▄▞▘  
 
+INSERT INTO USUARIO (nombre, contraseña, fk_empleado, fk_cliente, fk_proveedor, fk_rol) VALUES
+('sys_admin', MD5('secureAdminPass'), 1, NULL, NULL, 1), 
+('cliente_web_1', MD5('webuser123'), NULL, 2, NULL, 2),    
+('proveedor_admin', MD5('provAdmin!'), NULL, NULL, 1, 1), 
+('cliente_corporativo_user', MD5('corpUserPass'), NULL, 11, NULL, 2), 
+('empleado_user_sales', MD5('salespass'), 3, NULL, NULL, 2), 
+('cliente_web_2', MD5('webuser456'), NULL, 4, NULL, 2),    
+('dev_admin', MD5('devAdminPass'), 5, NULL, NULL, 1),    
+('cliente_vip_user', MD5('vipClientSecure'), NULL, 13, NULL, 2), 
+('proveedor_basic_user', MD5('basicProvPass'), NULL, NULL, 3, 2), 
+('empleado_user_hr', MD5('hrpass'), 7, NULL, NULL, 2);
+
 -- ▗▄▄▄▖▗▄▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖ ▗▄▖   
 --   █  ▐▌   ▐▌   ▐▌   ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌ ▐▌  
 --   █  ▐▛▀▀▘▐▌   ▐▛▀▀▘▐▛▀▀▘▐▌ ▐▌▐▌ ▝▜▌▐▌ ▐▌  
 --   █  ▐▙▄▄▖▐▙▄▄▖▐▙▄▄▖▐▌   ▝▚▄▞▘▐▌  ▐▌▝▚▄▞▘ 
+
+INSERT INTO TELEFONO (codigo_pais, numero, fk_proveedor, fk_cliente, fk_empleado) VALUES
+(58, 4121234567, 1, NULL, NULL), 
+(58, 2129876543, NULL, 1, NULL),  
+(58, 4147654321, NULL, NULL, 1), 
+(58, 4160123456, 11, NULL, NULL),
+(58, 2415551234, NULL, 12, NULL), 
+(58, 4243334455, NULL, NULL, 2),  
+(58, 2866667788, 2, NULL, NULL),   
+(58, 2959990011, NULL, 21, NULL), 
+(58, 4125556677, NULL, NULL, 3),  
+(58, 4168889900, NULL, 31, NULL); 
 
 
 --  ▗▄▄▖ ▗▄▖ ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▖        
@@ -918,17 +1193,104 @@ INSERT INTO EMPL_HORA (fk_empleado, fk_horario, asistencia) VALUES
 -- ▐▌   ▐▌ ▐▌▐▛▀▚▖▐▛▀▚▖▐▛▀▀▘▐▌ ▐▌     
 -- ▝▚▄▄▖▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌▐▙▄▄▖▝▚▄▞▘  
 
+INSERT INTO CORREO (correo, dominio, fk_proveedor, fk_cliente, fk_empleado) VALUES
+('contacto', 'cervecerialacapital.com', 1, NULL, NULL),  
+('ana.perez', 'ejemplo.com', NULL, 1, NULL),           
+('juan.perez', 'empresa.com', NULL, NULL, 1),         
+('info', 'distribuidoramiranda.net', 2, NULL, NULL),   
+('luis.garcia', 'correo.org', NULL, 2, NULL),          
+('maria.rodriguez', 'mycompany.com', NULL, NULL, 2),   
+('ventas', 'maltacarabobo.com', 3, NULL, NULL),     
+('sofia.rodriguez', 'email.com', NULL, 3, NULL),       
+('pedro.garcia', 'corp-email.com', NULL, NULL, 3),    
+('clientes', 'lupulosanzoategui.com', 4, NULL, NULL); 
+
 
 -- ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▖      ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▖    
 -- ▐▌   ▐▌     █ ▐▌ ▐▌    ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌ ▐▌   
 -- ▐▛▀▀▘ ▝▀▚▖  █ ▐▛▀▜▌    ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▛▀▘   
 -- ▐▙▄▄▖▗▄▄▞▘  █ ▐▌ ▐▌    ▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌▐▌  
 
+INSERT INTO ESTA_COMP (fk_compra, fk_estatus, fecha_inicio, fecha_fin) VALUES
+(1, 1, '2024-01-10', '2024-01-11'),
+(1, 2, '2024-01-11', '2024-01-12'),
+(1, 3, '2024-01-12', NULL),
+(2, 1, '2024-01-15', '2024-01-16'),
+(2, 4, '2024-01-16', NULL),
+(3, 1, '2024-01-20', '2024-01-21'),
+(3, 2, '2024-01-21', '2024-01-22'),
+(3, 3, '2024-01-22', NULL),
+(4, 1, '2024-01-25', '2024-01-26'),
+(4, 5, '2024-01-26', NULL),
+(5, 1, '2024-02-01', '2024-02-02'),
+(5, 2, '2024-02-02', '2024-02-03'),
+(5, 3, '2024-02-03', NULL),
+(6, 1, '2024-02-05', '2024-02-06'),
+(6, 4, '2024-02-06', NULL),
+(7, 1, '2024-02-10', '2024-02-11'),
+(7, 2, '2024-02-11', '2024-02-12'),
+(7, 3, '2024-02-12', NULL),
+(8, 1, '2024-02-15', '2024-02-16'),
+(8, 5, '2024-02-16', NULL),
+(9, 1, '2024-02-20', '2024-02-21'),
+(9, 2, '2024-02-21', '2024-02-22'),
+(9, 3, '2024-02-22', NULL),
+(10, 1, '2024-02-25', '2024-02-26'),
+(10, 4, '2024-02-26', NULL),
+(11, 1, '2024-03-01', '2024-03-02'),
+(11, 2, '2024-03-02', '2024-03-03'),
+(11, 3, '2024-03-03', NULL),
+(12, 1, '2024-03-05', '2024-03-06'),
+(12, 5, '2024-03-06', NULL),
+(13, 1, '2024-03-10', '2024-03-11'),
+(13, 2, '2024-03-11', '2024-03-12'),
+(13, 3, '2024-03-12', NULL),
+(14, 1, '2024-03-15', '2024-03-16'),
+(14, 4, '2024-03-16', NULL),
+(15, 1, '2024-03-20', '2024-03-21'),
+(15, 2, '2024-03-21', '2024-03-22'),
+(15, 3, '2024-03-22', NULL),
+(16, 1, '2024-03-25', '2024-03-26'),
+(16, 5, '2024-03-26', NULL),
+(17, 1, '2024-04-01', '2024-04-02'),
+(17, 2, '2024-04-02', '2024-04-03'),
+(17, 3, '2024-04-03', NULL),
+(18, 1, '2024-04-05', '2024-04-06'),
+(18, 4, '2024-04-06', NULL),
+(19, 1, '2024-04-10', '2024-04-11'),
+(19, 2, '2024-04-11', '2024-04-12'),
+(19, 3, '2024-04-12', NULL),
+(20, 1, '2024-04-15', '2024-04-16'),
+(20, 5, '2024-04-16', NULL);
+
 
 -- ▗▄▄▄  ▗▄▄▄▖▗▄▄▄▖▗▄▖ ▗▖   ▗▖   ▗▄▄▄▖     ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▖ ▗▄▄▖  ▗▄▖               
 -- ▐▌  █ ▐▌     █ ▐▌ ▐▌▐▌   ▐▌   ▐▌       ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌              
 -- ▐▌  █ ▐▛▀▀▘  █ ▐▛▀▜▌▐▌   ▐▌   ▐▛▀▀▘    ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▛▀▘ ▐▛▀▚▖▐▛▀▜▌              
 -- ▐▙▄▄▀ ▐▙▄▄▖  █ ▐▌ ▐▌▐▙▄▄▖▐▙▄▄▖▐▙▄▄▖    ▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌     
+
+INSERT INTO DETALLE_COMPRA (cantidad, precio_unitario, fk_compra) VALUES
+(100, 15.00, 1),
+(50, 1.50, 1),
+(20, 30.00, 2),
+(5, 150.00, 3),
+(10, 50.00, 4),
+(120, 10.00, 5),
+(60, 5.00, 6),
+(30, 100.00, 7),
+(80, 7.50, 8),
+(15, 120.00, 9),
+(200, 8.00, 10),
+(70, 2.00, 1),
+(25, 40.00, 2),
+(10, 250.00, 3),
+(150, 9.00, 4),
+(75, 6.00, 5),
+(40, 110.00, 6),
+(90, 12.00, 7),
+(20, 180.00, 8),
+(250, 7.00, 9),
+(100, 3.00, 10);
 
 
 --  ▗▄▄▖ ▗▄▖ ▗▄▄▖  ▗▄▄▖ ▗▄▖                                                            
@@ -954,6 +1316,18 @@ INSERT INTO CARGO (nombre) VALUES
 -- ▐▛▀▘ ▐▛▀▀▘▐▛▀▚▖ ▝▀▚▖▐▌ ▐▌▐▌ ▝▜▌▐▛▀▜▌▐▌       ▐▌   ▐▌ ▐▌▐▌ ▝▜▌  █ ▐▛▀▜▌▐▌     █ ▐▌ ▐▌
 -- ▐▌   ▐▙▄▄▖▐▌ ▐▌▗▄▄▞▘▝▚▄▞▘▐▌  ▐▌▐▌ ▐▌▐▙▄▄▖    ▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌  █ ▐▌ ▐▌▝▚▄▄▖  █ ▝▚▄▞▘
 
+INSERT INTO PERSONAL_CONTACTO (nombre, apellido, fk_juridico, fk_proveedor, fk_cargo) VALUES
+('Juan', 'Martínez', 1, NULL, 1),  
+('María', 'Fernández', NULL, 1, 2),  
+('Pedro', 'González', 2, NULL, 3),  
+('Ana', 'Díaz', NULL, 2, 4),  
+('Luis', 'Ramírez', 3, NULL, 5),  
+('Sofía', 'Castro', NULL, 3, 6),  
+('José', 'Torres', 4, NULL, 7),  
+('Laura', 'Vargas', NULL, 4, 8),  
+('Carlos', 'Sánchez', 5, NULL, 9),  
+('Elena', 'Ruiz', NULL, 5, 10);
+
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▄▄▖  ▗▄▖      ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▄▖ ▗▄▖  
 --   █    █  ▐▌ ▐▌▐▌ ▐▌    ▐▌   ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▌      ▗▞▘▐▌ ▐▌   
@@ -963,14 +1337,59 @@ INSERT INTO CARGO (nombre) VALUES
 INSERT INTO TIPO_CERVEZA (nombre, fk_tipo_cerveza, fk_receta) VALUES
 ('Ale', NULL, 1),
 ('Lager', NULL, 2),
-('IPA', 1, 3), 
-('Stout', 1, 4),
-('Porter', 1, 5),
-('Cerveza de trigo', 1, 6),
-('Pilsner', 2, 7),
-('Sour', NULL, 8),
-('Saison', 1, 9),
-('Barleywine', 1, 10);
+('Cervezas de trigo', NULL, 3),
+('Sour', NULL, 4),
+('Witbier', NULL, 5),
+('Spice, Herb o Vegetable Beer', NULL, 6),
+('Pale', 1, 7),
+('Brown', 1, 8),
+('Red', 1, 9),
+('Amber', 1, 10),
+('Pumpkin', 1, 11),
+('Golden', 1, 12),
+('Blond', 1, 13),
+('Stout', 1, 14),
+('IPA', 1, 15),
+('ESB', 1, 16),
+('Porter', 1, 17),
+('Barley Wine', 1, 18),
+('English Bitter', 1, 19),
+('American Amber Ale', 1, 20),
+('American Pale Ale', 1, 21),
+('American IPA', 1, 22),
+('Belgian Specialty Ale', 1, 23),
+('Cerveza de Abadía', 1, 24),
+('Trapense', 1, 25),
+('Ámbar', 1, 26),
+('Flamenca', 1, 27),
+('Belgian Barleywine', 1, 28),
+('Trappist Quadrupel', 1, 29),
+('Belgian Spiced Christmas Beer', 1, 30),
+('Belgian Stout', 1, 31),
+('Belgian IPA', 1, 32),
+('Blond Trappist Table Beer', 1, 33),
+('Artisanal Blond', 1, 34),
+('Artisanal Amber', 1, 35),
+('Artisanal Brown', 1, 36),
+('Flanders Red/Brown con frutas', 1, 37),
+('Pilsner', 2, 38),
+('Spezial', 2, 39),
+('Dortmunster', 2, 40),
+('Schwarzbier', 2, 41),
+('Vienna', 2, 42),
+('Bock', 2, 43),
+('Hefeweizen', 3, 44),
+('Weisse Beer', 3, 45),
+('Weizen-Weissbier', 3, 46),
+('Imperial Stout', 14, 47),
+('Chocolate', 14, 48),
+('Coffee', 14, 49),
+('Milk Stout', 14, 50),
+('Sweet Stout', 14, 51),
+('Eisbock', 43, 52),
+('Strong Saison', 23, 53),
+('Dark Saison', 23, 54),
+('Blonde Ale', 1, 55);
 
 
 --  ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▄▖ ▗▄▖  
@@ -994,6 +1413,18 @@ INSERT INTO CERVEZA (nombre, descripcion, historia, fk_tipo_cerveza, fk_proveedo
 -- ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌ ▐▌  █  ▐▌ ▐▌  
 -- ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ ▐▛▀▜▌▐▛▀▚▖  █  ▐▌ ▐▌ 
 -- ▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌▐▙▄▄▖▐▌  ▐▌  █ ▐▌ ▐▌▐▌ ▐▌▗▄█▄▖▝▚▄▞▘  
+
+INSERT INTO COMENTARIO (descripcion, fk_cerveza) VALUES
+('Excelente sabor, muy refrescante y ligera.', 1),
+('Un aroma a lúpulo increíble, perfecta para el verano.', 2),
+('Demasiado amarga para mi gusto, pero tiene buen cuerpo.', 3),
+('Ideal para acompañar con carnes asadas, muy robusta.', 4),
+('Sorprendente, un toque cítrico que la hace única.', 5),
+('No me terminó de convencer, le falta algo de carácter.', 6),
+('Mi favorita sin duda, el equilibrio perfecto entre dulce y amargo.', 7),
+('Buena opción para probar algo diferente, notas a café.', 8),
+('Muy suave, podría ser más intensa para mi paladar.', 9),
+('Maravillosa, se siente la calidad de los ingredientes artesanales.', 10);
 
 
 --  ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖    ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖                                      
@@ -1054,30 +1485,460 @@ VALUES ('Foro','Foro dado por un ponente invitado'),
 -- ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ ▐▌ ▐▌ 
 -- ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █ ▝▚▄▞▘     
 
-INSERT INTO EVENTO (nombre, descripcion, numero_entradas, fecha_inicio, fecha_fin, direccion, fk_evento, fk_tipo_evento, fk_lugar) 
-VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '12-7-2024','13-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '19-7-2024','20-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '26-7-2024','27-7-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
+INSERT INTO EVENTO (nombre, descripcion, numero_entradas, fecha_inicio, fecha_fin, direccion, precio_entrada, fk_evento, fk_tipo_evento, fk_lugar) VALUES
+('Festival Amazónico de Cervezas', 'Gran celebración de cervezas artesanales locales de la selva.', 500, '2025-07-10', '2025-07-12', 'Plaza Central de Puerto Ayacucho', 15.00, NULL, 1, 1),
+('Cata Mística del Orinoco', 'Degustación de cervezas con ingredientes exóticos de la región.', 60, '2025-08-05', '2025-08-05', 'Lodge Ecológico Orinoco', 25.00, NULL, 2, 1),
+('Lanzamiento "Espíritu de la Selva Ale"', 'Presentación de una nueva Pale Ale inspirada en la fauna local.', 100, '2025-09-01', '2025-09-01', 'Bar Temático Amazonas', 10.00, NULL, 3, 1),
+('Taller de Cerveza Casera Nivel 1', 'Introducción a la elaboración artesanal de cerveza.', 20, '2025-10-20', '2025-10-21', 'Centro Comunitario Ayacucho', 75.00, NULL, 4, 1),
+('Concurso "Mejor Lager Tropical"', 'Competición para encontrar la Lager más refrescante de la región.', 40, '2025-11-15', '2025-11-15', 'Salón de Eventos Ayacucho', 8.00, NULL, 5, 1),
 
-('Historia de la Cerveza en Venezuela','Charla dada por un experto', 1000, '1-1-2024','1-1-2024', 'UCAB, Aula Magna', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Foro'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-('UBirra','Degustacion de 30 birras', 100, '1-1-2024','1-1-2024', 'UCAB, Plaza Mickey', NULL, (SELECT eid FROM TIPO_EVENTO WHERE nombre = 'Cata'), (SELECT eid FROM LUGAR WHERE nombre = 'La Vega' AND tipo = 'PARROQUIA')),
-;
+('Expo Cerveza Oriental', 'Feria de exposición y venta de cervezas artesanales del oriente.', 800, '2025-07-15', '2025-07-17', 'Centro de Convenciones Lechería', 20.00, NULL, 9, 2),
+('Cata y Maridaje Costero', 'Degustación de cervezas maridadas con sabores del Caribe.', 70, '2025-08-10', '2025-08-10', 'Restaurant Vista al Mar, Puerto La Cruz', 30.00, NULL, 2, 2),
+('Presentación "Anzoátegui IPA"', 'Lanzamiento de una IPA con lúpulos intensos y notas frutales.', 120, '2025-09-05', '2025-09-05', 'Brewpub El Faro, Barcelona', 12.00, NULL, 3, 2),
+('Curso Intensivo de Malteado', 'Profundiza en el proceso de malteado y su impacto en la cerveza.', 25, '2025-10-25', '2025-10-26', 'Campus Universitario UGMA, Anaco', 90.00, NULL, 4, 2),
+('Competición de Maestros Cerveceros', 'Desafío de elaboración en vivo entre expertos.', 50, '2025-11-20', '2025-11-20', 'Club de Maestros Cerveceros, El Morro', 10.00, NULL, 5, 2),
 
+('Festival Llanero Cervecero', 'Celebrando la cerveza artesanal con la cultura de los llanos.', 400, '2025-07-20', '2025-07-22', 'Parque Ferial San Fernando', 12.00, NULL, 1, 3),
+('Cata de Cervezas Ahumadas', 'Degustación de cervezas con perfiles ahumados inspirados en el llano.', 50, '2025-08-15', '2025-08-15', 'Hacienda El Caney', 20.00, NULL, 2, 3),
+('Presentación "Palma Real Lager"', 'Nueva Lager refrescante, perfecta para el clima llanero.', 90, '2025-09-10', '2025-09-10', 'Restaurant La Cabaña, San Fernando', 9.00, NULL, 3, 3),
+('Taller de Agua para Cerveceros', 'La importancia del agua en la calidad de la cerveza.', 18, '2025-10-30', '2025-10-31', 'Casa de la Cultura Apure', 85.00, NULL, 4, 3),
+('Concurso "Cerveza Tradicional Llanera"', 'Buscando la mejor cerveza que represente el sabor de Apure.', 35, '2025-11-25', '2025-11-25', 'Rancho La Victoria', 7.00, NULL, 5, 3),
+
+('Aragua Beer Weekend', 'Un fin de semana dedicado a la cerveza artesanal en Maracay.', 900, '2025-07-25', '2025-07-27', 'Parque de Ferias de San Jacinto, Maracay', 18.00, NULL, 1, 4),
+('Cata de Cervezas Belgas', 'Explorando los complejos estilos belgas y sus adaptaciones locales.', 80, '2025-08-20', '2025-08-20', 'Hotel Hesperia Maracay', 32.00, NULL, 2, 4),
+('Lanzamiento "Samán Stout"', 'Presentación de una Stout con toques de café y cacao aragüeño.', 140, '2025-09-15', '2025-09-15', 'Brewpub La Maestranza, Maracay', 11.00, NULL, 3, 4),
+('Curso Avanzado de Fermentación', 'Técnicas avanzadas para el control de la fermentación.', 30, '2025-11-05', '2025-11-06', 'Laboratorio Cervecero Aragua', 100.00, NULL, 4, 4),
+('Batalla de Cerveceros Artesanales', 'Demostraciones y competencia entre los mejores cerveceros de Aragua.', 60, '2025-11-30', '2025-11-30', 'Espacio Cultural Girardot', 9.00, NULL, 5, 4),
+
+('Festival Cerveza Barinesa', 'Encuentro con las mejores cervezas artesanales de Barinas.', 600, '2025-07-30', '2025-08-01', 'Complejo Ferial Barinas', 14.00, NULL, 1, 5),
+('Cata de Cervezas Temporada Seca', 'Degustación de cervezas ligeras y refrescantes para el clima barinés.', 55, '2025-08-25', '2025-08-25', 'Restaurante El Estribo, Barinas', 23.00, NULL, 2, 5),
+('Presentación "Cacique IPA Llanera"', 'Nueva IPA con lúpulos criollos y carácter del llano.', 110, '2025-09-20', '2025-09-20', 'Cervecería El Hato, Barinas', 10.00, NULL, 3, 5),
+('Taller de Sanidad Cervecera', 'Prácticas de higiene y saneamiento en la producción de cerveza.', 22, '2025-11-10', '2025-11-11', 'Escuela de Agronomía ULL', 95.00, NULL, 4, 5),
+('Reto Cervecero del Sur', 'Competición de estilos clásicos entre cerveceros barineses.', 45, '2025-12-05', '2025-12-05', 'Club Campestre Barinas', 8.50, NULL, 5, 5),
+
+('Gran Expo Cervecera Guayana', 'El evento más grande de cerveza artesanal en el sur del país.', 1200, '2025-08-05', '2025-08-07', 'Palacio de Eventos de Guayana, Puerto Ordaz', 22.00, NULL, 9, 6),
+('Cata de Cervezas Negras del Sur', 'Explorando las Stouts y Porters de la región minera.', 75, '2025-09-01', '2025-09-01', 'Salón VIP Hotel Venetur, Ciudad Bolívar', 35.00, NULL, 2, 6),
+('Lanzamiento "Oro Negro Imperial Stout"', 'Una Stout densa y potente con toques de café local.', 150, '2025-09-25', '2025-09-25', 'Brewpub El Minero, Ciudad Guayana', 13.00, NULL, 3, 6),
+('Seminario de Insumos Alternativos', 'Uso de ingredientes no tradicionales en la cerveza artesanal.', 32, '2025-11-15', '2025-11-16', 'Centro de Negocios Altavista, Puerto Ordaz', 110.00, NULL, 4, 6),
+('Concurso "Copa Orinoco de Cerveza"', 'Juzgando la calidad y creatividad de las cervezas de Bolívar.', 60, '2025-12-10', '2025-12-10', 'Plaza del Agua, Puerto Ordaz', 10.00, NULL, 5, 6),
+
+('Festival Artesanal Valencia', 'Celebración de la cerveza artesanal y gastronomía carabobeña.', 1000, '2025-08-10', '2025-08-12', 'Parque Fernando Peñalver, Valencia', 20.00, NULL, 1, 7),
+('Cata de Cervezas con Frutas Tropicales', 'Degustación de cervezas infusionadas con frutas del estado.', 80, '2025-09-05', '2025-09-05', 'Hacienda La Esmeralda, Naguanagua', 28.00, NULL, 2, 7),
+('Presentación "Flor de Naranjo Blonde Ale"', 'Lanzamiento de una Blonde Ale ligera con toques cítricos.', 130, '2025-09-30', '2025-09-30', 'Brewery Garden, San Diego', 10.00, NULL, 3, 7),
+('Taller de Diseño de Recetas', 'Crea tus propias recetas de cerveza artesanal desde cero.', 35, '2025-11-20', '2025-11-21', 'Espacio Cultural Valencia', 95.00, NULL, 4, 7),
+('Campeonato Regional Cervecero', 'Competencia que premia la excelencia en la elaboración de cerveza.', 70, '2025-12-15', '2025-12-15', 'Complejo Deportivo, San Joaquin', 9.00, NULL, 5, 7),
+
+('Expo Cerveza Cojedeña', 'Muestra y venta de la producción cervecera artesanal local.', 300, '2025-08-15', '2025-08-17', 'Plaza La Fería, San Carlos', 10.00, NULL, 9, 8),
+('Cata de Cervezas Refrescantes', 'Degustación de cervezas ideales para el clima de Cojedes.', 40, '2025-09-10', '2025-09-10', 'Hotel Pao, Tinaquillo', 18.00, NULL, 2, 8),
+('Lanzamiento "Torbellino IPA"', 'Presentación de una IPA vibrante con carácter.', 80, '2025-10-05', '2025-10-05', 'Bar La Tinaja, San Carlos', 8.00, NULL, 3, 8),
+('Taller de Carbonatación y Embotellado', 'Dominando las etapas finales de la elaboración de cerveza.', 15, '2025-11-25', '2025-11-26', 'Centro de Capacitación Agroindustrial', 70.00, NULL, 4, 8),
+('Reto Cervecero del Llano Central', 'Concurso de cervezas artesanales del centro del país.', 30, '2025-12-20', '2025-12-20', 'Casa de la Cultura San Carlos', 6.00, NULL, 5, 8),
+
+('Festival Cerveza Warao', 'Celebración de la cerveza artesanal con la cultura indígena local.', 350, '2025-08-20', '2025-08-22', 'Paseo Manamo, Tucupita', 12.00, NULL, 8, 9),
+('Cata de Cervezas con Frutas Amazónicas', 'Degustación de cervezas con ingredientes exóticos del Delta.', 45, '2025-09-15', '2025-09-15', 'Hotel Gran Delta, Tucupita', 22.00, NULL, 2, 9),
+('Presentación "Moriche Ale"', 'Lanzamiento de una Ale de color ámbar con toques de la región.', 95, '2025-10-10', '2025-10-10', 'Brewpub El Carite, Tucupita', 9.50, NULL, 3, 9),
+('Curso de Gestión de Cervecerías Pequeñas', 'Aspectos administrativos y de negocio para cervecerías.', 17, '2025-11-30', '2025-12-01', 'Cámara de Comercio Tucupita', 105.00, NULL, 4, 9),
+('Concurso "Sabor del Delta"', 'Buscando la cerveza más representativa del Delta Amacuro.', 30, '2025-12-25', '2025-12-25', 'Mirador del Delta', 7.50, NULL, 5, 9),
+
+('Caracas Craft Beer Festival', 'El evento anual más esperado de cerveza artesanal en Caracas.', 1500, '2025-08-25', '2025-08-27', 'Parque Los Caobos, Caracas', 28.00, NULL, 1, 10),
+('Cata Maestra de Imperial Stouts', 'Degustación de las Stouts más potentes y complejas.', 80, '2025-09-20', '2025-09-20', 'Salón Espejos, Hotel Tamanaco, Caracas', 40.00, NULL, 2, 10),
+('Lanzamiento "Ávila IPA"', 'Presentación de una IPA audaz, inspirada en la montaña caraqueña.', 200, '2025-10-15', '2025-10-15', 'Terraza Lounge El Ávila, Caracas', 15.00, NULL, 3, 10),
+('Seminario de QA en Cervecería', 'Control de calidad y buenas prácticas en la producción de cerveza.', 30, '2025-11-10', '2025-11-11', 'Campus UCAB, Caracas', 120.00, NULL, 4, 10),
+('Concurso Nacional de Cerveza Artesanal', 'El certamen más prestigioso para cerveceros de Venezuela.', 100, '2025-12-05', '2025-12-07', 'Centro de Artes La Estancia, Caracas', 12.00, NULL, 5, 10),
+
+('Festival Cerveza de Paraguaná', 'Evento cervecero en la península, con ambiente playero.', 700, '2025-09-01', '2025-09-03', 'Playa El Supí, Punto Fijo', 16.00, NULL, 1, 11),
+('Cata de Cervezas con Cítricos', 'Degustación de cervezas con perfiles de naranja, limón y parchita.', 65, '2025-09-25', '2025-09-25', 'Restaurant Marino, Adícora', 26.00, NULL, 2, 11),
+('Presentación "Viento de Sal Lager"', 'Nueva Lager refrescante con toques salinos.', 110, '2025-10-20', '2025-10-20', 'Brewpub La Vela, Coro', 10.50, NULL, 3, 11),
+('Taller de Cervezas con Adjuntos Locales', 'Uso de ingredientes típicos de Falcón en la elaboración.', 25, '2025-12-10', '2025-12-11', 'Universidad Nacional Experimental Francisco de Miranda, Coro', 90.00, NULL, 4, 11),
+('Concurso "Sabor Costero"', 'Competición de cervezas que evocan el ambiente playero.', 40, '2025-12-28', '2025-12-28', 'Club Náutico Punto Fijo', 8.00, NULL, 5, 11),
+
+('Expo Cervecera Llanera', 'Muestra y venta de cervezas artesanales de Guárico y estados vecinos.', 450, '2025-09-05', '2025-09-07', 'Parque Ferial San Juan de los Morros', 12.00, NULL, 9, 12),
+('Cata de Cervezas Campesinas', 'Degustación de cervezas con perfiles rústicos y terrosos.', 45, '2025-09-30', '2025-09-30', 'Hato La Esperanza, Valle de la Pascua', 20.00, NULL, 2, 12),
+('Lanzamiento "El Morro Pale Ale"', 'Presentación de una Pale Ale balanceada y accesible.', 90, '2025-10-25', '2025-10-25', 'Cervecería Guárico, Ortiz', 9.00, NULL, 3, 12),
+('Seminario de Lúpulos y su Uso', 'Explorando las variedades de lúpulo y sus aplicaciones.', 20, '2025-12-15', '2025-12-16', 'Centro de Estudios Llaneros, Calabozo', 80.00, NULL, 4, 12),
+('Reto Cervecero "Corazón del Llano"', 'Concurso para la mejor cerveza que capture la esencia guariqueña.', 30, '2026-01-05', '2026-01-05', 'Club de Polo Las Mercedes', 7.00, NULL, 5, 12),
+
+('Festival Sabor Litoral', 'Evento cervecero con vista al mar, lo mejor de La Guaira.', 800, '2025-09-10', '2025-09-12', 'Club Puerto Azul, Naiguatá', 18.00, NULL, 1, 13),
+('Cata de Cervezas con Frutos del Mar', 'Maridaje de cervezas con productos marinos frescos.', 70, '2025-10-05', '2025-10-05', 'Restaurant El Canto del Mar, Macuto', 30.00, NULL, 2, 13),
+('Presentación "Atardecer Caribeño Ale"', 'Lanzamiento de una Ale dorada y frutal, ideal para el atardecer.', 130, '2025-10-30', '2025-10-30', 'Brewpub La Guaira, Maiquetía', 11.00, NULL, 3, 13),
+('Taller de Cervezas Estacionales', 'Elaboración de cervezas adaptadas a cada estación del año.', 28, '2025-12-20', '2025-12-21', 'Centro de Artes Vargas', 95.00, NULL, 4, 13),
+('Concurso "Cerveza Costeña del Año"', 'Premiando la mejor cerveza artesanal de la Guaira.', 45, '2026-01-10', '2026-01-10', 'Hotel Marriot Playa Grande', 9.00, NULL, 5, 13),
+
+('Festival Cerveza de los Crepúsculos', 'Celebración de la cerveza artesanal en la tierra del crepúsculo.', 1000, '2025-09-15', '2025-09-17', 'Obelisco de Barquisimeto', 20.00, NULL, 1, 14),
+('Cata de Cervezas con Café Larense', 'Degustación de cervezas con adición de café de la región.', 70, '2025-10-10', '2025-10-10', 'Cafetería La Negra, Barquisimeto', 32.00, NULL, 2, 14),
+('Lanzamiento "Tocuyo Porter"', 'Presentación de una Porter robusta con toques de chocolate.', 140, '2025-11-05', '2025-11-05', 'Cervecería Artesanal Tocuyo', 12.00, NULL, 3, 14),
+('Seminario de Diseño de Etiquetas', 'Crea una identidad visual atractiva para tu cerveza.', 30, '2025-12-25', '2025-12-26', 'Ateneo de Barquisimeto', 105.00, NULL, 4, 14),
+('Copa Regional de Cerveza Lara', 'Competición de cervezas artesanales de la región larense.', 50, '2026-01-15', '2026-01-15', 'Arena Ciudad Barquisimeto', 10.00, NULL, 5, 14),
+
+('Festival Cumbres Cerveceras', 'Evento cervecero en el impresionante paisaje andino.', 850, '2025-09-20', '2025-09-22', 'Centro de Convenciones Mucumbarila, Mérida', 18.00, NULL, 1, 15),
+('Cata de Cervezas de Altura', 'Degustación de cervezas elaboradas en las montañas de Mérida.', 60, '2025-10-15', '2025-10-15', 'Restaurante Casa Vieja, Mérida', 28.00, NULL, 2, 15),
+('Presentación "Nevado Pale Ale"', 'Lanzamiento de una Pale Ale fresca y de cuerpo ligero.', 130, '2025-11-10', '2025-11-10', 'Cervecería Andina, Ejido', 11.00, NULL, 3, 15),
+('Taller de Cervezas con Frutos Rojos', 'Uso de moras y fresas andinas en la elaboración de cerveza.', 25, '2026-01-01', '2026-01-02', 'Universidad de Los Andes, Mérida', 90.00, NULL, 4, 15),
+('Reto Cervecero Andino', 'Concurso para la mejor cerveza inspirada en la Cordillera.', 45, '2026-01-20', '2026-01-20', 'Estación Barinitas, Teleférico Mukumbarí', 9.00, NULL, 5, 15),
+
+('Miranda Beer Summit', 'Cumbre cervecera en la región mirandina.', 1500, '2025-09-25', '2025-09-27', 'Hacienda La Trinidad Parque Cultural, Caracas', 30.00, NULL, 1, 16),
+('Cata de Sours y Lambics', 'Exploración de estilos ácidos y fermentaciones espontáneas.', 90, '2025-10-20', '2025-10-20', 'Salón de Eventos El Hatillo', 38.00, NULL, 2, 16),
+('Lanzamiento "Chuao Chocolate Stout"', 'Stout con cacao de Chuao, un verdadero manjar.', 160, '2025-11-15', '2025-11-15', 'Brewpub El Cacao, Ocumare del Tuy', 14.00, NULL, 3, 16),
+('Curso Intensivo de Recetas de Cerveza', 'Desde la teoría hasta la práctica en la creación de recetas.', 35, '2026-01-05', '2026-01-07', 'Universidad Simón Bolívar, Sartenejas', 120.00, NULL, 4, 16),
+('Copa Cervecera Mirandina', 'Reconocimiento a las cervecerías artesanales de Miranda.', 70, '2026-01-25', '2026-01-25', 'Lagunita Country Club, El Hatillo', 11.00, NULL, 5, 16),
+
+('Festival Maturín Cervecero', 'Celebrando la cerveza artesanal en la capital monaguense.', 600, '2025-10-01', '2025-10-03', 'Parque La Guaricha, Maturín', 15.00, NULL, 1, 17),
+('Cata de Cervezas con Mango y Parchita', 'Degustación de cervezas infusionadas con frutas tropicales.', 55, '2025-10-25', '2025-10-25', 'Restaurante El Guacharín, Maturín', 24.00, NULL, 2, 17),
+('Presentación "Sabana Grande Golden Ale"', 'Lanzamiento de una Golden Ale brillante y refrescante.', 110, '2025-11-20', '2025-11-20', 'Cervecería Monagas, Punta de Mata', 9.50, NULL, 3, 17),
+('Taller de Filtración y Clarificación', 'Técnicas para obtener cervezas más claras y estables.', 20, '2026-01-10', '2026-01-11', 'Núcleo UDO Monagas', 85.00, NULL, 4, 17),
+('Concurso "Sabor de Monagas"', 'Premiando la cerveza que mejor represente los sabores de Monagas.', 35, '2026-01-30', '2026-01-30', 'Plaza Piar, Maturín', 7.00, NULL, 5, 17),
+
+('Margarita Beer & Beach', 'Festival de cerveza en la isla, con música y ambiente playero.', 1000, '2025-10-05', '2025-10-07', 'Playa El Agua, Isla Margarita', 25.00, NULL, 1, 18),
+('Cata de Cervezas Tropicales', 'Degustación de cervezas con perfiles frutales y refrescantes.', 70, '2025-10-30', '2025-10-30', 'Hotel Hesperia Margarita, Pampatar', 35.00, NULL, 2, 18),
+('Presentación "Perla del Caribe Lager"', 'Lanzamiento de una Lager cristalina, inspirada en las aguas de Margarita.', 140, '2025-11-25', '2025-11-25', 'Cervecería Isla, Porlamar', 12.00, NULL, 3, 18),
+('Seminario de Maridaje con Mariscos', 'Cómo combinar cervezas con la gastronomía marina de la isla.', 30, '2026-01-15', '2026-01-16', 'Restaurant La Casa de la Vieja Margarita', 110.00, NULL, 4, 18),
+('Campeonato Insular de Cerveza', 'Reconocimiento a la excelencia cervecera de Nueva Esparta.', 50, '2026-02-05', '2026-02-05', 'Centro Comercial Sambil Margarita', 10.00, NULL, 5, 18),
+
+('Festival Cerveza del Llano', 'Celebrando la cerveza artesanal en la tierra del maíz.', 700, '2025-10-10', '2025-10-12', 'Parque Ferial Guanare', 16.00, NULL, 1, 19),
+('Cata de Cervezas de Maíz', 'Explorando las cervezas elaboradas con maíz local.', 45, '2025-11-05', '2025-11-05', 'Restaurante El Fogón Llanero, Acarigua', 25.00, NULL, 2, 19),
+('Lanzamiento "Portuguesa Golden Lager"', 'Una Lager clara y brillante para el clima llanero.', 90, '2025-11-30', '2025-11-30', 'Cervecería Portuguesa, Guanare', 10.00, NULL, 3, 19),
+('Taller de Cervezas Envejecidas', 'Técnicas de maduración y añejamiento para cervezas especiales.', 18, '2026-01-20', '2026-01-21', 'Universidad Ezequiel Zamora, Guanare', 90.00, NULL, 4, 19),
+('Concurso "Maíz y Malta"', 'Premiando la cerveza que mejor integre el maíz en su perfil.', 30, '2026-02-10', '2026-02-10', 'Casa de la Cultura Acarigua', 8.00, NULL, 5, 19),
+
+('Expo Cerveza Oriental Sucre', 'Muestra de la diversidad cervecera artesanal sucrense.', 500, '2025-10-15', '2025-10-17', 'Paseo Miranda, Cumaná', 12.00, NULL, 9, 20),
+('Cata de Cervezas con Coco y Mango', 'Degustación de estilos con sabores tropicales.', 40, '2025-11-10', '2025-11-10', 'Restaurant El Morro, Cumaná', 22.00, NULL, 2, 20),
+('Presentación "Playa Grande Pale Ale"', 'Una Pale Ale con toques de frutas y aroma costero.', 85, '2025-12-05', '2025-12-05', 'Brewpub Cumaná, Carúpano', 9.00, NULL, 3, 20),
+('Taller de Marcas y Diseño', 'Desarrollando la imagen y branding de tu cervecería.', 17, '2026-01-25', '2026-01-26', 'Casa Ramos Sucre, Cumaná', 95.00, NULL, 4, 20),
+('Desafío Cervecero del Caribe', 'Concurso para la mejor cerveza que represente el Caribe.', 28, '2026-02-15', '2026-02-15', 'Castillo San Antonio, Cumaná', 7.00, NULL, 5, 20),
+
+('Festival Cerveza Andina', 'Celebrando la tradición cervecera en los Andes tachirenses.', 800, '2025-10-20', '2025-10-22', 'Pabellones de la Feria, San Cristóbal', 18.00, NULL, 1, 21),
+('Cata de Cervezas con Café Andino', 'Degustación de cervezas con el aromático café de la región.', 65, '2025-11-15', '2025-11-15', 'Restaurant Los Pinos, San Cristóbal', 28.00, NULL, 2, 21),
+('Presentación "Páramo Stout"', 'Una Stout robusta y oscura, inspirada en la majestuosidad del páramo.', 120, '2025-12-10', '2025-12-10', 'Cervecería Andina, Rubio', 11.00, NULL, 3, 21),
+('Seminario de Inoculación y Fermentación', 'Técnicas avanzadas para el control microbiológico en la cerveza.', 25, '2026-01-30', '2026-01-31', 'Universidad de Los Andes, San Cristóbal', 100.00, NULL, 4, 21),
+('Copa Táchira de Cerveza Artesanal', 'Reconociendo la excelencia en la producción cervecera andina.', 40, '2026-02-20', '2026-02-20', 'Velódromo de San Cristóbal', 9.00, NULL, 5, 21),
+
+('Expo Cerveza Trujillana', 'Muestra de la emergente escena cervecera del estado.', 400, '2025-10-25', '2025-10-27', 'Parque La Trujillanidad, Trujillo', 10.00, NULL, 9, 22),
+('Cata de Cervezas con Dulce de Leche', 'Degustación de cervezas con el tradicional sabor trujillano.', 40, '2025-11-20', '2025-11-20', 'Restaurante Mi Viejo Trujillo, Valera', 20.00, NULL, 2, 22),
+('Presentación "Trujillo Pale Lager"', 'Una Lager clara y refrescante, un homenaje al estado.', 80, '2025-12-15', '2025-12-15', 'Cervecería Los Andes, Valera', 8.50, NULL, 3, 22),
+('Taller de Costos y Rentabilidad', 'Gestiona eficientemente los costos en tu cervecería artesanal.', 15, '2026-02-05', '2026-02-06', 'Centro de Negocios Trujillo', 90.00, NULL, 4, 22),
+('Concurso "Sabor de Montaña"', 'Premiando la mejor cerveza que capture el espíritu andino.', 25, '2026-02-25', '2026-02-25', 'Monumento a la Paz, Trujillo', 6.00, NULL, 5, 22),
+
+('Festival Cerveza y Encanto Yaracuyano', 'Evento que une la cerveza artesanal con la cultura y tradiciones de Yaracuy.', 500, '2025-10-30', '2025-11-01', 'Parque de la Exótica Flora Tropical, San Felipe', 14.00, NULL, 8, 23),
+('Cata de Cervezas con Hierbas Aromáticas', 'Degustación de cervezas infusionadas con hierbas locales.', 50, '2025-11-25', '2025-11-25', 'Hacienda La Morita, San Felipe', 23.00, NULL, 2, 23),
+('Lanzamiento "María Lionza Golden Ale"', 'Presentación de una Golden Ale mística, inspirada en la leyenda.', 100, '2025-12-20', '2025-12-20', 'Brewpub La Montaña, Chivacoa', 9.50, NULL, 3, 23),
+('Seminario de Diseño de Cervecerías', 'Planificación y diseño de espacios para la producción artesanal.', 20, '2026-02-10', '2026-02-11', 'Universidad Politécnica Territorial de Yaracuy, San Felipe', 100.00, NULL, 4, 23),
+('Concurso "Magia Cervecera Yaracuyana"', 'Competición de cervezas que capturan la esencia del estado.', 30, '2026-03-01', '2026-03-01', 'Cerro María Lionza, Chivacoa', 7.50, NULL, 5, 23),
+
+('Zulia Craft Beer Festival', 'El festival de cerveza artesanal más grande del occidente venezolano.', 1500, '2025-11-05', '2025-11-07', 'Palacio de Eventos de Venezuela, Maracaibo', 28.00, NULL, 1, 24),
+('Cata de Cervezas con Coco y Plátano', 'Degustación de cervezas con sabores caribeños y zulianos.', 90, '2025-11-30', '2025-11-30', 'Restaurant El Caimán, Maracaibo', 35.00, NULL, 2, 24),
+('Presentación "Puente sobre el Lago Stout"', 'Stout profunda y misteriosa, inspirada en el icono zuliano.', 160, '2025-12-25', '2025-12-25', 'Brewpub El Puente, Cabimas', 13.00, NULL, 3, 24),
+('Taller de Cervezas Especiales', 'Experimentando con ingredientes y procesos únicos en la cerveza.', 35, '2026-02-15', '2026-02-16', 'Universidad del Zulia, Maracaibo', 115.00, NULL, 4, 24),
+('Copa Zuliana de Cerveza Artesanal', 'Premio a la cerveza artesanal más destacada del Zulia.', 60, '2026-03-05', '2026-03-05', 'Vereda del Lago, Maracaibo', 11.00, NULL, 5, 24);
 -- ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  
 -- ▐▌  ▐▌▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌       
 -- ▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ ▐▛▀▜▌ 
 --  ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █ ▐▌ ▐▌ 
 
+INSERT INTO VENTA (fecha, monto_total, fk_tienda_virtual, fk_tienda_fisica, fk_evento, fk_cliente) VALUES
+('2025-01-10', 55.70, 1, NULL, NULL, 1),
+('2025-01-15', 30.25, NULL, 1, NULL, 1),
+('2025-01-12', 120.00, 2, NULL, NULL, 2),
+('2025-01-18', 45.90, NULL, 2, NULL, 2),
+('2025-01-14', 78.50, 3, NULL, NULL, 3),
+('2025-01-20', 25.00, NULL, 3, NULL, 3),
+('2025-01-16', 92.10, 4, NULL, NULL, 4),
+('2025-01-22', 60.50, NULL, 4, NULL, 4),
+('2025-01-18', 35.60, 5, NULL, NULL, 5),
+('2025-01-24', 15.75, NULL, 5, NULL, 5),
+('2025-01-20', 150.00, 6, NULL, NULL, 6),
+('2025-01-26', 88.20, NULL, 1, NULL, 6),
+('2025-01-22', 20.00, 7, NULL, NULL, 7),
+('2025-01-28', 10.50, NULL, 2, NULL, 7),
+('2025-01-24', 110.30, 8, NULL, NULL, 8),
+('2025-01-30', 72.00, NULL, 3, NULL, 8),
+('2025-01-26', 49.99, 9, NULL, NULL, 9),
+('2025-02-01', 33.30, NULL, 4, NULL, 9),
+('2025-01-28', 85.40, 10, NULL, NULL, 10),
+('2025-02-03', 50.00, NULL, 5, NULL, 10),
+('2025-02-01', 70.20, 1, NULL, NULL, 11),
+('2025-02-05', 28.15, NULL, 1, NULL, 11),
+('2025-02-03', 95.80, 2, NULL, NULL, 12),
+('2025-02-07', 65.40, NULL, 2, NULL, 12),
+('2025-02-05', 40.00, 3, NULL, NULL, 13),
+('2025-02-09', 18.90, NULL, 3, NULL, 13),
+('2025-02-07', 180.00, 4, NULL, NULL, 14),
+('2025-02-11', 105.20, NULL, 4, NULL, 14),
+('2025-02-09', 22.50, 5, NULL, NULL, 15),
+('2025-02-13', 12.80, NULL, 5, NULL, 15),
+('2025-02-11', 60.00, 6, NULL, NULL, 16),
+('2025-02-15', 38.75, NULL, 1, NULL, 16),
+('2025-02-13', 135.00, 7, NULL, NULL, 17),
+('2025-02-17', 80.00, NULL, 2, NULL, 17),
+('2025-02-15', 55.00, 8, NULL, NULL, 18),
+('2025-02-19', 30.90, NULL, 3, NULL, 18),
+('2025-02-17', 100.00, 9, NULL, NULL, 19),
+('2025-02-21', 70.20, NULL, 4, NULL, 19),
+('2025-02-19', 42.10, 10, NULL, NULL, 20),
+('2025-02-23', 20.00, NULL, 5, NULL, 20),
+('2025-02-21', 88.00, NULL, NULL, 1, 21), 
+('2025-02-25', 65.00, 1, NULL, NULL, 21),
+('2025-02-23', 30.00, NULL, NULL, 2, 22), 
+('2025-02-27', 15.00, 2, NULL, NULL, 22),
+('2025-02-25', 115.00, NULL, NULL, 6, 23), 
+('2025-03-01', 75.00, 3, NULL, NULL, 23),
+('2025-02-27', 48.00, NULL, NULL, 7, 24), 
+('2025-03-03', 28.00, 4, NULL, NULL, 24),
+('2025-03-01', 90.00, NULL, NULL, 11, 25), 
+('2025-03-05', 50.00, 5, NULL, NULL, 25),
+('2025-03-03', 33.00, NULL, NULL, 12, 26), 
+('2025-03-07', 18.00, 6, NULL, NULL, 26),
+('2025-03-05', 160.00, NULL, NULL, 16, 27), 
+('2025-03-09', 95.00, 7, NULL, NULL, 27),
+('2025-03-07', 62.00, NULL, NULL, 17, 28), 
+('2025-03-11', 38.00, 8, NULL, NULL, 28),
+('2025-03-09', 105.00, NULL, NULL, 21, 29), 
+('2025-03-13', 70.00, 9, NULL, NULL, 29),
+('2025-03-11', 40.00, NULL, NULL, 22, 30),
+('2025-03-15', 22.00, 10, NULL, NULL, 30),
+('2025-03-13', 140.00, NULL, NULL, 26, 31),
+('2025-03-17', 85.00, 1, NULL, NULL, 31),
+('2025-03-15', 50.00, NULL, NULL, 27, 32),
+('2025-03-19', 30.00, 2, NULL, NULL, 32),
+('2025-03-17', 120.00, NULL, NULL, 31, 33), 
+('2025-03-21', 78.00, 3, NULL, NULL, 33),
+('2025-03-19', 45.00, NULL, NULL, 32, 34),
+('2025-03-23', 25.00, 4, NULL, NULL, 34),
+('2025-03-21', 98.00, NULL, NULL, 36, 35), 
+('2025-03-25', 60.00, 5, NULL, NULL, 35),
+('2025-03-23', 38.00, NULL, NULL, 37, 36), 
+('2025-03-27', 20.00, 6, NULL, NULL, 36),
+('2025-03-25', 130.00, NULL, NULL, 41, 37), 
+('2025-03-29', 80.00, 7, NULL, NULL, 37),
+('2025-03-27', 52.00, NULL, NULL, 42, 38), 
+('2525-03-31', 32.00, 8, NULL, NULL, 38),
+('2025-03-29', 110.00, NULL, NULL, 46, 39),
+('2025-04-02', 72.00, 9, NULL, NULL, 39),
+('2025-03-31', 44.00, NULL, NULL, 47, 40), 
+('2025-04-04', 24.00, 10, NULL, NULL, 40);
+
 
 -- ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▖     ▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖ 
 -- ▐▌   ▐▌     █ ▐▌ ▐▌    ▐▌  ▐▌▐▌   ▐▛▚▖▐▌  █   
 -- ▐▛▀▀▘ ▝▀▚▖  █ ▐▛▀▜▌    ▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █  
--- ▐▙▄▄▖▗▄▄▞▘  █ ▐▌ ▐▌     ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █      
+-- ▐▙▄▄▖▗▄▄▞▘  █ ▐▌ ▐▌     ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █     
+
+INSERT INTO ESTA_VENT (fk_venta, fk_estatus, fecha_inicio, fecha_fin) VALUES
+(1, 1, '2025-01-10', '2025-01-11'),
+(1, 2, '2025-01-11', '2025-01-12'),
+(1, 3, '2025-01-12', NULL),
+(2, 1, '2025-01-11', '2025-01-12'),
+(2, 2, '2025-01-12', '2025-01-13'),
+(2, 3, '2025-01-13', NULL),
+(3, 1, '2025-01-12', '2025-01-13'),
+(3, 2, '2025-01-13', NULL),
+(4, 1, '2025-01-13', '2025-01-14'),
+(4, 2, '2025-01-14', '2025-01-15'),
+(4, 3, '2025-01-15', NULL),
+(5, 1, '2025-01-14', '2025-01-15'),
+(5, 2, '2025-01-15', '2025-01-16'),
+(5, 3, '2025-01-16', NULL),
+(6, 1, '2025-01-15', '2025-01-16'),
+(6, 4, '2025-01-16', NULL),
+(7, 1, '2025-01-16', '2025-01-17'),
+(7, 2, '2025-01-17', '2025-01-18'),
+(7, 3, '2025-01-18', NULL),
+(8, 1, '2025-01-17', '2025-01-18'),
+(8, 2, '2025-01-18', '2025-01-19'),
+(8, 3, '2025-01-19', NULL),
+(9, 1, '2025-01-18', NULL),
+(10, 1, '2025-01-19', '2025-01-20'),
+(10, 2, '2025-01-20', '2025-01-21'),
+(10, 3, '2025-01-21', '2025-01-22'),
+(10, 5, '2025-01-22', NULL),
+(11, 1, '2025-01-20', '2025-01-21'),
+(11, 2, '2025-01-21', '2025-01-22'),
+(11, 3, '2025-01-22', NULL),
+(12, 1, '2025-01-21', '2025-01-22'),
+(12, 2, '2025-01-22', '2025-01-23'),
+(12, 3, '2025-01-23', NULL),
+(13, 1, '2025-01-22', '2025-01-23'),
+(13, 2, '2025-01-23', NULL),
+(14, 1, '2025-01-23', '2025-01-24'),
+(14, 2, '2025-01-24', '2025-01-25'),
+(14, 3, '2025-01-25', NULL),
+(15, 1, '2025-01-24', '2025-01-25'),
+(15, 2, '2025-01-25', '2025-01-26'),
+(15, 3, '2025-01-26', NULL),
+(16, 1, '2025-01-25', '2025-01-26'),
+(16, 4, '2025-01-26', NULL),
+(17, 1, '2025-01-26', '2025-01-27'),
+(17, 2, '2025-01-27', '2025-01-28'),
+(17, 3, '2025-01-28', NULL),
+(18, 1, '2025-01-27', '2025-01-28'),
+(18, 2, '2025-01-28', '2025-01-29'),
+(18, 3, '2025-01-29', NULL),
+(19, 1, '2025-01-28', NULL),
+(20, 1, '2025-01-29', '2025-01-30'),
+(20, 2, '2025-01-30', '2025-01-31'),
+(20, 3, '2025-01-31', '2025-02-01'),
+(20, 5, '2025-02-01', NULL),
+(21, 1, '2025-01-30', '2025-01-31'),
+(21, 2, '2025-01-31', '2025-02-01'),
+(21, 3, '2025-02-01', NULL),
+(22, 1, '2025-01-31', '2025-02-01'),
+(22, 2, '2025-02-01', '2025-02-02'),
+(22, 3, '2025-02-02', NULL),
+(23, 1, '2025-02-01', '2025-02-02'),
+(23, 2, '2025-02-02', NULL),
+(24, 1, '2025-02-02', '2025-02-03'),
+(24, 2, '2025-02-03', '2025-02-04'),
+(24, 3, '2025-02-04', NULL),
+(25, 1, '2025-02-03', '2025-02-04'),
+(25, 2, '2025-02-04', '2025-02-05'),
+(25, 3, '2025-02-05', NULL),
+(26, 1, '2025-02-04', '2025-02-05'),
+(26, 4, '2025-02-05', NULL),
+(27, 1, '2025-02-05', '2025-02-06'),
+(27, 2, '2025-02-06', '2025-02-07'),
+(27, 3, '2025-02-07', NULL),
+(28, 1, '2025-02-06', '2025-02-07'),
+(28, 2, '2025-02-07', '2025-02-08'),
+(28, 3, '2025-02-08', NULL),
+(29, 1, '2025-02-07', NULL),
+(30, 1, '2025-02-08', '2025-02-09'),
+(30, 2, '2025-02-09', '2025-02-10'),
+(30, 3, '2025-02-10', '2025-02-11'),
+(30, 5, '2025-02-11', NULL),
+(31, 1, '2025-02-09', '2025-02-10'),
+(31, 2, '2025-02-10', '2025-02-11'),
+(31, 3, '2025-02-11', NULL),
+(32, 1, '2025-02-10', '2025-02-11'),
+(32, 2, '2025-02-11', '2025-02-12'),
+(32, 3, '2025-02-12', NULL),
+(33, 1, '2025-02-11', '2025-02-12'),
+(33, 2, '2025-02-12', NULL),
+(34, 1, '2025-02-12', '2025-02-13'),
+(34, 2, '2025-02-13', '2025-02-14'),
+(34, 3, '2025-02-14', NULL),
+(35, 1, '2025-02-13', '2025-02-14'),
+(35, 2, '2025-02-14', '2025-02-15'),
+(35, 3, '2025-02-15', NULL),
+(36, 1, '2025-02-14', '2025-02-15'),
+(36, 4, '2025-02-15', NULL),
+(37, 1, '2025-02-15', '2025-02-16'),
+(37, 2, '2025-02-16', '2025-02-17'),
+(37, 3, '2025-02-17', NULL),
+(38, 1, '2025-02-16', '2025-02-17'),
+(38, 2, '2025-02-17', '2025-02-18'),
+(38, 3, '2025-02-18', NULL),
+(39, 1, '2025-02-17', NULL),
+(40, 1, '2025-02-18', '2025-02-19'),
+(40, 2, '2025-02-19', '2025-02-20'),
+(40, 3, '2025-02-20', '2025-02-21'),
+(40, 5, '2025-02-21', NULL),
+(41, 1, '2025-02-19', '2025-02-20'),
+(41, 2, '2025-02-20', '2025-02-21'),
+(41, 3, '2025-02-21', NULL),
+(42, 1, '2025-02-20', '2025-02-21'),
+(42, 2, '2025-02-21', '2025-02-22'),
+(42, 3, '2025-02-22', NULL),
+(43, 1, '2025-02-21', '2025-02-22'),
+(43, 2, '2025-02-22', NULL),
+(44, 1, '2025-02-22', '2025-02-23'),
+(44, 2, '2025-02-23', '2025-02-24'),
+(44, 3, '2025-02-24', NULL),
+(45, 1, '2025-02-23', '2025-02-24'),
+(45, 2, '2025-02-24', '2025-02-25'),
+(45, 3, '2025-02-25', NULL),
+(46, 1, '2025-02-24', '2025-02-25'),
+(46, 4, '2025-02-25', NULL),
+(47, 1, '2025-02-25', '2025-02-26'),
+(47, 2, '2025-02-26', '2025-02-27'),
+(47, 3, '2025-02-27', NULL),
+(48, 1, '2025-02-26', '2025-02-27'),
+(48, 2, '2025-02-27', '2025-02-28'),
+(48, 3, '2025-02-28', NULL),
+(49, 1, '2025-02-27', NULL),
+(50, 1, '2025-02-28', '2025-03-01'),
+(50, 2, '2025-03-01', '2025-03-02'),
+(50, 3, '2025-03-02', '2025-03-03'),
+(50, 5, '2025-03-03', NULL),
+(51, 1, '2025-03-01', '2025-03-02'),
+(51, 2, '2025-03-02', '2025-03-03'),
+(51, 3, '2025-03-03', NULL),
+(52, 1, '2025-03-02', '2025-03-03'),
+(52, 2, '2025-03-03', '2025-03-04'),
+(52, 3, '2025-03-04', NULL),
+(53, 1, '2025-03-03', '2025-03-04'),
+(53, 2, '2025-03-04', NULL),
+(54, 1, '2025-03-04', '2025-03-05'),
+(54, 2, '2025-03-05', '2025-03-06'),
+(54, 3, '2025-03-06', NULL),
+(55, 1, '2025-03-05', '2025-03-06'),
+(55, 2, '2025-03-06', '2025-03-07'),
+(55, 3, '2025-03-07', NULL),
+(56, 1, '2025-03-06', '2025-03-07'),
+(56, 4, '2025-03-07', NULL),
+(57, 1, '2025-03-07', '2025-03-08'),
+(57, 2, '2025-03-08', '2025-03-09'),
+(57, 3, '2025-03-09', NULL),
+(58, 1, '2025-03-08', '2025-03-09'),
+(58, 2, '2025-03-09', '2025-03-10'),
+(58, 3, '2025-03-10', NULL),
+(59, 1, '2025-03-09', NULL),
+(60, 1, '2025-03-10', '2025-03-11'),
+(60, 2, '2025-03-11', '2025-03-12'),
+(60, 3, '2025-03-12', '2025-03-13'),
+(60, 5, '2025-03-13', NULL),
+(61, 1, '2025-03-11', '2025-03-12'),
+(61, 2, '2025-03-12', '2025-03-13'),
+(61, 3, '2025-03-13', NULL),
+(62, 1, '2025-03-12', '2025-03-13'),
+(62, 2, '2025-03-13', '2025-03-14'),
+(62, 3, '2025-03-14', NULL),
+(63, 1, '2025-03-13', '2025-03-14'),
+(63, 2, '2025-03-14', NULL),
+(64, 1, '2025-03-14', '2025-03-15'),
+(64, 2, '2025-03-15', '2025-03-16'),
+(64, 3, '2025-03-16', NULL),
+(65, 1, '2025-03-15', '2025-03-16'),
+(65, 2, '2025-03-16', '2025-03-17'),
+(65, 3, '2025-03-17', NULL),
+(66, 1, '2025-03-16', '2025-03-17'),
+(66, 4, '2025-03-17', NULL),
+(67, 1, '2025-03-17', '2025-03-18'),
+(67, 2, '2025-03-18', '2025-03-19'),
+(67, 3, '2025-03-19', NULL),
+(68, 1, '2025-03-18', '2025-03-19'),
+(68, 2, '2025-03-19', '2025-03-20'),
+(68, 3, '2025-03-20', NULL),
+(69, 1, '2025-03-19', NULL),
+(70, 1, '2025-03-20', '2025-03-21'),
+(70, 2, '2025-03-21', '2025-03-22'),
+(70, 3, '2025-03-22', '2025-03-23'),
+(70, 5, '2025-03-23', NULL),
+(71, 1, '2025-03-21', '2025-03-22'),
+(71, 2, '2025-03-22', '2025-03-23'),
+(71, 3, '2025-03-23', NULL),
+(72, 1, '2025-03-22', '2025-03-23'),
+(72, 2, '2025-03-23', '2025-03-24'),
+(72, 3, '2025-03-24', NULL),
+(73, 1, '2025-03-23', '2025-03-24'),
+(73, 2, '2025-03-24', NULL),
+(74, 1, '2025-03-24', '2025-03-25'),
+(74, 2, '2025-03-25', '2025-03-26'),
+(74, 3, '2025-03-26', NULL),
+(75, 1, '2025-03-25', '2025-03-26'),
+(75, 2, '2025-03-26', '2025-03-27'),
+(75, 3, '2025-03-27', NULL),
+(76, 1, '2025-03-26', '2025-03-27'),
+(76, 4, '2025-03-27', NULL),
+(77, 1, '2025-03-27', '2025-03-28'),
+(77, 2, '2025-03-28', '2025-03-29'),
+(77, 3, '2025-03-29', NULL),
+(78, 1, '2025-03-28', '2025-03-29'),
+(78, 2, '2025-03-29', '2025-03-30'),
+(78, 3, '2025-03-30', NULL),
+(79, 1, '2025-03-29', NULL),
+(80, 1, '2025-03-30', '2025-03-31'),
+(80, 2, '2025-03-31', '2025-04-01'),
+(80, 3, '2025-04-01', '2025-04-02'),
+(80, 5, '2025-04-02', NULL);
 
 
 -- ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▄▖     ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖  
@@ -1085,11 +1946,83 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 -- ▐▛▀▀▘ ▝▀▚▖  █ ▐▛▀▜▌    ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌   
 -- ▐▙▄▄▖▗▄▄▞▘  █ ▐▌ ▐▌    ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌   
 
+INSERT INTO ESTA_EVEN (fk_evento, fk_estatus, fecha_inicio, fecha_fin) VALUES
+(1, 1, '2025-01-01', '2025-02-15'),  
+(1, 2, '2025-02-16', '2025-07-12'),  
+(1, 3, '2025-07-12', '2025-07-31'),  
+(1, 10, '2025-08-01', NULL),      
+(2, 2, '2025-03-01', '2025-08-05'), 
+(2, 3, '2025-08-05', NULL),          
+(3, 1, '2025-04-01', '2025-05-10'),  
+(3, 6, '2025-05-11', '2025-06-01'),  
+(3, 4, '2025-06-02', NULL),        
+(4, 5, '2025-01-01', '2025-09-30'),  
+(4, 2, '2025-10-01', '2025-10-21'), 
+(4, 3, '2025-10-21', NULL),          
+(5, 1, '2025-06-01', '2025-11-01'),  
+(5, 2, '2025-11-02', NULL),          
+(6, 1, '2025-02-01', '2025-03-15'),
+(6, 2, '2025-03-16', '2025-06-30'),
+(6, 7, '2025-07-01', '2025-07-17'),
+(6, 3, '2025-07-17', NULL),
+(7, 2, '2025-04-01', '2025-08-10'),
+(7, 3, '2025-08-10', NULL),
+(8, 1, '2025-05-01', '2025-09-01'),
+(8, 4, '2025-09-02', NULL),
+(11, 1, '2025-03-01', '2025-05-31'),
+(11, 2, '2025-06-01', '2025-07-22'),
+(11, 3, '2025-07-22', NULL),
+(12, 2, '2025-06-01', '2025-08-15'),
+(12, 3, '2025-08-15', NULL),
+(16, 1, '2025-02-15', '2025-04-30'),
+(16, 2, '2025-05-01', '2025-07-10'),
+(16, 7, '2025-07-11', '2025-07-27'),
+(16, 3, '2025-07-27', NULL),
+(17, 2, '2025-05-01', '2025-08-20'),
+(17, 3, '2025-08-20', NULL),
+(21, 1, '2025-03-01', '2025-06-30'),
+(21, 2, '2025-07-01', '2025-08-01'),
+(21, 3, '2025-08-01', NULL),
+(22, 2, '2025-07-01', '2025-08-25'),
+(22, 3, '2025-08-25', NULL),
+(26, 1, '2025-03-10', '2025-06-15'),
+(26, 2, '2025-06-16', '2025-08-01'),
+(26, 7, '2025-08-02', '2025-08-07'),
+(26, 3, '2025-08-07', NULL),
+(31, 1, '2025-03-20', '2025-06-30'),
+(31, 2, '2025-07-01', '2025-08-09'),
+(31, 7, '2025-08-10', '2025-08-12'),
+(31, 3, '2025-08-12', NULL),
+(36, 1, '2025-04-01', '2025-07-31'),
+(36, 2, '2025-08-01', '2025-08-17'),
+(36, 3, '2025-08-17', NULL),
+(41, 1, '2025-05-01', '2025-07-31'),
+(41, 2, '2025-08-01', '2025-08-22'),
+(41, 3, '2025-08-22', NULL),
+(46, 1, '2025-03-01', '2025-05-31'),
+(46, 2, '2025-06-01', '2025-08-24'),
+(46, 7, '2025-08-25', '2025-08-31'),
+(46, 3, '2025-08-31', '2025-09-30'),
+(46, 10, '2025-10-01', NULL)
+;
+
 
 --  ▗▄▄▖▗▄▄▄▖▗▄▄▖ ▗▖  ▗▖     ▗▄▄▖ ▗▄▖ ▗▄▄▖  ▗▄▖   
 -- ▐▌   ▐▌   ▐▌ ▐▌▐▌  ▐▌    ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌  
 -- ▐▌   ▐▛▀▀▘▐▛▀▚▖▐▌  ▐▌    ▐▌   ▐▛▀▜▌▐▛▀▚▖▐▛▀▜▌  
 -- ▝▚▄▄▖▐▙▄▄▖▐▌ ▐▌ ▝▚▞▘     ▝▚▄▄▖▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌  
+
+INSERT INTO CERV_CARA (fk_caracteristica, fk_cerveza, descripcion) VALUES
+(1, 1, 'Amargor bajo y refrescante, típico de una pilsen ligera.'),
+(2, 5, 'Aroma intenso a lúpulos cítricos y tropicales, distintivo de una IPA.'),
+(3, 7, 'Cuerpo robusto y cremoso, característico de una Porter.'),
+(4, 4, 'Notas herbales y ligeramente afrutadas, sutiles en esta lager verde.'),
+(5, 8, 'Final limpio y seco, que realza la potabilidad de la lager.'),
+(6, 6, 'Color café oscuro con destellos rojizos, clásico de una Trakata.'),
+(7, 2, 'Burbuja fina y efervescente, que aporta ligereza a la cerveza light.'),
+(8, 3, 'Sabor balanceado entre el dulzor de la malta y un ligero amargor, propio de Zulia.'),
+(9, 9, 'Carbonatación media que resalta los perfiles frutales de la Pale Ale.'),
+(10, 10, 'Espuma persistente y cremosa, que corona perfectamente esta cerveza de maíz.');
 
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▖  ▗▖▗▄▄▄▖    ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖  
@@ -1097,17 +2030,120 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 --   █  ▐▌ ▝▜▌▐▌  ▐▌▐▛▀▀▘      █    █  ▐▛▀▀▘▐▌ ▝▜▌  
 -- ▗▄█▄▖▐▌  ▐▌ ▝▚▞▘ ▐▙▄▄▖      █  ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌    
 
+INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad) VALUES
+(1, 1, 1, 6, 200),
+(1, 3, 1, 6, 150),
+(5, 2, 1, 7, 80),
+(7, 8, 1, 8, 45),
+(9, 10, 1, 9, 25),
+(2, 2, 2, 6, 180),
+(2, 4, 2, 6, 220),
+(6, 7, 2, 7, 60),
+(8, 9, 2, 8, 35),
+(10, 1, 2, 9, 90),
+(3, 1, 3, 6, 110),
+(3, 3, 3, 6, 140),
+(7, 5, 3, 7, 10),
+(9, 6, 3, 8, 5),
+(1, 7, 3, 9, 70),
+(4, 2, 4, 6, 130),
+(4, 4, 4, 6, 160),
+(8, 10, 4, 7, 20),
+(10, 8, 4, 8, 40),
+(2, 5, 4, 9, 7),
+(5, 1, 5, 6, 100),
+(5, 3, 5, 6, 120),
+(6, 2, 5, 7, 85),
+(7, 1, 5, 8, 75),
+(8, 3, 5, 9, 95);
+
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖    ▗▄▄▖ ▗▄▄▖  ▗▄▖ ▗▖  ▗▖ 
 -- ▐▌   ▐▌  ▐▌▐▌   ▐▛▚▖▐▌    ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌  ▐▌ 
 -- ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌    ▐▛▀▘ ▐▛▀▚▖▐▌ ▐▌▐▌  ▐▌  
 -- ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌    ▐▌   ▐▌ ▐▌▝▚▄▞▘ ▝▚▞▘   
 
+INSERT INTO EVEN_PROV (fk_evento, fk_proveedor) VALUES
+(1, 1),
+(1, 11),
+(2, 2),
+(3, 3),
+(4, 12),
+(5, 4),
+(6, 1),
+(6, 13),
+(7, 2),
+(8, 3),
+(9, 14),
+(10, 4),
+(11, 5),
+(11, 15),
+(12, 6),
+(13, 7),
+(14, 16),
+(16, 5),
+(16, 17),
+(17, 6),
+(18, 7),
+(19, 18),
+(21, 8),
+(21, 19),
+(22, 9),
+(23, 10),
+(24, 20),
+(26, 8),
+(26, 11),
+(27, 9),
+(28, 10),
+(29, 12),
+(31, 13),
+(31, 14),
+(32, 15),
+(33, 16),
+(34, 17);
+
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖     ▗▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖
 -- ▐▌   ▐▌  ▐▌▐▌   ▐▛▚▖▐▌    ▐▌   ▐▌     █  ▐▌ 
 -- ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌    ▐▌   ▐▌     █  ▐▛▀▀▘ 
--- ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌    ▝▚▄▄▖▐▙▄▄▖▗▄█▄▖▐▙▄▄▖       
+-- ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌    ▝▚▄▄▖▐▙▄▄▖▗▄█▄▖▐▙▄▄▖      
+
+INSERT INTO EVEN_CLIE (fk_evento, fk_cliente, cantidad_entradas) VALUES
+(1, 1, 2),
+(1, 11, 1),
+(2, 2, 1),
+(3, 12, 3),
+(4, 3, 1),
+(6, 4, 4),
+(6, 14, 2),
+(7, 5, 1),
+(8, 15, 1),
+(9, 6, 2),
+(11, 7, 3),
+(11, 17, 1),
+(12, 8, 1),
+(13, 18, 2),
+(14, 9, 1),
+(16, 10, 5),
+(16, 20, 3),
+(17, 1, 1),
+(18, 21, 1),
+(19, 2, 2),
+(21, 3, 2),
+(21, 23, 1),
+(22, 4, 1),
+(23, 24, 2),
+(24, 5, 1),
+(26, 6, 4),
+(26, 26, 2),
+(27, 7, 1),
+(28, 27, 1),
+(29, 8, 2),
+(31, 9, 3),
+(31, 29, 1),
+(32, 10, 1),
+(33, 30, 2),
+(34, 11, 1);
 
 
 --  ▗▄▄▖ ▗▄▖ ▗▄▄▖  ▗▄▄▖    ▗▄▄▄▖▗▖  ▗▖▗▄▄▖ ▗▖  
@@ -1115,11 +2151,35 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 -- ▐▌   ▐▛▀▜▌▐▛▀▚▖▐▌▝▜▌    ▐▛▀▀▘▐▌  ▐▌▐▛▀▘ ▐▌ 
 -- ▝▚▄▄▖▐▌ ▐▌▐▌ ▐▌▝▚▄▞▘    ▐▙▄▄▖▐▌  ▐▌▐▌   ▐▙▄▄▖ 
 
+INSERT INTO CARG_EMPL (fk_empleado, fk_cargo, fecha_inicio, fecha_fin, salario_base) VALUES
+(1, 1, '2020-03-01', NULL, 1500.00),
+(2, 7, '2018-07-15', NULL, 650.00),
+(3, 2, '2020-01-01', NULL, 1200.00),
+(4, 4, '2020-09-01', NULL, 850.00),
+(5, 6, '2017-06-10', NULL, 600.00),
+(6, 9, '2019-02-20', NULL, 950.00),
+(7, 8, '2016-11-05', NULL, 1100.00),
+(8, 10, '2021-04-12', NULL, 400.00),
+(9, 3, '2014-08-25', '2019-12-31', 750.00),
+(9, 5, '2020-01-01', NULL, 1300.00);
+
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▄▄▖ ▗▖       ▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖
 -- ▐▌   ▐▛▚▞▜▌▐▌ ▐▌▐▌       ▐▌ ▐▌▐▌   ▐▛▚▖▐▌▐▌ 
 -- ▐▛▀▀▘▐▌  ▐▌▐▛▀▘ ▐▌       ▐▛▀▚▖▐▛▀▀▘▐▌ ▝▜▌▐▛▀▀▘
 -- ▐▙▄▄▖▐▌  ▐▌▐▌   ▐▙▄▄▖    ▐▙▄▞▘▐▙▄▄▖▐▌  ▐▌▐▙▄▄▖  
+
+INSERT INTO EMPL_BENE (fk_empleado, fk_cargo, fk_beneficio, monto_beneficio) VALUES
+(1, 1, 1, 500.00),
+(1, 1, 2, 200.00),
+(2, 7, 3, 100.00),
+(3, 2, 4, 300.00),
+(4, 4, 2, 150.00),
+(5, 6, 3, 80.00),
+(6, 9, 1, 250.00),
+(7, 8, 4, 200.00),
+(8, 10, 3, 50.00),
+(9, 5, 2, 180.00);
 
 
 -- ▗▄▄▄▖▗▖  ▗▖▗▖  ▗▖▗▄▄▄▖    ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖ 
@@ -1127,11 +2187,50 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 --   █  ▐▌ ▝▜▌▐▌  ▐▌▐▛▀▀▘    ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌ 
 -- ▗▄█▄▖▐▌  ▐▌ ▝▚▞▘ ▐▙▄▄▖    ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  
 
+INSERT INTO INVE_EVEN (fk_cerveza, fk_presentacion, fk_evento, cantidad) VALUES
+(1, 1, 1, 300),
+(5, 3, 1, 150),
+(7, 7, 1, 50),
+(9, 10, 1, 20),
+(2, 2, 6, 250),
+(4, 4, 6, 180),
+(6, 5, 6, 5),
+(8, 9, 6, 30),
+(3, 1, 11, 200),
+(10, 3, 11, 100),
+(1, 6, 11, 2),
+(5, 1, 16, 400),
+(7, 2, 16, 200),
+(9, 4, 16, 150),
+(2, 7, 16, 60),
+(4, 1, 21, 180),
+(6, 3, 21, 90),
+(8, 5, 21, 3),
+(10, 1, 26, 220),
+(1, 2, 26, 130),
+(3, 4, 26, 100),
+(5, 6, 31, 1),
+(7, 1, 31, 280),
+(9, 2, 31, 160),
+(2, 3, 31, 120);
+
 
 -- ▗▄▄▖ ▗▖ ▗▖▗▖  ▗▖▗▄▄▄▖     ▗▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌  █      ▐▌   ▐▌     █  ▐▌ 
 -- ▐▛▀▘ ▐▌ ▐▌▐▌ ▝▜▌  █      ▐▌   ▐▌     █  ▐▛▀▀▘ 
 -- ▐▌   ▝▚▄▞▘▐▌  ▐▌  █      ▝▚▄▄▖▐▙▄▄▖▗▄█▄▖▐▙▄▄▖
+
+INSERT INTO PUNT_CLIE (fk_punto, fk_cliente, fk_tasa_cambio, cantidad_puntos) VALUES
+(1, 1, 1, 100),  
+(2, 2, 2, 150),   
+(3, 3, 3, 200),   
+(4, 4, 4, 50),    
+(5, 5, 5, 250),   
+(6, 6, 6, 120),   
+(7, 7, 7, 180),  
+(8, 8, 8, 75),    
+(9, 9, 9, 300),   
+(10, 10, 10, 90);
 
 
 -- ▗▄▄▖  ▗▄▖  ▗▄▄▖ ▗▄▖  
@@ -1139,11 +2238,105 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 -- ▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▌ ▐▌
 -- ▐▌   ▐▌ ▐▌▝▚▄▞▘▝▚▄▞▘
 
+INSERT INTO PAGO (fk_metodo_pago, fk_venta, fk_tasa_cambio, monto) VALUES
+(1, 1, 1, 55.70), 
+(2, 2, 1, 120.00),
+(3, 3, 1, 78.50),
+(4, 4, 1, 92.10),
+(5, 5, 1, 35.60),
+(6, 6, 1, 150.00),
+(7, 7, 2, 20.00), 
+(8, 8, 2, 110.30),
+(9, 9, 2, 49.99),
+(10, 10, 2, 85.40),
+(11, 11, 2, 70.20),
+(12, 12, 2, 95.80),
+(13, 13, 2, 40.00),
+(14, 14, 2, 180.00),
+(15, 15, 2, 22.50),
+(16, 16, 2, 60.00),
+(17, 17, 2, 135.00),
+(18, 18, 2, 55.00),
+(19, 19, 2, 100.00),
+(20, 20, 2, 42.10),
+(21, 21, 2, 88.00),
+(22, 22, 2, 30.00),
+(23, 23, 3, 115.00), 
+(24, 24, 3, 48.00),
+(25, 25, 3, 90.00),
+(26, 26, 3, 33.00),
+(27, 27, 3, 160.00),
+(28, 28, 3, 62.00),
+(29, 29, 3, 105.00),
+(30, 30, 3, 40.00),
+(31, 31, 3, 140.00),
+(32, 32, 3, 50.00),
+(33, 33, 3, 120.00),
+(34, 34, 3, 45.00),
+(35, 35, 3, 98.00),
+(36, 36, 4, 38.00), 
+(37, 37, 4, 130.00),
+(38, 38, 4, 52.00),
+(39, 39, 4, 110.00),
+(40, 40, 4, 44.00),
+(1, 41, 4, 30.25),
+(2, 42, 4, 45.90),
+(3, 43, 4, 25.00),
+(4, 44, 4, 60.50),
+(5, 45, 4, 15.75),
+(6, 46, 4, 88.20),
+(7, 47, 4, 10.50),
+(8, 48, 4, 72.00),
+(9, 49, 4, 33.30),
+(10, 50, 4, 50.00),
+(11, 51, 5, 28.15),
+(12, 52, 5, 65.40),
+(13, 53, 5, 18.90),
+(14, 54, 5, 105.20),
+(15, 55, 5, 12.80),
+(16, 56, 5, 38.75),
+(17, 57, 5, 80.00),
+(18, 58, 5, 30.90),
+(19, 59, 5, 70.20),
+(20, 60, 5, 20.00),
+(21, 61, 5, 65.00),
+(22, 62, 5, 15.00),
+(23, 63, 5, 75.00),
+(24, 64, 5, 28.00),
+(25, 65, 5, 50.00),
+(26, 66, 6, 18.00), 
+(27, 67, 6, 95.00),
+(28, 68, 6, 38.00),
+(29, 69, 6, 70.00),
+(30, 70, 6, 22.00),
+(31, 71, 6, 85.00),
+(32, 72, 6, 30.00),
+(33, 73, 6, 78.00),
+(34, 74, 6, 25.00),
+(35, 75, 6, 60.00),
+(36, 76, 6, 20.00),
+(37, 77, 6, 80.00),
+(38, 78, 6, 32.00),
+(39, 79, 6, 72.00),
+(40, 80, 6, 24.00);
+
 
 --    ▗▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▄▖ 
 --    ▐▌▐▌ ▐▌▐▌      ▗▞▘ 
 --    ▐▌▐▌ ▐▌▐▛▀▀▘ ▗▞▘ 
 -- ▗▄▄▞▘▝▚▄▞▘▐▙▄▄▖▐▙▄▄▄▖  
+
+INSERT INTO JUEZ (nombre, apellido) VALUES
+('Ana', 'García'),
+('Roberto', 'López'),
+('Sofía', 'Martínez'),
+('Diego', 'Ramírez'),
+('Laura', 'Hernández'),
+('Carlos', 'Sánchez'),
+('Elena', 'González'),
+('Pedro', 'Díaz'),
+('María', 'Torres'),
+('Andrés', 'Ruiz');
 
 
 --    ▗▖▗▖ ▗▖▗▄▄▄▖▗▄▄▄▄▖    ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖ 
@@ -1151,11 +2344,215 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 --    ▐▌▐▌ ▐▌▐▛▀▀▘ ▗▞▘      ▐▛▀▀▘▐▌  ▐▌▐▛▀▀▘▐▌ ▝▜▌  █ 
 -- ▗▄▄▞▘▝▚▄▞▘▐▙▄▄▖▐▙▄▄▄▖    ▐▙▄▄▖ ▝▚▞▘ ▐▙▄▄▖▐▌  ▐▌  █ 
 
+INSERT INTO JUEZ_EVENT (fk_juez, fk_evento) VALUES
+(1, 1),
+(2, 1),
+(3, 2),
+(4, 3),
+(5, 4),
+(6, 5),
+(7, 6),
+(8, 7),
+(9, 11),
+(10, 12),
+(1, 16),
+(2, 17),
+(3, 21),
+(4, 22),
+(5, 26),
+(6, 31),
+(7, 36),
+(8, 41),
+(9, 46),
+(10, 47),
+(1, 51),
+(2, 56),
+(3, 61),
+(4, 66),
+(5, 71),
+(6, 76),
+(7, 81),
+(8, 86),
+(9, 91),
+(10, 96),
+(1, 101),
+(2, 106),
+(3, 111),
+(4, 112),
+(5, 113),
+(6, 114),
+(7, 115),
+(8, 116),
+(9, 117),
+(10, 118);
+
 
 -- ▗▄▄▄  ▗▄▄▄▖▗▄▄▄▖▗▄▖ ▗▖   ▗▖   ▗▄▄▄▖    ▗▄▄▄▖ ▗▄▖  ▗▄▄▖▗▄▄▄▖▗▖ ▗▖▗▄▄▖  ▗▄▖ 
 -- ▐▌  █ ▐▌     █ ▐▌ ▐▌▐▌   ▐▌   ▐▌       ▐▌   ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌
 -- ▐▌  █ ▐▛▀▀▘  █ ▐▛▀▜▌▐▌   ▐▌   ▐▛▀▀▘    ▐▛▀▀▘▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▛▀▚▖▐▛▀▜▌
 -- ▐▙▄▄▀ ▐▙▄▄▖  █ ▐▌ ▐▌▐▙▄▄▖▐▙▄▄▖▐▙▄▄▖    ▐▌   ▐▌ ▐▌▝▚▄▄▖  █  ▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌
+
+INSERT INTO DETALLE_FACTURA (cantidad, precio_unitario, fk_venta, fk_cerveza, fk_presentacion) VALUES
+(2, 7.50, 1, 1, 1), (1, 12.00, 1, 5, 2), (3, 5.00, 1, 10, 1), (1, 9.00, 1, 15, 3), (2, 8.20, 1, 20, 1),
+(1, 15.00, 1, 3, 4), (4, 4.50, 1, 8, 1), (1, 10.00, 1, 12, 2), (2, 6.75, 1, 18, 1), (1, 11.50, 1, 2, 5),
+(1, 10.00, 2, 2, 1), (2, 8.00, 2, 6, 2), (1, 15.00, 2, 11, 1), (3, 6.00, 2, 16, 3), (1, 9.50, 2, 19, 1),
+(2, 5.50, 2, 4, 4), (1, 13.00, 2, 9, 1), (3, 7.00, 2, 13, 2), (1, 11.00, 2, 17, 1), (2, 4.00, 2, 1, 5),
+(3, 6.50, 3, 3, 1), (1, 11.00, 3, 7, 2), (2, 9.00, 3, 12, 1), (1, 14.00, 3, 17, 3), (3, 7.20, 3, 2, 1),
+(1, 16.00, 3, 5, 4), (2, 5.00, 3, 10, 1), (1, 8.50, 3, 14, 2), (3, 10.50, 3, 19, 1), (1, 5.80, 3, 6, 5),
+(1, 8.00, 4, 4, 1), (2, 13.50, 4, 8, 2), (1, 6.00, 4, 13, 1), (3, 10.00, 4, 18, 3), (1, 11.20, 4, 3, 1),
+(2, 7.00, 4, 6, 4), (1, 14.50, 4, 11, 1), (3, 5.50, 4, 15, 2), (1, 9.80, 4, 20, 1), (2, 12.50, 4, 7, 5),
+(2, 9.00, 5, 5, 1), (1, 7.00, 5, 9, 2), (3, 11.00, 5, 14, 1), (1, 8.00, 5, 19, 3), (2, 13.00, 5, 4, 1),
+(1, 6.00, 5, 7, 4), (4, 10.50, 5, 12, 1), (1, 16.00, 5, 16, 2), (2, 4.75, 5, 1, 1), (1, 9.20, 5, 8, 5),
+(1, 12.00, 6, 6, 1), (2, 5.00, 6, 10, 2), (1, 10.00, 6, 15, 1), (3, 7.00, 6, 20, 3), (1, 14.00, 6, 5, 1),
+(2, 8.00, 6, 9, 4), (1, 6.50, 6, 13, 1), (3, 11.00, 6, 18, 2), (1, 5.25, 6, 2, 1), (2, 10.50, 6, 11, 5),
+(3, 4.00, 7, 7, 1), (1, 9.50, 7, 11, 2), (2, 13.00, 7, 16, 1), (1, 5.00, 7, 1, 3), (3, 10.00, 7, 6, 1),
+(1, 11.00, 7, 10, 4), (2, 8.00, 7, 14, 1), (1, 15.00, 7, 19, 2), (3, 7.00, 7, 3, 1), (1, 12.00, 7, 12, 5),
+(1, 11.00, 8, 8, 1), (2, 6.00, 8, 12, 2), (1, 14.00, 8, 17, 1), (3, 8.00, 8, 2, 3), (1, 12.50, 8, 7, 1),
+(2, 5.00, 8, 11, 4), (1, 9.00, 8, 15, 1), (3, 13.00, 8, 20, 2), (1, 6.50, 8, 4, 1), (2, 10.00, 8, 13, 5),
+(2, 5.50, 9, 9, 1), (1, 10.00, 9, 13, 2), (3, 7.00, 9, 18, 1), (1, 12.00, 9, 3, 3), (2, 8.00, 9, 8, 1),
+(1, 15.00, 9, 12, 4), (4, 4.00, 9, 16, 1), (1, 11.00, 9, 1, 2), (2, 9.50, 9, 5, 1), (1, 6.00, 9, 14, 5),
+(1, 7.00, 10, 10, 1), (2, 11.50, 10, 14, 2), (1, 8.00, 10, 19, 1), (3, 13.00, 10, 4, 3), (1, 6.00, 10, 9, 1),
+(2, 9.00, 10, 13, 4), (1, 16.00, 10, 17, 1), (3, 5.00, 10, 2, 2), (1, 10.50, 10, 6, 1), (2, 14.50, 10, 15, 5),
+(2, 8.50, 11, 1, 1), (1, 13.00, 11, 5, 2), (3, 6.00, 11, 10, 1), (1, 10.00, 11, 15, 3), (2, 9.20, 11, 20, 1),
+(1, 16.00, 11, 3, 4), (4, 5.00, 11, 8, 1), (1, 11.00, 11, 12, 2), (2, 7.75, 11, 18, 1), (1, 12.50, 11, 2, 5),
+(1, 11.00, 12, 2, 1), (2, 9.00, 12, 6, 2), (1, 16.00, 12, 11, 1), (3, 7.00, 12, 16, 3), (1, 10.50, 12, 19, 1),
+(2, 6.50, 12, 4, 4), (1, 14.00, 12, 9, 1), (3, 8.00, 12, 13, 2), (1, 12.00, 12, 17, 1), (2, 5.00, 12, 1, 5),
+(3, 7.50, 13, 3, 1), (1, 12.00, 13, 7, 2), (2, 10.00, 13, 12, 1), (1, 15.00, 13, 17, 3), (3, 8.20, 13, 2, 1),
+(1, 17.00, 13, 5, 4), (2, 6.00, 13, 10, 1), (1, 9.50, 13, 14, 2), (3, 11.50, 13, 19, 1), (1, 6.80, 13, 6, 5),
+(1, 9.00, 14, 4, 1), (2, 14.50, 14, 8, 2), (1, 7.00, 14, 13, 1), (3, 11.00, 14, 18, 3), (1, 12.20, 14, 3, 1),
+(2, 8.00, 14, 6, 4), (1, 15.50, 14, 11, 1), (3, 6.50, 14, 15, 2), (1, 10.80, 14, 20, 1), (2, 13.50, 14, 7, 5),
+(2, 10.00, 15, 5, 1), (1, 8.00, 15, 9, 2), (3, 12.00, 15, 14, 1), (1, 9.00, 15, 19, 3), (2, 14.00, 15, 4, 1),
+(1, 7.00, 15, 7, 4), (4, 11.50, 15, 12, 1), (1, 17.00, 15, 16, 2), (2, 5.75, 15, 1, 1), (1, 10.20, 15, 8, 5),
+(1, 13.00, 16, 6, 1), (2, 6.00, 16, 10, 2), (1, 11.00, 16, 15, 1), (3, 8.00, 16, 20, 3), (1, 15.00, 16, 5, 1),
+(2, 9.00, 16, 9, 4), (1, 7.50, 16, 13, 1), (3, 12.00, 16, 18, 2), (1, 6.25, 16, 2, 1), (2, 11.50, 16, 11, 5),
+(3, 5.00, 17, 7, 1), (1, 10.50, 17, 11, 2), (2, 14.00, 17, 16, 1), (1, 6.00, 17, 1, 3), (3, 11.00, 17, 6, 1),
+(1, 12.00, 17, 10, 4), (2, 9.00, 17, 14, 1), (1, 16.00, 17, 19, 2), (3, 8.00, 17, 3, 1), (1, 13.00, 17, 12, 5),
+(1, 12.00, 18, 8, 1), (2, 7.00, 18, 12, 2), (1, 15.00, 18, 17, 1), (3, 9.00, 18, 2, 3), (1, 13.50, 18, 7, 1),
+(2, 6.00, 18, 11, 4), (1, 10.00, 18, 15, 1), (3, 14.00, 18, 20, 2), (1, 7.50, 18, 4, 1), (2, 11.00, 18, 13, 5),
+(2, 6.50, 19, 9, 1), (1, 11.00, 19, 13, 2), (3, 8.00, 19, 18, 1), (1, 13.00, 19, 3, 3), (2, 9.00, 19, 8, 1),
+(1, 16.00, 19, 12, 4), (4, 5.00, 19, 16, 1), (1, 12.00, 19, 1, 2), (2, 10.50, 19, 5, 1), (1, 7.00, 19, 14, 5),
+(1, 8.00, 20, 10, 1), (2, 12.50, 20, 14, 2), (1, 9.00, 20, 19, 1), (3, 14.00, 20, 4, 3), (1, 7.00, 20, 9, 1),
+(2, 10.00, 20, 13, 4), (1, 17.00, 20, 17, 1), (3, 6.00, 20, 2, 2), (1, 11.50, 20, 6, 1), (2, 15.50, 20, 15, 5),
+(2, 7.00, 21, 1, 1), (1, 11.50, 21, 5, 2), (3, 4.50, 21, 10, 1), (1, 8.50, 21, 15, 3), (2, 7.70, 21, 20, 1),
+(1, 14.50, 21, 3, 4), (4, 3.50, 21, 8, 1), (1, 9.50, 21, 12, 2), (2, 5.75, 21, 18, 1), (1, 10.50, 21, 2, 5),
+(1, 9.00, 22, 2, 1), (2, 7.00, 22, 6, 2), (1, 14.00, 22, 11, 1), (3, 5.00, 22, 16, 3), (1, 8.50, 22, 19, 1),
+(2, 4.50, 22, 4, 4), (1, 12.00, 22, 9, 1), (3, 6.00, 22, 13, 2), (1, 10.00, 22, 17, 1), (2, 3.00, 22, 1, 5),
+(3, 5.50, 23, 3, 1), (1, 10.00, 23, 7, 2), (2, 8.00, 23, 12, 1), (1, 13.00, 23, 17, 3), (3, 6.20, 23, 2, 1),
+(1, 15.00, 23, 5, 4), (2, 4.00, 23, 10, 1), (1, 7.50, 23, 14, 2), (3, 9.50, 23, 19, 1), (1, 4.80, 23, 6, 5),
+(1, 7.00, 24, 4, 1), (2, 12.50, 24, 8, 2), (1, 5.00, 24, 13, 1), (3, 9.00, 24, 18, 3), (1, 10.20, 24, 3, 1),
+(2, 6.00, 24, 6, 4), (1, 13.50, 24, 11, 1), (3, 4.50, 24, 15, 2), (1, 8.80, 24, 20, 1), (2, 11.50, 24, 7, 5),
+(2, 8.00, 25, 5, 1), (1, 6.00, 25, 9, 2), (3, 10.00, 25, 14, 1), (1, 7.00, 25, 19, 3), (2, 12.00, 25, 4, 1),
+(1, 5.00, 25, 7, 4), (4, 9.50, 25, 12, 1), (1, 15.00, 25, 16, 2), (2, 3.75, 25, 1, 1), (1, 8.20, 25, 8, 5),
+(1, 11.00, 26, 6, 1), (2, 4.00, 26, 10, 2), (1, 9.00, 26, 15, 1), (3, 6.00, 26, 20, 3), (1, 13.00, 26, 5, 1),
+(2, 7.00, 26, 9, 4), (1, 5.50, 26, 13, 1), (3, 10.00, 26, 18, 2), (1, 4.25, 26, 2, 1), (2, 9.50, 26, 11, 5),
+(3, 3.00, 27, 7, 1), (1, 8.50, 27, 11, 2), (2, 12.00, 27, 16, 1), (1, 4.00, 27, 1, 3), (3, 10.00, 27, 6, 1),
+(1, 10.00, 27, 10, 4), (2, 7.00, 27, 14, 1), (1, 14.00, 27, 19, 2), (3, 6.00, 27, 3, 1), (1, 11.00, 27, 12, 5),
+(1, 10.00, 28, 8, 1), (2, 5.00, 28, 12, 2), (1, 13.00, 28, 17, 1), (3, 8.00, 28, 2, 3), (1, 11.50, 28, 7, 1),
+(2, 4.00, 28, 11, 4), (1, 8.00, 28, 15, 1), (3, 12.00, 28, 20, 2), (1, 6.50, 28, 4, 1), (2, 10.00, 28, 13, 5),
+(2, 5.00, 29, 9, 1), (1, 9.00, 29, 13, 2), (3, 6.00, 29, 18, 1), (1, 11.00, 29, 3, 3), (2, 7.00, 29, 8, 1),
+(1, 14.00, 29, 12, 4), (4, 3.00, 29, 16, 1), (1, 10.00, 29, 1, 2), (2, 8.50, 29, 5, 1), (1, 5.00, 29, 14, 5),
+(1, 6.00, 30, 10, 1), (2, 10.50, 30, 14, 2), (1, 7.00, 30, 19, 1), (3, 12.00, 30, 4, 3), (1, 5.00, 30, 9, 1),
+(2, 8.00, 30, 13, 4), (1, 15.00, 30, 17, 1), (3, 5.00, 30, 2, 2), (1, 9.50, 30, 6, 1), (2, 14.50, 30, 15, 5),
+(2, 7.50, 31, 1, 1), (1, 12.00, 31, 5, 2), (3, 5.00, 31, 10, 1), (1, 9.00, 31, 15, 3), (2, 8.20, 31, 20, 1),
+(1, 15.00, 31, 3, 4), (4, 4.50, 31, 8, 1), (1, 10.00, 31, 12, 2), (2, 6.75, 31, 18, 1), (1, 11.50, 31, 2, 5),
+(1, 10.00, 32, 2, 1), (2, 8.00, 32, 6, 2), (1, 15.00, 32, 11, 1), (3, 6.00, 32, 16, 3), (1, 9.50, 32, 19, 1),
+(2, 5.50, 32, 4, 4), (1, 13.00, 32, 9, 1), (3, 7.00, 32, 13, 2), (1, 11.00, 32, 17, 1), (2, 4.00, 32, 1, 5),
+(3, 6.50, 33, 3, 1), (1, 11.00, 33, 7, 2), (2, 9.00, 33, 12, 1), (1, 14.00, 33, 17, 3), (3, 7.20, 33, 2, 1),
+(1, 16.00, 33, 5, 4), (2, 5.00, 33, 10, 1), (1, 8.50, 33, 14, 2), (3, 10.50, 33, 19, 1), (1, 5.80, 33, 6, 5),
+(1, 8.00, 34, 4, 1), (2, 13.50, 34, 8, 2), (1, 6.00, 34, 13, 1), (3, 10.00, 34, 18, 3), (1, 11.20, 34, 3, 1),
+(2, 7.00, 34, 6, 4), (1, 14.50, 34, 11, 1), (3, 5.50, 34, 15, 2), (1, 9.80, 34, 20, 1), (2, 12.50, 34, 7, 5),
+(2, 9.00, 35, 5, 1), (1, 7.00, 35, 9, 2), (3, 11.00, 35, 14, 1), (1, 8.00, 35, 19, 3), (2, 13.00, 35, 4, 1),
+(1, 6.00, 35, 7, 4), (4, 10.50, 35, 12, 1), (1, 16.00, 35, 16, 2), (2, 4.75, 35, 1, 1), (1, 9.20, 35, 8, 5),
+(1, 12.00, 36, 6, 1), (2, 5.00, 36, 10, 2), (1, 10.00, 36, 15, 1), (3, 7.00, 36, 20, 3), (1, 14.00, 36, 5, 1),
+(2, 8.00, 36, 9, 4), (1, 6.50, 36, 13, 1), (3, 11.00, 36, 18, 2), (1, 5.25, 36, 2, 1), (2, 10.50, 36, 11, 5),
+(3, 4.00, 37, 7, 1), (1, 9.50, 37, 11, 2), (2, 13.00, 37, 16, 1), (1, 5.00, 37, 1, 3), (3, 10.00, 37, 6, 1),
+(1, 11.00, 37, 10, 4), (2, 8.00, 37, 14, 1), (1, 15.00, 37, 19, 2), (3, 7.00, 37, 3, 1), (1, 12.00, 37, 12, 5),
+(1, 11.00, 38, 8, 1), (2, 6.00, 38, 12, 2), (1, 14.00, 38, 17, 1), (3, 8.00, 38, 2, 3), (1, 12.50, 38, 7, 1),
+(2, 5.00, 38, 11, 4), (1, 9.00, 38, 15, 1), (3, 13.00, 38, 20, 2), (1, 6.50, 38, 4, 1), (2, 10.00, 38, 13, 5),
+(2, 5.50, 39, 9, 1), (1, 10.00, 39, 13, 2), (3, 7.00, 39, 18, 1), (1, 12.00, 39, 3, 3), (2, 8.00, 39, 8, 1),
+(1, 15.00, 39, 12, 4), (4, 4.00, 39, 16, 1), (1, 11.00, 39, 1, 2), (2, 9.50, 39, 5, 1), (1, 6.00, 39, 14, 5),
+(1, 7.00, 40, 10, 1), (2, 11.50, 40, 14, 2), (1, 8.00, 40, 19, 1), (3, 13.00, 40, 4, 3), (1, 6.00, 40, 9, 1),
+(2, 9.00, 40, 13, 4), (1, 16.00, 40, 17, 1), (3, 5.00, 40, 2, 2), (1, 10.50, 40, 6, 1), (2, 14.50, 40, 15, 5),
+(2, 8.50, 41, 1, 1), (1, 13.00, 41, 5, 2), (3, 6.00, 41, 10, 1), (1, 10.00, 41, 15, 3), (2, 9.20, 41, 20, 1),
+(1, 16.00, 41, 3, 4), (4, 5.00, 41, 8, 1), (1, 11.00, 41, 12, 2), (2, 7.75, 41, 18, 1), (1, 12.50, 41, 2, 5),
+(1, 11.00, 42, 2, 1), (2, 9.00, 42, 6, 2), (1, 16.00, 42, 11, 1), (3, 7.00, 42, 16, 3), (1, 10.50, 42, 19, 1),
+(2, 6.50, 42, 4, 4), (1, 14.00, 42, 9, 1), (3, 8.00, 42, 13, 2), (1, 12.00, 42, 17, 1), (2, 5.00, 42, 1, 5),
+(3, 7.50, 43, 3, 1), (1, 12.00, 43, 7, 2), (2, 10.00, 43, 12, 1), (1, 15.00, 43, 17, 3), (3, 8.20, 43, 2, 1),
+(1, 17.00, 43, 5, 4), (2, 6.00, 43, 10, 1), (1, 9.50, 43, 14, 2), (3, 11.50, 43, 19, 1), (1, 6.80, 43, 6, 5),
+(1, 9.00, 44, 4, 1), (2, 14.50, 44, 8, 2), (1, 7.00, 44, 13, 1), (3, 11.00, 44, 18, 3), (1, 12.20, 44, 3, 1),
+(2, 8.00, 44, 6, 4), (1, 15.50, 44, 11, 1), (3, 6.50, 44, 15, 2), (1, 10.80, 44, 20, 1), (2, 13.50, 44, 7, 5),
+(2, 10.00, 45, 5, 1), (1, 8.00, 45, 9, 2), (3, 12.00, 45, 14, 1), (1, 9.00, 45, 19, 3), (2, 14.00, 45, 4, 1),
+(1, 7.00, 45, 7, 4), (4, 11.50, 45, 12, 1), (1, 17.00, 45, 16, 2), (2, 5.75, 45, 1, 1), (1, 10.20, 45, 8, 5),
+(1, 13.00, 46, 6, 1), (2, 6.00, 46, 10, 2), (1, 11.00, 46, 15, 1), (3, 8.00, 46, 20, 3), (1, 15.00, 46, 5, 1),
+(2, 9.00, 46, 9, 4), (1, 7.50, 46, 13, 1), (3, 12.00, 46, 18, 2), (1, 6.25, 46, 2, 1), (2, 11.50, 46, 11, 5),
+(3, 5.00, 47, 7, 1), (1, 10.50, 47, 11, 2), (2, 14.00, 47, 16, 1), (1, 6.00, 47, 1, 3), (3, 11.00, 47, 6, 1),
+(1, 12.00, 47, 10, 4), (2, 9.00, 47, 14, 1), (1, 16.00, 47, 19, 2), (3, 8.00, 47, 3, 1), (1, 13.00, 47, 12, 5),
+(1, 12.00, 48, 8, 1), (2, 7.00, 48, 12, 2), (1, 15.00, 48, 17, 1), (3, 9.00, 48, 2, 3), (1, 13.50, 48, 7, 1),
+(2, 6.00, 48, 11, 4), (1, 10.00, 48, 15, 1), (3, 14.00, 48, 20, 2), (1, 7.50, 48, 4, 1), (2, 11.00, 48, 13, 5),
+(2, 6.50, 49, 9, 1), (1, 11.00, 49, 13, 2), (3, 8.00, 49, 18, 1), (1, 13.00, 49, 3, 3), (2, 9.00, 49, 8, 1),
+(1, 16.00, 49, 12, 4), (4, 5.00, 49, 16, 1), (1, 12.00, 49, 1, 2), (2, 10.50, 49, 5, 1), (1, 7.00, 49, 14, 5),
+(1, 8.00, 50, 10, 1), (2, 12.50, 50, 14, 2), (1, 9.00, 50, 19, 1), (3, 14.00, 50, 4, 3), (1, 7.00, 50, 9, 1),
+(2, 10.00, 50, 13, 4), (1, 17.00, 50, 17, 1), (3, 6.00, 50, 2, 2), (1, 11.50, 50, 6, 1), (2, 15.50, 50, 15, 5),
+(2, 7.50, 51, 1, 1), (1, 12.00, 51, 5, 2), (3, 5.00, 51, 10, 1), (1, 9.00, 51, 15, 3), (2, 8.20, 51, 20, 1),
+(1, 15.00, 51, 3, 4), (4, 4.50, 51, 8, 1), (1, 10.00, 51, 12, 2), (2, 6.75, 51, 18, 1), (1, 11.50, 51, 2, 5),
+(1, 10.00, 52, 2, 1), (2, 8.00, 52, 6, 2), (1, 15.00, 52, 11, 1), (3, 6.00, 52, 16, 3), (1, 9.50, 52, 19, 1),
+(2, 5.50, 52, 4, 4), (1, 13.00, 52, 9, 1), (3, 7.00, 52, 13, 2), (1, 11.00, 52, 17, 1), (2, 4.00, 52, 1, 5),
+(3, 6.50, 53, 3, 1), (1, 11.00, 53, 7, 2), (2, 9.00, 53, 12, 1), (1, 14.00, 53, 17, 3), (3, 7.20, 53, 2, 1),
+(1, 16.00, 53, 5, 4), (2, 5.00, 53, 10, 1), (1, 8.50, 53, 14, 2), (3, 10.50, 53, 19, 1), (1, 5.80, 53, 6, 5),
+(1, 8.00, 54, 4, 1), (2, 13.50, 54, 8, 2), (1, 6.00, 54, 13, 1), (3, 10.00, 54, 18, 3), (1, 11.20, 54, 3, 1),
+(2, 7.00, 54, 6, 4), (1, 14.50, 54, 11, 1), (3, 5.50, 54, 15, 2), (1, 9.80, 54, 20, 1), (2, 12.50, 54, 7, 5),
+(2, 9.00, 55, 5, 1), (1, 7.00, 55, 9, 2), (3, 11.00, 55, 14, 1), (1, 8.00, 55, 19, 3), (2, 13.00, 55, 4, 1),
+(1, 6.00, 55, 7, 4), (4, 10.50, 55, 12, 1), (1, 16.00, 55, 16, 2), (2, 4.75, 55, 1, 1), (1, 9.20, 55, 8, 5),
+(1, 12.00, 56, 6, 1), (2, 5.00, 56, 10, 2), (1, 10.00, 56, 15, 1), (3, 7.00, 56, 20, 3), (1, 14.00, 56, 5, 1),
+(2, 8.00, 56, 9, 4), (1, 6.50, 56, 13, 1), (3, 11.00, 56, 18, 2), (1, 5.25, 56, 2, 1), (2, 10.50, 56, 11, 5),
+(3, 4.00, 57, 7, 1), (1, 9.50, 57, 11, 2), (2, 13.00, 57, 16, 1), (1, 5.00, 57, 1, 3), (3, 10.00, 57, 6, 1),
+(1, 11.00, 57, 10, 4), (2, 8.00, 57, 14, 1), (1, 15.00, 57, 19, 2), (3, 7.00, 57, 3, 1), (1, 12.00, 57, 12, 5),
+(1, 11.00, 58, 8, 1), (2, 6.00, 58, 12, 2), (1, 14.00, 58, 17, 1), (3, 8.00, 58, 2, 3), (1, 12.50, 58, 7, 1),
+(2, 5.00, 58, 11, 4), (1, 9.00, 58, 15, 1), (3, 13.00, 58, 20, 2), (1, 6.50, 58, 4, 1), (2, 10.00, 58, 13, 5),
+(2, 5.50, 59, 9, 1), (1, 10.00, 59, 13, 2), (3, 7.00, 59, 18, 1), (1, 12.00, 59, 3, 3), (2, 8.00, 59, 8, 1),
+(1, 15.00, 59, 12, 4), (4, 4.00, 59, 16, 1), (1, 11.00, 59, 1, 2), (2, 9.50, 59, 5, 1), (1, 6.00, 59, 14, 5),
+(1, 7.00, 60, 10, 1), (2, 11.50, 60, 14, 2), (1, 8.00, 60, 19, 1), (3, 13.00, 60, 4, 3), (1, 6.00, 60, 9, 1),
+(2, 9.00, 60, 13, 4), (1, 16.00, 60, 17, 1), (3, 5.00, 60, 2, 2), (1, 10.50, 60, 6, 1), (2, 14.50, 60, 15, 5),
+(2, 7.50, 61, 1, 1), (1, 12.00, 61, 5, 2), (3, 5.00, 61, 10, 1), (1, 9.00, 61, 15, 3), (2, 8.20, 61, 20, 1),
+(1, 15.00, 61, 3, 4), (4, 4.50, 61, 8, 1), (1, 10.00, 61, 12, 2), (2, 6.75, 61, 18, 1), (1, 11.50, 61, 2, 5),
+(1, 10.00, 62, 2, 1), (2, 8.00, 62, 6, 2), (1, 15.00, 62, 11, 1), (3, 6.00, 62, 16, 3), (1, 9.50, 62, 19, 1),
+(2, 5.50, 62, 4, 4), (1, 13.00, 62, 9, 1), (3, 7.00, 62, 13, 2), (1, 11.00, 62, 17, 1), (2, 4.00, 62, 1, 5),
+(3, 6.50, 63, 3, 1), (1, 11.00, 63, 7, 2), (2, 9.00, 63, 12, 1), (1, 14.00, 63, 17, 3), (3, 7.20, 63, 2, 1),
+(1, 16.00, 63, 5, 4), (2, 5.00, 63, 10, 1), (1, 8.50, 63, 14, 2), (3, 10.50, 63, 19, 1), (1, 5.80, 63, 6, 5),
+(1, 8.00, 64, 4, 1), (2, 13.50, 64, 8, 2), (1, 6.00, 64, 13, 1), (3, 10.00, 64, 18, 3), (1, 11.20, 64, 3, 1),
+(2, 7.00, 64, 6, 4), (1, 14.50, 64, 11, 1), (3, 5.50, 64, 15, 2), (1, 9.80, 64, 20, 1), (2, 12.50, 64, 7, 5),
+(2, 9.00, 65, 5, 1), (1, 7.00, 65, 9, 2), (3, 11.00, 65, 14, 1), (1, 8.00, 65, 19, 3), (2, 13.00, 65, 4, 1),
+(1, 6.00, 65, 7, 4), (4, 10.50, 65, 12, 1), (1, 16.00, 65, 16, 2), (2, 4.75, 65, 1, 1), (1, 9.20, 65, 8, 5),
+(1, 12.00, 66, 6, 1), (2, 5.00, 66, 10, 2), (1, 10.00, 66, 15, 1), (3, 7.00, 66, 20, 3), (1, 14.00, 66, 5, 1),
+(2, 8.00, 66, 9, 4), (1, 6.50, 66, 13, 1), (3, 11.00, 66, 18, 2), (1, 5.25, 66, 2, 1), (2, 10.50, 66, 11, 5),
+(3, 4.00, 67, 7, 1), (1, 9.50, 67, 11, 2), (2, 13.00, 67, 16, 1), (1, 5.00, 67, 1, 3), (3, 10.00, 67, 6, 1),
+(1, 11.00, 67, 10, 4), (2, 8.00, 67, 14, 1), (1, 15.00, 67, 19, 2), (3, 7.00, 67, 3, 1), (1, 12.00, 67, 12, 5),
+(1, 11.00, 68, 8, 1), (2, 6.00, 68, 12, 2), (1, 14.00, 68, 17, 1), (3, 8.00, 68, 2, 3), (1, 12.50, 68, 7, 1),
+(2, 5.00, 68, 11, 4), (1, 9.00, 68, 15, 1), (3, 13.00, 68, 20, 2), (1, 6.50, 68, 4, 1), (2, 10.00, 68, 13, 5),
+(2, 5.50, 69, 9, 1), (1, 10.00, 69, 13, 2), (3, 7.00, 69, 18, 1), (1, 12.00, 69, 3, 3), (2, 8.00, 69, 8, 1),
+(1, 15.00, 69, 12, 4), (4, 4.00, 69, 16, 1), (1, 11.00, 69, 1, 2), (2, 9.50, 69, 5, 1), (1, 6.00, 69, 14, 5),
+(1, 7.00, 70, 10, 1), (2, 11.50, 70, 14, 2), (1, 8.00, 70, 19, 1), (3, 13.00, 70, 4, 3), (1, 6.00, 70, 9, 1),
+(2, 9.00, 70, 13, 4), (1, 16.00, 70, 17, 1), (3, 5.00, 70, 2, 2), (1, 10.50, 70, 6, 1), (2, 14.50, 70, 15, 5),
+(2, 7.50, 71, 1, 1), (1, 12.00, 71, 5, 2), (3, 5.00, 71, 10, 1), (1, 9.00, 71, 15, 3), (2, 8.20, 71, 20, 1),
+(1, 15.00, 71, 3, 4), (4, 4.50, 71, 8, 1), (1, 10.00, 71, 12, 2), (2, 6.75, 71, 18, 1), (1, 11.50, 71, 2, 5),
+(1, 10.00, 72, 2, 1), (2, 8.00, 72, 6, 2), (1, 15.00, 72, 11, 1), (3, 6.00, 72, 16, 3), (1, 9.50, 72, 19, 1),
+(2, 5.50, 72, 4, 4), (1, 13.00, 72, 9, 1), (3, 7.00, 72, 13, 2), (1, 11.00, 72, 17, 1), (2, 4.00, 72, 1, 5),
+(3, 6.50, 73, 3, 1), (1, 11.00, 73, 7, 2), (2, 9.00, 73, 12, 1), (1, 14.00, 73, 17, 3), (3, 7.20, 73, 2, 1),
+(1, 16.00, 73, 5, 4), (2, 5.00, 73, 10, 1), (1, 8.50, 73, 14, 2), (3, 10.50, 73, 19, 1), (1, 5.80, 73, 6, 5),
+(1, 8.00, 74, 4, 1), (2, 13.50, 74, 8, 2), (1, 6.00, 74, 13, 1), (3, 10.00, 74, 18, 3), (1, 11.20, 74, 3, 1),
+(2, 7.00, 74, 6, 4), (1, 14.50, 74, 11, 1), (3, 5.50, 74, 15, 2), (1, 9.80, 74, 20, 1), (2, 12.50, 74, 7, 5),
+(2, 9.00, 75, 5, 1), (1, 7.00, 75, 9, 2), (3, 11.00, 75, 14, 1), (1, 8.00, 75, 19, 3), (2, 13.00, 75, 4, 1),
+(1, 6.00, 75, 7, 4), (4, 10.50, 75, 12, 1), (1, 16.00, 75, 16, 2), (2, 4.75, 75, 1, 1), (1, 9.20, 75, 8, 5),
+(1, 12.00, 76, 6, 1), (2, 5.00, 76, 10, 2), (1, 10.00, 76, 15, 1), (3, 7.00, 76, 20, 3), (1, 14.00, 76, 5, 1),
+(2, 8.00, 76, 9, 4), (1, 6.50, 76, 13, 1), (3, 11.00, 76, 18, 2), (1, 5.25, 76, 2, 1), (2, 10.50, 76, 11, 5),
+(3, 4.00, 77, 7, 1), (1, 9.50, 77, 11, 2), (2, 13.00, 77, 16, 1), (1, 5.00, 77, 1, 3), (3, 10.00, 77, 6, 1),
+(1, 11.00, 77, 10, 4), (2, 8.00, 77, 14, 1), (1, 15.00, 77, 19, 2), (3, 7.00, 77, 3, 1), (1, 12.00, 77, 12, 5),
+(1, 11.00, 78, 8, 1), (2, 6.00, 78, 12, 2), (1, 14.00, 78, 17, 1), (3, 8.00, 78, 2, 3), (1, 12.50, 78, 7, 1),
+(2, 5.00, 78, 11, 4), (1, 9.00, 78, 15, 1), (3, 13.00, 78, 20, 2), (1, 6.50, 78, 4, 1), (2, 10.00, 78, 13, 5),
+(2, 5.50, 79, 9, 1), (1, 10.00, 79, 13, 2), (3, 7.00, 79, 18, 1), (1, 12.00, 79, 3, 3), (2, 8.00, 79, 8, 1),
+(1, 15.00, 79, 12, 4), (4, 4.00, 79, 16, 1), (1, 11.00, 79, 1, 2), (2, 9.50, 79, 5, 1), (1, 6.00, 79, 14, 5),
+(1, 7.00, 80, 10, 1), (2, 11.50, 80, 14, 2), (1, 8.00, 80, 19, 1), (3, 13.00, 80, 4, 3), (1, 6.00, 80, 9, 1),
+(2, 9.00, 80, 13, 4), (1, 16.00, 80, 17, 1), (3, 5.00, 80, 2, 2), (1, 10.50, 80, 6, 1), (2, 14.50, 80, 15, 5);
 
 
 -- ▗▄▄▖  ▗▄▖  ▗▄▄▖ ▗▄▖      ▗▄▖ ▗▄▄▄▖▗▄▄▄▖▗▖   ▗▄▄▄▖ ▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
@@ -1163,9 +2560,31 @@ VALUES ('UBirra','Degustacion de 30 birras', 100, '5-7-2024','6-7-2024', 'UCAB, 
 -- ▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▌ ▐▌    ▐▛▀▜▌▐▛▀▀▘  █  ▐▌     █  ▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▌ ▝▜▌
 -- ▐▌   ▐▌ ▐▌▝▚▄▞▘▝▚▄▞▘    ▐▌ ▐▌▐▌   ▗▄█▄▖▐▙▄▄▖▗▄█▄▖▐▌ ▐▌▝▚▄▄▖▗▄█▄▖▝▚▄▞▘▐▌  ▐▌ 
 
+INSERT INTO PAGO_AFILIACION (fecha, total, mes_pagado, fk_afiliacion, fk_metodo_pago, fk_tasa_cambio) VALUES
+('2024-01-01', 50.00, '2024-01-01', 1, 1, 1),
+('2024-02-01', 50.00, '2024-02-01', 1, 3, 2),
+('2024-03-01', 50.00, '2024-03-01', 1, 5, 3),
+('2024-02-15', 30.00, '2024-02-01', 2, 6, 2),
+('2024-03-15', 30.00, '2024-03-01', 2, 8, 3),
+('2023-11-01', 50.00, '2023-11-01', 3, 15, 1),
+('2023-12-01', 50.00, '2023-12-01', 3, 2, 1),
+('2024-04-10', 50.00, '2024-04-01', 5, 24, 4),
+('2024-05-01', 50.00, '2024-05-01', 7, 30, 5),
+('2024-06-01', 30.00, '2024-06-01', 8, 14, 6);
 
 -- ▗▖  ▗▖ ▗▄▖  ▗▄▄▖ ▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖ 
 -- ▐▌  ▐▌▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
 -- ▐▌  ▐▌▐▛▀▜▌▐▌   ▐▛▀▜▌▐▌     █  ▐▌ ▐▌▐▌ ▝▜▌
 --  ▝▚▞▘ ▐▌ ▐▌▝▚▄▄▖▐▌ ▐▌▝▚▄▄▖▗▄█▄▖▝▚▄▞▘▐▌  ▐▌ 
 
+INSERT INTO VACACION (fecha_inicio, fecha_fin, fk_cargo, fk_empleado) VALUES
+('2024-07-01', '2024-07-15', 1, 1),
+('2024-08-01', '2024-08-10', 7, 2),
+('2024-09-01', '2024-09-20', 2, 3),
+('2024-10-01', '2024-10-07', 4, 4),
+('2024-11-01', '2024-11-14', 6, 5),
+('2024-12-01', '2024-12-05', 9, 6),
+('2025-01-05', '2025-01-19', 8, 7),
+('2025-02-01', '2025-02-07', 10, 8),
+('2025-03-01', '2025-03-10', 3, 9),
+('2025-04-01', '2025-04-15', 5, 10);
