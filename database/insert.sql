@@ -1,3 +1,4 @@
+-- Active: 1750694776958@@127.0.0.1@5432@test@public
 -- ▗▖   ▗▖ ▗▖ ▗▄▄▖ ▗▄▖ ▗▄▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌
 -- ▐▌   ▐▌ ▐▌▐▌▝▜▌▐▛▀▜▌▐▛▀▚▖
@@ -585,8 +586,7 @@ INSERT INTO RECE_INST (fk_instruccion, fk_receta, orden) VALUES
 (1, 51, 1),
 (2, 52, 1),
 (3, 53, 1),
-(4, 54, 1),
-(5, 55, 1);
+(4, 54, 1);
 
 -- ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖ ▗▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖
 -- ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▛▚▖▐▌  █ ▐▌ ▐▌▐▌     █  ▐▌ ▐▌▐▛▚▖▐▌
@@ -711,7 +711,7 @@ VALUES ('Malta Best Malz Pale Ale'),
 
 INSERT INTO ROL (nombre, descripcion) VALUES
 ('Administrador del Sistema', 'Acceso completo a la configuración del sistema, gestión de usuarios, productos y reportes.'),
-('Cliente Registrado', 'Usuario con cuenta que puede realizar pedidos, ver historial de compras y gestionar su perfil.'),
+('Cliente Registrado', 'Usuario con cuenta que puede realizar pedidos, ver historial de compras y gestionar su perfil.');
 
 
 -- ▗▄▄▖  ▗▄▖ ▗▖  ▗▖ ▗▄▄▖ ▗▄▖                                    
@@ -790,10 +790,10 @@ INSERT INTO TASA_CAMBIO (fecha_inicio, fecha_fin, tasa_bs_dolar, tasa_bs_punto) 
 -- ▐▙▄▄▖▝▚▄▞▘▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌      █  ▗▄█▄▖▐▙▄▄▖▐▌  ▐▌▐▙▄▄▀ ▐▌ ▐▌
 
 INSERT INTO LUGAR_TIENDA (nombre, tipo, fk_lugar_tienda) VALUES
-('Tienda', 'TIENDA', NULL),
+('Tienda', 'ALMACEN', NULL),
 ('Pasillo A', 'PASILLO', 1),
 ('Pasillo B', 'PASILLO', 1),
-('Pasillo C', 'PASILLO', 1);
+('Pasillo C', 'PASILLO', 1),
 ('Anaquel A1', 'ANAQUEL', 2),
 ('Anaquel A2', 'ANAQUEL', 2), 
 ('Anaquel B1', 'ANAQUEL', 3), 
@@ -1059,7 +1059,7 @@ INSERT INTO COMPRA (fecha, monto_total, fk_proveedor) VALUES
 ('2024-02-10', 3100.00, 7),
 ('2024-02-15', 620.50, 8),
 ('2024-02-20', 1800.00, 9),
-('2024-02-25', 450.75, 10),
+('2024-02-25', 450.75, 10);
 
 
 -- ▗▄▄▖ ▗▖  ▗▖ ▗▄▖▗▄▄▄▖▗▖ ▗▖▗▄▄▖  ▗▄▖ ▗▖    
