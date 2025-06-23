@@ -61,7 +61,6 @@ const server = serve({
       },
     },
 
-
     "/api/form/parroquias": {
       async GET() {
         const res = await sql`
@@ -122,7 +121,8 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() { return Response.json(await ClienteService.getNaturalesSQL(), CORS_HEADERS); },
       async POST(req: Bun.BunRequest) {
-        const res = await ClienteService.insertClienteNatural(await req.json());
+        const body = await req.json();
+        const res = await ClienteService.insertClienteNatural(body.insert_data);
         return Response.json(res, CORS_HEADERS);
       }
     },
@@ -131,7 +131,8 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() { return Response.json(await ClienteService.getJuridicoSQL(), CORS_HEADERS); },
       async POST(req: Bun.BunRequest) {
-        const res = await ClienteService.insertClienteJuridico(await req.json());
+        const body = await req.json();
+        const res = await ClienteService.insertClienteJuridico(body.insert_data);
         return Response.json(res, CORS_HEADERS);
       }
     },
@@ -139,7 +140,15 @@ const server = serve({
     "/api/roles": {
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
-        const res = await sql`INSERT INTO Rol ${sql(body.insert_data)} RETURNING *`;
+        const res = RolManagementService.postRolSQL(body.insert_data);
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
+
+    "/api/privilegio": {
+      async POST(req: Bun.BunRequest) {
+        const body = await req.json();
+        const res = RolManagementService.postPrivilegioSQL(body.insert_data);
         return Response.json(res, CORS_HEADERS);
       }
     },

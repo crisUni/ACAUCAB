@@ -9,9 +9,18 @@ function NoRolDetected() {
         { label: "Rol", keyName: "fk_rol", fetchFrom: "http://127.0.0.1:3000/api/form/roles", required: true },
     ], { callback: (data) => window.location.href = `/privilegios/${data.insert_data.fk_rol}` })
 
+    const PrivCreateForm = () => GenerateForm([
+      { label: "Nombre del Privilegio", keyName: "nombre", inputType: "text", required: true },
+      { label: "Descripcion", keyName: "descripcion", inputType: "text", required: false }
+    ], {url: "http://127.0.0.1:3000/api/privilegio"})
+
     return (
         <div>
             <a href="/">Back</a>
+            <h1>Menu Privilegios</h1>
+            <h2>Agregar Privilegio</h2>
+            { PrivCreateForm() }
+            <h2>Agregar privilegios a un rol</h2>
             Menu para seleccionar rol { /*(deberia redirigir a /privilegios/:rol cuando termines) */}
             {possibleUsers()}
         </div>
@@ -50,13 +59,13 @@ function RolPrivileges({ rol }: { rol: string }) {
         <div>
             <a href="/privilegios">Back</a>
 
-            <h1>Privileges for Rol Nr {rol}</h1>
-            <h2>Privileges [HAVE]</h2>
+            <h1>Privilegios for Rol Nr {rol}</h1>
+            <h2>Privilegios que TIENE</h2>
             <ul>
                 {rolPrivileges.map(x => <li key={x.eid}> {JSON.stringify(x)}  </li>)}
             </ul>
             <div>{possiblePrivilegios()}</div>
-            <h2>Privileges [DONT HAVE]</h2>
+            <h2>Privilegios que NO TIENE</h2>
             <ul>
                 {missingPrivileges.map(x => <li key={x.eid}> {JSON.stringify(x)} </li>)}
             </ul>
