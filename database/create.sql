@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS TARJETA (
     fk_metodo_pago INT PRIMARY KEY,
     fk_banco INT NOT NULL,
     fk_tipo_tarjeta INT NOT NULL,
-    numero_tarjeta INT NOT NULL,
+    numero_tarjeta BIGINT NOT NULL,
     fecha_vence DATE NOT NULL,
     nombre_titular VARCHAR(100) NOT NULL,
     cvv INT CHECK (cvv >= 100 AND cvv <= 999),
@@ -258,7 +258,10 @@ CREATE TABLE IF NOT EXISTS EMPL_HORA (
     fk_empleado INT NOT NULL,
     fk_horario INT NOT NULL,
     asistencia INT,
-    PRIMARY KEY (fk_empleado, fk_horario),
+    fecha DATE NOT NULL,
+    hora_entrada TIME,
+    hora_salida TIME,
+    PRIMARY KEY (fk_empleado, fk_horario, fecha),
     FOREIGN KEY (fk_empleado) REFERENCES EMPLEADO(eid),
     FOREIGN KEY (fk_horario) REFERENCES HORARIO(eid)
 );
@@ -280,7 +283,7 @@ CREATE TABLE IF NOT EXISTS USUARIO (
 CREATE TABLE IF NOT EXISTS TELEFONO (
     eid SERIAL PRIMARY KEY,
     codigo_pais INT NOT NULL,
-    numero INT NOT NULL,
+    numero BIGINT NOT NULL,
     fk_proveedor INT,
     fk_cliente INT,
     fk_empleado INT,
@@ -529,7 +532,6 @@ CREATE TABLE IF NOT EXISTS PAGO (
     fk_metodo_pago INT NOT NULL,
     fk_venta INT NOT NULL,
     fk_tasa_cambio INT NOT NULL,
-    monto FLOAT NOT NULL,
     PRIMARY KEY (fk_metodo_pago, fk_venta),
     FOREIGN KEY (fk_metodo_pago) REFERENCES METODO_PAGO(eid),
     FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
