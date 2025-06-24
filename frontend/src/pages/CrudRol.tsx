@@ -4,11 +4,11 @@ import { useState } from "react";
 const RolCreateForm = () => GenerateForm([
   { label: "Nombre del Rol", keyName: "nombre", inputType: "text", required: true },
   { label: "Descripcion", keyName: "descripcion", inputType: "text", required: false }
-], {url: "http://127.0.0.1:3000/api/roles"})
+], { url: "http://127.0.0.1:3000/api/form/roles" })
 
-const possiblerol = () => GenerateForm([
-    { label: "Rol", keyName: "fk_rol", fetchFrom: "http://127.0.0.1:3000/api/form/roles", required: true },
-], { callback: (data) => window.location.href = `/privilegios/${data.insert_data.fk_rol}` })
+const RolDeleteForm = () => GenerateForm([
+    { label: "Rol", keyName: "eid", fetchFrom: "http://127.0.0.1:3000/api/form/roles", required: true },
+], { url: `http://127.0.0.1:3000/api/roles`, method: "DELETE" })
 
 export default function CrudRol() {
     return (
@@ -19,10 +19,7 @@ export default function CrudRol() {
             { RolCreateForm() }
 
             <h2>Eliminar Roles</h2>
-            {possiblerol()}
-
-
-
+            { RolDeleteForm() }
         </div>
     )
 }

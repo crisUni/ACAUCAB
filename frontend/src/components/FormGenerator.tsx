@@ -1,4 +1,13 @@
 import { HTMLInputTypeAttribute, JSX, useState } from "react"
+import DynamicOptionInputs from "./DynamicOptions"
+
+type DynamicOptions = {
+    label: string,
+    keyName: string, // fk_cerveza,fk_presentacion,fk_tienda
+    required: boolean,
+    fetchFrom: string,
+    multiple: boolean
+}
 
 type FormEntry<T> = {
     label: string,
@@ -20,7 +29,7 @@ type FormOptions = {
     method?: "POST" | "DELETE"
 }
 
-function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase)[], options: FormOptions) {
+function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions)[], options: FormOptions) {
     const [fromDatabase, setFromDatabase] = useState<{ [key: string | symbol]: any }>({});
     const [formData, setFormData] = useState<{ [key: string | symbol]: any }>(() => {
         const res: { [key: string | symbol]: any } = {};
@@ -44,12 +53,19 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         return res;
     });
 
+    const handleCatalogChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value, });
+    };
+
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value, });
     };
 
     function generateHTML(entry: FormEntry<unknown> | FormEntrySelectFromDatabase): JSX.Element {
+        if ('multiple' in entry)
+            return (<DynamicOptionInputs eidKey={entry.keyName} endpoint={entry.fetchFrom}/>)
         if ('fetchFrom' in entry)
             return generateSelectHTML(entry as FormEntrySelectFromDatabase);
         if ('inputType' in entry)
@@ -117,7 +133,6 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
                 delete newFormData[key]
 
         const data = JSON.stringify({ insert_data: newFormData });
-
         if ('url' in options && options.url !== undefined)
             await postToUrl(data)
         if ('callback' in options && options.callback !== undefined)

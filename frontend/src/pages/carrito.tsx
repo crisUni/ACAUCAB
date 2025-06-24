@@ -1,4 +1,3 @@
-
 type InveTien = {
   fk_cerveza: Number,
   fk_presentacion: Number,
@@ -29,3 +28,5 @@ type Carrito = {
   items: Array<CervPres>,
   monto: Number,
 };
+
+const InventoryService = {}

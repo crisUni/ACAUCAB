@@ -74,13 +74,48 @@ const server = serve({
     },
 
     "/api/form/roles": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() {
+        return Response.json(await RolManagementService.getRolSQL(), CORS_HEADERS);
+      },
+    },
+
+    "/api/form/providers": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
         const res = await sql`
-          SELECT eid AS "eid", nombre AS "displayName"
-          FROM Rol
-        `
+          SELECT eid AS "eid", denominacion_comercial ||' / '|| razon_social AS "displayName"
+          FROM Proveedor`;
+        return Response.json(res, CORS_HEADERS)
+      },
+    },
+
+    "/api/form/inve_tien": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() {
+        const res = await sql`
+          SELECT CAST(IT.fk_cerveza AS text)||','||CAST(IT.fk_presentacion AS Text)||','||CAST(IT.fk_tienda AS text)||','||CAST(IT.fk_lugar_tienda as text) AS "eid",
+          C.nombre||': '||P.nombre AS "displayName"
+          FROM INVE_TIEN as IT
+          JOIN Cerveza as C on IT.fk_cerveza = C.eid
+          JOIN Presentacion as P on IT.fk_presentacion = P.eid
+          ;`;
+        return Response.json(res, CORS_HEADERS)
+      },
+    },
+
+    "/api/roles": {
+      async POST(req: Bun.BunRequest) {
+        const body = await req.json();
+        const res = RolManagementService.postRolSQL(body.insert_data);
         return Response.json(res, CORS_HEADERS);
       },
+      async DELETE(req, _) {
+        const body = await req.json()
+        const res = await RolManagementService.deleteRolSQL(body.insert_data)
+        return Response.json(res, CORS_HEADERS);
+      },
+
     },
 
     "/api/privilegios/:rol": {
@@ -137,20 +172,22 @@ const server = serve({
       }
     },
 
-    "/api/roles": {
-      async POST(req: Bun.BunRequest) {
-        const body = await req.json();
-        const res = RolManagementService.postRolSQL(body.insert_data);
-        return Response.json(res, CORS_HEADERS);
-      }
-    },
-
-    "/api/privilegio": {
+    "/api/priv": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() {
+        console.log("hello")
+        return Response.json(await RolManagementService.getPrivilegioSQL(), CORS_HEADERS);
+      },
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
         const res = RolManagementService.postPrivilegioSQL(body.insert_data);
         return Response.json(res, CORS_HEADERS);
-      }
+      },
+      async DELETE(req, _) {
+        const body = await req.json()
+        const res = await RolManagementService.deletePrivilegioSQL(Number(body.insert_data.eid))
+        return Response.json(res, CORS_HEADERS);
+      },
     },
 
     "/api/usuario": {

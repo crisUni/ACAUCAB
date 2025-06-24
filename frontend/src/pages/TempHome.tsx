@@ -13,6 +13,9 @@ export default function TempHome() {
             <li key="privilegios">
                 <a href="/privilegios">Privilegios</a>
             </li>
+            <li key="Compra">
+                <a href="/compra">compra</a>
+            </li>
         </ul>
     )
 }

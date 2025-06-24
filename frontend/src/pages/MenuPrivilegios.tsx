@@ -2,7 +2,6 @@ import GenerateForm from "@/components/FormGenerator";
 import { useEffect, useState } from "react";
 
 
-
 // THIS IS FOR WHEN NO ROL IS SET
 function NoRolDetected() {
     const possibleUsers = () => GenerateForm([
@@ -14,12 +13,19 @@ function NoRolDetected() {
       { label: "Descripcion", keyName: "descripcion", inputType: "text", required: false }
     ], {url: "http://127.0.0.1:3000/api/privilegio"})
 
+    const PrivDeleteForm = () => GenerateForm([
+        { label: "Privilegio", keyName: "eid", fetchFrom: "http://127.0.0.1:3000/api/priv", required: true },
+    ], { callback: (data) => window.location.href = `/priv/${data.insert_data.eid}` })
+
     return (
         <div>
             <a href="/">Back</a>
             <h1>Menu Privilegios</h1>
             <h2>Agregar Privilegio</h2>
             { PrivCreateForm() }
+            <h2>Eliminar Privilegio</h2>
+            {PrivDeleteForm()}
+
             <h2>Agregar privilegios a un rol</h2>
             Menu para seleccionar rol { /*(deberia redirigir a /privilegios/:rol cuando termines) */}
             {possibleUsers()}

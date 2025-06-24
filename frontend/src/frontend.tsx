@@ -8,6 +8,8 @@ import CrudUsuario from "./pages/CrudUsuario";
 import TempHome from "./pages/TempHome";
 import CrudRol from "./pages/CrudRol";
 import MenuPrivilegios from "./pages/MenuPrivilegios";
+import CrudCompra from "./pages/CrudCompra";
+import CompraProveedor from "./pages/CompraProveedor";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -19,6 +21,8 @@ const app = (
           <Route path="/usuario" element={<CrudUsuario />} />
           <Route path="/roles" element={<CrudRol />} />
           <Route path="/privilegios/*" element={<MenuPrivilegios />} />
+          <Route path="/compra" element={<CrudCompra />} />
+          <Route path="/compra/*" element={<CompraProveedor />} />
         </Routes>
     </Router>
   </StrictMode>
