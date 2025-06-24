@@ -83,3 +83,14 @@ Hacer minimo 10 insert en cada uno (exepto en los que solo son 1)
 - [x] Detalle Factura
 - [x] Pago Afiliacion
 - [x] Vacacion
+
+```sql
+SELECT con.*
+    FROM pg_catalog.pg_constraint con
+        INNER JOIN pg_catalog.pg_class rel ON rel.oid = con.conrelid
+        INNER JOIN pg_catalog.pg_namespace nsp ON nsp.oid = connamespace
+        WHERE rel.relname = '{table name}'; --table name en full minusculas
+
+
+ALTER TABLE TARJETA ALTER COLUMN "numero_tarjeta" TYPE BIGINT;
+```

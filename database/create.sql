@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS LUGAR (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('ESTADO', 'MUNICIPIO', 'PARROQUIA')),
-    fk_lugar INT
+    fk_lugar INT,
+    FOREIGN KEY (fk_lugar) REFERENCES LUGAR (eid)
 );
 
 CREATE TABLE IF NOT EXISTS INSTRUCCION (
@@ -13,7 +14,7 @@ CREATE TABLE IF NOT EXISTS INSTRUCCION (
 CREATE TABLE IF NOT EXISTS RECETA (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
-    descripcion TEXT NOT NULL,
+    descripcion TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS RECE_INST (
@@ -104,11 +105,12 @@ CREATE TABLE IF NOT EXISTS LUGAR_TIENDA (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('ALMACEN', 'PASILLO', 'ANAQUEL')),
-    fk_lugar_tienda INT
+    fk_lugar_tienda INT,
+    FOREIGN KEY (fk_lugar_tienda) REFERENCES LUGAR_TIENDA(eid)
 );
 
 CREATE TABLE IF NOT EXISTS METODO_PAGO (
-    eid SERIAL PRIMARY KEY
+    eid SERIAL PRIMARY KEY,
     monto INT NOT NULL
 );
 
@@ -179,7 +181,7 @@ CREATE TABLE IF NOT EXISTS TARJETA (
     fk_metodo_pago INT PRIMARY KEY,
     fk_banco INT NOT NULL,
     fk_tipo_tarjeta INT NOT NULL,
-    numero_tarjeta INT NOT NULL,
+    numero_tarjeta BIGINT NOT NULL,
     fecha_vence DATE NOT NULL,
     nombre_titular VARCHAR(100) NOT NULL,
     cvv INT CHECK (cvv >= 100 AND cvv <= 999),
@@ -228,7 +230,7 @@ CREATE TABLE IF NOT EXISTS COMPRA (
 CREATE TABLE IF NOT EXISTS PNATURAL (
     eid SERIAL PRIMARY KEY,
     fk_cliente INT UNIQUE NOT NULL,
-    cedula VARCHAR(20),
+    cedula VARCHAR(25),
     nombre VARCHAR(100),
     apellido VARCHAR(100),
     fecha_nacimiento DATE,
@@ -279,7 +281,7 @@ CREATE TABLE IF NOT EXISTS USUARIO (
 CREATE TABLE IF NOT EXISTS TELEFONO (
     eid SERIAL PRIMARY KEY,
     codigo_pais INT NOT NULL,
-    numero INT NOT NULL,
+    numero BIGINT NOT NULL,
     fk_proveedor INT,
     fk_cliente INT,
     fk_empleado INT,
@@ -287,6 +289,8 @@ CREATE TABLE IF NOT EXISTS TELEFONO (
     FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid),
     FOREIGN KEY (fk_empleado) REFERENCES EMPLEADO(eid)
 );
+
+
 
 CREATE TABLE IF NOT EXISTS CORREO (
     eid SERIAL PRIMARY KEY,
@@ -310,13 +314,7 @@ CREATE TABLE IF NOT EXISTS ESTA_COMP (
     FOREIGN KEY (fk_estatus) REFERENCES ESTATUS(eid)
 );
 
-CREATE TABLE IF NOT EXISTS DETALLE_COMPRA (
-    eid SERIAL PRIMARY KEY,
-    cantidad INT NOT NULL,
-    precio_unitario FLOAT NOT NULL,
-    fk_compra INT NOT NULL,
-    FOREIGN KEY (fk_compra) REFERENCES COMPRA(eid)
-);
+
 
 CREATE TABLE IF NOT EXISTS CARGO (
     eid SERIAL PRIMARY KEY,
@@ -383,6 +381,17 @@ CREATE TABLE IF NOT EXISTS DESC_CERV_PRES (
     FOREIGN KEY (fk_cerveza) REFERENCES CERVEZA(eid),
     FOREIGN KEY (fk_presentacion) REFERENCES PRESENTACION(eid),
     FOREIGN KEY (fk_descuento) REFERENCES DESCUENTO(eid)
+);
+
+CREATE TABLE IF NOT EXISTS DETALLE_COMPRA (
+    eid SERIAL PRIMARY KEY,
+    cantidad INT NOT NULL,
+    precio_unitario FLOAT NOT NULL,
+    fk_compra INT NOT NULL,
+    fk_cerveza INT NOT NULL,
+    fk_presentacion INT NOT NULL,
+    FOREIGN KEY (fk_cerveza, fk_presentacion) REFERENCES CERV_PRES (fk_cerveza, fk_presentacion),
+    FOREIGN KEY (fk_compra) REFERENCES COMPRA(eid)
 );
 
 CREATE TABLE IF NOT EXISTS TIPO_EVENTO (
@@ -457,7 +466,7 @@ CREATE TABLE IF NOT EXISTS INVE_TIEN (
     fk_tienda INT NOT NULL,
     fk_lugar_tienda INT NOT NULL,
     cantidad INT NOT NULL CHECK (cantidad >= 0),
-    PRIMARY KEY (fk_cerveza, fk_presentacion, fk_tienda),
+    PRIMARY KEY (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda),
     FOREIGN KEY (fk_cerveza) REFERENCES CERVEZA(eid),
     FOREIGN KEY (fk_presentacion) REFERENCES PRESENTACION(eid),
     FOREIGN KEY (fk_tienda) REFERENCES TIENDA_FISICA(eid),
@@ -520,7 +529,7 @@ CREATE TABLE IF NOT EXISTS PUNT_CLIE (
     fk_tasa_cambio INT NOT NULL,
     cantidad_puntos INT NOT NULL,
     PRIMARY KEY (fk_punto, fk_cliente),
-    FOREIGN KEY (fk_punto) REFERENCES PUNTO(eid),
+    FOREIGN KEY (fk_punto) REFERENCES PUNTO(fk_metodo_pago),
     FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid),
     FOREIGN KEY (fk_tasa_cambio) REFERENCES TASA_CAMBIO(eid)
 );
@@ -539,7 +548,7 @@ CREATE TABLE IF NOT EXISTS PAGO (
 CREATE TABLE IF NOT EXISTS JUEZ (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS JUEZ_EVENT (
@@ -558,8 +567,7 @@ CREATE TABLE IF NOT EXISTS DETALLE_FACTURA (
     fk_cerveza INT NOT NULL,
     fk_presentacion INT NOT NULL,
     FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
-    FOREIGN KEY (fk_cerveza) REFERENCES CERVEZA(eid),
-    FOREIGN KEY (fk_presentacion) REFERENCES PRESENTACION(eid)
+    FOREIGN KEY (fk_cerveza, fk_presentacion) REFERENCES CERV_PRES(fk_cerveza, fk_presentacion)
 );
 
 CREATE TABLE IF NOT EXISTS PAGO_AFILIACION (
