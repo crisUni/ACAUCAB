@@ -728,7 +728,7 @@ INSERT INTO TIPO_TARJETA (nombre, procesador) VALUES
 INSERT INTO ESTATUS (nombre) VALUES
 ('Pendiente'),
 ('En Proceso'),
-('Completado'),
+('Pagado'),
 ('Cancelado'),
 ('En Espera'),
 ('Rechazado'),
@@ -2398,29 +2398,36 @@ AFTER INSERT ON DETALLE_FACTURA
 FOR EACH ROW
 EXECUTE FUNCTION descontar_inventario_detalle_factura();
 
-CREATE OR REPLACE FUNCTION aumentar_inventario_detalle_compra()
+
+CREATE OR REPLACE FUNCTION sumar_inventario_al_pagar_compra()
 RETURNS TRIGGER AS $$
 DECLARE
   tienda_id INT;
   lugar_tienda_id INT;
+  detalle RECORD;
 BEGIN
+  IF NEW.fk_estatus = 3 THEN
 
-  SELECT fk_tienda_fisica INTO tienda_id
-  FROM COMPRA
-  WHERE eid = NEW.fk_compra;
+    SELECT fk_tienda_fisica INTO tienda_id
+    FROM COMPRA
+    WHERE eid = NEW.fk_compra;
 
-  SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
+    SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
 
-  INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad)
-  VALUES (NEW.fk_cerveza, NEW.fk_presentacion, tienda_id, lugar_tienda_id, NEW.cantidad)
-  ON CONFLICT (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda)
-  DO UPDATE SET cantidad = INVE_TIEN.cantidad + NEW.cantidad;
-
+    FOR detalle IN
+      SELECT * FROM DETALLE_COMPRA WHERE fk_compra = NEW.fk_compra
+    LOOP
+      INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad)
+      VALUES (detalle.fk_cerveza, detalle.fk_presentacion, tienda_id, lugar_tienda_id, detalle.cantidad)
+      ON CONFLICT (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda)
+      DO UPDATE SET cantidad = INVE_TIEN.cantidad + detalle.cantidad;
+    END LOOP;
+  END IF;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_aumentar_inventario_detalle_compra
-AFTER INSERT ON DETALLE_COMPRA
+CREATE TRIGGER trigger_sumar_inventario_al_pagar_compra
+AFTER INSERT OR UPDATE ON ESTA_COMP
 FOR EACH ROW
-EXECUTE FUNCTION aumentar_inventario_detalle_compra();
+EXECUTE FUNCTION sumar_inventario_al_pagar_compra();
