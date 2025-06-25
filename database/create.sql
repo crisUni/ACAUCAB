@@ -150,9 +150,8 @@ CREATE TABLE IF NOT EXISTS CLIENTE (
     direccion TEXT NOT NULL,
     numero_registro INT,
     fk_lugar_1 INT NOT NULL,
-    fk_lugar_2 INT NOT NULL,
-    FOREIGN KEY (fk_lugar_1) REFERENCES LUGAR(eid),
-    FOREIGN KEY (fk_lugar_2) REFERENCES LUGAR(eid)
+    FOREIGN KEY (fk_lugar_1) REFERENCES LUGAR(eid)
+    
 );
 
 CREATE TABLE IF NOT EXISTS TIENDA_FISICA (
@@ -244,6 +243,8 @@ CREATE TABLE IF NOT EXISTS PJURIDICO (
     razon_social VARCHAR(100),
     pagina_web VARCHAR(200),
     capital_disponible FLOAT,
+    fk_lugar_2 INT NOT NULL,
+    FOREIGN KEY (fk_lugar_2) REFERENCES LUGAR(eid),
     FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid)
 );
 
@@ -467,8 +468,7 @@ CREATE TABLE IF NOT EXISTS INVE_TIEN (
     fk_lugar_tienda INT NOT NULL,
     cantidad INT NOT NULL CHECK (cantidad >= 0),
     PRIMARY KEY (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda),
-    FOREIGN KEY (fk_cerveza) REFERENCES CERVEZA(eid),
-    FOREIGN KEY (fk_presentacion) REFERENCES PRESENTACION(eid),
+    FOREIGN KEY (fk_cerveza, fk_presentacion) REFERENCES CERV_PRES(fk_cerveza, fk_presentacion),
     FOREIGN KEY (fk_tienda) REFERENCES TIENDA_FISICA(eid),
     FOREIGN KEY (fk_lugar_tienda) REFERENCES LUGAR_TIENDA(eid)
 );
@@ -518,8 +518,7 @@ CREATE TABLE IF NOT EXISTS INVE_EVEN (
     fk_evento INT NOT NULL,
     cantidad INT NOT NULL CHECK (cantidad >= 0),
     PRIMARY KEY (fk_cerveza, fk_presentacion, fk_evento),
-    FOREIGN KEY (fk_cerveza) REFERENCES CERVEZA(eid),
-    FOREIGN KEY (fk_presentacion) REFERENCES PRESENTACION(eid),
+    FOREIGN KEY (fk_cerveza, fk_presentacion) REFERENCES CERV_PRES(fk_cerveza, fk_presentacion),
     FOREIGN KEY (fk_evento) REFERENCES EVENTO(eid)
 );
 
