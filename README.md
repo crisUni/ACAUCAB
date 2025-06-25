@@ -93,4 +93,39 @@ SELECT con.*
 
 
 ALTER TABLE TARJETA ALTER COLUMN "numero_tarjeta" TYPE BIGINT;
+
+
+CREATE OR REPLACE PROCEDURE pipu (INT, INT)
+AS
+$$
+DECLARE
+  cliente_id INT;
+  monto FLOAT;
+  puntos INT;
+  punto_id INT;
+BEGIN
+  RAISE NOTICE 'Corriendo puntos pagar';
+
+  IF $2 = 3 THEN
+    SELECT fk_cliente, monto_total INTO cliente_id, monto
+    FROM VENTA
+    WHERE eid = $1;
+
+    SELECT fk_punto INTO punto_id FROM PUNT_CLIE WHERE fk_cliente = cliente_id;
+
+    puntos := FLOOR(monto * 0.05);
+
+    IF punto_id IS NOT NULL THEN
+      UPDATE PUNT_CLIE
+      SET cantidad_puntos = cantidad_puntos + puntos
+      WHERE fk_cliente = cliente_id;
+    ELSE
+      SELECT fk_metodo_pago INTO punto_id FROM PUNTO LIMIT 1;
+      INSERT INTO PUNT_CLIE (fk_punto, fk_cliente, cantidad_puntos)
+        VALUES (punto_id, cliente_id, puntos);
+    END IF;
+  END IF;
+
+END
+$$ LANGUAGE plpgsql;    
 ```

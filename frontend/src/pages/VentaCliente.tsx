@@ -8,7 +8,7 @@ export default function VentaCliente() {
     const form = () => GenerateForm([
         { label: "Productos", fetchFrom: `http://127.0.0.1:3000/api/form/inve_tien`, keyName: "fk_cerveza,fk_presentacion,fk_tienda,fk_lugar_tienda,cantidad", multiple: true, required: true },
         { label: "Productos", fetchFrom: `http://127.0.0.1:3000/api/form/metodo_pago`, keyName: "fk_metodo_pago,monto", multiple: true, required: true }
-    ], { url: `http://127.0.0.1:3000/api/venta/nueva/${clienteId}` })
+    ], { url: `http://127.0.0.1:3000/api/venta/nueva/${clienteId}` , callback: (data) => window.location.href = `/venta` })
 
     return (
         <div>

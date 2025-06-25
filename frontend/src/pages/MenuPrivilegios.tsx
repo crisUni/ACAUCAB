@@ -49,13 +49,12 @@ function NoRolDetected() {
 }
 
 
-
-
 // THIS IS FOR WHEN ROL IS SET
 function RolPrivileges({ rol }: { rol: string }) {
     const [missingPrivileges, setMissingPrivileges] = useState<Array<any>>([])
     const [rolPrivileges, setRolPrivileges] = useState<Array<any>>([])
 
+    // TABLE
     useEffect(() => {
         fetch(`/api/privilegios/${String(rol)}?missing=true`)
             .then(async res => setMissingPrivileges(await res.json()))
@@ -69,11 +68,11 @@ function RolPrivileges({ rol }: { rol: string }) {
     }, [])
 
     const possiblePrivilegios = () => GenerateForm([
-        { label: "Eliminar privilegio", keyName: "fk_priv", fetchFrom: `/api/privilegios/${String(rol)}?missing=false`, required: true },
+        { label: "Eliminar privilegio", keyName: "fk_priv", fetchFrom: `/api/form/privilegios/${String(rol)}?missing=false`, required: true },
     ], { url: `http://127.0.0.1:3000/api/privilegios/${String(rol)}`, method: "DELETE", callback: (data) => window.location.href = `/privilegios/${rol}` })
 
     const missingPrivilegios = () => GenerateForm([
-        { label: "Agregar privilegio", keyName: "fk_priv", fetchFrom: `/api/privilegios/${String(rol)}?missing=true`, required: true },
+        { label: "Agregar privilegio", keyName: "fk_priv", fetchFrom: `/api/form/privilegios/${String(rol)}?missing=true`, required: true },
     ], { url: `http://127.0.0.1:3000/api/privilegios/${String(rol)}`, callback: (data) => window.location.href = `/privilegios/${rol}` })
 
     return (
@@ -82,14 +81,22 @@ function RolPrivileges({ rol }: { rol: string }) {
 
             <h1>Privilegios for Rol Nr {rol}</h1>
             <h2>Privilegios que TIENE</h2>
-            <ul>
-                {rolPrivileges.map(x => <li key={x.eid}> {JSON.stringify(x)}  </li>)}
-            </ul>
+            <div>
+                {GenerateColumn([
+                { title: "eid", keyName: "eid" },
+                { title: "Nombre", keyName: "nombre" },
+                { title: "Descripcion", keyName: "descripcion" },
+                ], rolPrivileges)}
+            </div>
             <div>{possiblePrivilegios()}</div>
             <h2>Privilegios que NO TIENE</h2>
-            <ul>
-                {missingPrivileges.map(x => <li key={x.eid}> {JSON.stringify(x)} </li>)}
-            </ul>
+            <div>
+                {GenerateColumn([
+                { title: "eid", keyName: "eid" },
+                { title: "Nombre", keyName: "nombre" },
+                { title: "Descripcion", keyName: "descripcion" },
+                ], missingPrivileges)}
+            </div>
             <div>{missingPrivilegios()}</div>
 
 

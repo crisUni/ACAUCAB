@@ -172,6 +172,28 @@ const server = serve({
       }
     },
 
+    "/api/form/privilegios/:rol": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req) {
+        const rol = req.params.rol;
+        const missing = new URL(req.url).searchParams.get("missing");
+        let res;
+        if (missing === "true")
+          res = await sql`
+            SELECT eid as "eid", eid ||' '|| nombre ||': '|| descripcion as "displayName"
+            FROM privilegio where eid NOT IN (SELECT fk_privilegio
+            FROM Privilegio p, ROL_PRIV rp
+            WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
+        else
+          res = await sql`
+            SELECT eid as "eid", eid ||' '|| nombre ||': '|| descripcion as "displayName"
+            FROM privilegio WHERE eid IN (SELECT fk_privilegio
+            FROM Privilegio p, ROL_PRIV rp
+            WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
+        return Response.json(res, CORS_HEADERS);
+      },
+    },
+    
     "/api/roles": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
@@ -197,13 +219,13 @@ const server = serve({
         let res;
         if (missing === "true")
           res = await sql`
-            SELECT eid as "eid", nombre||': '||descripcion as "displayName"
+            SELECT eid, nombre, descripcion
             FROM privilegio where eid NOT IN (SELECT fk_privilegio
             FROM Privilegio p, ROL_PRIV rp
             WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
         else
           res = await sql`
-            SELECT eid as "eid", nombre||': '||descripcion as "displayName"
+            SELECT eid, nombre, descripcion
             FROM privilegio WHERE eid IN (SELECT fk_privilegio
             FROM Privilegio p, ROL_PRIV rp
             WHERE rp.fk_privilegio = p.eid AND rp.fk_rol = ${Number(rol)})`
@@ -371,6 +393,16 @@ const server = serve({
       }
     },
 
+    "/api/compra/set_pagada/:idCompra": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const res = await sql`
+        INSERT INTO ESTA_COMP (fk_estatus, fk_compra, fecha_inicio, fecha_fin)
+          VALUES(3, ${req.params.idCompra}, CURRENT_DATE, NULL)`
+        return Response.json({}, CORS_HEADERS)
+      }
+    },
+
     "/api/compra/nueva/:proveedorId": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async POST(req, _) {
@@ -390,6 +422,7 @@ const server = serve({
         return Response.json(compra, CORS_HEADERS)
       }
     },
+    
     "/api/puntos/:clienteID": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET(req, _) {
@@ -418,9 +451,10 @@ const server = serve({
           SET cantidad = ${body.cantidad}
           WHERE fk_cerveza = ${body.fk_cerveza}
           AND fk_presentacion = ${body.fk_presentacion}
-          AND fk_tienda = ${body.fk_tienda}
+          
           AND fk_lugar_tienda = ${body.fk_lugar_tienda}
           RETURNING *`;
+          // AND fk_tienda = ${body.fk_tienda}
         return Response.json(res, CORS_HEADERS);
       }
     },

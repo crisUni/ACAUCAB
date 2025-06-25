@@ -11,7 +11,7 @@ const NewCrudNatural = () => GenerateForm([
   { label: "Apellido", keyName: "apellido", inputType: "text", required: true },
   { label: "Fecha de Nacimiento", keyName: "fecha_nacimiento", inputType: "date", required: true },
   { label: "Direccion 1", keyName: "fk_lugar_1", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true },
-], { url: 'http://127.0.0.1:3000/api/cliente_natural' })
+], { url: 'http://127.0.0.1:3000/api/cliente_natural' , callback: (data) => window.location.href = `/clientes-naturales` })
 
 export default function CrudNatural() {
   const [naturalData, setNaturalData] = useState<Array<any>>([])

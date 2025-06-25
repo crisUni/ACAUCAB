@@ -10,11 +10,11 @@ export default function CrudInventario() {
             .catch(console.error)
     }, [])
 
-    function updateStock(data) {
+    function updateStock(data: any) {
         data.cantidad = Number(prompt("Seleccione la nueva cantidad para la cerveza"))
         fetch("http://127.0.0.1:3000/api/inventario_tienda",
             { method: "PUT", body: JSON.stringify(data) })
-            .then(res => (window.location.href = window.location.href))
+            //.then(res => (window.location.href = window.location.href))
     }
 
     return (

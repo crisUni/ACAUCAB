@@ -308,11 +308,12 @@ CREATE TABLE IF NOT EXISTS CORREO (
 );
 
 CREATE TABLE IF NOT EXISTS ESTA_COMP (
+    eid SERIAL NOT NULL,
     fk_compra INT NOT NULL,
     fk_estatus INT NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE,
-    PRIMARY KEY (fk_compra, fk_estatus, fecha_inicio),
+    PRIMARY KEY (fk_compra, fk_estatus, eid),
     FOREIGN KEY (fk_compra) REFERENCES COMPRA(eid),
     FOREIGN KEY (fk_estatus) REFERENCES ESTATUS(eid)
 );
@@ -435,21 +436,23 @@ CREATE TABLE IF NOT EXISTS VENTA (
 );
 
 CREATE TABLE IF NOT EXISTS ESTA_VENT (
+    eid SERIAL NOT NULL,
     fk_venta INT NOT NULL,
     fk_estatus INT NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE,
-    PRIMARY KEY (fk_venta, fk_estatus, fecha_inicio),
+    PRIMARY KEY (fk_venta, fk_estatus, eid),
     FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
     FOREIGN KEY (fk_estatus) REFERENCES ESTATUS(eid)
 );
 
 CREATE TABLE IF NOT EXISTS ESTA_EVEN (
+    eid SERIAL NOT NULL,
     fk_evento INT NOT NULL,
     fk_estatus INT NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE,
-    PRIMARY KEY (fk_evento, fk_estatus, fecha_inicio),
+    PRIMARY KEY (fk_evento, fk_estatus, eid),
     FOREIGN KEY (fk_evento) REFERENCES EVENTO(eid),
     FOREIGN KEY (fk_estatus) REFERENCES ESTATUS(eid)
 );

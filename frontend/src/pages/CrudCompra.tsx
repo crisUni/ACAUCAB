@@ -26,7 +26,7 @@ export default function CrudCompra() {
                 { title: "Fecha", keyName: "fecha" },
                 { title: "Monto", keyName: "monto_total" },
                 { title: "Proveedor", keyName: "fk_proveedor" },
-            ], compraData, [{ title: "Detalle", action: data => { window.location.href = `/compra/detalle/${data.eid}`}}])}
+            ], compraData, [{ title: "Pagar", action: data => fetch(`http://127.0.0.1:3000/api/compra/set_pagada/${data.eid}`) }, { title: "Detalle", action: data => { window.location.href = `/compra/detalle/${data.eid}`}}])}
         </div>
     )
 }

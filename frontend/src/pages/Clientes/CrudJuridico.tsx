@@ -13,7 +13,7 @@ const NewCrudJuridico = () => GenerateForm([
   { label: "Capital Disponible", keyName: "capital_disponible", inputType: "number", required: true },
   { label: "Direccion Fisica Principal", keyName: "fk_lugar_1", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true },
   { label: "Direccion Fiscal", keyName: "fk_lugar_2", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true }
-], { url: 'http://127.0.0.1:3000/api/cliente_juridico' })
+], { url: 'http://127.0.0.1:3000/api/cliente_juridico' , callback: (data) => window.location.href = `/clientes-juridicos` })
 
 export default function CrudJuridico() {
   const [juridicoData, setJuridicoData] = useState<Array<any>>([])

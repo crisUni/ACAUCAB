@@ -69,8 +69,8 @@ const DynamicOptionInputs = ({ endpoint, onChange }) => {
 
   const notifyChange = (index, optionValue, amountValue) => {
     const valuesArray = inputs.map((_, idx) => {
-      const eid = selectedOptions[idx] || '';
-      const amount = amounts[idx] || 0;
+      const eid = (idx === index ? optionValue : null) || selectedOptions[idx] || '';
+      const amount = (idx === index ? amountValue : null) || amounts[idx] || 0;
       return `${eid},${amount}`;
     });
     if (onChange) {
@@ -79,10 +79,7 @@ const DynamicOptionInputs = ({ endpoint, onChange }) => {
   };
 
   const handleAmountChange = (index, value) => {
-    setAmounts((prevAmounts) => ({
-      ...prevAmounts,
-      [index]: value,
-    }));
+    setAmounts((prevAmounts) => ({ ...prevAmounts, [index]: value }));
     notifyChange(index, selectedOptions[index], value);
   };
 
@@ -93,10 +90,7 @@ const DynamicOptionInputs = ({ endpoint, onChange }) => {
       return newSet;
     });
 
-    setSelectedOptions((prevOptions) => ({
-      ...prevOptions,
-      [index]: value,
-    }));
+    setSelectedOptions((prevOptions) => ({ ...prevOptions, [index]: value }));
     notifyChange(index, value, amounts[index]);
   };
 
