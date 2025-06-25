@@ -2370,3 +2370,57 @@ INSERT INTO VACACION (fecha_inicio, fecha_fin, fk_cargo, fk_empleado) VALUES
 ('2025-02-01', '2025-02-07', 10, 8),
 ('2025-03-01', '2025-03-10', 3, 9),
 ('2025-04-01', '2025-04-15', 5, 10);
+
+
+CREATE OR REPLACE FUNCTION descontar_inventario_detalle_factura()
+RETURNS TRIGGER AS $$
+DECLARE
+  tienda_id INT;
+  lugar_tienda_id INT;
+BEGIN
+  SELECT fk_tienda_fisica INTO tienda_id FROM VENTA WHERE eid = NEW.fk_venta;
+  SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
+
+  UPDATE INVE_TIEN
+  SET cantidad = cantidad - NEW.cantidad
+  WHERE fk_cerveza = NEW.fk_cerveza
+    AND fk_presentacion = NEW.fk_presentacion
+    AND fk_tienda = tienda_id
+    AND fk_lugar_tienda = lugar_tienda_id;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trigger_descuento_inventario_detalle_factura
+AFTER INSERT ON DETALLE_FACTURA
+FOR EACH ROW
+EXECUTE FUNCTION descontar_inventario_detalle_factura();
+
+CREATE OR REPLACE FUNCTION aumentar_inventario_detalle_compra()
+RETURNS TRIGGER AS $$
+DECLARE
+  tienda_id INT;
+  lugar_tienda_id INT;
+BEGIN
+
+  SELECT fk_tienda_fisica INTO tienda_id
+  FROM COMPRA
+  WHERE eid = NEW.fk_compra;
+
+  SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
+
+  INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad)
+  VALUES (NEW.fk_cerveza, NEW.fk_presentacion, tienda_id, lugar_tienda_id, NEW.cantidad)
+  ON CONFLICT (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda)
+  DO UPDATE SET cantidad = INVE_TIEN.cantidad + NEW.cantidad;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_aumentar_inventario_detalle_compra
+AFTER INSERT ON DETALLE_COMPRA
+FOR EACH ROW
+EXECUTE FUNCTION aumentar_inventario_detalle_compra();
