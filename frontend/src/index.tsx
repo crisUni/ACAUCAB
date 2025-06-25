@@ -48,6 +48,13 @@ const server = serve({
       },
     },
 
+        "/api/cervezas": {
+      async GET() {
+        const res = await sql`SELECT * FROM Cerveza`;
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
+
     "/api/form/pnatural": {
       async GET() {
         const res = await ClienteService.getClienteNaturalForm();

@@ -1,3 +1,4 @@
+-- Active: 1750694776958@@127.0.0.1@5432@test@public
 CREATE TABLE IF NOT EXISTS LUGAR (
     eid SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -260,7 +261,10 @@ CREATE TABLE IF NOT EXISTS EMPL_HORA (
     fk_empleado INT NOT NULL,
     fk_horario INT NOT NULL,
     asistencia INT,
-    PRIMARY KEY (fk_empleado, fk_horario),
+    fecha DATE NOT NULL,
+    hora_entrada TIME,
+    hora_salida TIME,
+    PRIMARY KEY (fk_empleado, fk_horario, fecha),
     FOREIGN KEY (fk_empleado) REFERENCES EMPLEADO(eid),
     FOREIGN KEY (fk_horario) REFERENCES HORARIO(eid)
 );
@@ -525,19 +529,17 @@ CREATE TABLE IF NOT EXISTS INVE_EVEN (
 CREATE TABLE IF NOT EXISTS PUNT_CLIE (
     fk_punto INT NOT NULL,
     fk_cliente INT NOT NULL,
-    fk_tasa_cambio INT NOT NULL,
     cantidad_puntos INT NOT NULL,
-    PRIMARY KEY (fk_punto, fk_cliente),
+    PRIMARY KEY (fk_cliente),
     FOREIGN KEY (fk_punto) REFERENCES PUNTO(fk_metodo_pago),
-    FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid),
-    FOREIGN KEY (fk_tasa_cambio) REFERENCES TASA_CAMBIO(eid)
+    FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid)
 );
+
 
 CREATE TABLE IF NOT EXISTS PAGO (
     fk_metodo_pago INT NOT NULL,
     fk_venta INT NOT NULL,
     fk_tasa_cambio INT NOT NULL,
-    monto FLOAT NOT NULL,
     PRIMARY KEY (fk_metodo_pago, fk_venta),
     FOREIGN KEY (fk_metodo_pago) REFERENCES METODO_PAGO(eid),
     FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
