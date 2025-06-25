@@ -685,7 +685,14 @@ VALUES ('Malta Best Malz Pale Ale'),
 INSERT INTO ROL (nombre, descripcion) VALUES
 ('Administrador del Sistema', 'Acceso completo a la configuración del sistema, gestión de usuarios, productos y reportes.'),
 ('Cliente Registrado', 'Usuario con cuenta que puede realizar pedidos, ver historial de compras y gestionar su perfil.');
-
+('Gerente de Ventas', 'Supervisa el equipo de ventas, analiza el rendimiento y establece estrategias comerciales.'),
+('Soporte Técnico', 'Proporciona asistencia a los usuarios con problemas técnicos, dudas sobre el funcionamiento y resolución de incidencias.'),
+('Almacenista', 'Gestiona el inventario, realiza el seguimiento de entradas y salidas de productos, y prepara pedidos para envío.'),
+('Marketing Digital', 'Desarrolla y ejecuta estrategias de marketing online, incluyendo campañas de email, SEO y redes sociales.'),
+('Desarrollador', 'Mantiene y mejora la plataforma tecnológica, implementa nuevas funcionalidades y corrige errores.'),
+('Diseñador Gráfico', 'Crea elementos visuales para el sitio web, materiales de marketing y branding del producto.'),
+('Analista de Datos', 'Recopila, procesa y analiza datos para identificar tendencias, generar informes y apoyar la toma de decisiones.'),
+('Control de Calidad', 'Revisa productos y procesos para asegurar que cumplan con los estándares de calidad establecidos.');
 
 -- ▗▄▄▖  ▗▄▖ ▗▖  ▗▖ ▗▄▄▖ ▗▄▖                                    
 -- ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌▐▌   ▐▌ ▐▌                                   
@@ -2548,3 +2555,127 @@ CREATE TRIGGER trigger_sumar_inventario_al_pagar_compra
 AFTER INSERT OR UPDATE ON ESTA_COMP
 FOR EACH ROW
 EXECUTE FUNCTION sumar_inventario_al_pagar_compra();
+
+
+CREATE OR REPLACE FUNCTION actualizar_monto_total_compra()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE COMPRA
+    SET monto_total = monto_total + (NEW.cantidad * NEW.precio_unitario)
+    WHERE eid = NEW.fk_compra;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_actualizar_monto_total_compra
+AFTER INSERT ON DETALLE_COMPRA
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_monto_total_compra();
+
+CREATE OR REPLACE FUNCTION actualizar_monto_total_venta()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE VENTA
+    SET monto_total = monto_total + (NEW.cantidad * NEW.precio_unitario)
+    WHERE eid = NEW.fk_venta;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_actualizar_monto_total_venta
+AFTER INSERT ON DETALLE_FACTURA
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_monto_total_venta();
+
+CREATE OR REPLACE FUNCTION sumar_puntos_al_pagar_venta()
+RETURNS TRIGGER AS $$
+DECLARE
+  cliente_id INT;
+  monto FLOAT;
+  puntos INT;
+  punto_id INT;
+BEGIN
+
+  IF NEW.fk_estatus = 3 THEN
+    SELECT fk_cliente, monto_total INTO cliente_id, monto
+    FROM VENTA
+    WHERE eid = NEW.fk_venta;
+
+    SELECT fk_punto INTO punto_id FROM PUNT_CLIE WHERE fk_cliente = cliente_id;
+
+    puntos := FLOOR(monto * 0.05);
+
+    IF punto_id IS NOT NULL THEN
+      UPDATE PUNT_CLIE
+      SET cantidad_puntos = cantidad_puntos + puntos
+      WHERE fk_cliente = cliente_id;
+    ELSE
+      SELECT fk_metodo_pago INTO punto_id FROM PUNTO LIMIT 1;
+      INSERT INTO PUNT_CLIE (fk_punto, fk_cliente, cantidad_puntos)
+      VALUES (punto_id, cliente_id, puntos);
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_sumar_puntos_al_pagar_venta
+AFTER INSERT OR UPDATE ON ESTA_VENT
+FOR EACH ROW
+EXECUTE FUNCTION sumar_puntos_al_pagar_venta();
+
+
+
+CREATE OR REPLACE FUNCTION trigger_reponer_inventario()
+RETURNS TRIGGER AS $$
+DECLARE
+    v_proveedor_id INT;
+    v_precio_unitario FLOAT;
+    v_compra_id INT;
+    v_cerveza_nombre VARCHAR(100);
+    v_orden_pendiente INT;
+BEGIN
+    IF NEW.cantidad < 100 THEN
+        SELECT COUNT(*) INTO v_orden_pendiente
+        FROM COMPRA c
+        JOIN DETALLE_COMPRA d ON d.fk_compra = c.eid
+        JOIN ESTA_COMP ec ON ec.fk_compra = c.eid
+        WHERE d.fk_cerveza = NEW.fk_cerveza
+          AND d.fk_presentacion = NEW.fk_presentacion
+          AND c.fk_proveedor = (SELECT fk_proveedor FROM CERVEZA WHERE eid = NEW.fk_cerveza)
+          AND ec.fk_estatus <> 3;
+
+        IF v_orden_pendiente = 0 THEN
+            SELECT fk_proveedor, nombre INTO v_proveedor_id, v_cerveza_nombre
+            FROM CERVEZA
+            WHERE eid = NEW.fk_cerveza;
+
+            SELECT precio INTO v_precio_unitario
+            FROM CERV_PRES
+            WHERE fk_cerveza = NEW.fk_cerveza AND fk_presentacion = NEW.fk_presentacion
+            LIMIT 1;
+
+            INSERT INTO COMPRA (fecha, monto_total, fk_proveedor)
+            VALUES (CURRENT_DATE, 500 * v_precio_unitario, v_proveedor_id)
+            RETURNING eid INTO v_compra_id;
+
+            INSERT INTO DETALLE_COMPRA (cantidad, precio_unitario, fk_compra, fk_cerveza, fk_presentacion)
+            VALUES (500, v_precio_unitario, v_compra_id, NEW.fk_cerveza, NEW.fk_presentacion);
+
+
+            RAISE NOTICE 'Orden de compra generada automáticamente para % (cerveza_id=%), presentación %, proveedor %, cantidad 500', v_cerveza_nombre, NEW.fk_cerveza, NEW.fk_presentacion, v_proveedor_id;
+        ELSE
+            RAISE NOTICE 'Ya existe una orden pendiente para este producto/presentación, no se genera otra.';
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+DROP TRIGGER IF EXISTS trigger_reponer_inventario ON INVE_TIEN;
+
+CREATE TRIGGER trigger_reponer_inventario
+AFTER UPDATE ON INVE_TIEN
+FOR EACH ROW
+EXECUTE FUNCTION trigger_reponer_inventario();
