@@ -48,11 +48,19 @@ const server = serve({
       },
     },
 
-        "/api/cervezas": {
+    "/api/cervezas": {
       async GET() {
         const res = await sql`SELECT * FROM Cerveza`;
         return Response.json(res, CORS_HEADERS);
       }
+    },
+
+    "/api/form/clientes": {
+      async GET() {
+        const natu = await ClienteService.getClienteNaturalForm();
+        const juri = await ClienteService.getClienteJuridicoForm();
+        return Response.json([...natu, ...juri], CORS_HEADERS);
+      },
     },
 
     "/api/form/pnatural": {
@@ -88,13 +96,25 @@ const server = serve({
       },
     },
 
-
     "/api/form/providers": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
         const res = await sql`
           SELECT eid AS "eid", denominacion_comercial ||' / '|| razon_social AS "displayName"
           FROM Proveedor`;
+        return Response.json(res, CORS_HEADERS)
+      },
+    },
+
+    "/api/form/inve_tien": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const res = await sql`
+          SELECT CAST(IT.fk_cerveza AS text)||','||CAST(IT.fk_presentacion AS Text)||','||CAST(IT.fk_tienda AS text)||','||CAST(IT.fk_lugar_tienda as text) AS "eid",
+          C.nombre||': '||P.nombre AS "displayName"
+          FROM INVE_TIEN as IT
+          JOIN Cerveza as C on IT.fk_cerveza = C.eid
+          JOIN Presentacion as P on IT.fk_presentacion = P.eid`;
         return Response.json(res, CORS_HEADERS)
       },
     },
@@ -113,6 +133,30 @@ const server = serve({
           ;`;
         return Response.json(res, CORS_HEADERS)
       },
+    },
+
+    "/api/form/metodo_pago": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const res = await sql`
+          SELECT M.eid AS "eid", 'Tarjeta: '||T.nombre_titular||', '||T.numero_tarjeta AS "displayName"
+          FROM Metodo_pago AS M
+          JOIN Tarjeta AS T on T.fk_metodo_pago = M.eid
+          UNION
+          SELECT M.eid AS "eid", 'Cheque: '||C.numero AS "displayName"
+          FROM Metodo_pago AS M
+          JOIN Cheque AS C on C.fk_metodo_pago = M.eid
+          UNION
+          SELECT M.eid AS "eid", E.tipo_moneda||': '||E.denominacion AS "displayName"
+          FROM Metodo_pago AS M
+          JOIN Efectivo AS E on E.fk_metodo_pago = M.eid
+          UNION
+          SELECT M.eid AS "eid", 'Canjeo de Puntos' AS "displayName"
+          FROM Metodo_pago AS M
+          JOIN Punto AS P on P.fk_metodo_pago = M.eid
+        `
+        return Response.json(res, CORS_HEADERS)
+      }
     },
 
     "/api/roles": {

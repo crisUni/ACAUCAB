@@ -10,7 +10,7 @@ const NewCrudJuridico = () => GenerateForm([
   { label: "Razon Social", keyName: "razon_social", inputType: "text", required: true },
   { label: "Pagina Web", keyName: "pagina_web", inputType: "text", required: true },
   { label: "Fecha de Nacimiento", keyName: "fecha_nacimiento", inputType: "date", required: true },
-  { label: "Capital Disponible", keyName: "capital_disponible", inputType: "date", required: true },
+  { label: "Capital Disponible", keyName: "capital_disponible", inputType: "number", required: true },
   { label: "Direccion Fisica Principal", keyName: "fk_lugar_1", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true },
   { label: "Direccion Fiscal", keyName: "fk_lugar_2", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true }
 ], { url: 'http://127.0.0.1:3000/api/cliente_juridico' })
