@@ -53,19 +53,19 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         return res;
     });
 
-    const handleCatalogChange = (e: any) => {
-        const { name, value } = e.target;
+    const handleChange = (e: any) => {
+        const { name, value }: { name: string, value: string | string[] } = e.target;
+        console.log(value)
         setFormData({ ...formData, [name]: value, });
     };
 
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value, });
+    const handleDynamicChange = (e: any) => {
+        console.log(e)
     };
 
     function generateHTML(entry: FormEntry<unknown> | FormEntrySelectFromDatabase): JSX.Element {
         if ('multiple' in entry)
-            return (<DynamicOptionInputs eidKey={entry.keyName} endpoint={entry.fetchFrom}/>)
+            return (<DynamicOptionInputs eidKey={entry.keyName} endpoint={entry.fetchFrom} onChange={(d: string) => handleChange({ target: { name: String(entry.keyName), value: d }})}/>)
         if ('fetchFrom' in entry)
             return generateSelectHTML(entry as FormEntrySelectFromDatabase);
         if ('inputType' in entry)
@@ -120,12 +120,23 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
 
         let newFormData = formData;
         for (const key in formData) {
-            const split_key = key.split(',');
+            console.log(key + '')
+            const split_key = (key + '').split(',');
             if (split_key.length < 2) continue;
-            const split_values: string[] = formData[key].split(',')
-            for (const i in split_values)
-                newFormData = { ...newFormData, [split_key[i]]: split_values[i] }
-            delete newFormData[key]
+            if (Array.isArray(formData[key])) {
+                for (const data of formData[key]) {
+                    const split_values: string[] = data.split(',')
+                    for (const i in split_values)
+                        newFormData = { ...newFormData, [split_key[i]]: [...(newFormData[split_key[i]] || []), split_values[i]] }
+                    delete newFormData[key]
+                }
+            } else {
+                const split_values: string[] = formData[key].split(',')
+                for (const i in split_values)
+                    newFormData = { ...newFormData, [split_key[i]]: split_values[i] }
+                delete newFormData[key]
+            }
+
         }
 
         for (const key in newFormData)

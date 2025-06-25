@@ -1,9 +1,51 @@
 import React, { useState, useEffect } from 'react';
 
-const OptionInput = ({ endpoint, index, onAmountChange }) => {
+const OptionInput = ({ index, onAmountChange, onOptionChange, allSelectedOptions, options }) => {
+  const [amount, setAmount] = useState('');
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    setAmount(value);
+    onAmountChange(index, value);
+  };
+
+  const handleOptionChange = (e) => {
+    const value = e.target.value;
+    setSelectedOption(value);
+    onOptionChange(index, value);
+  };
+
+  return (
+    <div style={{ marginBottom: '10px' }}>
+      <select value={selectedOption} onChange={handleOptionChange}>
+        <option value="" disabled>
+          Seleccionar una opción
+        </option>
+        {options.map((option) => (
+          <option key={option.eid} value={option.eid} disabled={allSelectedOptions.has(option.eid) && selectedOption !== option.eid}>
+            {option.displayName}
+          </option>
+        ))}
+      </select>
+      <input
+        type="number"
+        value={amount}
+        onChange={handleAmountChange}
+        placeholder="Amount"
+        style={{ marginLeft: '10px' }}
+      />
+    </div>
+  );
+};
+
+const DynamicOptionInputs = ({ endpoint, onChange }) => {
+  const [inputs, setInputs] = useState([]);
+  const [amounts, setAmounts] = useState({});
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [allSelectedOptions, setAllSelectedOptions] = useState(new Set());
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [amount, setAmount] = useState('');
 
   useEffect(() => {
     const fetchOptions = async () => {
@@ -21,42 +63,19 @@ const OptionInput = ({ endpoint, index, onAmountChange }) => {
     fetchOptions();
   }, [endpoint]);
 
-  const handleAmountChange = (e) => {
-    const value = e.target.value;
-    setAmount(value);
-    onAmountChange(index, value); // Notify parent component of the amount change
-  };
-
-  if (loading) {
-    return <p>Loading options...</p>;
-  }
-
-  return (
-    <div style={{ marginBottom: '10px' }}>
-      <select>
-        {options.map((option) => (
-          <option key={option.eid} value={option.eid}>
-            {option.displayName}
-          </option>
-        ))}
-      </select>
-      <input
-        type="number"
-        value={amount}
-        onChange={handleAmountChange}
-        placeholder="Amount"
-        style={{ marginLeft: '10px' }}
-      />
-    </div>
-  );
-};
-
-const DynamicOptionInputs = ({ eidKey = 'eid', endpoint }) => {
-  const [inputs, setInputs] = useState([]);
-  const [amounts, setAmounts] = useState({});
-
   const addInput = () => {
     setInputs([...inputs, inputs.length]);
+  };
+
+  const notifyChange = (index, optionValue, amountValue) => {
+    const valuesArray = inputs.map((_, idx) => {
+      const eid = selectedOptions[idx] || '';
+      const amount = amounts[idx] || 0;
+      return `${eid},${amount}`;
+    });
+    if (onChange) {
+      onChange(valuesArray);
+    }
   };
 
   const handleAmountChange = (index, value) => {
@@ -64,18 +83,34 @@ const DynamicOptionInputs = ({ eidKey = 'eid', endpoint }) => {
       ...prevAmounts,
       [index]: value,
     }));
+    notifyChange(index, selectedOptions[index], value);
   };
 
-  const getValues = () => {
-    const result = inputs.map((_, index) => ({
-      [eidKey]: document.querySelectorAll('select')[index].value,
-      amount: amounts[index] || 0, // Default to 0 if no amount is provided
+  const handleOptionChange = (index, value) => {
+    setAllSelectedOptions((prev) => {
+      const newSet = new Set(prev);
+      if (value) newSet.add(value);
+      return newSet;
+    });
+
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [index]: value,
     }));
-    console.log(result); // You can handle the result as needed
-    return result; // Return the result if needed
+    notifyChange(index, value, amounts[index]);
   };
 
-  // You can call getValues() from a parent component or another event as needed
+  const clearAllInputs = () => {
+    setInputs([]);
+    setAmounts({});
+    setSelectedOptions({});
+    setAllSelectedOptions(new Set());
+    notifyChange(-1, '', 0);
+  };
+
+  if (loading) {
+    return <p>Loading options...</p>;
+  }
 
   return (
     <div>
@@ -83,11 +118,18 @@ const DynamicOptionInputs = ({ eidKey = 'eid', endpoint }) => {
         <OptionInput
           key={index}
           index={index}
-          endpoint={endpoint} // Pass the endpoint prop to OptionInput
           onAmountChange={handleAmountChange}
+          onOptionChange={handleOptionChange}
+          allSelectedOptions={allSelectedOptions}
+          options={options}
         />
       ))}
-      <button type="button" onClick={addInput}>Add Option Input</button>
+      <button type="button" onClick={addInput} disabled={inputs.length >= options.length}>
+        Add Option Input
+      </button>
+      <button type="button" onClick={clearAllInputs} style={{ marginLeft: '10px' }}>
+        Clear All
+      </button>
     </div>
   );
 };

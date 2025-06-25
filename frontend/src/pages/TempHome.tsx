@@ -16,6 +16,9 @@ export default function TempHome() {
             <li key="Compra">
                 <a href="/compra">compra</a>
             </li>
+            <li key="Venta">
+                <a href="/venta">venta</a>
+            </li>
         </ul>
     )
 }

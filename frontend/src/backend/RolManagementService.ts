@@ -27,7 +27,7 @@ const RolManagementService = {
   getRolSQL: async (): Promise<Array<any>> =>
     await sql`
     SELECT eid, nombre ||': '|| descripcion as "displayName"
-    FROM Privilegio p`,
+    FROM Rol`,
 
   // ROL PRIVILEGIO
 

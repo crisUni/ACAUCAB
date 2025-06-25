@@ -5,6 +5,7 @@ import home from "./pages/home.html"
 import users from "./pages/crud_user.html"
 import ClienteService from "./backend/ClienteService";
 import RolManagementService from "./backend/RolManagementService";
+import VentaService from "./backend/VentaService";
 
 const CORS_HEADERS = {
   headers: {
@@ -80,6 +81,7 @@ const server = serve({
       },
     },
 
+
     "/api/form/providers": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
@@ -90,15 +92,17 @@ const server = serve({
       },
     },
 
-    "/api/form/inve_tien": {
+    "/api/form/inve_tien/:proveedor": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
-      async GET() {
+      async GET(req, _) {
+        const proveedor = req.params.proveedor;
         const res = await sql`
           SELECT CAST(IT.fk_cerveza AS text)||','||CAST(IT.fk_presentacion AS Text)||','||CAST(IT.fk_tienda AS text)||','||CAST(IT.fk_lugar_tienda as text) AS "eid",
           C.nombre||': '||P.nombre AS "displayName"
           FROM INVE_TIEN as IT
           JOIN Cerveza as C on IT.fk_cerveza = C.eid
           JOIN Presentacion as P on IT.fk_presentacion = P.eid
+          WHERE C.fk_proveedor = ${proveedor}
           ;`;
         return Response.json(res, CORS_HEADERS)
       },
@@ -107,7 +111,7 @@ const server = serve({
     "/api/roles": {
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
-        const res = RolManagementService.postRolSQL(body.insert_data);
+        const res = await RolManagementService.postRolSQL(body.insert_data);
         return Response.json(res, CORS_HEADERS);
       },
       async DELETE(req, _) {
@@ -198,6 +202,62 @@ const server = serve({
         return Response.json(res, CORS_HEADERS);
       },
     },
+
+    "/api/venta": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() { return Response.json(await VentaService.getVentaSQL(), CORS_HEADERS); },
+    },
+
+    "/api/venta/detalle/:id": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const id = req.params.id;
+        return Response.json(await (sql`SELECT * FROM Detalle_factura WHERE fk_venta = ${id}`), CORS_HEADERS);
+      },
+    },
+
+    "/api/venta/pagos/:id": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const id = req.params.id;
+        return Response.json(await (sql`SELECT * FROM Pago WHERE fk_venta = ${id}`), CORS_HEADERS);
+      },
+    },
+
+    "/api/compra": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() { return Response.json(await (sql`SELECT * FROM Compra`), CORS_HEADERS); },
+
+    },
+
+    "/api/compra/:id": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const id = req.params.id;
+        return Response.json(await (sql`SELECT * FROM Detalle_compra WHERE fk_compra = ${id}`), CORS_HEADERS);
+      },
+
+    },
+
+    "/api/compra/nueva/:proveedorId": {
+      async POST(req, _) {
+        const body = await req.json()
+        const compra = (await sql`insert into compra(fecha, monto_total, fk_proveedor) values (CURRENT_DATE, 0, ${req.params.proveedorId}) returning *`)[0]
+        for (const idx in body.insert_data.cantidad) {
+          const { precio } = (await sql`select precio from cerv_pres where fk_cerveza = ${body.insert_data.fk_cerveza[idx]} and fk_presentacion = ${body.insert_data.fk_presentacion[idx]}`)[0];
+          const detalle_compra = {
+            cantidad: Number(body.insert_data.cantidad[idx]),
+            precio_unitario: precio,
+            fk_compra: Number(compra.eid),
+            fk_cerveza:  Number(body.insert_data.fk_cerveza[idx]),
+            fk_presentacion: Number(body.insert_data.fk_presentacion[idx]),
+          }
+          await sql`INSERT INTO Detalle_Compra ${sql(detalle_compra)}`
+        }
+        return Response.json(compra, CORS_HEADERS)
+      }
+    }
+
   },
   development: process.env.NODE_ENV !== "production" && {
     // Enable browser hot reloading in development
