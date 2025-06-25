@@ -11,7 +11,6 @@ const NewCrudNatural = () => GenerateForm([
   { label: "Apellido", keyName: "apellido", inputType: "text", required: true },
   { label: "Fecha de Nacimiento", keyName: "fecha_nacimiento", inputType: "date", required: true },
   { label: "Direccion 1", keyName: "fk_lugar_1", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true },
-  { label: "Direccion 2", keyName: "fk_lugar_2", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true }
 ], { url: 'http://127.0.0.1:3000/api/cliente_natural' })
 
 export default function CrudNatural() {
@@ -27,9 +26,11 @@ export default function CrudNatural() {
     <div>
       <a href="/">Back</a>
       <a href="/clientes-juridicos">Juridico</a>
-      <h1>Crear Clientes</h1>
+      <h1>Menu Clientes Naturales</h1>
       <h2>Crear Natural</h2>
       <NewCrudNatural />
+
+      <h2>Eliminar Clientes</h2>
       
       <h2> Clientes Naturales </h2>
       <ul>
@@ -39,7 +40,6 @@ export default function CrudNatural() {
           { title: "Direccion", keyName: "direccion" },
           { title: "Numero Registro", keyName: "numero_registro" },
           { title: "Lugar 1", keyName: "fk_lugar_1" },
-          { title: "Lugar 2", keyName: "fk_lugar_2" },
           { title: "Cedula", keyName: "cedula" },
           { title: "Nombre", keyName: "nombre" },
           { title: "Apellido", keyName: "apellido" },

@@ -6,8 +6,7 @@ type Cliente = {
     rif: String,
     direccion: String,
     numero_registro: Number,
-    fk_lugar_1: Number,
-    fk_lugar_2: Number,
+    fk_lugar_1: Number
 };
 
 type Natural = {
@@ -23,7 +22,8 @@ type Juridico = {
     denominacion_comercial: String,
     razon_social: String,
     pagina_web: String,
-    capital_disponible: Number
+    capital_disponible: Number,
+    fk_lugar_2: Number,
 }
 
 const ClienteService = {
@@ -65,7 +65,7 @@ const ClienteService = {
           direccion: data.direccion,
           numero_registro: data.numero_registro,
           fk_lugar_1: data.fk_lugar_1,
-          fk_lugar_2: data.fk_lugar_2
+          
         }, {
           cedula: data.cedula,
           nombre: data.nombre,
@@ -80,13 +80,13 @@ const ClienteService = {
           rif: data.rif,
           direccion: data.direccion,
           numero_registro: data.numero_registro,
-          fk_lugar_1: data.fk_lugar_1,
-          fk_lugar_2: data.fk_lugar_2
+          fk_lugar_1: data.fk_lugar_1
         }, {
           denominacion_comercial: data.denominacion_comercial,
           razon_social: data.razon_social,
           pagina_web: data.pagina_web,
-          capital_disponible: data.capital_disponible
+          capital_disponible: data.capital_disponible,
+          fk_lugar_2: data.fk_lugar_2
         })
         return res;
     },
@@ -101,9 +101,9 @@ const ClienteService = {
 
     getClienteJuridicoForm: async function() {
         const res = await sql`
-          SELECT c.eid||','||n.eid AS "eid", c.rif||': '||j.denominacion_comercial AS "displayName"
+          SELECT c.eid||','||j.eid AS "eid", c.rif||': '||j.denominacion_comercial AS "displayName"
           FROM cliente as c
-          JOIN pjuridico as j on c.eid = jn.fk_cliente`
+          JOIN pjuridico as j on c.eid = j.fk_cliente`
         return res;
     }
 }

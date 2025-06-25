@@ -18,8 +18,9 @@ export default function CrudCompra() {
     return (
         <div>
             <a href="/">Back</a>
-            <h1> Seleccionar a quien se le haremos la compra </h1>
+            <h2> Seleccionar a quien se le haremos la compra </h2>
             {possibleProviders()}
+            <h2> Lista de Compras </h2>
             {GenerateColumn([
                 { title: "Identificador", keyName: "eid" },
                 { title: "Fecha", keyName: "fecha" },
