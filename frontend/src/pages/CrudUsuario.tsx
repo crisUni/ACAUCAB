@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GenerateForm from "@/components/FormGenerator";
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink from "@/components/SmartLink";
 
 const possibleUsers = () => GenerateForm([
   { label: "Nombre de Usuario", keyName: "nombre", inputType: "text", required: true },
@@ -10,7 +11,7 @@ const possibleUsers = () => GenerateForm([
     fetchFrom: "http://127.0.0.1:3000/api/form/user_creation",
     required: true },
   { label: "Rol de la Cuenta", keyName: "fk_rol", fetchFrom: "http://127.0.0.1:3000/api/form/roles", required: true },
-  ], {url:"http://127.0.0.1:3000/api/usuario"})
+  ], {url:"http://127.0.0.1:3000/api/usuario" , callback: () => (window.location.href = `/usuario`)})
 
 
 export default function CrudUsuario() {
@@ -25,7 +26,7 @@ export default function CrudUsuario() {
 
     return (
         <div>
-            <a href="/">Back</a>
+            <SmartLink href="/">Back</SmartLink>
             <h1>Menu Usuarios</h1>
             <h2>Crear Usuario</h2>
             { possibleUsers() }

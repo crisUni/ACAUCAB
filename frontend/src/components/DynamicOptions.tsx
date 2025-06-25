@@ -39,7 +39,7 @@ const OptionInput = ({ index, onAmountChange, onOptionChange, allSelectedOptions
   );
 };
 
-const DynamicOptionInputs = ({ endpoint, onChange }) => {
+const DynamicOptionInputs = ({ label, endpoint, onChange }: { label: string, endpoint: string, onChange: (data: any) => void}) => {
   const [inputs, setInputs] = useState([]);
   const [amounts, setAmounts] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -108,6 +108,7 @@ const DynamicOptionInputs = ({ endpoint, onChange }) => {
 
   return (
     <div>
+      <label> {label} </label>
       {inputs.map((_, index) => (
         <OptionInput
           key={index}

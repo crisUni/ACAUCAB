@@ -1,5 +1,7 @@
 import { HTMLInputTypeAttribute, JSX, useState } from "react"
 import DynamicOptionInputs from "./DynamicOptions"
+import { goto } from "./SmartLink"
+import { useNavigate } from "react-router-dom"
 
 type DynamicOptions = {
     label: string,
@@ -24,13 +26,17 @@ type FormEntrySelectFromDatabase = {
 }
 
 type FormOptions = {
-    url?: string,
+    url?: string
     method?: "POST" | "DELETE"
-    callback?: (data: any) => void;
-    fetchCallback?: (data: any) => void;
+    callback?: (data: any) => void
+    fetchCallback?: (data: any) => void
+    redirect?: string
+    redirect_var?: string
 }
 
 function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions)[], options: FormOptions) {
+    const navigate = useNavigate();
+
     const [fromDatabase, setFromDatabase] = useState<{ [key: string | symbol]: any }>({});
     const [formData, setFormData] = useState<{ [key: string | symbol]: any }>(() => {
         const res: { [key: string | symbol]: any } = {};
@@ -56,17 +62,12 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
 
     const handleChange = (e: any) => {
         const { name, value }: { name: string, value: string | string[] } = e.target;
-        console.log(value)
         setFormData({ ...formData, [name]: value, });
-    };
-
-    const handleDynamicChange = (e: any) => {
-        console.log(e)
     };
 
     function generateHTML(entry: FormEntry<unknown> | FormEntrySelectFromDatabase): JSX.Element {
         if ('multiple' in entry)
-            return (<DynamicOptionInputs eidKey={entry.keyName} endpoint={entry.fetchFrom} onChange={(d: string) => handleChange({ target: { name: String(entry.keyName), value: d }})}/>)
+            return (<DynamicOptionInputs label={entry.label} eidKey={entry.keyName} endpoint={entry.fetchFrom} onChange={(d: string) => handleChange({ target: { name: String(entry.keyName), value: d }})}/>)
         if ('fetchFrom' in entry)
             return generateSelectHTML(entry as FormEntrySelectFromDatabase);
         if ('inputType' in entry)
@@ -123,7 +124,7 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        let newFormData = formData;
+        let newFormData: { [key: string]: any } = formData;
         for (const key in formData) {
             console.log(key + '')
             const split_key = (key + '').split(',');
@@ -153,6 +154,11 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
             await postToUrl(data)
         if ('callback' in options && options.callback !== undefined)
             options.callback(JSON.parse(data))
+        if ('redirect' in options && options.redirect) {
+            const url = options.redirect + (newFormData[options.redirect_var || ''] || '')
+            console.log(url)
+            navigate(url)
+        }
     };
 
     return (

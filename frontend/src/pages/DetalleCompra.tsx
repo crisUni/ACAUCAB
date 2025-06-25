@@ -1,4 +1,5 @@
 import GenerateColumn from "@/components/GenerateColumn"
+import SmartLink from "@/components/SmartLink";
 import { useEffect, useState } from "react"
 
 export default function DetalleCompra() {
@@ -13,7 +14,7 @@ export default function DetalleCompra() {
 
     return (
         <div>
-            <a href="/compra">Back</a>
+            <SmartLink href="/compra">Back</SmartLink>
             <h1> Detalle de la compra </h1>
             {GenerateColumn([
                 { title: "Identificador", keyName: "eid" },

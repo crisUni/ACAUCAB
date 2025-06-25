@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GenerateForm from "@/components/FormGenerator";
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink, { goto } from "@/components/SmartLink";
 
 const NewCrudJuridico = () => GenerateForm([
   { label: "RIF", keyName: "rif", inputType: "text", required: true },
@@ -13,7 +14,7 @@ const NewCrudJuridico = () => GenerateForm([
   { label: "Capital Disponible", keyName: "capital_disponible", inputType: "number", required: true },
   { label: "Direccion Fisica Principal", keyName: "fk_lugar_1", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true },
   { label: "Direccion Fiscal", keyName: "fk_lugar_2", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true }
-], { url: 'http://127.0.0.1:3000/api/cliente_juridico' , callback: (data) => window.location.href = `/clientes-juridicos` })
+], { url: 'http://127.0.0.1:3000/api/cliente_juridico' , callback: () => (window.location.href = `/clientes-juridicos`) })
 
 export default function CrudJuridico() {
   const [juridicoData, setJuridicoData] = useState<Array<any>>([])
@@ -26,8 +27,8 @@ export default function CrudJuridico() {
 
   return (
     <div>
-      <a href="/">Back</a>
-      <a href="/clientes-naturales">Natural</a>
+      <SmartLink href="/">Back</SmartLink>
+      <SmartLink href="/clientes-naturales">Natural</SmartLink>
       
       <h1>Menu Clientes Juridicos</h1>
 

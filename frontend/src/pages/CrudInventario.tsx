@@ -1,4 +1,5 @@
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink, { goto } from "@/components/SmartLink";
 import { useEffect, useState } from "react";
 
 export default function CrudInventario() {
@@ -14,12 +15,12 @@ export default function CrudInventario() {
         data.cantidad = Number(prompt("Seleccione la nueva cantidad para la cerveza"))
         fetch("http://127.0.0.1:3000/api/inventario_tienda",
             { method: "PUT", body: JSON.stringify(data) })
-            .then(res => (window.location.href = window.location.href))
+            .then(res => goto(window.location.href))
     }
 
     return (
         <div>
-            <a href="/">Back</a>
+            <SmartLink href="/">Back</SmartLink>
             <h1> Inventario </h1>
             <ul>
                 { /* TODO: Hacer que lugar 1, 2 no sea el numero sino el lugar*/}

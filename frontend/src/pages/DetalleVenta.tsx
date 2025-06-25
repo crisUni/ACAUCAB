@@ -1,4 +1,5 @@
 import GenerateColumn from "@/components/GenerateColumn"
+import SmartLink from "@/components/SmartLink";
 import { useEffect, useState } from "react"
 
 // TODO: Mostrar mas informacion META de la venta, como total, cliente, etc
@@ -22,7 +23,7 @@ export default function DetalleVenta() {
 
     return (
         <div>
-            <a href="/venta">Back</a>
+            <SmartLink href="/venta">Back</SmartLink>
             <h1> Detalle de la venta </h1>
             <h2> Pagos </h2>
             {GenerateColumn([

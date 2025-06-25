@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import GenerateForm from "@/components/FormGenerator";
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink from "@/components/SmartLink";
 
 export default function CrudCliente() {
   return (
     <div>
       <h1>Menu Clientes</h1>
-      <a href="/">Back</a>
+      <SmartLink href="/">Back</SmartLink>
       <h2>Menu Naturales</h2>
-      <a href="/clientes-naturales">Natural</a>
+      <SmartLink href="/clientes-naturales">Natural</SmartLink>
       <h2>Menu Juridicos</h2>
-      <a href="/clientes-juridicos">Juridico</a>
+      <SmartLink href="/clientes-juridicos">Juridico</SmartLink>
     </div>
   )
 }

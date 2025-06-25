@@ -29,17 +29,7 @@ services:
       - 3000:3000
     environment:
       POSTGRES_URL: postgres://postgres:admin@postgres-sql:5432/postgres
-  backend:
-    image: oven/bun
-    restart: always
-    volumes:
-      - type: bind
-        source: ./backend
-        target: /home/bun/app
-    working_dir: /home/bun/app
-    command: bun run dev
-    ports:
-      - 3001:3000
+
   jsreport:
     image: jsreport/jsreport:latest
     container_name: jsreport

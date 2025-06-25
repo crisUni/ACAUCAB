@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import GenerateForm from "@/components/FormGenerator";
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink from "@/components/SmartLink";
 
 const RolCreateForm = () => GenerateForm([
   { label: "Nombre del Rol", keyName: "nombre", inputType: "text", required: true },
   { label: "Descripcion", keyName: "descripcion", inputType: "text", required: false }
-], { url: "http://127.0.0.1:3000/api/roles" })
+], { url: "http://127.0.0.1:3000/api/roles", callback: () => (window.location.href = `/roles`)})
 
 const RolDeleteForm = () => GenerateForm([
     { label: "Rol", keyName: "eid", fetchFrom: "http://127.0.0.1:3000/api/form/roles", required: true },
@@ -21,13 +22,11 @@ export default function CrudRol() {
     }, [])
     return (
         <div>
-            <a href="/">Back</a>
+            <SmartLink href="/">Back</SmartLink>
             <h1>Menu Roles</h1>
             <h2>Agregar Rol</h2>
             { RolCreateForm() }
 
-            <h2>Eliminar Roles</h2>
-            { RolDeleteForm() }
 
             <h2>Ver Roles</h2>
             {GenerateColumn([
