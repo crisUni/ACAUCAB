@@ -1,0 +1,23 @@
+.dropdown {
+    position: absolute; /* Position the dropdown absolutely */
+    top: 100%; /* Align it below the input */
+    left: 0; /* Align it to the left of the input */
+    right: 0; /* Make it the same width as the input */
+    background-color: white; /* Background color */
+    border: 1px solid #ccc; /* Border for the dropdown */
+    z-index: 1000; /* Ensure it appears above other content */
+    max-height: 200px; /* Optional: limit the height */
+    overflow-y: auto; /* Optional: add scroll if too many options */
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.dropdown li {
+    padding: 8px; /* Add some padding to the list items */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.dropdown li:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}

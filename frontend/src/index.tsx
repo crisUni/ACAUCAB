@@ -6,6 +6,19 @@ import users from "./pages/crud_user.html"
 import ClienteService from "./backend/ClienteService";
 import RolManagementService from "./backend/RolManagementService";
 import VentaService from "./backend/VentaService";
+import { reporteIngresosEventos, reporteProductosPromocion, reportePuntualidadPorCargo, reporteRankingProveedores, reporteValorPuntosCanjeados } from "./backend/reportes";
+
+function generateUserToken(length: number = 32): string {
+  const characters = '0123456789abcdef';
+  let token = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    token += characters[randomIndex];
+  }
+  return token;
+}
+
+const user_tokens: { [key: string]: number } = {}
 
 const CORS_HEADERS = {
   headers: {
@@ -14,6 +27,7 @@ const CORS_HEADERS = {
     'Access-Control-Allow-Headers': 'Content-Type',
   },
 };
+
 const server = serve({
   routes: {
     // Serve index.html for all unmatched routes.
@@ -193,7 +207,23 @@ const server = serve({
         return Response.json(res, CORS_HEADERS);
       },
     },
-    
+
+    "/api/login":{
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async POST(req: Bun.BunRequest) {
+        const body = await req.json();
+        const res = await sql`SELECT * FROM Usuario WHERE nombre = ${body.insert_data.nombre} AND contraseña = ${body.insert_data.contrasena} LIMIT 1`
+        if (res.length > 0) {
+          const token = generateUserToken()
+          user_tokens[token] = res[0].fk_rol
+          res[0].token = token
+          return Response.json(res, CORS_HEADERS);
+        }
+
+        return Response.json(res, CORS_HEADERS);
+      },
+    },
+
     "/api/roles": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
@@ -268,7 +298,7 @@ const server = serve({
       async GET() {
         const res = await ClienteService.getJuridicoSQL()
         for (const cliente of res) {
-          const puntos = (await sql`SELECT * FROM punt_clie WHERE fk_cliente = ${cliente.eid} order by eid limit 1`)[0];
+          const puntos = (await sql`SELECT * FROM punt_clie WHERE fk_cliente = ${cliente.eid} order by eid desc limit 1`)[0];
           cliente.cantidad_puntos = puntos?.cantidad_puntos || 0;
         }
         return Response.json(res, CORS_HEADERS);
@@ -365,19 +395,19 @@ const server = serve({
       async POST(req, _) {
         const body = await req.json()
         const venta = (await sql`insert into venta(fecha, monto_total, fk_tienda_fisica, fk_cliente) values (CURRENT_DATE, 0, 1, ${req.params.clienteId}) returning *`)[0]
-        
+
         for (const idx in body.insert_data.cantidad) {
           const { precio } = (await sql`select precio from cerv_pres where fk_cerveza = ${body.insert_data.fk_cerveza[idx]} and fk_presentacion = ${body.insert_data.fk_presentacion[idx]}`)[0];
           const detalle_factura = {
             cantidad: Number(body.insert_data.cantidad[idx]),
             precio_unitario: precio,
             fk_venta: Number(venta.eid),
-            fk_cerveza:  Number(body.insert_data.fk_cerveza[idx]),
+            fk_cerveza: Number(body.insert_data.fk_cerveza[idx]),
             fk_presentacion: Number(body.insert_data.fk_presentacion[idx]),
           }
           await sql`INSERT INTO Detalle_Factura ${sql(detalle_factura)}`
         }
-        
+
         const tasa = (await sql`SELECT * FROM tasa_cambio WHERE fecha_fin IS NULL LIMIT 1`)[0];
         for (const idx in body.insert_data.monto) {
           const pago = {
@@ -414,7 +444,7 @@ const server = serve({
             cantidad: Number(body.insert_data.cantidad[idx]),
             precio_unitario: precio,
             fk_compra: Number(compra.eid),
-            fk_cerveza:  Number(body.insert_data.fk_cerveza[idx]),
+            fk_cerveza: Number(body.insert_data.fk_cerveza[idx]),
             fk_presentacion: Number(body.insert_data.fk_presentacion[idx]),
           }
           await sql`INSERT INTO Detalle_Compra ${sql(detalle_compra)}`
@@ -422,7 +452,7 @@ const server = serve({
         return Response.json(compra, CORS_HEADERS)
       }
     },
-    
+
     "/api/puntos/:clienteID": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET(req, _) {
@@ -436,11 +466,15 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
         const res = await sql`
-        SELECT c.nombre AS "fk_cerveza", p.nombre AS "fk_presentacion", lt.nombre AS "fk_lugar_tienda", it.cantidad
+        SELECT c.nombre AS "fk_cerveza_display", c.eid AS "fk_cerveza",
+        p.nombre AS "fk_presentacion_display", p.eid AS "fk_presentacion",
+        lt.nombre AS "fk_lugar_tienda_display", lt.eid AS "fk_lugar_tienda",
+        it.cantidad
         FROM inve_tien as it
         JOIN Cerveza as c on c.eid = it.fk_cerveza
         JOIN Presentacion as p on p.eid = it.fk_presentacion
         JOIN Lugar_Tienda as lt on lt.eid = it.fk_lugar_tienda
+        ORDER BY it.cantidad DESC
         `;
         return Response.json(res, CORS_HEADERS);
       },
@@ -454,8 +488,43 @@ const server = serve({
           
           AND fk_lugar_tienda = ${body.fk_lugar_tienda}
           RETURNING *`;
-          // AND fk_tienda = ${body.fk_tienda}
+        // AND fk_tienda = ${body.fk_tienda}
         return Response.json(res, CORS_HEADERS);
+      }
+    },
+
+    "/api/reporte_1": {
+      async GET() {
+        const res = await reporteProductosPromocion();
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+
+    "/api/reporte_2": {
+      async GET() {
+        const res = await reporteIngresosEventos();
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+
+    "/api/reporte_3": {
+      async GET() {
+        const res = await reportePuntualidadPorCargo();
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+
+    "/api/reporte_4": {
+      async GET() {
+        const res = await reporteRankingProveedores();
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+
+    "/api/reporte_5": {
+      async GET() {
+        const res = await reporteValorPuntosCanjeados()
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
       }
     },
   },

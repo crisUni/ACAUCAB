@@ -11,6 +11,8 @@
   },
   "scripts": {
     "dev": "bun --watch index.ts"
+  },
+  "dependencies": {
+    "jsreport": "^4.9.0"
   }
-
 }

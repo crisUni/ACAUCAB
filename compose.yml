@@ -40,3 +40,13 @@ services:
     command: bun run dev
     ports:
       - 3001:3000
+  jsreport:
+    image: jsreport/jsreport:latest
+    container_name: jsreport
+    ports:
+      - "5488:5488"
+    environment:
+      - JSREPORT_ADMIN_PASSWORD=admin
+      - JSREPORT_ENABLE_XSRF=false
+    volumes:
+      - /jsreport/data

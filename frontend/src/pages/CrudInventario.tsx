@@ -14,7 +14,7 @@ export default function CrudInventario() {
         data.cantidad = Number(prompt("Seleccione la nueva cantidad para la cerveza"))
         fetch("http://127.0.0.1:3000/api/inventario_tienda",
             { method: "PUT", body: JSON.stringify(data) })
-            //.then(res => (window.location.href = window.location.href))
+            .then(res => (window.location.href = window.location.href))
     }
 
     return (
@@ -24,9 +24,9 @@ export default function CrudInventario() {
             <ul>
                 { /* TODO: Hacer que lugar 1, 2 no sea el numero sino el lugar*/}
                 {GenerateColumn([
-                    { title: "Cerveza", keyName: "fk_cerveza" },
-                    { title: "Presentacion", keyName: "fk_presentacion" },
-                    { title: "Lugar En Tienda", keyName: "fk_lugar_tienda" },
+                    { title: "Cerveza", keyName: "fk_cerveza_display" },
+                    { title: "Presentacion", keyName: "fk_presentacion_display" },
+                    { title: "Lugar En Tienda", keyName: "fk_lugar_tienda_display" },
                     { title: "Stock", keyName: "cantidad" },
                 ], inventarioData, [{ title: "Editar Stock", action: (data) => updateStock(data) }])}
             </ul>

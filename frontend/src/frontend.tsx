@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { App } from "./App";
+import Login from "./pages/Login";
+
 import CrudCliente from "./pages/Clientes/CrudCliente";
 import CrudNatural from "./pages/Clientes/CrudNatural";
 import CrudJuridico from "./pages/Clientes/CrudJuridico";
@@ -25,6 +27,8 @@ const app = (
     <Router>
         <Routes>
           <Route path="/" element={<TempHome />} />
+          <Route path="/login" element={<Login />} />
+
           <Route path="/clientes" element={<CrudCliente />} />
           <Route path="/clientes-naturales" element={<CrudNatural />} />
           <Route path="/clientes-juridicos" element={<CrudJuridico />} />

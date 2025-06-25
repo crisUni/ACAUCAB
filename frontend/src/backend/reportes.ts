@@ -1,6 +1,6 @@
 import { sql } from "bun";
 
-const jsreportUrl = "http://localhost:5488/api/report";
+const jsreportUrl = "http://jsreport:5488/api/report";
 
 // 1. Productos mas seleccionados en promociones para "DiarioDeUnaCerveza"
 export async function reporteProductosPromocion() {
@@ -61,6 +61,7 @@ export async function reporteProductosPromocion() {
         data: { productos }
     };
 
+    console.log("POST REQUEST BEING DONE")
     const res = await fetch(jsreportUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,9 +73,8 @@ export async function reporteProductosPromocion() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    const buffer = Buffer.from(await res.arrayBuffer());
-    await Bun.write("productos_promocion_report.pdf", buffer);
     console.log("Reporte generado: productos_promocion_report.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // 2. Ingresos por Venta de Entradas a Eventos por periodo
@@ -150,9 +150,8 @@ export async function reporteIngresosEventos() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    const buffer = Buffer.from(await res.arrayBuffer());
-    await Bun.write("ingresos_eventos_report.pdf", buffer);
     console.log("Reporte generado: ingresos_eventos_report.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // 3. Analisis de Puntualidad por Cargo
@@ -228,10 +227,10 @@ export async function reportePuntualidadPorCargo() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    const buffer = Buffer.from(await res.arrayBuffer());
-    await Bun.write("puntualidad_cargo_report.pdf", buffer);
     console.log("Reporte generado: puntualidad_cargo_report.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
+
 // 4. Ranking de Miembros Proveedores por Tipo de Cerveza
 export async function reporteRankingProveedores() {
     const ranking = await sql`
@@ -303,21 +302,18 @@ export async function reporteRankingProveedores() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    const buffer = Buffer.from(await res.arrayBuffer());
-    await Bun.write("ranking_proveedores_report.pdf", buffer);
     console.log("Reporte generado: ranking_proveedores_report.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // 5. Valor monetario total de puntos canjeados por clientes en los ultimos 6 meses
 export async function reporteValorPuntosCanjeados() {
     const resultado = await sql`
-    SELECT 
-      SUM(mp.monto * tc.tasa_bs_punto) AS valor_total_bs
-    FROM PAGO p
-    JOIN METODO_PAGO mp ON p.fk_metodo_pago = mp.eid
-    JOIN TASA_CAMBIO tc ON p.fk_tasa_cambio = tc.eid
-    JOIN PUNTO pt ON p.fk_metodo_pago = pt.fk_metodo_pago
-    WHERE tc.fecha_inicio >= (CURRENT_DATE - INTERVAL '6 months')
+    SELECT SUM(P.monto * Tc.tasa_bs_punto) AS valor_total_bs
+    FROM Pago AS P
+    JOIN PUNTO AS Pu ON P.fk_metodo_pago = Pu.fk_metodo_pago
+    JOIN TASA_CAMBIO AS Tc ON P.fk_tasa_cambio = Tc.eid
+    WHERE tc.fecha_inicio >= (CURRENT_DATE - INTERVAL '6 months') 
   `;
 
     const valor_total_bs = resultado[0]?.valor_total_bs ?? 0;
@@ -414,9 +410,8 @@ export async function reporteValorPuntosCanjeados() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    const buffer = Buffer.from(await res.arrayBuffer());
-    await Bun.write("valor_puntos_canjeados_report.pdf", buffer);
     console.log("Reporte generado: valor_puntos_canjeados_report.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // Ejecucion directa

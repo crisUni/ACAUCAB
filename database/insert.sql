@@ -1190,16 +1190,16 @@ INSERT INTO EMPL_HORA (fk_empleado, fk_horario, asistencia, fecha, hora_entrada,
 -- ▝▚▄▞▘▗▄▄▞▘▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌▗▄█▄▖▝▚▄▞▘  
 
 INSERT INTO USUARIO (nombre, contraseña, fk_empleado, fk_cliente, fk_proveedor, fk_rol) VALUES
-('sys_admin', MD5('secureAdminPass'), 1, NULL, NULL, 1), 
-('cliente_web_1', MD5('webuser123'), NULL, 2, NULL, 2),    
-('proveedor_admin', MD5('provAdmin!'), NULL, NULL, 1, 1), 
-('cliente_corporativo_user', MD5('corpUserPass'), NULL, 11, NULL, 2), 
-('empleado_user_sales', MD5('salespass'), 3, NULL, NULL, 2), 
-('cliente_web_2', MD5('webuser456'), NULL, 4, NULL, 2),    
-('dev_admin', MD5('devAdminPass'), 5, NULL, NULL, 1),    
-('cliente_vip_user', MD5('vipClientSecure'), NULL, 13, NULL, 2), 
-('proveedor_basic_user', MD5('basicProvPass'), NULL, NULL, 3, 2), 
-('empleado_user_hr', MD5('hrpass'), 7, NULL, NULL, 2);
+('sys_admin', 'secureAdminPass', 1, NULL, NULL, 1), 
+('cliente_web_1', 'webuser123', NULL, 2, NULL, 2),    
+('proveedor_admin', 'provAdmin!', NULL, NULL, 1, 1), 
+('cliente_corporativo_user', 'corpUserPass', NULL, 11, NULL, 2), 
+('empleado_user_sales', 'salespass', 3, NULL, NULL, 2), 
+('cliente_web_2', 'webuser456', NULL, 4, NULL, 2),    
+('dev_admin', 'devAdminPass', 5, NULL, NULL, 1),    
+('cliente_vip_user','vipClientSecure', NULL, 13, NULL, 2), 
+('proveedor_basic_user', 'basicProvPass', NULL, NULL, 3, 2), 
+('empleado_user_hr', 'hrpass', 7, NULL, NULL, 2);
 
 -- ▗▄▄▄▖▗▄▄▄▖▗▖   ▗▄▄▄▖▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖ ▗▄▖   
 --   █  ▐▌   ▐▌   ▐▌   ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌ ▐▌  

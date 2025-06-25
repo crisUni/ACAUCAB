@@ -25,8 +25,9 @@ type FormEntrySelectFromDatabase = {
 
 type FormOptions = {
     url?: string,
-    callback?: (data: any) => void;
     method?: "POST" | "DELETE"
+    callback?: (data: any) => void;
+    fetchCallback?: (data: any) => void;
 }
 
 function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions)[], options: FormOptions) {
@@ -111,7 +112,11 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
             method: options.method === undefined ? "POST" : options.method,
             body: data
         })
-            .then(async res => console.log(await res.json()))
+            .then(async res => {
+                const data = await res.json();
+                console.log(data)
+                if (options.fetchCallback) options.fetchCallback(data);
+            })
             .catch(err => console.error)
     }
 
