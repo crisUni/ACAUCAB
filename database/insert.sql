@@ -728,7 +728,7 @@ INSERT INTO TIPO_TARJETA (nombre, procesador) VALUES
 INSERT INTO ESTATUS (nombre) VALUES
 ('Pendiente'),
 ('En Proceso'),
-('Completado'),
+('Pagado'),
 ('Cancelado'),
 ('En Espera'),
 ('Rechazado'),
@@ -2401,3 +2401,85 @@ INSERT INTO VACACION (fecha_inicio, fecha_fin, fk_cargo, fk_empleado) VALUES
 ('2025-02-01', '2025-02-07', 10, 8),
 ('2025-03-01', '2025-03-10', 3, 9),
 ('2025-04-01', '2025-04-15', 5, 10);
+
+
+CREATE OR REPLACE FUNCTION descontar_inventario_detalle_factura()
+RETURNS TRIGGER AS $$
+DECLARE
+  tienda_id INT;
+  lugar_tienda_id INT;
+  filas_afectadas INT;
+BEGIN
+  SELECT fk_tienda_fisica INTO tienda_id FROM VENTA WHERE eid = NEW.fk_venta;
+
+  IF tienda_id IS NULL THEN
+    RAISE NOTICE 'Venta no asociada a tienda física, no se descuenta inventario.';
+    RETURN NEW;
+  END IF;
+
+  SELECT fk_lugar_tienda INTO lugar_tienda_id
+  FROM INVE_TIEN
+  WHERE fk_cerveza = NEW.fk_cerveza
+    AND fk_presentacion = NEW.fk_presentacion
+    AND fk_tienda = tienda_id
+    AND cantidad >= NEW.cantidad
+  LIMIT 1;
+
+  IF lugar_tienda_id IS NULL THEN
+    RAISE NOTICE 'No hay inventario suficiente para descontar: tienda=%, cerveza=%, presentacion=%', tienda_id, NEW.fk_cerveza, NEW.fk_presentacion;
+    RETURN NEW;
+  END IF;
+
+  UPDATE INVE_TIEN
+  SET cantidad = cantidad - NEW.cantidad
+  WHERE fk_cerveza = NEW.fk_cerveza
+    AND fk_presentacion = NEW.fk_presentacion
+    AND fk_tienda = tienda_id
+    AND fk_lugar_tienda = lugar_tienda_id
+  RETURNING 1 INTO filas_afectadas;
+
+  RAISE NOTICE 'Trigger descontar_inventario_detalle_factura: tienda_id=%, lugar_tienda_id=%, filas_afectadas=%', tienda_id, lugar_tienda_id, filas_afectadas;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trigger_descuento_inventario_detalle_factura
+AFTER INSERT ON DETALLE_FACTURA
+FOR EACH ROW
+EXECUTE FUNCTION descontar_inventario_detalle_factura();
+
+
+CREATE OR REPLACE FUNCTION sumar_inventario_al_pagar_compra()
+RETURNS TRIGGER AS $$
+DECLARE
+  tienda_id INT;
+  lugar_tienda_id INT;
+  detalle RECORD;
+BEGIN
+  IF NEW.fk_estatus = 3 THEN
+
+    SELECT fk_tienda_fisica INTO tienda_id
+    FROM COMPRA
+    WHERE eid = NEW.fk_compra;
+
+    SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
+
+    FOR detalle IN
+      SELECT * FROM DETALLE_COMPRA WHERE fk_compra = NEW.fk_compra
+    LOOP
+      INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad)
+      VALUES (detalle.fk_cerveza, detalle.fk_presentacion, tienda_id, lugar_tienda_id, detalle.cantidad)
+      ON CONFLICT (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda)
+      DO UPDATE SET cantidad = INVE_TIEN.cantidad + detalle.cantidad;
+    END LOOP;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_sumar_inventario_al_pagar_compra
+AFTER INSERT OR UPDATE ON ESTA_COMP
+FOR EACH ROW
+EXECUTE FUNCTION sumar_inventario_al_pagar_compra();
