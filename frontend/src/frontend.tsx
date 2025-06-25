@@ -17,6 +17,7 @@ import CrudVenta from "./pages/CrudVenta";
 import DetalleCompra from "./pages/DetalleCompra";
 import DetalleVenta from "./pages/DetalleVenta";
 import VentaCliente from "./pages/VentaCliente";
+import CrudInventario from "./pages/CrudInventario";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -37,6 +38,8 @@ const app = (
           <Route path="/venta" element={<CrudVenta />} />
           <Route path="/venta/detalle/*" element={<DetalleVenta />} />
           <Route path="/venta/*" element={<VentaCliente />} />
+
+          <Route path="/inventario" element={<CrudInventario />} />
         </Routes>
     </Router>
   </StrictMode>

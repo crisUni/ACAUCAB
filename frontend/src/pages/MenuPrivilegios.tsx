@@ -1,6 +1,6 @@
-import GenerateForm from "@/components/FormGenerator";
 import { useEffect, useState } from "react";
-
+import GenerateForm from "@/components/FormGenerator";
+import GenerateColumn from "@/components/GenerateColumn";
 
 // THIS IS FOR WHEN NO ROL IS SET
 function NoRolDetected() {
@@ -14,8 +14,16 @@ function NoRolDetected() {
     ], {url: "http://127.0.0.1:3000/api/privilegio"})
 
     const PrivDeleteForm = () => GenerateForm([
-        { label: "Privilegio", keyName: "eid", fetchFrom: "http://127.0.0.1:3000/api/priv", required: true },
+        { label: "Privilegio", keyName: "eid", fetchFrom: "http://127.0.0.1:3000/api/form/privilegios", required: true },
     ], { callback: (data) => window.location.href = `/priv/${data.insert_data.eid}` })
+
+    const [roleData, setRoleData] = useState<Array<any>>([])
+
+    useEffect(() => {
+    fetch("http://127.0.0.1:3000/api/priv")
+        .then(async res => setRoleData(await res.json()))
+        .catch(console.error)
+    }, [])
 
     return (
         <div>
@@ -29,6 +37,13 @@ function NoRolDetected() {
             <h2>Agregar privilegios a un rol</h2>
             Menu para seleccionar rol { /*(deberia redirigir a /privilegios/:rol cuando termines) */}
             {possibleUsers()}
+
+            <h2>Ver Privilegios</h2>
+            {GenerateColumn([
+            { title: "eid", keyName: "eid" },
+            { title: "Nombre", keyName: "nombre" },
+            { title: "Descripcion", keyName: "descripcion" },
+            ], roleData)}
         </div>
     )
 }

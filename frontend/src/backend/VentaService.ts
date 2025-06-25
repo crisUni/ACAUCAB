@@ -15,8 +15,11 @@ const VentaService = {
   // ROL
   getVentaSQL: async (): Promise<Array<any>> =>
     await sql`
-    SELECT *
-    FROM Venta`,
+    SELECT V.eid, V.fecha, V.monto_total, V.fk_tienda_fisica AS "fk_tienda_fisica", V.fk_tienda_virtual, E.nombre AS "fk_evento", C.rif AS "fk_cliente"
+    FROM Venta AS V
+    JOIN Cliente AS C ON C.eid = V.fk_cliente
+    LEFT JOIN Evento AS E ON E.eid = V.fk_evento
+    `,
 }
 
 export default VentaService;

@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import GenerateForm from "@/components/FormGenerator";
-import { useState } from "react";
+import GenerateColumn from "@/components/GenerateColumn";
 
 const RolCreateForm = () => GenerateForm([
   { label: "Nombre del Rol", keyName: "nombre", inputType: "text", required: true },
@@ -11,6 +12,13 @@ const RolDeleteForm = () => GenerateForm([
 ], { url: `http://127.0.0.1:3000/api/roles`, method: "DELETE" })
 
 export default function CrudRol() {
+    const [roleData, setRoleData] = useState<Array<any>>([])
+
+    useEffect(() => {
+    fetch("http://127.0.0.1:3000/api/roles")
+        .then(async res => setRoleData(await res.json()))
+        .catch(console.error)
+    }, [])
     return (
         <div>
             <a href="/">Back</a>
@@ -20,6 +28,13 @@ export default function CrudRol() {
 
             <h2>Eliminar Roles</h2>
             { RolDeleteForm() }
+
+            <h2>Ver Roles</h2>
+            {GenerateColumn([
+            { title: "eid", keyName: "eid" },
+            { title: "Nombre", keyName: "nombre" },
+            { title: "Descripcion", keyName: "descripcion" },
+            ], roleData)}
         </div>
     )
 }

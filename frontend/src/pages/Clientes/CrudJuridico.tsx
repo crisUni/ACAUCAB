@@ -16,14 +16,7 @@ const NewCrudJuridico = () => GenerateForm([
 ], { url: 'http://127.0.0.1:3000/api/cliente_juridico' })
 
 export default function CrudJuridico() {
-  const [naturalData, setNaturalData] = useState<Array<any>>([])
   const [juridicoData, setJuridicoData] = useState<Array<any>>([])
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:3000/api/cliente_natural")
-      .then(async res => setNaturalData(await res.json()))
-      .catch(console.error)
-  }, [])
 
   useEffect(() => {
     fetch("http://127.0.0.1:3000/api/cliente_juridico")
@@ -36,10 +29,13 @@ export default function CrudJuridico() {
       <a href="/">Back</a>
       <a href="/clientes-naturales">Natural</a>
       
-      <h1>Crear Clientes</h1>
+      <h1>Menu Clientes Juridicos</h1>
 
       <h2>Crear Juridico</h2>
       {NewCrudJuridico()}
+
+      <h2>Eliminar Juridico</h2>
+
       <h2> Clientes Juridicos </h2>
       <ul>
         { /* TODO: Hacer que lugar 1, 2 no sea el numero sino el lugar*/}
@@ -53,6 +49,7 @@ export default function CrudJuridico() {
           { title: "Razon Social", keyName: "razon_social" },
           { title: "Pegina Web", keyName: "pagina_web" },
           { title: "Capital Disponible", keyName: "capital_disponible" },
+          { title: "Puntos", keyName: "cantidad_puntos" },
         ], juridicoData)}
       </ul>
     </div>

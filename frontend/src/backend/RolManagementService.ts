@@ -29,6 +29,11 @@ const RolManagementService = {
     SELECT eid, nombre ||': '|| descripcion as "displayName"
     FROM Rol`,
 
+  getAllRolSQL: async (): Promise<Array<any>> =>
+    await sql`
+    SELECT *
+    FROM Rol`,
+
   // ROL PRIVILEGIO
 
   postRolPrivSQL: async (rol_priv: ROL_PRIV) =>
@@ -49,6 +54,11 @@ const RolManagementService = {
     await sql`
     SELECT p.eid as "eid", p.nombre ||': '|| p.descripcion as "displayName"
     FROM Privilegio p`,
+
+  getAllPrivilegioSQL: async () =>
+    await sql`
+    SELECT *
+    FROM Privilegio`,
 
   postPrivilegioSQL: async (priv: Privilegio) =>
     await sql`

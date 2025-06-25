@@ -44,6 +44,7 @@ export default function CrudNatural() {
           { title: "Nombre", keyName: "nombre" },
           { title: "Apellido", keyName: "apellido" },
           { title: "Fecha de Nacimiento", keyName: "fecha_nacimiento" },
+          { title: "Puntos", keyName: "cantidad_puntos" },
         ], naturalData)}
       </ul>
       

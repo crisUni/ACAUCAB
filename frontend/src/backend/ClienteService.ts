@@ -29,18 +29,25 @@ type Juridico = {
 const ClienteService = {
     getNaturalesSQL: async function(): Promise<Array<any>> {
         return await sql`
-        SELECT c.*, pn.*
+        SELECT c.rif, c.direccion, c.numero_registro, COALESCE(p.nombre, m.nombre, e.nombre) AS "fk_lugar_1", pn.*
         FROM cliente AS c
         JOIN pnatural AS pn ON c.eid = pn.fk_cliente 
-        `;
+        JOIN Lugar AS p ON p.eid = c.fk_lugar_1
+        JOIN Lugar AS m ON m.eid = c.fk_lugar_1
+        JOIN Lugar AS e ON e.eid = c.fk_lugar_1`;
     },
 
     getJuridicoSQL: async function(): Promise<Array<any>> {
         return await sql`
-        SELECT c.*, pj.*
+        SELECT c.rif, c.direccion, c.numero_registro, COALESCE(p.nombre, m.nombre, e.nombre) AS "fk_lugar_1", pj.*, COALESCE(pp.nombre, mm.nombre, ee.nombre) AS "fk_lugar_2"
         FROM cliente AS c
         JOIN pjuridico AS pj ON c.eid = pj.fk_cliente 
-        `;
+        JOIN Lugar AS p ON p.eid = c.fk_lugar_1
+        JOIN Lugar AS m ON m.eid = c.fk_lugar_1
+        JOIN Lugar AS e ON e.eid = c.fk_lugar_1
+        JOIN Lugar AS pp ON pp.eid = pj.fk_lugar_2
+        JOIN Lugar AS mm ON mm.eid = pj.fk_lugar_2
+        JOIN Lugar AS ee ON ee.eid = pj.fk_lugar_2`;
     },
 
     postClienteSQL: async function(cliente: Cliente): Promise<Array<object & { eid: Number }>> {

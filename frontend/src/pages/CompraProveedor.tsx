@@ -7,7 +7,7 @@ export default function CompraProveedor() {
     
     const form = () => GenerateForm([
         { label: "Productos", fetchFrom: `http://127.0.0.1:3000/api/form/inve_tien/${proveedorId}`, keyName: "fk_cerveza,fk_presentacion,fk_tienda,fk_lugar_tienda,cantidad", multiple: true, required: true }
-    ], { url: `http://127.0.0.1:3000/api/compra/nueva/${proveedorId}` })
+    ], { url: `http://127.0.0.1:3000/api/compra/nueva/${proveedorId}` , callback: (data) => window.location.href = `/compra` })
 
     return (
         <div>

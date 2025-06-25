@@ -19,7 +19,7 @@ const server = serve({
     // Serve index.html for all unmatched routes.
     "/*": index,
 
-    "/api/get_users": {
+    "/api/form/usuarios": {
       OPTIONS: () => new Response('Departed', CORS_HEADERS),
       async GET(req) {
         const res = await sql`SELECT * FROM Usuario`;
@@ -57,9 +57,15 @@ const server = serve({
 
     "/api/form/clientes": {
       async GET() {
-        const natu = await ClienteService.getClienteNaturalForm();
-        const juri = await ClienteService.getClienteJuridicoForm();
-        return Response.json([...natu, ...juri], CORS_HEADERS);
+        const res = await sql`
+          SELECT c.eid AS "eid", c.rif||': '||n.nombre||' '||n.cedula AS "displayName"
+          FROM cliente as c
+          JOIN pnatural as n on c.eid = n.fk_cliente
+          UNION
+          SELECT c.eid AS "eid", c.rif||': '||j.denominacion_comercial AS "displayName"
+          FROM cliente as c
+          JOIN pjuridico as j on c.eid = j.fk_cliente`;
+        return Response.json(res, CORS_HEADERS);
       },
     },
 
@@ -93,6 +99,13 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
         return Response.json(await RolManagementService.getRolSQL(), CORS_HEADERS);
+      },
+    },
+
+    "/api/form/privilegios": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() {
+        return Response.json(await RolManagementService.getPrivilegioSQL(), CORS_HEADERS);
       },
     },
 
@@ -139,6 +152,11 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET(req, _) {
         const res = await sql`
+          (SELECT M.eid AS "eid", 'Canjeo de Puntos' AS "displayName"
+          FROM Metodo_pago AS M
+          JOIN Punto AS P on P.fk_metodo_pago = M.eid
+          LIMIT 1)
+          UNION
           SELECT M.eid AS "eid", 'Tarjeta: '||T.nombre_titular||', '||T.numero_tarjeta AS "displayName"
           FROM Metodo_pago AS M
           JOIN Tarjeta AS T on T.fk_metodo_pago = M.eid
@@ -149,17 +167,16 @@ const server = serve({
           UNION
           SELECT M.eid AS "eid", E.tipo_moneda||': '||E.denominacion AS "displayName"
           FROM Metodo_pago AS M
-          JOIN Efectivo AS E on E.fk_metodo_pago = M.eid
-          UNION
-          SELECT M.eid AS "eid", 'Canjeo de Puntos' AS "displayName"
-          FROM Metodo_pago AS M
-          JOIN Punto AS P on P.fk_metodo_pago = M.eid
-        `
+          JOIN Efectivo AS E on E.fk_metodo_pago = M.eid`;
         return Response.json(res, CORS_HEADERS)
       }
     },
 
     "/api/roles": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() {
+        return Response.json(await RolManagementService.getAllRolSQL(), CORS_HEADERS);
+      },
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
         const res = await RolManagementService.postRolSQL(body.insert_data);
@@ -170,7 +187,6 @@ const server = serve({
         const res = await RolManagementService.deleteRolSQL(body.insert_data)
         return Response.json(res, CORS_HEADERS);
       },
-
     },
 
     "/api/privilegios/:rol": {
@@ -209,7 +225,15 @@ const server = serve({
 
     "/api/cliente_natural": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
-      async GET() { return Response.json(await ClienteService.getNaturalesSQL(), CORS_HEADERS); },
+      async GET() {
+        const res = await ClienteService.getNaturalesSQL()
+        console.log(res)
+        for (const cliente of res) {
+          const puntos = (await sql`SELECT * FROM punt_clie WHERE fk_cliente = ${cliente.eid} order by eid limit 1`)[0];
+          cliente.cantidad_puntos = puntos?.cantidad_puntos || 0;
+        }
+        return Response.json(res, CORS_HEADERS);
+      },
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
         const res = await ClienteService.insertClienteNatural(body.insert_data);
@@ -219,19 +243,26 @@ const server = serve({
 
     "/api/cliente_juridico": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
-      async GET() { return Response.json(await ClienteService.getJuridicoSQL(), CORS_HEADERS); },
+      async GET() {
+        const res = await ClienteService.getJuridicoSQL()
+        for (const cliente of res) {
+          const puntos = (await sql`SELECT * FROM punt_clie WHERE fk_cliente = ${cliente.eid} order by eid limit 1`)[0];
+          cliente.cantidad_puntos = puntos?.cantidad_puntos || 0;
+        }
+        return Response.json(res, CORS_HEADERS);
+      },
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
         const res = await ClienteService.insertClienteJuridico(body.insert_data);
         return Response.json(res, CORS_HEADERS);
-      }
+      },
     },
 
     "/api/priv": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
         console.log("hello")
-        return Response.json(await RolManagementService.getPrivilegioSQL(), CORS_HEADERS);
+        return Response.json(await RolManagementService.getAllPrivilegioSQL(), CORS_HEADERS);
       },
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
@@ -256,7 +287,10 @@ const server = serve({
 
     "/api/venta": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
-      async GET() { return Response.json(await VentaService.getVentaSQL(), CORS_HEADERS); },
+      async GET() {
+        const res = await VentaService.getVentaSQL()
+        return Response.json(res, CORS_HEADERS);
+      },
     },
 
     "/api/venta/detalle/:id": {
@@ -277,7 +311,15 @@ const server = serve({
 
     "/api/compra": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
-      async GET() { return Response.json(await (sql`SELECT * FROM Compra`), CORS_HEADERS); },
+      async GET() {
+        const res = await sql`
+          SELECT C.eid, C.fecha, C.monto_total, p.denominacion_comercial AS "fk_proveedor"
+          FROM Compra as C
+          JOIN Proveedor as P ON P.eid = C.fk_proveedor
+
+        `;
+        return Response.json(res, CORS_HEADERS);
+      },
 
     },
 
@@ -285,12 +327,52 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET(req, _) {
         const id = req.params.id;
-        return Response.json(await (sql`SELECT * FROM Detalle_compra WHERE fk_compra = ${id}`), CORS_HEADERS);
+        const res = await sql`
+        SELECT DC.eid, DC.cantidad, DC.precio_unitario, C.nombre AS "fk_cerveza", P.nombre AS "fk_presentacion"
+        FROM Detalle_compra AS DC
+        JOIN Cerveza AS C ON DC.fk_cerveza = C.eid
+        JOIN Presentacion AS P ON DC.fk_presentacion = P.eid
+        WHERE fk_compra = ${id}
+        `
+        return Response.json(res, CORS_HEADERS);
       },
+    },
 
+    "/api/venta/nueva/:clienteId": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async POST(req, _) {
+        const body = await req.json()
+        const venta = (await sql`insert into venta(fecha, monto_total, fk_tienda_fisica, fk_cliente) values (CURRENT_DATE, 0, 1, ${req.params.clienteId}) returning *`)[0]
+        
+        for (const idx in body.insert_data.cantidad) {
+          const { precio } = (await sql`select precio from cerv_pres where fk_cerveza = ${body.insert_data.fk_cerveza[idx]} and fk_presentacion = ${body.insert_data.fk_presentacion[idx]}`)[0];
+          const detalle_factura = {
+            cantidad: Number(body.insert_data.cantidad[idx]),
+            precio_unitario: precio,
+            fk_venta: Number(venta.eid),
+            fk_cerveza:  Number(body.insert_data.fk_cerveza[idx]),
+            fk_presentacion: Number(body.insert_data.fk_presentacion[idx]),
+          }
+          await sql`INSERT INTO Detalle_Factura ${sql(detalle_factura)}`
+        }
+        
+        const tasa = (await sql`SELECT * FROM tasa_cambio WHERE fecha_fin IS NULL LIMIT 1`)[0];
+        for (const idx in body.insert_data.monto) {
+          const pago = {
+            fk_metodo_pago: body.insert_data.fk_metodo_pago[idx],
+            fk_venta: Number(venta.eid),
+            fk_tasa_cambio: Number(tasa.eid),
+            monto: body.insert_data.monto[idx]
+          }
+          await sql`INSERT INTO Pago ${sql(pago)}`;
+        }
+
+        return Response.json(venta, CORS_HEADERS)
+      }
     },
 
     "/api/compra/nueva/:proveedorId": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async POST(req, _) {
         const body = await req.json()
         const compra = (await sql`insert into compra(fecha, monto_total, fk_proveedor) values (CURRENT_DATE, 0, ${req.params.proveedorId}) returning *`)[0]
@@ -307,8 +389,41 @@ const server = serve({
         }
         return Response.json(compra, CORS_HEADERS)
       }
-    }
+    },
+    "/api/puntos/:clienteID": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET(req, _) {
+        const id = req.params.clienteID;
+        const res = (await sql`SELECT * FROM punt_clie WHERE fk_cliente = ${id} order by eid limit 1`)[0]
+        return Response.json(res, CORS_HEADERS);
+      },
+    },
 
+    "/api/inventario_tienda": {
+      OPTIONS() { return new Response('Departed', CORS_HEADERS) },
+      async GET() {
+        const res = await sql`
+        SELECT c.nombre AS "fk_cerveza", p.nombre AS "fk_presentacion", lt.nombre AS "fk_lugar_tienda", it.cantidad
+        FROM inve_tien as it
+        JOIN Cerveza as c on c.eid = it.fk_cerveza
+        JOIN Presentacion as p on p.eid = it.fk_presentacion
+        JOIN Lugar_Tienda as lt on lt.eid = it.fk_lugar_tienda
+        `;
+        return Response.json(res, CORS_HEADERS);
+      },
+      async PUT(req, _) {
+        const body = await req.json();
+        const res = await sql`
+          UPDATE INVE_TIEN
+          SET cantidad = ${body.cantidad}
+          WHERE fk_cerveza = ${body.fk_cerveza}
+          AND fk_presentacion = ${body.fk_presentacion}
+          AND fk_tienda = ${body.fk_tienda}
+          AND fk_lugar_tienda = ${body.fk_lugar_tienda}
+          RETURNING *`;
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
   },
   development: process.env.NODE_ENV !== "production" && {
     // Enable browser hot reloading in development

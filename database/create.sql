@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS ESTATUS (
 CREATE TABLE IF NOT EXISTS TASA_CAMBIO (
     eid SERIAL PRIMARY KEY,
     fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL,
+    fecha_fin DATE,
     tasa_bs_dolar FLOAT NOT NULL,
     tasa_bs_punto FLOAT NOT NULL
 );
@@ -525,10 +525,11 @@ CREATE TABLE IF NOT EXISTS INVE_EVEN (
 );
 
 CREATE TABLE IF NOT EXISTS PUNT_CLIE (
+    eid SERIAL NOT NULL,
     fk_punto INT NOT NULL,
     fk_cliente INT NOT NULL,
     cantidad_puntos INT NOT NULL,
-    PRIMARY KEY (fk_cliente),
+    PRIMARY KEY (fk_cliente, eid, fk_punto),
     FOREIGN KEY (fk_punto) REFERENCES PUNTO(fk_metodo_pago),
     FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid)
 );
@@ -538,6 +539,7 @@ CREATE TABLE IF NOT EXISTS PAGO (
     fk_metodo_pago INT NOT NULL,
     fk_venta INT NOT NULL,
     fk_tasa_cambio INT NOT NULL,
+    monto INT NOT NULL DEFAULT 0,
     PRIMARY KEY (fk_metodo_pago, fk_venta),
     FOREIGN KEY (fk_metodo_pago) REFERENCES METODO_PAGO(eid),
     FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
