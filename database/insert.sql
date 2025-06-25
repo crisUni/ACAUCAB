@@ -2725,3 +2725,43 @@ CREATE OR REPLACE TRIGGER trigger_sumar_puntos_al_pagar_venta
   AFTER INSERT ON ESTA_VENT
   FOR EACH ROW
   EXECUTE FUNCTION sumar_puntos_al_pagar_venta();
+
+
+CREATE OR REPLACE FUNCTION cerrar_estado_anterior_compra()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE ESTA_COMP
+  SET fecha_fin = NEW.fecha_inicio
+  WHERE fk_compra = NEW.fk_compra
+    AND fecha_fin IS NULL
+    AND eid <> NEW.eid;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_cerrar_estado_anterior_compra ON ESTA_COMP;
+
+CREATE TRIGGER trigger_cerrar_estado_anterior_compra
+AFTER INSERT ON ESTA_COMP
+FOR EACH ROW
+EXECUTE FUNCTION cerrar_estado_anterior_compra();
+
+
+CREATE OR REPLACE FUNCTION cerrar_estado_anterior_venta()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE ESTA_VENT
+  SET fecha_fin = NEW.fecha_inicio
+  WHERE fk_venta = NEW.fk_venta
+    AND fecha_fin IS NULL
+    AND eid <> NEW.eid;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_cerrar_estado_anterior_venta ON ESTA_VENT;
+
+CREATE TRIGGER trigger_cerrar_estado_anterior_venta
+AFTER INSERT ON ESTA_VENT
+FOR EACH ROW
+EXECUTE FUNCTION cerrar_estado_anterior_venta();
