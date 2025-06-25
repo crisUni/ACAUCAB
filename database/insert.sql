@@ -2377,16 +2377,37 @@ RETURNS TRIGGER AS $$
 DECLARE
   tienda_id INT;
   lugar_tienda_id INT;
+  filas_afectadas INT;
 BEGIN
   SELECT fk_tienda_fisica INTO tienda_id FROM VENTA WHERE eid = NEW.fk_venta;
-  SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
+
+  IF tienda_id IS NULL THEN
+    RAISE NOTICE 'Venta no asociada a tienda física, no se descuenta inventario.';
+    RETURN NEW;
+  END IF;
+
+  SELECT fk_lugar_tienda INTO lugar_tienda_id
+  FROM INVE_TIEN
+  WHERE fk_cerveza = NEW.fk_cerveza
+    AND fk_presentacion = NEW.fk_presentacion
+    AND fk_tienda = tienda_id
+    AND cantidad >= NEW.cantidad
+  LIMIT 1;
+
+  IF lugar_tienda_id IS NULL THEN
+    RAISE NOTICE 'No hay inventario suficiente para descontar: tienda=%, cerveza=%, presentacion=%', tienda_id, NEW.fk_cerveza, NEW.fk_presentacion;
+    RETURN NEW;
+  END IF;
 
   UPDATE INVE_TIEN
   SET cantidad = cantidad - NEW.cantidad
   WHERE fk_cerveza = NEW.fk_cerveza
     AND fk_presentacion = NEW.fk_presentacion
     AND fk_tienda = tienda_id
-    AND fk_lugar_tienda = lugar_tienda_id;
+    AND fk_lugar_tienda = lugar_tienda_id
+  RETURNING 1 INTO filas_afectadas;
+
+  RAISE NOTICE 'Trigger descontar_inventario_detalle_factura: tienda_id=%, lugar_tienda_id=%, filas_afectadas=%', tienda_id, lugar_tienda_id, filas_afectadas;
 
   RETURN NEW;
 END;
