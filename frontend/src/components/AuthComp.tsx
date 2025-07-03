@@ -8,9 +8,10 @@ export const AuthProvider = ({ children }) => {
     return token ? true : false;
   });
 
-  const login = (token: string, nombre: string) => {
+  const login = (token: string, nombre: string, eid: string) => {
     localStorage.setItem('token', token);
     localStorage.setItem('nombre', nombre);
+    localStorage.setItem('eid', eid);
     setIsAuthenticated(true);
   };
 

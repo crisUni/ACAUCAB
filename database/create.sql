@@ -409,8 +409,8 @@ CREATE TABLE IF NOT EXISTS EVENTO (
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT NOT NULL,
     numero_entradas INT NOT NULL,
-    fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL,
+    fecha_inicio TIMESTAMP NOT NULL,
+    fecha_fin TIMESTAMP NOT NULL,
     direccion TEXT NOT NULL,
     precio_entrada FLOAT NOT NULL,
     fk_evento INT,
@@ -442,7 +442,7 @@ CREATE TABLE IF NOT EXISTS ESTA_VENT (
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE,
     PRIMARY KEY (fk_venta, fk_estatus, eid),
-    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
+    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid) ON DELETE CASCADE,
     FOREIGN KEY (fk_estatus) REFERENCES ESTATUS(eid)
 );
 
@@ -545,7 +545,7 @@ CREATE TABLE IF NOT EXISTS PAGO (
     monto INT NOT NULL DEFAULT 0,
     PRIMARY KEY (fk_metodo_pago, fk_venta),
     FOREIGN KEY (fk_metodo_pago) REFERENCES METODO_PAGO(eid),
-    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
+    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid) ON DELETE CASCADE,
     FOREIGN KEY (fk_tasa_cambio) REFERENCES TASA_CAMBIO(eid)
 );
 
@@ -570,7 +570,8 @@ CREATE TABLE IF NOT EXISTS DETALLE_FACTURA (
     fk_venta INT NOT NULL,
     fk_cerveza INT NOT NULL,
     fk_presentacion INT NOT NULL,
-    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid),
+    CONSTRAINT unique_detalle UNIQUE (fk_venta, fk_cerveza, fk_presentacion),
+    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid) ON DELETE CASCADE,
     FOREIGN KEY (fk_cerveza, fk_presentacion) REFERENCES CERV_PRES(fk_cerveza, fk_presentacion)
 );
 

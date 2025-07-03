@@ -1,5 +1,3 @@
--- SQLBook: Code
-
 -- ▗▖   ▗▖ ▗▖ ▗▄▄▖ ▗▄▖ ▗▄▄▖ 
 -- ▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌
 -- ▐▌   ▐▌ ▐▌▐▌▝▜▌▐▛▀▜▌▐▛▀▚▖
@@ -744,8 +742,11 @@ INSERT INTO ESTATUS (nombre) VALUES
 ('Enviado'),
 ('Entregado'),
 ('Devuelto'),
+('Carrito'),
 ('Archivado');
                     
+INSERT INTO ESTATUS (eid, nombre) VALUES (100, 'Carrito');
+
 -- ▗▄▄▄▖▗▄▖  ▗▄▄▖ ▗▄▖      ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▖ ▗▄▄▄▖ ▗▄▖        
 --   █ ▐▌ ▐▌▐▌   ▐▌ ▐▌    ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌ ▐▌  █  ▐▌ ▐▌       
 --   █ ▐▛▀▜▌ ▝▀▚▖▐▛▀▜▌    ▐▌   ▐▛▀▜▌▐▌  ▐▌▐▛▀▚▖  █  ▐▌ ▐▌       
@@ -1190,7 +1191,7 @@ INSERT INTO EMPL_HORA (fk_empleado, fk_horario, asistencia, fecha, hora_entrada,
 -- ▝▚▄▞▘▗▄▄▞▘▝▚▄▞▘▐▌ ▐▌▐▌ ▐▌▗▄█▄▖▝▚▄▞▘  
 
 INSERT INTO USUARIO (nombre, contraseña, fk_empleado, fk_cliente, fk_proveedor, fk_rol) VALUES
-('sys_admin', 'secureAdminPass', 1, NULL, NULL, 1), 
+('admin', 'admin', 1, NULL, NULL, 1), 
 ('cliente_web_1', 'webuser123', NULL, 2, NULL, 2),    
 ('proveedor_admin', 'provAdmin!', NULL, NULL, 1, 1), 
 ('cliente_corporativo_user', 'corpUserPass', NULL, 11, NULL, 2), 

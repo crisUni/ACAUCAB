@@ -6,6 +6,9 @@ import users from "./pages/crud_user.html"
 import ClienteService from "./backend/ClienteService";
 import RolManagementService from "./backend/RolManagementService";
 import VentaService from "./backend/VentaService";
+import CarritoService from "./backend/CarritoService";
+import EventoService from "./backend/EventoService";
+
 import { reporteIngresosEventos, reporteProductosPromocion, reportePuntualidadPorCargo, reporteRankingProveedores, reporteValorPuntosCanjeados } from "./backend/reportes";
 
 function generateUserToken(length: number = 32): string {
@@ -24,14 +27,39 @@ const CORS_HEADERS = {
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, DELETE, PUT',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': '*',
   },
 };
+
+console.log("Running Bun Backend in port 3000!!!")
 
 const server = serve({
   routes: {
     // Serve index.html for all unmatched routes.
     "/*": index,
+
+    "/api/getUser/:token": {
+      GET: (req) => {
+        const user = user_tokens[req.params.token]
+        return Response.json(user, CORS_HEADERS)
+      }
+    },
+
+    ...CarritoService.routes,
+    ...EventoService.routes,
+
+    //    ███████  ██████  ██████  ███    ███ 
+    //    ██      ██    ██ ██   ██ ████  ████ 
+    //    █████   ██    ██ ██████  ██ ████ ██ 
+    //    ██      ██    ██ ██   ██ ██  ██  ██ 
+    //    ██       ██████  ██   ██ ██      ██
+
+    "/api/form/tipo_evento": {
+      GET: async () => {
+        const res = await sql`select eid, nombre AS "displayName" from tipo_evento;`;
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
 
     "/api/form/usuarios": {
       OPTIONS: () => new Response('Departed', CORS_HEADERS),
@@ -208,14 +236,21 @@ const server = serve({
       },
     },
 
-    "/api/login":{
+    // ████████ ██   ██ ███████     ██████  ███████ ███████ ████████        ██████  
+    //    ██    ██   ██ ██          ██   ██ ██      ██         ██        ██ ██   ██ 
+    //    ██    ███████ █████       ██████  █████   ███████    ██           ██████  
+    //    ██    ██   ██ ██          ██   ██ ██           ██    ██        ██ ██      
+    //    ██    ██   ██ ███████     ██   ██ ███████ ███████    ██           ██     
+
+
+    "/api/login": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async POST(req: Bun.BunRequest) {
         const body = await req.json();
         const res = await sql`SELECT * FROM Usuario WHERE nombre = ${body.insert_data.nombre} AND contraseña = ${body.insert_data.contrasena} LIMIT 1`
         if (res.length > 0) {
           const token = generateUserToken()
-          user_tokens[token] = res[0].fk_rol
+          user_tokens[token] = res[0]
           res[0].token = token
           return Response.json(res, CORS_HEADERS);
         }
@@ -493,6 +528,39 @@ const server = serve({
       }
     },
 
+    "/api/inventario_online": {
+      GET: async () => {
+        // Todos los items de CERV_PRES que tengan una cantidad en ALGUN inve_tien mayor a 100
+        const res = await sql`SELECT CP.*, C.nombre AS "cerveza", P.nombre AS "presentacion"
+        FROM CERV_PRES CP
+        JOIN INVE_TIEN IT ON IT.fk_cerveza = CP.fk_cerveza AND IT.fk_presentacion = CP.fk_presentacion
+        JOIN Cerveza C ON C.eid = CP.fk_cerveza
+        JOIN Presentacion P ON P.eid = CP.fk_presentacion
+        WHERE IT.cantidad > 100`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/item/:itemID": {
+      GET: async (req: any) => {
+        const [cerveza, presentacion] = req.params.itemID.split('_')
+        const res = (await sql`SELECT C.nombre AS "nombre_cerveza", P.nombre AS "nombre_presentacion", *
+          FROM CERV_PRES CP
+          JOIN Cerveza C ON C.eid = CP.fk_cerveza
+          JOIN Presentacion P ON P.eid = CP.fk_presentacion
+          WHERE CP.fk_cerveza = ${cerveza}
+          AND CP.fk_presentacion = ${presentacion} LIMIT 1`)
+        return Response.json(res.length === 0 ? {} : res[0], CORS_HEADERS)
+      }
+    },
+
+
+    //    ██████  ███████ ██████   ██████  ██████  ████████ ███████ ███████ 
+    //    ██   ██ ██      ██   ██ ██    ██ ██   ██    ██    ██      ██      
+    //    ██████  █████   ██████  ██    ██ ██████     ██    █████   ███████ 
+    //    ██   ██ ██      ██      ██    ██ ██   ██    ██    ██           ██ 
+    //    ██   ██ ███████ ██       ██████  ██   ██    ██    ███████ ███████
+
     "/api/reporte_1": {
       async GET() {
         const res = await reporteProductosPromocion();
@@ -538,3 +606,5 @@ const server = serve({
 });
 
 console.log(`🚀 Server running at ${server.url}`);
+
+export { CORS_HEADERS }

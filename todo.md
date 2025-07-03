@@ -6,37 +6,39 @@
 - [ ] Frontend para pagar carrito -> Tarjeta de credito y puntos
     - [ ] /user/cart/pay
 - [ ] Frontend para ver eventos, y comprar entrada
-    - [ ] /user/events
-    - [ ] /user/events/pay
+    - [-] /user/events
 - [ ] Frontend para ver eventos actividades y detalles de un evento
-    - [ ] /user/events/:eventID
+    - [-] /user/events/:eventID
+    - [ ] /user/events/:eventID/pay
 - [ ] Frontend para ver entradas compradas
     - [ ] /user/myEvents
 
 ## Backend
-- [ ] /api/inventario_online -> Returns ONLY fk_presentacion, fk_cerveza sin importar donde esta (no se lo dice al usuario)
+- [x] /api/inventario_online -> Returns ONLY fk_presentacion, fk_cerveza sin importar donde esta (no se lo dice al usuario)
+- [ ] /api/item/:itemID
+    - [ ] GET: Gets a specific item's details from the inventory
 - [ ] /api/carrito/:clientID
-    - [ ] GET: Gets el carrito del usuario
-    - [ ] POST: Crea el carrito del usuario
-    - [ ] DELETE: Borra el carrito del usuario
+    - [x] GET: Gets el carrito del usuario
+    - [x] POST: Crea el carrito del usuario
+    - [x] DELETE: Borra el carrito del usuario
 - [ ] /api/carrito/:clienteID/items
-    - [ ] GET: Gets los items del carrito del usuario
-    - [ ] POST: Agrega items al carrito del usuario (Si estan repetidos los actualiza)
-    - [ ] DELETE: Borra items del carrito del usuario
+    - [x] GET: Gets los items del carrito del usuario
+    - [x] POST: Agrega items al carrito del usuario (Si estan repetidos los actualiza)
+    - [x] DELETE: Borra items del carrito del usuario
 - [ ] /api/carrito/:clienteID/pay
-    - [ ] GET: Consigue los metodos de pago para pagar el carrito
+    - [x] GET: Consigue los metodos de pago para pagar el carrito
     - [ ] POST: Registra un metodo de pago usado para pagar el carrito, con su monto
 - [ ] /api/carrito/:clienteID/complete
     - [ ] GET: Marca el carrito del usuario como pagado
 - [ ] /api/evento
-    - [ ] GET: Conseguir todos los eventos
-    - [ ] POST: Crear un nuevo evento
+    - [x] GET: Conseguir todos los eventos
+    - [x] POST: Crear un nuevo evento
     - [ ] DELETE: Borrar un evento
 - [ ] /api/evento/:eventoID
-    - [ ] GET: Consigue las actividades del evento
-    - [ ] POST: Crea un actividad en un evento
+    - [x] GET: Consigue las actividades del evento
+    - [x] POST: Crea un actividad en un evento (is post in /api/evento)
     - [ ] DELETE: Borra una actividad de un evento
 - [ ] /api/evento/:eventoID/:clienteID
-    - [ ] GET: Consigue si el cliente esta registrado para un evento
-    - [ ] POST: Registra a un cliente para un evento (puede incluir metodos de pago)
+    - [x] GET: Consigue si el cliente esta registrado para un evento
+    - [x] POST: Registra a un cliente para un evento (puede incluir metodos de pago)
     - [ ] DELETE: Quita el registro de un cliente para un evento

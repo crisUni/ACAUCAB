@@ -9,9 +9,9 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    function validateUserLogin(data: { token: string, nombre: string }) {
+    function validateUserLogin(data: { token: string, nombre: string, eid: number }) {
         if (data.token) {
-            login(data.token, data.nombre);
+            login(data.token, data.nombre, String(data.eid));
             navigate('/');
         } else {
             alert("Login fallo!")
