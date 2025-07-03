@@ -26,6 +26,9 @@ import CrudEvents from "./pages/CrudEvents";
 import CrudActivities from "./pages/CrudActivities";
 import UserShop from "./pages/UserShop";
 import UserItemDetails from "./pages/UserItemDetails";
+import UserCarrito from "./pages/UserCarrito";
+import UserMyEvents from "./pages/UserMyEvents";
+import UserCarritoPay from "./pages/UserCarritoPay";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -58,6 +61,9 @@ const app = (
           <Route path="/user/events/*" element={<ProtectedRoute element={<UserSpecificEvent />} />} />
           <Route path="/user/shop" element={<ProtectedRoute element={<UserShop />} />} />
           <Route path="/user/shop/item/*" element={<ProtectedRoute element={<UserItemDetails />} />} />
+          <Route path="/user/carrito" element={<ProtectedRoute element={<UserCarrito />} />} />
+          <Route path="/user/carrito/pay" element={<ProtectedRoute element={<UserCarritoPay />} />} />
+          <Route path="/user/myEvents" element={<ProtectedRoute element={<UserMyEvents />} />} />
         </Routes>
       </Router>
     </AuthProvider>

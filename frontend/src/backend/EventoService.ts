@@ -1,7 +1,6 @@
 import { sql } from "bun";
 import { CORS_HEADERS } from "..";
-
-type DateString = `${number}${number}${number}${number}-${number}${number}-${number}${number}`;
+import UsuarioService from "./UsuarioService";
 
 type Cliente = {
   rif: String,
@@ -14,8 +13,8 @@ type Evento = {
   nombre: String,
   descripcion: String,
   numero_entradas: Number,
-  fecha_inicio: DateString,
-  fecha_fin: DateString,
+  fecha_inicio: String,
+  fecha_fin: String,
   direccion: String,
   precio_entradas: Number,
   fk_evento?: Number,
@@ -31,7 +30,7 @@ type EvenClie ={
 }
 
 class EventoService {
-  
+
 //  ███████ ██    ██ ███    ██  ██████ ████████ ██  ██████  ███    ██ ███████ 
 //  ██      ██    ██ ████   ██ ██         ██    ██ ██    ██ ████   ██ ██      
 //  █████   ██    ██ ██ ██  ██ ██         ██    ██ ██    ██ ██ ██  ██ ███████ 
@@ -72,6 +71,15 @@ class EventoService {
       `;
   }
 
+  async getClienteEventosSQL(clienteID: Number) {
+    return await sql`
+      select e.* 
+      from evento e, even_clie ec
+      WHERE ec.fk_cliente = ${clienteID} 
+      AND ec.fk_evento = e.eid;
+      `;
+  }
+
   async getAllEvents() {
     const res = await this.getEventoSQL();
     return Response.json(res, CORS_HEADERS);
@@ -106,15 +114,34 @@ class EventoService {
       OPTIONS: () => { return new Response('Departed', CORS_HEADERS) },
       GET: async (req: any) => await this.getEventoParticipantsSQL(req.params.eventoID),
     },
-    "/api/evento/:eventoID/:clienteID": {
+    "/api/evento/:eventoID/:userID": {
       OPTIONS: () => { return new Response('Departed', CORS_HEADERS) },
       GET: async (req: any) => {
-        const res = (await sql`SELECT * FROM Evento`)[0]
+        const res = await this.getAllEvents()
         return Response.json(res, CORS_HEADERS);
       },
       POST: async (req: any) => {
         const body = await req.json();
+        body.insert_data.userID
         const res = this.postEvenClieSQL(body.insert_data);
+        return Response.json(res, CORS_HEADERS);
+      },
+    },
+    "/api/evento/:eventoID/:userID/join": {
+      OPTIONS: () => { return new Response('Departed', CORS_HEADERS) },
+      POST: async (req: any) => {
+        const id = await UsuarioService.getClientIDfromUserID(req.params.userID)
+        if (id.length === 0)
+            return new Response('', { ...CORS_HEADERS, status: 204 })
+        console.log("HELLO WORLD")
+
+        const body = await req.json();
+        const even_clie = {
+          fk_evento: req.params.eventoID,
+          fk_cliente: id[0].eid,
+          cantidad_entradas: body.insert_data.numero_entradas,
+        }
+        const res = this.postEvenClieSQL(even_clie);
         return Response.json(res, CORS_HEADERS);
       },
     },

@@ -18,11 +18,11 @@ import { sql } from "bun";
 type Item = {
     fk_cerveza: number
     fk_presentacion: number
-    precio_unitario: number
+    precio_unitario?: number
 }
 
 type DetalleFactura = {
-    cantidad: number
+    cantidad?: number
     fk_venta?: number,
 } & Item
 
@@ -34,27 +34,32 @@ type Pago = {
 }
 
 const CORS_HEADERS = {
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, DELETE, PUT',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  },
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS, POST, DELETE, PUT',
+        'Access-Control-Allow-Headers': 'Content-Type',
+    },
 }; // TODO: Remove from here, make global
 
 class CarritoService {
     async getCarritoObject(clienteID: string) {
-        const carrito = await sql`SELECT V.*
+        const carrito: any[] = await sql`SELECT V.*
             FROM Venta V, ESTA_VENT EV
             WHERE V.fk_cliente = ${clienteID}
             AND V.eid = EV.fk_venta
             AND EV.fk_estatus = 100 -- HACK: 100 es el estatus Carrito
+            AND EV.fecha_fin IS NULL
             ORDER BY V.eid DESC
             LIMIT 1`;
-        
+
         if (carrito.length === 0)
             return carrito
 
-        const items = await sql`SELECT * FROM Detalle_Factura WHERE fk_venta = ${carrito[0].eid}`;
+        const items = await sql`SELECT DF.*, C.nombre AS "nombre_cerveza", P.nombre AS "nombre_presentacion"
+            FROM Detalle_Factura DF
+            JOIN Cerveza C ON DF.fk_cerveza = C.eid
+            JOIN Presentacion P ON DF.fk_presentacion = P.eid
+            WHERE DF.fk_venta = ${carrito[0].eid}`;
         carrito[0].items = items;
         const payments = await sql`SELECT * FROM Pago WHERE fk_venta = ${carrito[0].eid}`;
         carrito[0].payments = payments;
@@ -149,24 +154,39 @@ class CarritoService {
 
     async markAsComplete(clienteID: string) {
         const res = await this.getCarritoObject(clienteID);
-        if (res.length() === 0)
+        if (res.length === 0)
             return new Response('', { status: 204, ...CORS_HEADERS })
         const carrito = res[0];
-        const estatus = await sql`INSERT INTO ESTA_VENT (fk_venta, fk_estatus)
-            VALUES(${carrito.eid}, 3) RETURNING *`; // HACK: 3 es Pagado
+        await sql`UPDATE ESTA_VENT SET fecha_fin = CURRENT_DATE WHERE fk_venta = ${carrito.eid} AND fk_estatus = 100`;
+        const estatus = await sql`INSERT INTO ESTA_VENT (fecha_inicio, fk_venta, fk_estatus)
+            VALUES(CURRENT_DATE, ${carrito.eid}, 3) RETURNING *`; // HACK: 3 es Pagado
         return Response.json(estatus, { status: 200, ...CORS_HEADERS })
+    }
+
+    async handlePaymentInsertData(insert_data: any) {
+        const metodo_id = await sql`INSERT INTO Metodo_Pago DEFAULT VALUES RETURNING eid`
+        insert_data.fk_metodo_pago = metodo_id[0].eid
+        await sql`INSERT INTO Tarjeta ${sql(insert_data)}`
+        const payment: Pago = { fk_metodo_pago: metodo_id[0].eid, monto: 0, fk_venta: 0, fk_tasa_cambio: 0 }
+        return payment
     }
 
     routes = {
         "/api/carrito/:clientID": {
+            OPTIONS: () => new Response('Departed', CORS_HEADERS),
             GET: async (req: any, _: any) => await this.getCarrito(req.params.clientID),
             POST: async (req: any, _: any) => await this.createCarrito(req.params.clientID),
             DELETE: async (req: any, _: any) => await this.deleteCarrito(req.params.clientID),
         },
         "/api/carrito/:clientID/items": {
+            OPTIONS: () => new Response('Departed', CORS_HEADERS),
             GET: async (req: any, _: any) => await this.getItemsFromCarrito(req.params.clientID),
             POST: async (req: any, _: any) => {
                 const items = await req.json()
+
+                if ('insert_data' in items)
+                    return this.addItemsToCarrito(req.params.clientID, [items.insert_data])
+
                 return this.addItemsToCarrito(req.params.clientID, items)
             },
             DELETE: async (req: any, _: any) => {
@@ -175,13 +195,19 @@ class CarritoService {
             },
         },
         "/api/carrito/:clientID/pay": {
+            OPTIONS: () => new Response('Departed', CORS_HEADERS),
             GET: async (req: any, _: any) => await this.getPaymentsFromCarrito(req.params.clientID),
             POST: async (req: any, _: any) => {
                 const payments = await req.json()
+                if ('insert_data' in payments) {
+                    const payment = await this.handlePaymentInsertData(payments.insert_data)
+                    return await this.registerPaymentForCarrito(req.params.clientID, [payment])
+                }
                 return this.registerPaymentForCarrito(req.params.clientID, payments)
             },
         },
         "/api/carrito/:clientID/complete": {
+            OPTIONS: () => new Response('Departed', CORS_HEADERS),
             GET: async (req: any, _: any) => await this.markAsComplete(req.params.clientID),
         },
     }

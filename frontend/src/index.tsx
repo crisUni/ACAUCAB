@@ -45,6 +45,7 @@ const server = serve({
       }
     },
 
+    ...ClienteService.routes,
     ...CarritoService.routes,
     ...EventoService.routes,
 
@@ -53,6 +54,20 @@ const server = serve({
     //    █████   ██    ██ ██████  ██ ████ ██ 
     //    ██      ██    ██ ██   ██ ██  ██  ██ 
     //    ██       ██████  ██   ██ ██      ██
+
+    "/api/form/banco": {
+      GET: async () => {
+        const res = await sql`SELECT eid, nombre AS "displayName" FROM Banco`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/form/tipo_tarjeta": {
+      GET: async () => {
+        const res = await sql`SELECT eid, nombre AS "displayName" FROM Tipo_Tarjeta`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
 
     "/api/form/tipo_evento": {
       GET: async () => {

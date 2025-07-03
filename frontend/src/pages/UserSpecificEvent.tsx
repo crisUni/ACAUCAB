@@ -1,3 +1,4 @@
+import GenerateForm from "@/components/FormGenerator";
 import GenerateColumn from "@/components/GenerateColumn";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,13 @@ function UserSpecificEvent() {
     let eventID = window.location.href.split('/').pop();
     const [eventData, setEventData] = useState<any[]>([]);
     const navigate = useNavigate();
+    let userID = localStorage.getItem('eid');
+
+    const entradasCreateForm = () => GenerateForm([
+        { label: "cantidad de entradas", keyName: "cantidad_entradas", inputType: "number", required: true },
+        { label: "Evento Perteneciente", keyName: "fk_evento", value: eventID }
+      ], { url: `http://127.0.0.1:3000/api/evento/${eventID}/${userID}/join`, redirect: "/user/myEvent"})
+      
 
     useEffect(() => {
         fetch(`http://127.0.0.1:3000/api/evento/${eventID}`)
@@ -16,20 +24,14 @@ function UserSpecificEvent() {
 
     // manage sign in to event and message if already in it
 
-    function unirseEvento(){}
 
     return (
         <div>
             <h1>
                 Evento {eventID}
             </h1>
-            <button >  
-                Unirse Evento
-            </button>
+            {entradasCreateForm()}
 
-            <form onSubmit={unirseEvento}>
-            <button type="submit">Submit</button>
-            </form>
             <h2>
                 Listado de Actividades
             </h2>

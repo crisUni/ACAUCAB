@@ -1,4 +1,5 @@
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink from "@/components/SmartLink";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +14,7 @@ function UserShop() {
     }, [])
 
     return (<div>
+        <SmartLink href={"/user/carrito"} > Ver Carrito </SmartLink>
         <h1>
             Shop
         </h1>
