@@ -2514,8 +2514,13 @@ DECLARE
   tienda_id INT;
   lugar_tienda_id INT;
   filas_afectadas INT;
+  venta_monto_total FLOAT; 
 BEGIN
-  CALL pipu(NEW.fk_venta,3);
+
+  SELECT monto_total INTO venta_monto_total FROM VENTA WHERE eid = NEW.fk_venta;
+
+  CALL pipu(NEW.fk_venta, 3, venta_monto_total); 
+
   SELECT fk_tienda_fisica INTO tienda_id FROM VENTA WHERE eid = NEW.fk_venta;
 
   IF tienda_id IS NULL THEN
@@ -2541,8 +2546,9 @@ BEGIN
   WHERE fk_cerveza = NEW.fk_cerveza
     AND fk_presentacion = NEW.fk_presentacion
     AND fk_tienda = tienda_id
-    AND fk_lugar_tienda = lugar_tienda_id
-  RETURNING 1 INTO filas_afectadas;
+    AND fk_lugar_tienda = lugar_tienda_id;
+
+  GET DIAGNOSTICS filas_afectadas = ROW_COUNT;
 
   RAISE NOTICE 'Trigger descontar_inventario_detalle_factura: tienda_id=%, lugar_tienda_id=%, filas_afectadas=%', tienda_id, lugar_tienda_id, filas_afectadas;
 
@@ -2560,25 +2566,60 @@ EXECUTE FUNCTION descontar_inventario_detalle_factura();
 CREATE OR REPLACE FUNCTION sumar_inventario_al_pagar_compra()
 RETURNS TRIGGER AS $$
 DECLARE
-  tienda_id INT = 1;
-  lugar_tienda_id INT;
-  detalle RECORD;
+    tienda_destino_id INT = 1;
+    detalle RECORD;
+    actual_lugar_tienda_id INT;
 BEGIN
-  IF NEW.fk_estatus = 3 THEN
-    SELECT eid INTO lugar_tienda_id FROM LUGAR_TIENDA WHERE fk_lugar_tienda IS NULL LIMIT 1;
+    IF NEW.fk_estatus = 3 AND (OLD.fk_estatus IS DISTINCT FROM 3 OR OLD.fk_estatus IS NULL) THEN
 
-    FOR detalle IN
-      SELECT * FROM DETALLE_COMPRA WHERE fk_compra = NEW.fk_compra
-    LOOP
-      INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad)
-      VALUES (detalle.fk_cerveza, detalle.fk_presentacion, tienda_id, lugar_tienda_id, detalle.cantidad)
-      ON CONFLICT (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda)
-      DO UPDATE SET cantidad = INVE_TIEN.cantidad + detalle.cantidad;
-    END LOOP;
-  END IF;
-  RETURN NEW;
+        FOR detalle IN
+            SELECT fk_cerveza, fk_presentacion, cantidad
+            FROM DETALLE_COMPRA
+            WHERE fk_compra = NEW.fk_compra
+        LOOP
+            actual_lugar_tienda_id := NULL;
+
+            SELECT it.fk_lugar_tienda INTO actual_lugar_tienda_id
+            FROM INVE_TIEN it
+            WHERE it.fk_cerveza = detalle.fk_cerveza
+              AND it.fk_presentacion = detalle.fk_presentacion
+              AND it.fk_tienda = tienda_destino_id
+            LIMIT 1;
+
+            IF actual_lugar_tienda_id IS NULL THEN
+                SELECT eid INTO actual_lugar_tienda_id
+                FROM LUGAR_TIENDA
+                WHERE tipo = 'ANAQUEL'
+                ORDER BY RANDOM()
+                LIMIT 1;
+
+                IF actual_lugar_tienda_id IS NULL THEN
+                    RAISE EXCEPTION 'No se encontró ningún anaquel disponible en LUGAR_TIENDA para asignar el producto (Cerveza: %, Presentación: %) en la Tienda ID: %.',
+                                     detalle.fk_cerveza, detalle.fk_presentacion, tienda_destino_id;
+                END IF;
+
+                RAISE NOTICE 'Producto (Cerveza: %, Presentación: %) es nuevo en la Tienda ID: %. Asignando a anaquel aleatorio: %',
+                             detalle.fk_cerveza, detalle.fk_presentacion, tienda_destino_id, actual_lugar_tienda_id;
+            ELSE
+                RAISE NOTICE 'Producto (Cerveza: %, Presentación: %) encontrado en anaquel existente: % en Tienda ID: %.',
+                             detalle.fk_cerveza, detalle.fk_presentacion, actual_lugar_tienda_id, tienda_destino_id;
+            END IF;
+
+            INSERT INTO INVE_TIEN (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda, cantidad)
+            VALUES (detalle.fk_cerveza, detalle.fk_presentacion, tienda_destino_id, actual_lugar_tienda_id, detalle.cantidad)
+            ON CONFLICT (fk_cerveza, fk_presentacion, fk_tienda, fk_lugar_tienda) DO UPDATE
+            SET cantidad = INVE_TIEN.cantidad + EXCLUDED.cantidad;
+
+        END LOOP;
+
+        RAISE NOTICE 'Inventario sumado para la compra ID: % en Tienda ID: %.',
+                     NEW.fk_compra, tienda_destino_id;
+    END IF;
+
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE TRIGGER trigger_sumar_inventario_al_pagar_compra
 AFTER INSERT OR UPDATE ON ESTA_COMP
