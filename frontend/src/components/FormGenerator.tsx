@@ -1,7 +1,13 @@
-import { HTMLInputTypeAttribute, JSX, useState } from "react"
+import { HTMLInputTypeAttribute, JSX, useEffect, useState } from "react"
 import DynamicOptionInputs from "./DynamicOptions"
 import { goto } from "./SmartLink"
 import { useNavigate } from "react-router-dom"
+
+type PresetValue = {
+    label: string,
+    keyName: string,
+    value: any,
+}
 
 type DynamicOptions = {
     label: string,
@@ -34,9 +40,8 @@ type FormOptions = {
     redirect_var?: string
 }
 
-function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions)[], options: FormOptions) {
+function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions | PresetValue)[], options: FormOptions) {
     const navigate = useNavigate();
-
     const [fromDatabase, setFromDatabase] = useState<{ [key: string | symbol]: any }>({});
     const [formData, setFormData] = useState<{ [key: string | symbol]: any }>(() => {
         const res: { [key: string | symbol]: any } = {};
@@ -44,6 +49,9 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
             res[entry.keyName] = ''
 
         const fetchResponses: { [key: string | symbol]: any } = {}
+
+        for (const entry of entries.filter(x => 'value' in x))
+            res[entry.keyName] = entry.value
 
         for (const entry of entries.filter(x => 'fetchFrom' in x))
             fetchResponses[entry.keyName] = fetch(entry.fetchFrom)
@@ -66,6 +74,8 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
     };
 
     function generateHTML(entry: FormEntry<unknown> | FormEntrySelectFromDatabase): JSX.Element {
+        if ('value' in entry)
+            return generateStaticValueHTML(entry)
         if ('multiple' in entry)
             return (<DynamicOptionInputs label={entry.label} eidKey={entry.keyName} endpoint={entry.fetchFrom} onChange={(d: string) => handleChange({ target: { name: String(entry.keyName), value: d }})}/>)
         if ('fetchFrom' in entry)
@@ -73,6 +83,24 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         if ('inputType' in entry)
             return generateInputHTML(entry as FormEntry<unknown>);
         return <></>
+    }
+
+    function generateStaticValueHTML(entry: PresetValue): JSX.Element {
+        return (
+            <div>
+                <label>
+                    {entry.label}:
+                    <input
+                        type="text"
+                        disabled={true}
+                        name={entry.keyName}
+                        value={entry.value}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+            </div>
+        )
     }
 
     function generateInputHTML(entry: FormEntry<unknown>): JSX.Element {
@@ -115,7 +143,6 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         })
             .then(async res => {
                 const data = await res.json();
-                console.log(data)
                 if (options.fetchCallback) options.fetchCallback(data);
             })
             .catch(err => console.error)
@@ -156,7 +183,6 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
             options.callback(JSON.parse(data))
         if ('redirect' in options && options.redirect) {
             const url = options.redirect + (newFormData[options.redirect_var || ''] || '')
-            console.log(url)
             navigate(url)
         }
     };

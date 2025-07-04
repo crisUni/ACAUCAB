@@ -37,6 +37,9 @@ export default function TempHome() {
                 <li key="inventario">
                     <SmartLink href="/inventario">Inventario</SmartLink>
                 </li>
+                <li key="events">
+                    <SmartLink href="/events">Eventos</SmartLink>
+                </li>
                 <li key="reporte_1">
                     <a href="/api/reporte_1" onClick={(e) => { e.preventDefault(); window.open("/api/reporte_1", '_self')} }>Reporte: Productos en Promocion</a>
                 </li>

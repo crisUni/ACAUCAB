@@ -20,6 +20,15 @@ import VentaCliente from "./pages/VentaCliente";
 import CrudInventario from "./pages/CrudInventario";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CrudRolPriv from "./pages/CrudRolPriv";
+import UserEventos from "./pages/UserEventos";
+import UserSpecificEvent from "./pages/UserSpecificEvent";
+import CrudEvents from "./pages/CrudEvents";
+import CrudActivities from "./pages/CrudActivities";
+import UserShop from "./pages/UserShop";
+import UserItemDetails from "./pages/UserItemDetails";
+import UserCarrito from "./pages/UserCarrito";
+import UserMyEvents from "./pages/UserMyEvents";
+import UserCarritoPay from "./pages/UserCarritoPay";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -44,7 +53,17 @@ const app = (
           <Route path="/venta/detalle/*" element={<ProtectedRoute element={<DetalleVenta />} />} />
           <Route path="/venta/*" element={<ProtectedRoute element={<VentaCliente />} />} />
           <Route path="/inventario" element={<ProtectedRoute element={<CrudInventario />} />} />
+
+          <Route path="/events" element={<ProtectedRoute element={<CrudEvents />} />} />
+          <Route path="/events/*" element={<ProtectedRoute element={<CrudActivities />} />} />
           
+          <Route path="/user/events" element={<ProtectedRoute element={<UserEventos />} />} />
+          <Route path="/user/events/*" element={<ProtectedRoute element={<UserSpecificEvent />} />} />
+          <Route path="/user/shop" element={<ProtectedRoute element={<UserShop />} />} />
+          <Route path="/user/shop/item/*" element={<ProtectedRoute element={<UserItemDetails />} />} />
+          <Route path="/user/carrito" element={<ProtectedRoute element={<UserCarrito />} />} />
+          <Route path="/user/carrito/pay" element={<ProtectedRoute element={<UserCarritoPay />} />} />
+          <Route path="/user/myEvents" element={<ProtectedRoute element={<UserMyEvents />} />} />
         </Routes>
       </Router>
     </AuthProvider>
