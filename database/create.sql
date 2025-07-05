@@ -489,11 +489,16 @@ CREATE TABLE IF NOT EXISTS EVEN_PROV (
 CREATE TABLE IF NOT EXISTS EVEN_CLIE (
     fk_evento INT NOT NULL,
     fk_cliente INT NOT NULL,
+    fk_venta INT,
     cantidad_entradas INT,
     PRIMARY KEY (fk_evento, fk_cliente),
     FOREIGN KEY (fk_evento) REFERENCES EVENTO(eid),
-    FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid)
+    FOREIGN KEY (fk_cliente) REFERENCES CLIENTE(eid),
+    FOREIGN KEY (fk_venta) REFERENCES VENTA(eid)
 );
+
+
+
 
 CREATE TABLE IF NOT EXISTS CARG_EMPL (
     fk_empleado INT NOT NULL,
