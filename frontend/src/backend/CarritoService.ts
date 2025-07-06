@@ -1,18 +1,3 @@
-// - [x] /api/carrito/:clientID
-//     - [x] GET: Gets el carrito del usuario
-//     - [x] POST: Crea el carrito del usuario
-//     - [x] DELETE: Borra el carrito del usuario
-// - [x] /api/carrito/:clienteID/items
-//     - [x] GET: Gets los items del carrito del usuario
-//     - [x] POST: Agrega items al carrito del usuario (Si estan repetidos los actualiza)
-//     - [x] DELETE: Borra items del carrito del usuario
-// - [x] /api/carrito/:clienteID/pay
-//     - [x] GET: Consigue los metodos de pago para pagar el carrito
-//      TODO: Hacer que se pueda registrar una tarjeta (o reusar una) y canjear puntos
-//     - [ ] POST: Registra un metodo de pago usado para pagar el carrito, con su monto
-// - [x] /api/carrito/:clienteID/complete
-//     - [x] GET: Marca el carrito del usuario como pagado
-
 import { sql } from "bun";
 
 type Item = {
@@ -102,12 +87,16 @@ class CarritoService {
 
     async getItemsFromCarrito(clienteID: string) {
         const carrito = (await this.getOrCreateCarritoObject(clienteID))[0];
+        for (const item of carrito.items)
+            item.precio_total = item.cantidad * item.precio_unitario
         return Response.json(carrito.items, CORS_HEADERS)
     }
 
     async addItemsToCarrito(clienteID: string, items: DetalleFactura[]) {
         const carrito = (await this.getOrCreateCarritoObject(clienteID))[0];
         for (const item of items) {
+            if ('precio_total' in item)
+                delete item.precio_total
             item.fk_venta = carrito.eid
             await sql`INSERT INTO Detalle_Factura ${sql(item)}
                 ON CONFLICT (fk_venta, fk_cerveza, fk_presentacion)
@@ -166,6 +155,8 @@ class CarritoService {
     async handlePaymentInsertData(insert_data: any) {
         const metodo_id = await sql`INSERT INTO Metodo_Pago DEFAULT VALUES RETURNING eid`
         insert_data.fk_metodo_pago = metodo_id[0].eid
+        if ('monto_total' in insert_data)
+            delete insert_data.monto_total
         await sql`INSERT INTO Tarjeta ${sql(insert_data)}`
         const payment: Pago = { fk_metodo_pago: metodo_id[0].eid, monto: 0, fk_venta: 0, fk_tasa_cambio: 0 }
         return payment
@@ -200,8 +191,9 @@ class CarritoService {
             POST: async (req: any, _: any) => {
                 const payments = await req.json()
                 if ('insert_data' in payments) {
+                    const monto = payments.insert_data.monto_total
                     const payment = await this.handlePaymentInsertData(payments.insert_data)
-                    return await this.registerPaymentForCarrito(req.params.clientID, [payment])
+                    return await this.registerPaymentForCarrito(req.params.clientID, [{ ...payment, monto }])
                 }
                 return this.registerPaymentForCarrito(req.params.clientID, payments)
             },

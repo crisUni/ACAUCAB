@@ -20,6 +20,7 @@ function UserMyEvents() {
             </h1>
             {
                 GenerateColumn([
+                    { title: "Entradas Disponibles", keyName: "cantidad_entradas" },
                     { title: "Nombre", keyName: "nombre" },
                     { title: "Descripcion", keyName: "descripcion" },
                     { title: "Inicio", keyName: "fecha_inicio" },

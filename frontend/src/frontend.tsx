@@ -20,15 +20,16 @@ import VentaCliente from "./pages/VentaCliente";
 import CrudInventario from "./pages/CrudInventario";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CrudRolPriv from "./pages/CrudRolPriv";
-import UserEventos from "./pages/UserEventos";
-import UserSpecificEvent from "./pages/UserSpecificEvent";
+import UserEventos from "./pages/User/UserEventos";
+import UserSpecificEvent from "./pages/User/UserSpecificEvent";
 import CrudEvents from "./pages/CrudEvents";
 import CrudActivities from "./pages/CrudActivities";
-import UserShop from "./pages/UserShop";
-import UserItemDetails from "./pages/UserItemDetails";
-import UserCarrito from "./pages/UserCarrito";
-import UserMyEvents from "./pages/UserMyEvents";
-import UserCarritoPay from "./pages/UserCarritoPay";
+import UserShop from "./pages/User/UserShop";
+import UserItemDetails from "./pages/User/UserItemDetails";
+import UserCarrito from "./pages/User/UserCarrito";
+import UserMyEvents from "./pages/User/UserMyEvents";
+import UserCarritoPay from "./pages/User/UserCarritoPay";
+import UserHome from "./pages/User/UserHome";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -57,6 +58,7 @@ const app = (
           <Route path="/events" element={<ProtectedRoute element={<CrudEvents />} />} />
           <Route path="/events/*" element={<ProtectedRoute element={<CrudActivities />} />} />
           
+          <Route path="/user" element={<ProtectedRoute element={<UserHome />} />} />
           <Route path="/user/events" element={<ProtectedRoute element={<UserEventos />} />} />
           <Route path="/user/events/*" element={<ProtectedRoute element={<UserSpecificEvent />} />} />
           <Route path="/user/shop" element={<ProtectedRoute element={<UserShop />} />} />

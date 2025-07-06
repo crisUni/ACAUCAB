@@ -1,4 +1,5 @@
 import GenerateColumn from "@/components/GenerateColumn";
+import SmartLink from "@/components/SmartLink";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +15,7 @@ function UserEventos() {
 
     return (
         <div>
+            <SmartLink href={"/user"} > Regresar </SmartLink>
             <h1>
                 Eventos
             </h1>

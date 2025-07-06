@@ -3,29 +3,35 @@ import DynamicOptionInputs from "./DynamicOptions"
 import { goto } from "./SmartLink"
 import { useNavigate } from "react-router-dom"
 
-type PresetValue = {
-    label: string,
+type EntryBase = {
+    label: string
+}
+
+type PresetValue = EntryBase & {
     keyName: string,
     value: any,
 }
 
-type DynamicOptions = {
-    label: string,
+type DerivedValue = EntryBase & {
+    value_1: string,
+    value_2: string,
+    action: "multiply"
+}
+
+type DynamicOptions = EntryBase & {
     keyName: string, // fk_cerveza,fk_presentacion,fk_tienda
     required: boolean,
     fetchFrom: string,
     multiple: boolean
 }
 
-type FormEntry<T> = {
-    label: string,
+type FormEntry<T> = EntryBase & {
     keyName: string,
     required: boolean,
     inputType: HTMLInputTypeAttribute
 }
 
-type FormEntrySelectFromDatabase = {
-    label: string,
+type FormEntrySelectFromDatabase = EntryBase & {
     keyName: string, // fk_cerveza,fk_presentacion,fk_tienda
     required: boolean,
     fetchFrom: string,
@@ -40,12 +46,12 @@ type FormOptions = {
     redirect_var?: string
 }
 
-function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions | PresetValue)[], options: FormOptions) {
+function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase | DynamicOptions | PresetValue | DerivedValue)[], options: FormOptions) {
     const navigate = useNavigate();
     const [fromDatabase, setFromDatabase] = useState<{ [key: string | symbol]: any }>({});
     const [formData, setFormData] = useState<{ [key: string | symbol]: any }>(() => {
         const res: { [key: string | symbol]: any } = {};
-        for (const entry of entries)
+        for (const entry of entries.filter(x => 'keyName' in x))
             res[entry.keyName] = ''
 
         const fetchResponses: { [key: string | symbol]: any } = {}
@@ -56,7 +62,7 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         for (const entry of entries.filter(x => 'fetchFrom' in x))
             fetchResponses[entry.keyName] = fetch(entry.fetchFrom)
                 .then(async res => await res.json())
-                .catch(err => { console.log("Check the logs!!", err); return []; })
+                .catch(err => { console.error("Check the logs!!", err); return []; })
 
         Promise.all(Object.values(fetchResponses))
             .then(async res => {
@@ -73,16 +79,29 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
         setFormData({ ...formData, [name]: value, });
     };
 
-    function generateHTML(entry: FormEntry<unknown> | FormEntrySelectFromDatabase): JSX.Element {
+    function generateHTML(entry: FormEntry<unknown> | FormEntrySelectFromDatabase | DerivedValue | DynamicOptions): JSX.Element {
+        if ('action' in entry)
+            return generateDerivedHTML(entry)
         if ('value' in entry)
             return generateStaticValueHTML(entry)
         if ('multiple' in entry)
-            return (<DynamicOptionInputs label={entry.label} eidKey={entry.keyName} endpoint={entry.fetchFrom} onChange={(d: string) => handleChange({ target: { name: String(entry.keyName), value: d }})}/>)
+            return (<DynamicOptionInputs label={entry.label} endpoint={entry.fetchFrom} onChange={(d: string) => handleChange({ target: { name: String(entry.keyName), value: d } })} />)
         if ('fetchFrom' in entry)
-            return generateSelectHTML(entry as FormEntrySelectFromDatabase);
+            return generateSelectHTML(entry);
         if ('inputType' in entry)
-            return generateInputHTML(entry as FormEntry<unknown>);
+            return generateInputHTML(entry);
         return <></>
+    }
+
+    function generateDerivedHTML(entry: DerivedValue) {
+        return (
+            <div>
+                <label> {entry.label} </label>
+                <b>
+                    {Number(formData[entry.value_1]) * Number(formData[entry.value_2])}
+                </b>
+            </div>
+        )
     }
 
     function generateStaticValueHTML(entry: PresetValue): JSX.Element {
@@ -153,7 +172,6 @@ function GenerateForm(entries: (FormEntry<unknown> | FormEntrySelectFromDatabase
 
         let newFormData: { [key: string]: any } = formData;
         for (const key in formData) {
-            console.log(key + '')
             const split_key = (key + '').split(',');
             if (split_key.length < 2) continue;
             if (Array.isArray(formData[key])) {

@@ -61,7 +61,6 @@ export async function reporteProductosPromocion() {
         data: { productos }
     };
 
-    console.log("POST REQUEST BEING DONE")
     const res = await fetch(jsreportUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -121,9 +121,9 @@ class ClienteService {
         "/api/cliente/:clienteID/events": {
             GET: async (req: any) => {
                 const id = await UsuarioService.getClientIDfromUserID(req.params.clienteID)
-                if (id.length === 0)
+                if (id === 0)
                     return new Response('', { ...CORS_HEADERS, status: 204 })
-                const res = await EventoService.getClienteEventosSQL(Number(id[0].eid))
+                const res = await EventoService.getClienteEventosSQL(Number(id))
                 return Response.json(res, CORS_HEADERS)
             }
         }
