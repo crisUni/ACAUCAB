@@ -9,6 +9,7 @@ function BuyNowButton({ cerveza, presentacion, precio }: { cerveza: number, pres
         { label: "Cerveza", keyName: "fk_cerveza", value: cerveza },
         { label: "Presentacion", keyName: "fk_presentacion", value: presentacion },
         { label: "Precio por Unidad", keyName: "precio_unitario", value: precio },
+        { label: "Monto Total", value_1: "cantidad", value_2: "precio_unitario", action: "multiply" },
     ], { url: `http://127.0.0.1:3000/api/carrito/${cliente}/items`, redirect: "/user/carrito" })
     return buyNow()
 }
@@ -42,7 +43,7 @@ function UserItemDetails() {
                     <label>Precio: </label> {info.precio}
                 </li>
                 <li key="descripcion">
-                    <label>Precio: </label> {info.descripcion}
+                    <label>Descripcion: </label> {info.descripcion}
                 </li>
             </ul>
             {info.nombre_presentacion === ''

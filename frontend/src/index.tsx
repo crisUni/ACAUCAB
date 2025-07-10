@@ -329,7 +329,6 @@ const server = serve({
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
         const res = await ClienteService.getNaturalesSQL()
-        console.log(res)
         for (const cliente of res) {
           const puntos = (await sql`SELECT * FROM punt_clie WHERE fk_cliente = ${cliente.eid} order by eid limit 1`)[0];
           cliente.cantidad_puntos = puntos?.cantidad_puntos || 0;
@@ -363,7 +362,6 @@ const server = serve({
     "/api/priv": {
       OPTIONS() { return new Response('Departed', CORS_HEADERS) },
       async GET() {
-        console.log("hello")
         return Response.json(await RolManagementService.getAllPrivilegioSQL(), CORS_HEADERS);
       },
       async POST(req: Bun.BunRequest) {

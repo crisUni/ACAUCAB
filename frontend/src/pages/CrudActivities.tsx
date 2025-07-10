@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 function CrudActivities() {
     let eventID = window.location.href.split('/').pop();
     const [eventData, setEventData] = useState<any[]>([]);
+    const [participantsData, setParticipantsData] = useState<any[]>([]);
     const navigate = useNavigate();
+
     const eventoForm = () => GenerateForm([
         { label: "Nombre", keyName: "nombre", inputType: "text", required: true },
         { label: "Descripcion", keyName: "descripcion", inputType: "text", required: false },
@@ -26,6 +28,12 @@ function CrudActivities() {
             .catch(err => console.error(err))
     }, [])
 
+    useEffect(() => {
+        fetch(`http://127.0.0.1:3000/api/evento/${eventID}/participants`)
+            .then(async res => setParticipantsData(await res.json()))
+            .catch(err => console.error(err))
+    }, [])
+
     return (
         <div>
             <h1>
@@ -33,10 +41,21 @@ function CrudActivities() {
             </h1>
 
             <h2>
-                Create Activity
+                Crear Actividad
             </h2>
             {
                 eventoForm()
+            }
+
+            <h2>
+                Participantes
+            </h2>
+            {
+                GenerateColumn([
+                    { title: "RIF", keyName: "rif" },
+                    { title: "Nombre", keyName: "nombre" },
+                    { title: "Entradas Compradas", keyName: "cantidad_entradas" },
+                ], participantsData, [])
             }
 
 

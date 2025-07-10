@@ -24,6 +24,7 @@ function UserCarrito() {
                     { title: "Item", keyName: "nombre_cerveza" },
                     { title: "Presentacion", keyName: "nombre_presentacion" },
                     { title: "Precio Por Unidad", keyName: "precio_unitario" },
+                    { title: "Total", keyName: "precio_total" },
                 ], itemsCarrito, [
                     {
                         title: "-", action: data => fetch(`http://127.0.0.1:3000/api/carrito/${user}/items`,

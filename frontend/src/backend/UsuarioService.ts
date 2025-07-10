@@ -16,10 +16,11 @@ type Usuario = {
 };
 
 class UsuarioService {
-
-  async getClientIDfromUserID(userID: Number) {
+  async getClientIDfromUserID(userID: Number): Promise<number> {
     const res = await sql`SELECT c.eid FROM Cliente c, Usuario u WHERE u.eid = ${userID} AND u.fk_cliente = c.eid`;
-    return res;
+    if (res.length === 0)
+      return 0
+    return res[0].eid;
   }
 };
 
