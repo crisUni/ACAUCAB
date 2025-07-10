@@ -1,6 +1,9 @@
 import { sql } from "bun";
+import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
+import * as fs from "fs";
 
-const jsreportUrl = "http://jsreport:5488/api/report";
+
+const jsreportUrl = "http://localhost:5488/api/report";
 
 // 1. Productos mas seleccionados en promociones para "DiarioDeUnaCerveza"
 export async function reporteProductosPromocion() {
@@ -414,11 +417,349 @@ export async function reporteValorPuntosCanjeados() {
     return Buffer.from(await res.arrayBuffer());
 }
 
+
+// 6. Gráfico de Tendencia de Ventas a lo largo del tiempo
+
+export async function reporteGraficoTendenciaVentas() {
+    // Obtener los últimos 8 meses (incluyendo meses sin ventas)
+    const mesesQuery = await sql`
+        SELECT TO_CHAR(date_trunc('month', CURRENT_DATE) - INTERVAL '1 month' * gs.n, 'YYYY-MM') AS periodo
+        FROM generate_series(0, 7) AS gs(n)
+        ORDER BY periodo
+    `;
+
+    // Traer las ventas agrupadas por mes
+    const ventasQuery = await sql`
+        SELECT 
+            TO_CHAR(fecha, 'YYYY-MM') AS periodo,
+            SUM(monto_total) AS total_ventas
+        FROM VENTA
+        WHERE fecha >= (date_trunc('month', CURRENT_DATE) - INTERVAL '7 months')
+        GROUP BY TO_CHAR(fecha, 'YYYY-MM')
+        ORDER BY periodo
+    `;
+
+    // Mapear ventas a objeto {periodo: total_ventas}
+    const ventasMap = new Map<string, number>();
+    for (const v of ventasQuery) {
+        ventasMap.set(v.periodo, Number(v.total_ventas));
+    }
+
+    // Construir arrays de labels y data, asegurando que todos los meses estén presentes
+    const labels = mesesQuery.map((m: any) => m.periodo);
+    const data = labels.map((periodo: string) => ventasMap.get(periodo) ?? 0);
+
+    // Generar imagen del gráfico
+    const width = 700;
+    const height = 350;
+    const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height });
+    const configuration = {
+        type: 'line' as const,
+        data: {
+            labels,
+            datasets: [{
+                label: 'Total Ventas (Bs)',
+                data,
+                borderColor: '#4299e1',
+                backgroundColor: 'rgba(66,153,225,0.15)',
+                fill: true,
+                tension: 0.2,
+                pointRadius: 4,
+                pointBackgroundColor: '#2a4365'
+            }]
+        },
+        options: {
+            plugins: { legend: { display: true } },
+            scales: { y: { beginAtZero: true } }
+        }
+    };
+    const image = await chartJSNodeCanvas.renderToDataURL(configuration);
+
+    const reportTemplate = {
+        template: {
+            content: `
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Gráfico de Tendencia de Ventas</title>
+                <style>
+                    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7fa; margin: 0; }
+                    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 40px 32px 32px 32px; }
+                    h1 { color: #2a4365; text-align: center; margin-bottom: 24px; font-size: 2rem; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Gráfico de Tendencia de Ventas Mensuales (Últimos 8 meses)</h1>
+                    <img src="{{image}}" width="700" height="350" />
+                </div>
+            </body>
+            </html>
+            `,
+            engine: "handlebars",
+            recipe: "html"
+        },
+        data: {
+            image
+        }
+    };
+
+    const res = await fetch(jsreportUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportTemplate)
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
+    }
+
+    return await res.text();
+}
+
+// 7. Gráfico de Ventas por Canal de Distribución (Física vs Virtual)
+export async function reporteGraficoVentasPorCanal() {
+    const ventas = await sql`
+        SELECT 'Tienda Física' AS canal, COALESCE(SUM(monto_total),0) AS total
+        FROM VENTA WHERE fk_tienda_fisica IS NOT NULL
+        UNION ALL
+        SELECT 'Tienda Virtual' AS canal, COALESCE(SUM(monto_total),0) AS total
+        FROM VENTA WHERE fk_tienda_virtual IS NOT NULL
+    `;
+
+    const labels = ventas.map((v: any) => v.canal);
+    const data = ventas.map((v: any) => Number(v.total));
+
+    const width = 600;
+    const height = 350;
+    const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height });
+    const configuration = {
+        type: 'bar' as const,
+        data: {
+            labels,
+            datasets: [{
+                label: 'Total Ventas (Bs)',
+                data,
+                backgroundColor: ['#4299e1', '#48bb78']
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+        }
+    };
+    const image = await chartJSNodeCanvas.renderToDataURL(configuration);
+
+    const reportTemplate = {
+        template: {
+            content: `
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Ventas por Canal de Distribución</title>
+                <style>
+                    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7fa; margin: 0; }
+                    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 40px 32px 32px 32px; }
+                    h1 { color: #2a4365; text-align: center; margin-bottom: 24px; font-size: 2rem; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Ventas por Canal de Distribución</h1>
+                    <img src="{{image}}" width="600" height="350" />
+                </div>
+            </body>
+            </html>
+            `,
+            engine: "handlebars",
+            recipe: "html"
+        },
+        data: { image }
+    };
+
+    const res = await fetch(jsreportUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportTemplate)
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
+    }
+
+    return await res.text();
+}
+
+// 8. Tabla de Productos top 10 más vendidos
+export async function reporteTopProductosVendidos() {
+    const productos = await sql`
+        SELECT c.nombre AS producto, SUM(df.cantidad) AS total_vendido
+        FROM DETALLE_FACTURA df
+        JOIN CERVEZA c ON df.fk_cerveza = c.eid
+        GROUP BY c.nombre
+        ORDER BY total_vendido DESC
+        LIMIT 10
+    `;
+
+    const reportTemplate = {
+        template: {
+            content: `
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Top 10 Productos Más Vendidos</title>
+                <style>
+                    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7fa; margin: 0; }
+                    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 40px 32px 32px 32px; }
+                    h1 { color: #2a4365; text-align: center; margin-bottom: 24px; font-size: 2rem; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+                    th, td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+                    th { background: #4299e1; color: #fff; }
+                    tr:nth-child(even) { background: #f1f5f9; }
+                    tr:hover { background: #bee3f8; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Top 10 Productos Más Vendidos</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Total Vendido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each productos}}
+                            <tr>
+                                <td>{{producto}}</td>
+                                <td>{{total_vendido}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </body>
+            </html>
+            `,
+            engine: "handlebars",
+            recipe: "html"
+        },
+        data: { productos }
+    };
+
+    const res = await fetch(jsreportUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportTemplate)
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
+    }
+
+    return await res.text();
+}
+
+// 9. Reporte de Inventario Actual 
+export async function reporteInventarioActual() {
+    const inventario = await sql`
+        SELECT 
+            c.nombre AS producto,
+            p.nombre AS presentacion,
+            it.cantidad
+        FROM INVE_TIEN it
+        JOIN CERVEZA c ON it.fk_cerveza = c.eid
+        JOIN PRESENTACION p ON it.fk_presentacion = p.eid
+        ORDER BY producto, presentacion
+    `;
+
+    const reportTemplate = {
+        template: {
+            content: `
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Reporte de Inventario Actual</title>
+                <style>
+                    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7fa; margin: 0; }
+                    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 40px 32px 32px 32px; }
+                    h1 { color: #2a4365; text-align: center; margin-bottom: 24px; font-size: 2rem; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+                    th, td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+                    th { background: #4299e1; color: #fff; }
+                    tr:nth-child(even) { background: #f1f5f9; }
+                    tr:hover { background: #bee3f8; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Reporte de Inventario Actual</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Presentación</th>
+                                <th>Cantidad en Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each inventario}}
+                            <tr>
+                                <td>{{producto}}</td>
+                                <td>{{presentacion}}</td>
+                                <td>{{cantidad}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </body>
+            </html>
+            `,
+            engine: "handlebars",
+            recipe: "html"
+        },
+        data: { inventario }
+    };
+
+    const res = await fetch(jsreportUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportTemplate)
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
+    }
+
+    return await res.text();
+}
+
+
 // Ejecucion directa
 if (import.meta.main) {
-    await reporteProductosPromocion();
-    await reporteIngresosEventos();
-    await reportePuntualidadPorCargo();
-    await reporteRankingProveedores();
-    await reporteValorPuntosCanjeados();
+    //await reporteProductosPromocion();
+    //await reporteIngresosEventos();
+    //await reportePuntualidadPorCargo();
+    //await reporteRankingProveedores();
+    //await reporteValorPuntosCanjeados();
+    //await reporteGraficoTendenciaVentas();
+    //await reporteGraficoVentasPorCanal();
+    const html = await reporteInventarioActual();
+    fs.writeFileSync("reporte_inventario_actual.html", html, "utf-8");
+
+    const html2 = await reporteTopProductosVendidos();
+    fs.writeFileSync("productos_mas_vendidos.html", html2, "utf-8");
+
+    const html3 = await reporteGraficoVentasPorCanal();
+    fs.writeFileSync("ventas_por_canal.html", html3, "utf-8");
+    const html4 = await reporteGraficoTendenciaVentas();
+    fs.writeFileSync("tendencia_ventas.html", html4, "utf-8");
 }
+
+
