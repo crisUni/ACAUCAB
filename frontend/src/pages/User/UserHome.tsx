@@ -14,6 +14,9 @@ function UserHome() {
                 <li key="events">
                     <SmartLink href="/user/events"> Buscar Eventos Disponibles </SmartLink>
                 </li>
+                <li key="events">
+                    <SmartLink href="/user/myevents"> Ver los eventos en los que estoy registrado </SmartLink>
+                </li>
             </ul>
         </div>
     )

@@ -55,6 +55,16 @@ const server = serve({
     //    ██      ██    ██ ██   ██ ██  ██  ██ 
     //    ██       ██████  ██   ██ ██      ██
 
+    "/api/form/cerv_pres": {
+      GET: async () => {
+        const res = await sql`SELECT C.eid||','||P.eid as eid, C.nombre||' '||P.nombre as "displayName"
+          FROM CERV_PRES CP
+          JOIN Cerveza C ON C.eid = CP.fk_cerveza
+          JOIN Presentacion P ON P.eid = CP.fk_presentacion`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
     "/api/form/banco": {
       GET: async () => {
         const res = await sql`SELECT eid, nombre AS "displayName" FROM Banco`

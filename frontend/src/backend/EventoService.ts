@@ -149,6 +149,104 @@ class EventoService {
         return Response.json(res, CORS_HEADERS);
       },
     },
+    "/api/evento/:eventoID/buyItem": {
+      POST: async (req: any) => {
+        const body = await req.json()
+        const venta = (await sql`INSERT INTO Venta(fecha, monto_total, fk_evento, fk_cliente)
+          VALUES (CURRENT_DATE, 0, ${req.params.eventoID}, ${body.insert_data.fk_cliente}) RETURNING *`)[0]
+
+        const items = []
+        for (const i in body.insert_data.fk_cerveza) {
+          const precio = (await sql`SELECT precio
+            FROM CERV_PRES
+            WHERE fk_cerveza = ${body.insert_data.fk_cerveza[i]}
+            AND fk_presentacion = ${body.insert_data.fk_presentacion[i]}`)[0].precio
+          const item = {
+            cantidad: body.insert_data.cantidad[i],
+            precio_unitario: precio,
+            fk_venta: venta.eid,
+            fk_cerveza: body.insert_data.fk_cerveza[i],
+            fk_presentacion: body.insert_data.fk_presentacion[i]
+          }
+          const created = (await sql`INSERT INTO Detalle_Factura ${sql(item)} RETURNING *`)[0]
+          items.push(created)
+        }
+
+        const payments = []
+        const tasa = (await sql`SELECT * FROM tasa_cambio WHERE fecha_fin IS NULL LIMIT 1`)[0];
+        for (const i in body.insert_data.monto) {
+          const pago = {
+            fk_metodo_pago: body.insert_data.fk_metodo_pago[i],
+            fk_venta: venta.eid,
+            fk_tasa_cambio: tasa.eid,
+            monto: body.insert_data.monto[i]
+          }
+          payments.push((await sql`INSERT INTO Pago ${sql(pago)} RETURNING *`)[0]);
+        }
+
+        return Response.json({ ...venta, items, payments }, CORS_HEADERS)
+      }
+    },
+    "/api/evento/:eventoID/inventario": {
+      OPTIONS: () => { return new Response('Departed', CORS_HEADERS) },
+      GET: async (req: any) => {
+        const res = await sql`SELECT c.nombre as "nombre_cerveza", p.nombre as "nombre_presentacion", ie.*
+          FROM INVE_EVEN ie
+          JOIN Cerveza C ON ie.fk_cerveza = C.eid
+          JOIN Presentacion P ON ie.fk_presentacion = P.eid
+          WHERE fk_evento = ${req.params.eventoID}`;
+        return Response.json(res, CORS_HEADERS)
+      },
+      POST: async (req: any) => {
+        const body = await req.json()
+        const res = await sql`INSERT INTO INVE_EVEN
+          (fk_cerveza, fk_presentacion, fk_evento, cantidad)
+          VALUES(${body.insert_data.fk_cerveza}, ${body.insert_data.fk_presentacion}, ${body.insert_data.fk_evento}, 0)`
+        return Response.json(req, CORS_HEADERS)
+      },
+      PUT: async (req: any) => {
+        const body = await req.json()
+        const { fk_cerveza, fk_presentacion, fk_evento, cantidad } = body;
+        const res = await sql`UPDATE INVE_EVEN
+          SET cantidad = ${cantidad}
+          WHERE fk_cerveza = ${fk_cerveza}
+          AND fk_presentacion = ${fk_presentacion}
+          AND fk_evento = ${fk_evento} RETURNING *`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+    "/api/evento/:eventoID/inventario/form": {
+      OPTIONS: () => { return new Response('Departed', CORS_HEADERS) },
+      GET: async (req: any) => {
+        const res = await sql`SELECT c.eid||','||p.eid||','||ie.fk_evento as "eid", c.nombre||' '||p.nombre as "displayName"
+          FROM INVE_EVEN ie
+          JOIN Cerveza C ON ie.fk_cerveza = C.eid
+          JOIN Presentacion P ON ie.fk_presentacion = P.eid
+          WHERE fk_evento = ${req.params.eventoID}`;
+        return Response.json(res, CORS_HEADERS)
+      },
+    },
+    "/api/evento/:eventoID/sales": {
+      GET: async (req: any) => {
+        const res = await sql`select v.*, pn.*
+          from venta v
+          join pnatural pn on pn.fk_cliente = v.fk_cliente
+          where fk_evento = ${req.params.eventoID}`;
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+    "/api/evento/:eventoID/invite": {
+      POST: async (req: any) => {
+        const body = await req.json()
+        const info = {
+          fk_evento: req.params.eventoID,
+          fk_cliente: body.insert_data.fk_cliente,
+          cantidad_entradas: body.insert_data.cantidad_entradas,
+        }
+        const res = await sql`INSERT INTO EVEN_CLIE ${sql(info)}`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
     "/api/evento/:eventoID/:userID/join": {
       OPTIONS: () => { return new Response('Departed', CORS_HEADERS) },
       POST: async (req: any) => {

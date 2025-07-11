@@ -14,9 +14,10 @@ function UserMyEvents() {
 
     return (
         <div>
-            <SmartLink href="/user/events"> Back to Events</SmartLink>
+            <SmartLink href="/user"> Menu Principal</SmartLink>
+            <SmartLink href="/user/events"> Eventos</SmartLink>
             <h1>
-                Events I'm Registered For
+                Eventos en los que estoy registrado
             </h1>
             {
                 GenerateColumn([

@@ -30,6 +30,8 @@ import UserCarrito from "./pages/User/UserCarrito";
 import UserMyEvents from "./pages/User/UserMyEvents";
 import UserCarritoPay from "./pages/User/UserCarritoPay";
 import UserHome from "./pages/User/UserHome";
+import CrudEventVenta from "./pages/CrudEventVenta";
+import CrudEventVentaDetalle from "./pages/CrudEventVentaDetalle";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -56,7 +58,9 @@ const app = (
           <Route path="/inventario" element={<ProtectedRoute element={<CrudInventario />} />} />
 
           <Route path="/events" element={<ProtectedRoute element={<CrudEvents />} />} />
-          <Route path="/events/*" element={<ProtectedRoute element={<CrudActivities />} />} />
+          <Route path="/events/details/*" element={<ProtectedRoute element={<CrudActivities />} />} />
+          <Route path="/events/venta/*" element={<ProtectedRoute element={<CrudEventVenta />} />} />
+          <Route path="/events/sale/*" element={<ProtectedRoute element={<CrudEventVentaDetalle />} />} />
           
           <Route path="/user" element={<ProtectedRoute element={<UserHome />} />} />
           <Route path="/user/events" element={<ProtectedRoute element={<UserEventos />} />} />

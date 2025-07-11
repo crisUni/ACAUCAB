@@ -15,7 +15,7 @@ function BuyTicketForm({ eventID, userID, price }: { eventID: string, userID: st
         { label: "Banco", keyName: "fk_banco", fetchFrom: "/api/form/banco", required: true },
         { label: "Tipo de Tarjeta", keyName: "fk_tipo_tarjeta", fetchFrom: "/api/form/tipo_tarjeta", required: true },
         { label: "Monto Final", value_1: "numero_entradas", value_2: "precio_entrada", action: "multiply" }
-    ], { url: `http://127.0.0.1:3000/api/evento/${eventID}/${userID}/join` })
+    ], { url: `http://127.0.0.1:3000/api/evento/${eventID}/${userID}/join` , callback: () => (window.location.href = `/user/myevents`)  })
 
     const freeForm = () => GenerateForm([
         { label: "Cantidad de Entradas", keyName: "numero_entradas", inputType: "number", required: true },

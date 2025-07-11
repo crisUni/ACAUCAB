@@ -2522,18 +2522,10 @@ BEGIN
 
   CALL pipu(NEW.fk_venta, 3, venta_monto_total); 
 
-  SELECT fk_tienda_fisica INTO tienda_id FROM VENTA WHERE eid = NEW.fk_venta;
-
-  IF tienda_id IS NULL THEN
-    RAISE NOTICE 'Venta no asociada a tienda física, no se descuenta inventario.';
-    RETURN NEW;
-  END IF;
-
   SELECT fk_lugar_tienda INTO lugar_tienda_id
   FROM INVE_TIEN
   WHERE fk_cerveza = NEW.fk_cerveza
     AND fk_presentacion = NEW.fk_presentacion
-    AND fk_tienda = tienda_id
     AND cantidad >= NEW.cantidad
   LIMIT 1;
 
@@ -2546,7 +2538,6 @@ BEGIN
   SET cantidad = cantidad - NEW.cantidad
   WHERE fk_cerveza = NEW.fk_cerveza
     AND fk_presentacion = NEW.fk_presentacion
-    AND fk_tienda = tienda_id
     AND fk_lugar_tienda = lugar_tienda_id;
 
   GET DIAGNOSTICS filas_afectadas = ROW_COUNT;
@@ -2558,7 +2549,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE TRIGGER trigger_descuento_inventario_detalle_factura
+CREATE OR REPLACE TRIGGER trigger_descuento_inventario_detalle_factura
 AFTER INSERT ON DETALLE_FACTURA
 FOR EACH ROW
 EXECUTE FUNCTION descontar_inventario_detalle_factura();
@@ -2666,48 +2657,32 @@ DECLARE
     v_precio_unitario FLOAT;
     v_compra_id INT;
     v_cerveza_nombre VARCHAR(100);
-    v_orden_pendiente INT;
 BEGIN
-    IF NEW.cantidad < 100 THEN
-        SELECT COUNT(*) INTO v_orden_pendiente
-        FROM COMPRA c
-        JOIN DETALLE_COMPRA d ON d.fk_compra = c.eid
-        JOIN ESTA_COMP ec ON ec.fk_compra = c.eid
-        WHERE d.fk_cerveza = NEW.fk_cerveza
-          AND d.fk_presentacion = NEW.fk_presentacion
-          AND c.fk_proveedor = (SELECT fk_proveedor FROM CERVEZA WHERE eid = NEW.fk_cerveza)
-          AND ec.fk_estatus <> 3;
-
-        IF v_orden_pendiente = 0 THEN
-            SELECT fk_proveedor, nombre INTO v_proveedor_id, v_cerveza_nombre
-            FROM CERVEZA
-            WHERE eid = NEW.fk_cerveza;
-
-            SELECT precio INTO v_precio_unitario
-            FROM CERV_PRES
-            WHERE fk_cerveza = NEW.fk_cerveza AND fk_presentacion = NEW.fk_presentacion
-            LIMIT 1;
-
-            INSERT INTO COMPRA (fecha, monto_total, fk_proveedor)
-            VALUES (CURRENT_DATE, 0, v_proveedor_id)
-            RETURNING eid INTO v_compra_id;
-
-            INSERT INTO DETALLE_COMPRA (cantidad, precio_unitario, fk_compra, fk_cerveza, fk_presentacion)
-            VALUES (10000, v_precio_unitario, v_compra_id, NEW.fk_cerveza, NEW.fk_presentacion);
-
-
-            RAISE NOTICE 'Orden de compra generada automáticamente para % (cerveza_id=%), presentación %, proveedor %, cantidad 10000', v_cerveza_nombre, NEW.fk_cerveza, NEW.fk_presentacion, v_proveedor_id;
-        ELSE
-            RAISE NOTICE 'Ya existe una orden pendiente para este producto/presentación, no se genera otra.';
-        END IF;
+    IF NEW.cantidad >= 100 THEN
+    RETURN NEW;
     END IF;
+
+    SELECT fk_proveedor, nombre INTO v_proveedor_id, v_cerveza_nombre
+    FROM CERVEZA
+    WHERE eid = NEW.fk_cerveza;
+
+    SELECT precio INTO v_precio_unitario
+    FROM CERV_PRES
+    WHERE fk_cerveza = NEW.fk_cerveza AND fk_presentacion = NEW.fk_presentacion
+    LIMIT 1;
+
+    INSERT INTO COMPRA (fecha, monto_total, fk_proveedor)
+    VALUES (CURRENT_DATE, 0, v_proveedor_id)
+    RETURNING eid INTO v_compra_id;
+
+    INSERT INTO DETALLE_COMPRA (cantidad, precio_unitario, fk_compra, fk_cerveza, fk_presentacion)
+    VALUES (10000, v_precio_unitario, v_compra_id, NEW.fk_cerveza, NEW.fk_presentacion);
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trigger_reponer_inventario ON INVE_TIEN;
-
-CREATE TRIGGER trigger_reponer_inventario
+CREATE OR REPLACE TRIGGER trigger_reponer_inventario
 AFTER UPDATE ON INVE_TIEN
 FOR EACH ROW
 EXECUTE FUNCTION trigger_reponer_inventario();

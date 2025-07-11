@@ -30,7 +30,7 @@ function CrudEvents() {
         { label: "Precio de Entrada", keyName: "precio_entrada", inputType: "number", required: true },
         { label: "Tipo de Evento", keyName: "fk_tipo_evento", fetchFrom: 'http://127.0.0.1:3000/api/form/tipo_evento', required: true },
         { label: "Ubicacion", keyName: "fk_lugar", fetchFrom: 'http://127.0.0.1:3000/api/form/parroquias', required: true },
-    ], { url: 'http://127.0.0.1:3000/api/evento' })
+    ], { url: 'http://127.0.0.1:3000/api/evento' , callback: () => (window.location.href = `/events`) })
 
     useEffect(() => {
         fetch('http://127.0.0.1:3000/api/evento')
@@ -55,7 +55,7 @@ function CrudEvents() {
                 {GenerateColumn([
                     { title: "Nombre", keyName: "nombre" }
                 ], eventData, [
-                    { title: "Detalles", action: (data) => navigate(`/events/${data.eid}`) }
+                    { title: "Detalles", action: (data) => navigate(`/events/details/${data.eid}`) }
                 ])}
         </div>
     )
