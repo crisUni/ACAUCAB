@@ -9,7 +9,7 @@ import VentaService from "./backend/VentaService";
 import CarritoService from "./backend/CarritoService";
 import EventoService from "./backend/EventoService";
 
-import { reporteIngresosEventos, reporteProductosPromocion, reportePuntualidadPorCargo, reporteRankingProveedores, reporteValorPuntosCanjeados } from "./backend/reportes";
+import { reporteIngresosEventos, reporteProductosPromocion, reportePuntualidadPorCargo, reporteRankingProveedores, reporteValorPuntosCanjeados, reporteInventarioActual, reporteTopProductosVendidos, reporteGraficoVentasPorCanal, reporteGraficoTendenciaVentas } from "./backend/reportes";
 
 function generateUserToken(length: number = 32): string {
   const characters = '0123456789abcdef';
@@ -39,7 +39,7 @@ const server = serve({
     "/*": index,
 
     "/api/getUser/:token": {
-      GET: (req) => {
+      GET: (req: any) => {
         const user = user_tokens[req.params.token]
         return Response.json(user, CORS_HEADERS)
       }
@@ -616,6 +616,173 @@ const server = serve({
       async GET() {
         const res = await reporteValorPuntosCanjeados()
         return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+
+    "/api/reporte_6": {
+      async GET() {
+        const res = await reporteInventarioActual()
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+    "/api/reporte_7": {
+      async GET() {
+        const res = await reporteTopProductosVendidos()
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+    "/api/reporte_8": {
+      async GET() {
+        const res = await reporteGraficoVentasPorCanal()
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+    "/api/reporte_9": {
+      async GET() {
+        const res = await reporteGraficoTendenciaVentas()
+        return new Response(res, { ...CORS_HEADERS, ...{ headers: { "Content-Type": "application/pdf" } } });
+      }
+    },
+
+    "/api/reporte/ventas_totales_por_tienda": {
+      async GET() {
+        const res = await sql`select false as "fisica", sum(monto_total) as "ingresos" 
+          from venta
+          where fk_tienda_virtual IS NOT NULL
+          union
+          select true as "fisica", sum(monto_total) as "ingresos"
+          from venta
+          where fk_tienda_fisica IS NOT NULL;`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/reporte/crecimiento_ventas/:p11/:p12/:p21/:p22": {
+      async GET(req: any) {
+        const p11 = req.params.p11;
+        const p12 = req.params.p12;
+        const p21 = req.params.p21;
+        const p22 = req.params.p22;
+
+        const res = await sql`select 1 as "periodo", count(*) as "ventas", sum(monto_total) as "ingresos",
+          (count(*)*100/(select count(*) from venta)) as "porcentaje total de todas las ventas"
+          from venta
+          where ${p11} <= fecha AND fecha <= ${p12} 
+          union
+          select 2 as "periodo", count(*) as "ventas", sum(monto_total) as "ingresos",
+          (count(*)*100/(select count(*) from venta)) as "porcentaje total de todas las ventas"
+          from venta
+          where ${p21} <= fecha AND fecha <= ${p22} 
+          ;`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/reporte/valor_promedio_venta": {
+      async GET() {
+        const res = await sql`select min(monto_total), avg(monto_total), max(monto_total) from venta;`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/reporte/volumen_de_unidades_vendidas": {
+      async GET() {
+        const res = await sql`select p.eid, p.nombre, SUM(df.cantidad)
+          from presentacion p
+          join cerv_pres cp on cp.fk_presentacion = p.eid
+          join detalle_factura df on cp.fk_cerveza = df.fk_cerveza and p.eid = df.fk_presentacion
+          group by p.eid, p.nombre;`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/reporte/ventas_por_estilo": {
+      async GET() {
+        const res = await sql`SELECT tc.nombre, SUM(df.cantidad) as "cantidad"
+          FROM detalle_factura df
+          JOIN cerveza c ON c.eid = df.fk_cerveza
+          JOIN tipo_cerveza tc ON c.fk_tipo_cerveza = tc.eid
+          GROUP BY tc.eid;`
+        return Response.json(res, CORS_HEADERS)
+      }
+    },
+
+    "/api/reporte/nuevos_vs_recurrentes": {
+      async GET() {
+        const res = await sql`SELECT true "nuevo", COUNT(DISTINCT c.rif)
+          FROM Cliente c
+          JOIN Venta v ON c.eid = v.fk_cliente
+            WHERE (v.fecha < CURRENT_DATE AND v.fecha > CURRENT_DATE - INTERVAL '4 month')
+            AND c.eid NOT IN (SELECT c.eid FROM Cliente c JOIN Venta v ON c.eid = v.fk_cliente
+              WHERE v.fecha < CURRENT_DATE - INTERVAL '4 month')
+          UNION
+          SELECT false "nuevo", COUNT(DISTINCT c.rif)
+          FROM Cliente c
+          JOIN Venta v ON c.eid = v.fk_cliente
+            WHERE v.fecha < CURRENT_DATE - INTERVAL '4 month';`
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
+    "/api/reporte/tasa_retencion_clientes/:p11/:p12": {
+      async GET(req: any) {
+        const p11 = req.params.p11;
+        const p12 = req.params.p12;
+
+        const rep = (await sql`select count(*)
+          from venta
+          where fecha > ${p11} and fecha < ${p12}
+          group by fk_cliente
+          having count(*) > 1`)
+        const nonrep = (await sql`select count(*)
+          from venta
+          where fecha > ${p11} and fecha < ${p12}
+          group by fk_cliente
+          having count(*) > 1`)
+
+        if (rep.length === 0 && nonrep.length === 0)
+          return Response.json({ repeat: 0, nonrepeat: 0 }, CORS_HEADERS)
+
+        if (rep.length === 0)
+          return Response.json({ repeat: 0, nonrepeat: 100 }, CORS_HEADERS)
+
+        if (nonrep.length === 0)
+          return Response.json({ repeat: 100, nonrepeat: 0 }, CORS_HEADERS)
+
+        const res = await sql`select (count(distinct rep.*) * 100) / (count(distinct rep.*) + count(distinct nonrep.*)) "repeat",
+          (count(distinct nonrep.*) * 100) / (count(distinct rep.*) + count(distinct nonrep.*)) "nonrepeat"
+          from (select fk_cliente, count(*)
+          from venta
+          where fecha > ${p11} and fecha < ${p12}
+          group by fk_cliente
+          having count(*) > 1) as rep,
+          (select fk_cliente, count(*)
+          from venta
+          where fecha > ${p11} and fecha < ${p12}
+          group by fk_cliente
+          having count(*) = 1) as nonrep`;
+        return Response.json(res, CORS_HEADERS)
+      },
+    },
+
+    "/api/reporte/rotacion_inventario": {
+      async GET() {
+        const res = await sql`select ((select sum(cp.precio)
+            from inve_tien it, cerv_pres cp
+            where it.fk_presentacion = cp.fk_presentacion
+            )/(select sum(monto_total)from venta)) as "rotacion de inventario"`;
+        return Response.json(res, CORS_HEADERS);
+      }
+    },
+
+    "/api/reporte/stockout_rate/:p11/:p12": {
+      async GET(req: any) {
+        const p11 = req.params.p11;
+        const p12 = req.params.p12;
+        const res = await sql`select count(*) 
+            from compra c, detalle_compra dc
+            where ${p11} <= fecha AND fecha <= ${p12} 
+              AND dc.fk_compra = c.eid AND dc.cantidad = 10000;`
+        return Response.json(res, CORS_HEADERS)
       }
     },
   },

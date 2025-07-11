@@ -26,3 +26,6 @@ BEGIN
   ;
 END;
 $$ LANGUAGE plpgsql;
+
+
+SELECT  df.* from venta v, detalle_factura df;

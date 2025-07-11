@@ -2790,15 +2790,3 @@ EXECUTE FUNCTION cerrar_estado_anterior_venta();
 -- ██████  ██   ██ ███████ ██   ██ ██████   ██████  ██   ██ ██   ██ ██████ 
 
 
-CREATE OR REPLACE FUNCTION niveles_stock_producto()
-AS 
-$$
-BEGIN
-  SELECT c.nombre ||', '|| p.nombre as "Producto", cp.precio, it.cantidad
-  FROM PRESENTACION p, CERV_PRES cp, INVE_TIEN it, CERVEZA c
-  WHERE it.fk_presentacion = cp.fk_presentacion 
-    AND it.fk_cerveza = cp.fk_cerveza AND it.fk_cerveza = c.eid
-  ORDER BY cantidad DESC
-  ;
-END;
-$$ LANGUAGE plpgsql;

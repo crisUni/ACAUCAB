@@ -3,7 +3,7 @@ import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
 import * as fs from "fs";
 
 
-const jsreportUrl = "http://localhost:5488/api/report";
+const jsreportUrl = "http://jsreport:5488/api/report";
 
 // 1. Productos mas seleccionados en promociones para "DiarioDeUnaCerveza"
 export async function reporteProductosPromocion() {
@@ -416,9 +416,7 @@ export async function reporteValorPuntosCanjeados() {
     return Buffer.from(await res.arrayBuffer());
 }
 
-
 // 6. Gráfico de Tendencia de Ventas a lo largo del tiempo
-
 export async function reporteGraficoTendenciaVentas() {
     // Obtener los últimos 8 meses (incluyendo meses sin ventas)
     const mesesQuery = await sql`
@@ -443,7 +441,7 @@ export async function reporteGraficoTendenciaVentas() {
     for (const v of ventasQuery) {
         ventasMap.set(v.periodo, Number(v.total_ventas));
     }
-
+    console.log(ventasMap)
     // Construir arrays de labels y data, asegurando que todos los meses estén presentes
     const labels = mesesQuery.map((m: any) => m.periodo);
     const data = labels.map((periodo: string) => ventasMap.get(periodo) ?? 0);
@@ -496,7 +494,7 @@ export async function reporteGraficoTendenciaVentas() {
             </html>
             `,
             engine: "handlebars",
-            recipe: "html"
+            recipe: "chrome-pdf"
         },
         data: {
             image
@@ -514,7 +512,8 @@ export async function reporteGraficoTendenciaVentas() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    return await res.text();
+    console.log("Reporte generado: grafico tendencia.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // 7. Gráfico de Ventas por Canal de Distribución (Física vs Virtual)
@@ -572,7 +571,7 @@ export async function reporteGraficoVentasPorCanal() {
             </html>
             `,
             engine: "handlebars",
-            recipe: "html"
+            recipe: "chrome-pdf"
         },
         data: { image }
     };
@@ -588,7 +587,8 @@ export async function reporteGraficoVentasPorCanal() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    return await res.text();
+    console.log("Reporte generado: 9.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // 8. Tabla de Productos top 10 más vendidos
@@ -644,7 +644,7 @@ export async function reporteTopProductosVendidos() {
             </html>
             `,
             engine: "handlebars",
-            recipe: "html"
+            recipe: "chrome-pdf"
         },
         data: { productos }
     };
@@ -660,7 +660,8 @@ export async function reporteTopProductosVendidos() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    return await res.text();
+    console.log("Reporte generado: 9.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
 
 // 9. Reporte de Inventario Actual 
@@ -720,7 +721,7 @@ export async function reporteInventarioActual() {
             </html>
             `,
             engine: "handlebars",
-            recipe: "html"
+            recipe: "chrome-pdf"
         },
         data: { inventario }
     };
@@ -736,29 +737,22 @@ export async function reporteInventarioActual() {
         throw new Error(`jsreport error: ${res.statusText}\n${errorText}`);
     }
 
-    return await res.text();
+    console.log("Reporte generado: 9.pdf");
+    return Buffer.from(await res.arrayBuffer());
 }
-
 
 // Ejecucion directa
 if (import.meta.main) {
-    //await reporteProductosPromocion();
-    //await reporteIngresosEventos();
-    //await reportePuntualidadPorCargo();
-    //await reporteRankingProveedores();
-    //await reporteValorPuntosCanjeados();
-    //await reporteGraficoTendenciaVentas();
-    //await reporteGraficoVentasPorCanal();
-    const html = await reporteInventarioActual();
-    fs.writeFileSync("reporte_inventario_actual.html", html, "utf-8");
+    await reporteProductosPromocion();
+    await reporteIngresosEventos();
+    await reportePuntualidadPorCargo();
+    await reporteRankingProveedores();
+    await reporteValorPuntosCanjeados();
 
-    const html2 = await reporteTopProductosVendidos();
-    fs.writeFileSync("productos_mas_vendidos.html", html2, "utf-8");
-
-    const html3 = await reporteGraficoVentasPorCanal();
-    fs.writeFileSync("ventas_por_canal.html", html3, "utf-8");
-    const html4 = await reporteGraficoTendenciaVentas();
-    fs.writeFileSync("tendencia_ventas.html", html4, "utf-8");
+    await reporteInventarioActual();
+    await reporteTopProductosVendidos();
+    await reporteGraficoVentasPorCanal();
+    await reporteGraficoTendenciaVentas();
 }
 
 

@@ -32,6 +32,10 @@ import UserCarritoPay from "./pages/User/UserCarritoPay";
 import UserHome from "./pages/User/UserHome";
 import CrudEventVenta from "./pages/CrudEventVenta";
 import CrudEventVentaDetalle from "./pages/CrudEventVentaDetalle";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import IndicadoresVenta from "./pages/Dashboard/IndicadoresVenta";
+import IndicadoresCliente from "./pages/Dashboard/IndicadoresCliente";
+import IndicadoresInventario from "./pages/Dashboard/IndicadoresInventario";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -57,6 +61,10 @@ const app = (
           <Route path="/venta/*" element={<ProtectedRoute element={<VentaCliente />} />} />
           <Route path="/inventario" element={<ProtectedRoute element={<CrudInventario />} />} />
 
+          <Route path="/indicadores/venta" element={<ProtectedRoute element={<IndicadoresVenta />} />} />
+          <Route path="/indicadores/cliente" element={<ProtectedRoute element={<IndicadoresCliente />} />} />
+          <Route path="/indicadores/inventario" element={<ProtectedRoute element={<IndicadoresInventario />} />} />
+
           <Route path="/events" element={<ProtectedRoute element={<CrudEvents />} />} />
           <Route path="/events/details/*" element={<ProtectedRoute element={<CrudActivities />} />} />
           <Route path="/events/venta/*" element={<ProtectedRoute element={<CrudEventVenta />} />} />
@@ -70,6 +78,8 @@ const app = (
           <Route path="/user/carrito" element={<ProtectedRoute element={<UserCarrito />} />} />
           <Route path="/user/carrito/pay" element={<ProtectedRoute element={<UserCarritoPay />} />} />
           <Route path="/user/myEvents" element={<ProtectedRoute element={<UserMyEvents />} />} />
+
+          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
         </Routes>
       </Router>
     </AuthProvider>

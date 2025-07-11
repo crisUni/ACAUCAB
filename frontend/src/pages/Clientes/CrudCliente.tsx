@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import GenerateForm from "@/components/FormGenerator";
-import GenerateColumn from "@/components/GenerateColumn";
 import SmartLink from "@/components/SmartLink";
 
 export default function CrudCliente() {

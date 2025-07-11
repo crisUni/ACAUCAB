@@ -11,6 +11,12 @@
     "start": "NODE_ENV=production bun src/index.tsx"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.2.0",
+    "@mui/x-charts": "^8.7.0",
+    "chartjs": "^0.3.24",
+    "chartjs-node-canvas": "^5.0.0",
     "jsreport": "^4.9.0",
     "react": "^19",
     "react-dom": "^19",

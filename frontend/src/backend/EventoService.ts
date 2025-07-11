@@ -228,7 +228,7 @@ class EventoService {
     },
     "/api/evento/:eventoID/sales": {
       GET: async (req: any) => {
-        const res = await sql`select v.*, pn.*
+        const res = await sql`select v.eid, v.fecha, v.monto_total, pn.nombre, pn.apellido
           from venta v
           join pnatural pn on pn.fk_cliente = v.fk_cliente
           where fk_evento = ${req.params.eventoID}`;
