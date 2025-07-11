@@ -64,9 +64,6 @@ export default function TempHome() {
                 <li key="reporte_7">
                     <a href="/api/reporte_7" onClick={(e) => { e.preventDefault(); window.open("/api/reporte_7", '_self')} }>Reporte: Productos con mejor rendimiento</a>
                 </li>
-                <li key="reporte_8">
-                    <a href="/api/reporte_8" onClick={(e) => { e.preventDefault(); window.open("/api/reporte_8", '_self')} }>Reporte: Grafico de ventas por canal</a>
-                </li>
                 <li key="reporte_9">
                     <a href="/api/reporte_9" onClick={(e) => { e.preventDefault(); window.open("/api/reporte_9", '_self')} }>Reporte: Gradico Ventas </a>
                 </li>
